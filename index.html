@@ -27,6 +27,26 @@
   #sidebar{width:220px;min-height:100vh;background:var(--red);display:flex;flex-direction:column;transition:width .25s;flex-shrink:0;overflow:hidden}
   #sidebar.collapsed{width:64px}
   #main{flex:1;overflow-y:auto;min-height:100vh;animation:fadeIn .3s ease}
+  #mobile-topbar,#mobile-tabbar{display:none}
+  .mobile-topbar{position:sticky;top:0;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px;background:rgba(247,247,248,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,.06)}
+  .mobile-topbar-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .mobile-brand{display:flex;align-items:center;gap:10px;min-width:0}
+  .mobile-brand-icon{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--red),var(--red-light));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;box-shadow:0 10px 20px rgba(193,39,45,.24)}
+  .mobile-brand-copy{min-width:0}
+  .mobile-brand-title{font-size:15px;font-weight:900;color:var(--black);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mobile-brand-sub{font-size:11px;color:var(--gray);margin-top:2px}
+  .mobile-topbar-actions{display:flex;align-items:center;gap:8px}
+  .mobile-icon-btn{width:38px;height:38px;border:none;border-radius:12px;background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;color:var(--gray-dark);font-size:17px;cursor:pointer}
+  .mobile-user-pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:6px 10px;box-shadow:0 4px 18px rgba(0,0,0,.06)}
+  .mobile-user-meta{max-width:110px}
+  .mobile-user-name{font-size:12px;font-weight:800;color:var(--black);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mobile-user-role{font-size:10px;color:var(--gray)}
+  .mobile-tabbar{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(env(safe-area-inset-bottom,0px) + 10px);background:linear-gradient(180deg,rgba(247,247,248,.76),rgba(247,247,248,.98));backdrop-filter:blur(16px);border-top:1px solid rgba(0,0,0,.06)}
+  .mobile-tabbar-inner{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:760px;margin:0 auto}
+  .mobile-tab{border:none;background:transparent;border-radius:16px;padding:10px 4px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;color:var(--gray);font-family:inherit}
+  .mobile-tab.active{background:#fff;color:var(--red);box-shadow:0 8px 20px rgba(193,39,45,.14)}
+  .mobile-tab .icon{font-size:18px;line-height:1}
+  .mobile-tab .label{font-size:11px;font-weight:800}
 
   /* Sidebar */
   .sb-logo{padding:22px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.1)}
@@ -218,11 +238,51 @@
   #sidebar.collapsed .sb-btns{justify-content:center}
 
   /* Responsive */
-  @media(max-width:768px){
-    #sidebar{width:200px}
+  @media(max-width:1024px){
+    .page-title{font-size:22px}
+    .detail-hero{padding:22px 22px 0}
     .cal-grid{grid-template-columns:1fr}
-    .form-row{grid-template-columns:1fr}
-    .info-grid{grid-template-columns:1fr}
+  }
+
+  @media(max-width:768px){
+    body{background:#EEF0F3}
+    #app{display:block;min-height:100dvh}
+    #sidebar{display:none}
+    #mobile-topbar,#mobile-tabbar{display:block}
+    #main{min-height:100dvh;padding-bottom:104px}
+    #main>div{padding:18px!important}
+    .page-header{flex-direction:column;align-items:flex-start;gap:14px}
+    .page-header .btn{width:100%;justify-content:center}
+    .grid-stats,.grid-2,.grid-3,.info-grid,.form-row{grid-template-columns:1fr}
+    .card{border-radius:18px;box-shadow:0 10px 30px rgba(16,24,40,.06)}
+    .search-wrap{margin-bottom:16px}
+    .tabs{overflow:auto;padding:4px}
+    .tab{white-space:nowrap;flex:none;min-width:max-content;padding:10px 14px}
+    .detail-hero{padding:20px;flex-direction:column;align-items:flex-start;border-radius:22px}
+    .detail-info{padding-bottom:0}
+    .modal-overlay{padding:0;align-items:flex-end}
+    .modal{border-radius:24px 24px 0 0;max-height:88vh}
+    #toast{left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 86px)}
+    .toast{max-width:none}
+    .login-card{max-width:100%;padding:28px 22px;border-radius:28px}
+    .login-title{font-size:28px}
+    .splash-title{font-size:30px}
+    .cal-day{padding:10px 2px}
+  }
+
+  @media(min-width:769px) and (max-width:1180px){
+    #sidebar{width:88px}
+    #sidebar .sb-logo-text,
+    #sidebar .label,
+    #sidebar .sb-user,
+    #sidebar .logout-btn{display:none}
+    #sidebar .sb-logo{padding:18px 0;justify-content:center}
+    #sidebar .sb-nav{padding:8px 0}
+    #sidebar .nav-item{padding:12px 0;justify-content:center;border-radius:0}
+    #sidebar .sb-footer{padding:10px 0;display:flex;justify-content:center}
+    #sidebar .sb-btns{justify-content:center}
+    .grid-2{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+    .grid-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
 </style>
 </head>
@@ -286,7 +346,9 @@
       </div>
     </div>
   </div>
+  <div id="mobile-topbar"></div>
   <div id="main"></div>
+  <div id="mobile-tabbar"></div>
 </div>
 
 <script>
@@ -757,12 +819,65 @@ function buildSidebar() {
   avatarEl.style.background = `linear-gradient(135deg,hsl(${hue},65%,55%),hsl(${hue + 30},60%,40%))`;
 }
 
+function sectionTitle(section = activeSection) {
+  return NAV.find(item => item.id === section)?.label || "PITCRM";
+}
+
+function buildMobileChrome() {
+  const mobileTopbar = document.getElementById("mobile-topbar");
+  const mobileTabbar = document.getElementById("mobile-tabbar");
+  if (!mobileTopbar || !mobileTabbar) return;
+
+  const name = displayUserName();
+  const initials = name.split(/\s+/).map(w => w[0]).slice(0, 2).join("").toUpperCase() || "?";
+  const hue = [...name].reduce((acc, ch) => acc + ch.charCodeAt(0), 0) % 360;
+  const mobileNav = NAV.filter(item => item.id !== "settings");
+
+  mobileTopbar.innerHTML = `
+    <div class="mobile-topbar">
+      <div class="mobile-topbar-row">
+        <div class="mobile-brand">
+          <div class="mobile-brand-icon">P</div>
+          <div class="mobile-brand-copy">
+            <div class="mobile-brand-title">${esc(sectionTitle())}</div>
+            <div class="mobile-brand-sub">Professionisti in Team</div>
+          </div>
+        </div>
+        <div class="mobile-topbar-actions">
+          <button class="mobile-icon-btn" onclick="navigate('settings')" aria-label="Apri impostazioni">⚙️</button>
+          <div class="mobile-user-pill">
+            <div class="avatar" style="width:28px;height:28px;font-size:11px;background:linear-gradient(135deg,hsl(${hue},65%,55%),hsl(${hue + 30},60%,40%))">${initials}</div>
+            <div class="mobile-user-meta">
+              <div class="mobile-user-name">${esc(name)}</div>
+              <div class="mobile-user-role">${esc(currentUser?.role || "utente")}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  mobileTabbar.innerHTML = `
+    <div class="mobile-tabbar">
+      <div class="mobile-tabbar-inner">
+        ${mobileNav.map(item => `
+          <button class="mobile-tab ${item.id === activeSection ? "active" : ""}" onclick="navigate('${item.id}')">
+            <span class="icon">${item.icon}</span>
+            <span class="label">${item.label}</span>
+          </button>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
 function navigate(section, extra) {
   clearUnsubs();
   activeSection = section;
   document.querySelectorAll(".nav-item").forEach(el => el.classList.remove("active"));
   const navEl = document.getElementById(`nav-${section}`);
   if (navEl) navEl.classList.add("active");
+  buildMobileChrome();
 
   const main = document.getElementById("main");
   main.style.animation = "none";
@@ -785,6 +900,7 @@ function showApp() {
   document.getElementById("login-screen").style.display = "none";
   document.getElementById("app").style.display = "flex";
   buildSidebar();
+  buildMobileChrome();
   navigate("dashboard");
 }
 
