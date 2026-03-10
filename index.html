@@ -1,0 +1,2562 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PITCRM</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Nunito',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+  body{background:#F7F7F8;color:#0D0D0D;min-height:100vh}
+  :root{
+    --red:#C1272D;--red-dark:#8B1C1F;--red-light:#E04B52;
+    --black:#0D0D0D;--gray:#6B6B6B;--gray-light:#A8A8A8;--gray-dark:#3A3A3A;
+    --bg:#F7F7F8;--card:#FFFFFF;--border:rgba(0,0,0,0.08);
+    --success:#2E7D32;--warning:#E65100;--info:#1565C0;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes slideUp{from{opacity:0;transform:translateY(20px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:5px;height:5px}
+  ::-webkit-scrollbar-thumb{background:rgba(0,0,0,.12);border-radius:3px}
+
+  /* Layout */
+  #app{display:flex;min-height:100vh}
+  #sidebar{width:220px;min-height:100vh;background:var(--red);display:flex;flex-direction:column;transition:width .25s;flex-shrink:0;overflow:hidden}
+  #sidebar.collapsed{width:64px}
+  #main{flex:1;overflow-y:auto;min-height:100vh;animation:fadeIn .3s ease}
+
+  /* Sidebar */
+  .sb-logo{padding:22px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .sb-logo-icon{width:38px;height:38px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;font-weight:900;color:#fff}
+  .sb-logo-text{color:#fff;font-weight:900;font-size:17px;letter-spacing:-.5px;white-space:nowrap}
+  .sb-nav{flex:1;padding:12px 10px}
+  .nav-item{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:10px;cursor:pointer;margin-bottom:2px;transition:background .15s;white-space:nowrap}
+  .nav-item:hover{background:rgba(255,255,255,.12)}
+  .nav-item.active{background:rgba(255,255,255,.22)}
+  .nav-item .icon{font-size:18px;flex-shrink:0;width:24px;text-align:center}
+  .nav-item .label{color:rgba(255,255,255,.92);font-size:14px;font-weight:600}
+  .nav-item.active .label{font-weight:800}
+  .sb-footer{padding:12px 14px;border-top:1px solid rgba(255,255,255,.12)}
+  .sb-user{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .sb-user-name{color:#fff;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sb-user-role{color:rgba(255,255,255,.6);font-size:11px}
+  .sb-btns{display:flex;gap:8px}
+  .sb-btn{background:rgba(255,255,255,.15);border:none;border-radius:8px;padding:6px 10px;color:#fff;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit}
+  .sb-btn:hover{background:rgba(255,255,255,.25)}
+
+  /* Cards */
+  .card{background:var(--card);border-radius:12px;border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.05)}
+  .card-hover:hover{box-shadow:0 4px 16px rgba(193,39,45,.1);cursor:pointer;transform:translateY(-1px)}
+  .card-hover{transition:all .15s}
+
+  /* Page header */
+  .page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+  .page-title{font-size:26px;font-weight:900;color:var(--black)}
+  .page-sub{font-size:14px;color:var(--gray);margin-top:3px}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:10px;border:none;cursor:pointer;font-size:14px;font-weight:700;font-family:inherit;transition:all .15s}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .btn-primary{background:var(--red);color:#fff}
+  .btn-primary:hover:not(:disabled){background:var(--red-dark)}
+  .btn-secondary{background:transparent;color:var(--red);border:1.5px solid rgba(193,39,45,.35)}
+  .btn-secondary:hover{background:rgba(193,39,45,.05)}
+  .btn-ghost{background:transparent;color:var(--gray)}
+  .btn-ghost:hover{background:#F3F4F6}
+  .btn-danger{background:#FEE2E2;color:#B91C1C}
+  .btn-danger:hover{background:#FECACA}
+  .btn-sm{padding:6px 12px;font-size:13px;border-radius:8px}
+  .btn-icon{background:#F3F4F6;border:none;border-radius:8px;padding:6px 9px;cursor:pointer;font-size:14px;transition:background .15s}
+  .btn-icon:hover{background:#E5E7EB}
+  .btn-icon.red{background:#FEF2F2}
+  .btn-icon.red:hover{background:#FECACA}
+  .btn-icon.blue{background:#EFF6FF}
+  .btn-icon.blue:hover{background:#DBEAFE}
+
+  /* Forms */
+  .form-group{margin-bottom:16px}
+  .form-label{display:block;font-size:13px;font-weight:700;color:var(--gray-dark);margin-bottom:6px}
+  .form-label .req{color:var(--red)}
+  .form-control{width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;outline:none;color:var(--black);font-family:inherit;background:#fff;transition:border .2s}
+  .form-control:focus{border-color:var(--red)}
+  textarea.form-control{resize:vertical;min-height:80px}
+  select.form-control{cursor:pointer}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  .form-row.full{grid-column:span 2}
+
+  /* Badge */
+  .badge{display:inline-block;padding:2px 10px;border-radius:6px;font-size:12px;font-weight:700;white-space:nowrap}
+
+  /* Avatar */
+  .avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;flex-shrink:0}
+
+  /* Modal */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center;z-index:999;padding:16px}
+  .modal{background:#fff;border-radius:18px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.22);animation:slideUp .2s ease}
+  .modal-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 16px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(193,39,45,.05),rgba(193,39,45,.02))}
+  .modal-title-bar{display:flex;align-items:center;gap:10px}
+  .modal-accent{width:5px;height:24px;background:var(--red);border-radius:3px}
+  .modal-title{font-size:16px;font-weight:800;color:var(--black)}
+  .modal-close{background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray-light);line-height:1;padding:0 4px}
+  .modal-body{padding:24px}
+
+  /* Table */
+  .table-wrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;padding:10px 14px;border-bottom:2px solid var(--border);background:#FAFAFA}
+  td{padding:12px 14px;border-bottom:1px solid var(--border);font-size:14px;vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:#FAFAFA}
+
+  /* Tabs */
+  .tabs{display:flex;gap:3px;background:#F3F4F6;border-radius:10px;padding:3px;margin-bottom:20px}
+  .tab{flex:1;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;transition:all .15s;background:transparent;color:var(--gray)}
+  .tab.active{background:#fff;color:var(--red);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+
+  /* Search */
+  .search-wrap{position:relative;margin-bottom:20px}
+  .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--gray-light);font-size:16px;pointer-events:none}
+  .search-input{width:100%;padding:10px 42px;border-radius:12px;border:1.5px solid var(--border);font-size:14px;outline:none;font-family:inherit;background:#fff;transition:border .2s}
+  .search-input:focus{border-color:var(--red)}
+  .search-clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:20px;color:var(--gray-light);line-height:1}
+
+  /* Grid */
+  .grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+  .grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+  .grid-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:28px}
+
+  /* Stat card */
+  .stat-card{padding:20px}
+  .stat-icon{font-size:26px;margin-bottom:10px}
+  .stat-value{font-size:30px;font-weight:900;color:var(--black);line-height:1}
+  .stat-label{font-size:13px;color:var(--gray);margin-top:4px}
+
+  /* Empty state */
+  .empty{text-align:center;padding:64px 24px;color:var(--gray-light)}
+  .empty-icon{font-size:48px;margin-bottom:12px}
+  .empty-title{font-size:16px;font-weight:700;color:var(--gray);margin-bottom:6px}
+  .empty-sub{font-size:14px}
+
+  /* Spinner */
+  .spinner-wrap{display:flex;justify-content:center;align-items:center;padding:64px}
+  .spinner{width:32px;height:32px;border:3px solid rgba(193,39,45,.15);border-top:3px solid var(--red);border-radius:50%;animation:spin .7s linear infinite}
+
+  /* Toast */
+  #toast{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+  .toast{padding:12px 18px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.15);animation:fadeIn .25s ease;pointer-events:auto;max-width:340px}
+  .toast.success{background:#fff;border-left:4px solid var(--success);color:var(--success)}
+  .toast.error{background:#fff;border-left:4px solid var(--red);color:var(--red)}
+  .toast.info{background:#fff;border-left:4px solid var(--info);color:var(--info)}
+
+  /* Login */
+  #login-screen{min-height:100vh;background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 55%,var(--red-light) 100%);display:flex;align-items:center;justify-content:center;padding:16px}
+  .login-card{background:rgba(255,255,255,.97);border-radius:22px;padding:36px;width:100%;max-width:420px;box-shadow:0 28px 64px rgba(0,0,0,.28);animation:fadeIn .4s ease}
+  .login-logo{text-align:center;margin-bottom:32px}
+  .login-logo-icon{display:inline-flex;align-items:center;justify-content:center;width:66px;height:66px;background:var(--red);border-radius:20px;margin-bottom:14px;box-shadow:0 8px 24px rgba(193,39,45,.35)}
+  .login-logo-icon span{color:#fff;font-size:32px;font-weight:900}
+  .login-title{font-size:30px;font-weight:900;color:var(--black);margin-bottom:4px}
+  .login-sub{font-size:14px;color:var(--gray)}
+  .login-h2{font-size:20px;font-weight:800;color:var(--black);margin-bottom:24px}
+  .error-box{background:#FEE2E2;border:1px solid #FECACA;border-radius:10px;padding:10px 14px;font-size:13px;color:#B91C1C;margin-bottom:14px}
+  .warn-box{background:#FFF7ED;border:1px solid #FED7AA;border-radius:10px;padding:10px 14px;font-size:13px;color:#C2410C;margin-bottom:14px}
+
+  /* Splash */
+  #splash{position:fixed;inset:0;background:linear-gradient(135deg,var(--red-dark),var(--red));display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s}
+  #splash.hide{opacity:0;pointer-events:none}
+  .splash-icon{width:82px;height:82px;background:rgba(255,255,255,.18);border-radius:24px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;animation:fadeIn .4s ease}
+  .splash-icon span{font-size:40px;font-weight:900;color:#fff}
+  .splash-title{color:#fff;font-size:34px;font-weight:900;margin-bottom:6px;animation:fadeIn .4s .1s both}
+  .splash-sub{color:rgba(255,255,255,.7);font-size:14px;animation:fadeIn .4s .2s both;margin-bottom:36px}
+  .splash-spinner{width:32px;height:32px;border:3px solid rgba(255,255,255,.2);border-top:3px solid #fff;border-radius:50%;animation:spin .7s linear infinite}
+
+  /* Calendar grid */
+  .cal-grid{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start}
+  .cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-top:6px}
+  .cal-day-hdr{text-align:center;font-size:11px;font-weight:700;color:var(--gray-light);padding:4px 0}
+  .cal-day{text-align:center;padding:7px 2px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;position:relative;transition:background .12s}
+  .cal-day:hover{background:#F3F4F6}
+  .cal-day.today{background:rgba(193,39,45,.1);font-weight:700;color:var(--red)}
+  .cal-day.selected{background:var(--red)!important;color:#fff!important;font-weight:800}
+  .cal-dots{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);display:flex;gap:2px}
+  .cal-dot{width:4px;height:4px;border-radius:50%}
+
+  /* Status filters */
+  .status-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+  .status-filter{padding:6px 14px;border-radius:20px;border:none;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;transition:all .15s}
+  .status-filter.active{color:#fff}
+  .status-filter:not(.active){background:#F3F4F6;color:var(--gray)}
+
+  /* Detail header */
+  .detail-hero{border-radius:16px;overflow:hidden;margin-bottom:22px;padding:26px 26px 0;display:flex;gap:18px;align-items:flex-end}
+  .detail-info{padding-bottom:22px;flex:1}
+  .detail-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:8px}
+  .back-btn{background:none;border:none;cursor:pointer;color:var(--red);font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px;padding:0;margin-bottom:18px;font-family:inherit}
+  .back-btn:hover{text-decoration:underline}
+
+  /* Info grid */
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 28px}
+  .info-field label{font-size:11px;font-weight:700;color:var(--gray-light);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px}
+  .info-field span{font-size:14px;color:var(--black);font-weight:600}
+
+  /* Task check */
+  .task-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+  .task-check.done{background:var(--success);border-color:var(--success)}
+  .task-check.done::after{content:'✓';color:#fff;font-size:13px;font-weight:800}
+
+  /* Collapsed sidebar */
+  #sidebar.collapsed .sb-logo-text,
+  #sidebar.collapsed .label,
+  #sidebar.collapsed .sb-user,
+  #sidebar.collapsed .logout-btn{display:none}
+  #sidebar.collapsed .sb-logo{padding:18px 0;justify-content:center}
+  #sidebar.collapsed .sb-nav{padding:8px 0}
+  #sidebar.collapsed .nav-item{padding:11px 0;border-radius:0;justify-content:center}
+  #sidebar.collapsed .sb-footer{padding:10px 0;display:flex;justify-content:center}
+  #sidebar.collapsed .sb-btns{justify-content:center}
+
+  /* Responsive */
+  @media(max-width:768px){
+    #sidebar{width:200px}
+    .cal-grid{grid-template-columns:1fr}
+    .form-row{grid-template-columns:1fr}
+    .info-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- Splash -->
+<div id="splash">
+  <div class="splash-icon"><span>P</span></div>
+  <div class="splash-title">PITCRM</div>
+  <div class="splash-sub">Professionisti in Team</div>
+  <div class="splash-spinner"></div>
+</div>
+
+<!-- Toast container -->
+<div id="toast"></div>
+
+<!-- Login -->
+<div id="login-screen" style="display:none">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-icon"><span>P</span></div>
+      <div class="login-title">PITCRM</div>
+      <div class="login-sub">Professionisti in Team</div>
+    </div>
+    <div class="login-h2">Accedi al tuo account</div>
+    <div id="login-error" class="error-box" style="display:none"></div>
+    <div id="login-cooldown" class="warn-box" style="display:none"></div>
+    <div class="form-group">
+      <label class="form-label">Username <span class="req">*</span></label>
+      <input id="inp-username" class="form-control" type="text" placeholder="Inserisci username" autocomplete="username">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password <span class="req">*</span></label>
+      <input id="inp-password" class="form-control" type="password" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="btn btn-primary" id="btn-login" style="width:100%;justify-content:center;padding:12px 20px;font-size:15px;border-radius:12px" onclick="handleLogin()">
+      Accedi
+    </button>
+  </div>
+</div>
+
+<!-- Main App -->
+<div id="app" style="display:none">
+  <div id="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-icon">P</div>
+      <div class="sb-logo-text">PITCRM</div>
+    </div>
+    <nav class="sb-nav" id="sb-nav"></nav>
+    <div class="sb-footer">
+      <div class="sb-user">
+        <div id="sb-avatar" class="avatar" style="width:30px;height:30px;font-size:12px"></div>
+        <div>
+          <div class="sb-user-name" id="sb-username">—</div>
+          <div class="sb-user-role" id="sb-role">—</div>
+        </div>
+      </div>
+      <div class="sb-btns">
+        <button class="sb-btn" onclick="toggleSidebar()">⇄</button>
+        <button class="sb-btn logout-btn" onclick="handleLogout()">Esci</button>
+      </div>
+    </div>
+  </div>
+  <div id="main"></div>
+</div>
+
+<script>
+const FIREBASE_SDK_URLS = [
+  "https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js",
+  "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js",
+  "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"
+];
+
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyByNM-Qd-Q8MdDfV7IM21EtXusbTNhBzis",
+  authDomain: "pitcrm-7e69c.firebaseapp.com",
+  projectId: "pitcrm-7e69c",
+  storageBucket: "pitcrm-7e69c.firebasestorage.app",
+  messagingSenderId: "475700242972",
+  appId: "1:475700242972:web:0bed4e2351f6f56ea88dd9"
+};
+
+const COLLECTIONS = {
+  users: "pitcrm_users",
+  clients: "clients",
+  leads: "leads",
+  events: "events",
+  tasks: "tasks",
+  collaborators: "collaborators",
+  attachments: "client_attachments"
+};
+
+const SUPABASE = {
+  projectRef: "jeskuaofhyjldbuhpnvh",
+  bucket: "pitcrm-attachments"
+};
+
+const LEAD_STATUSES = [
+  "Nuovo",
+  "Contattato",
+  "In valutazione",
+  "In attesa documenti",
+  "Perso",
+  "Convertito in cliente"
+];
+
+const LEAD_STATUS_COLORS = {
+  "Nuovo": "#1565C0",
+  "Contattato": "#00838F",
+  "In valutazione": "#E65100",
+  "In attesa documenti": "#F57F17",
+  "Perso": "#C62828",
+  "Convertito in cliente": "#2E7D32"
+};
+
+let firebaseReady = false;
+let firebaseInitError = null;
+let db = null;
+let auth = null;
+let _authReady = false;
+let _authReadyPromise = Promise.resolve();
+let _bootStarted = false;
+
+function loadExternalScript(src, timeoutMs = 4500) {
+  return new Promise((resolve, reject) => {
+    if ([...document.scripts].some(script => script.src === src)) {
+      resolve();
+      return;
+    }
+
+    const script = document.createElement("script");
+    const timeoutId = setTimeout(() => {
+      script.remove();
+      reject(new Error(`Timeout caricamento SDK: ${src}`));
+    }, timeoutMs);
+
+    script.src = src;
+    script.async = true;
+    script.onload = () => {
+      clearTimeout(timeoutId);
+      resolve();
+    };
+    script.onerror = () => {
+      clearTimeout(timeoutId);
+      reject(new Error(`Errore caricamento SDK: ${src}`));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+async function initializeFirebase() {
+  try {
+    await Promise.all(FIREBASE_SDK_URLS.map(src => loadExternalScript(src)));
+    if (!window.firebase) {
+      throw new Error("Firebase SDK non disponibile");
+    }
+    firebase.initializeApp(FIREBASE_CONFIG);
+    db = firebase.firestore();
+    auth = firebase.auth();
+    firebaseReady = true;
+    _authReadyPromise = new Promise(resolve => {
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          _authReady = true;
+          resolve();
+          return;
+        }
+        auth.signInAnonymously()
+          .then(() => {
+            _authReady = true;
+            resolve();
+          })
+          .catch(error => {
+            console.warn("Anon auth failed:", error);
+            resolve();
+          });
+      });
+    });
+    await _authReadyPromise;
+  } catch (error) {
+    firebaseInitError = error;
+    firebaseReady = false;
+    _authReadyPromise = Promise.resolve();
+  }
+}
+
+async function waitAuth() {
+  if (!_authReady) await _authReadyPromise;
+}
+
+function showBootstrapError(message) {
+  const splash = document.getElementById("splash");
+  if (splash) splash.remove();
+  const login = document.getElementById("login-screen");
+  login.style.display = "flex";
+  const errorEl = document.getElementById("login-error");
+  errorEl.innerHTML = `${esc(message)}<br><br>Requisiti minimi:<br>1. Connessione internet attiva<br>2. Apri il file in Safari/Chrome, non nell'anteprima bloccata<br>3. Accesso consentito a Firebase e Supabase`;
+  errorEl.style.display = "block";
+  const btn = document.getElementById("btn-login");
+  btn.disabled = true;
+  btn.textContent = "Accesso non disponibile";
+}
+
+function showLoginScreen() {
+  const splash = document.getElementById("splash");
+  if (splash) {
+    splash.classList.add("hide");
+    setTimeout(() => {
+      const currentSplash = document.getElementById("splash");
+      if (currentSplash) currentSplash.remove();
+    }, 450);
+  }
+  const login = document.getElementById("login-screen");
+  login.style.display = "flex";
+}
+
+function setLoginInitializing(message) {
+  showLoginScreen();
+  const btn = document.getElementById("btn-login");
+  btn.disabled = true;
+  btn.textContent = "Inizializzazione...";
+  const cooldown = document.getElementById("login-cooldown");
+  cooldown.textContent = message;
+  cooldown.style.display = "block";
+}
+
+async function sha256(msg) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+function toast(msg, type = "success") {
+  const el = document.createElement("div");
+  el.className = `toast ${type}`;
+  el.textContent = msg;
+  document.getElementById("toast").appendChild(el);
+  setTimeout(() => el.remove(), 3500);
+}
+
+function esc(str) {
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function toDateValue(value) {
+  if (!value) return null;
+  if (value.toDate) return value.toDate();
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+function formatDate(value) {
+  const d = toDateValue(value);
+  return d ? d.toLocaleDateString("it-IT") : "—";
+}
+
+function formatDateTime(value) {
+  const d = toDateValue(value);
+  return d ? d.toLocaleString("it-IT", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "—";
+}
+
+function avatar(name, size = 36) {
+  const safeName = (name || "?").trim() || "?";
+  const initials = safeName.split(/\s+/).map(w => w[0]).slice(0, 2).join("").toUpperCase();
+  const hue = [...safeName].reduce((acc, ch) => acc + ch.charCodeAt(0), 0) % 360;
+  return `<div class="avatar" style="width:${size}px;height:${size}px;font-size:${size * 0.36}px;background:linear-gradient(135deg,hsl(${hue},65%,55%),hsl(${hue + 30},60%,40%))">${initials}</div>`;
+}
+
+function badge(label, color) {
+  return `<span class="badge" style="background:${color}18;color:${color};border:1px solid ${color}40">${label}</span>`;
+}
+
+function spinner() {
+  return `<div class="spinner-wrap"><div class="spinner"></div></div>`;
+}
+
+function emptyState(icon, title, sub) {
+  return `<div class="empty"><div class="empty-icon">${icon}</div><div class="empty-title">${title}</div><div class="empty-sub">${sub}</div></div>`;
+}
+
+function displayUserName(user = currentUser) {
+  return user?.name || user?.username || "Utente";
+}
+
+function canEditData() {
+  return ["admin", "internal"].includes(currentUser?.role);
+}
+
+function getLeadStatusColor(status) {
+  return LEAD_STATUS_COLORS[status] || "#6B6B6B";
+}
+
+async function ensureClientsLoaded() {
+  if (allClients.length > 0) return allClients;
+  await waitAuth();
+  const snap = await db.collection(COLLECTIONS.clients).get();
+  allClients = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  return allClients;
+}
+
+function clientDisplayName(client) {
+  return client?.businessName || "Cliente senza nome";
+}
+
+function clientEmail(client) {
+  return client?.contactEmail || client?.ownerEmail || "";
+}
+
+function clientPhone(client) {
+  return client?.contactPhone || client?.contactMobile || "";
+}
+
+function clientFiscalCode(client) {
+  return client?.businessFiscalCode || "";
+}
+
+async function presignUpload(clientId, file) {
+  const resp = await fetch(`https://${SUPABASE.projectRef}.functions.supabase.co/presign-upload`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      clientId,
+      fileName: file.name,
+      contentType: file.type || "application/octet-stream"
+    })
+  });
+  if (!resp.ok) throw new Error(await resp.text() || "Errore presign upload");
+  return resp.json();
+}
+
+async function presignDownload(storagePath) {
+  const resp = await fetch(`https://${SUPABASE.projectRef}.functions.supabase.co/presign-download`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ bucket: SUPABASE.bucket, path: storagePath })
+  });
+  if (!resp.ok) throw new Error(await resp.text() || "Errore presign download");
+  return resp.json();
+}
+
+async function uploadToSignedUrl(signedUrl, file) {
+  let resp = await fetch(signedUrl, {
+    method: "PUT",
+    headers: {
+      "Content-Type": file.type || "application/octet-stream",
+      "x-upsert": "true"
+    },
+    body: file
+  });
+  if (resp.ok) return;
+  resp = await fetch(signedUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": file.type || "application/octet-stream",
+      "x-upsert": "true"
+    },
+    body: file
+  });
+  if (!resp.ok) throw new Error(await resp.text() || `Upload fallito (${resp.status})`);
+}
+
+let _activeUnsubs = [];
+function clearUnsubs() {
+  _activeUnsubs.forEach(unsub => unsub && unsub());
+  _activeUnsubs = [];
+}
+
+let currentUser = null;
+let loginAttempts = 0;
+let cooldownTimer = null;
+let cooldownSec = 0;
+let activeSection = "dashboard";
+let allClients = [];
+let clientSearch = "";
+let allLeads = [];
+let _leadFilter = "all";
+let calDate = new Date();
+let allEvents = [];
+let allTasks = [];
+let allCollabs = [];
+let collabSearch = "";
+let _editingClientId = null;
+let _editingLeadId = null;
+let _editingCollabId = null;
+let _editingUserId = null;
+let _detailClient = null;
+let _detailTab = "info";
+
+function resetLoginUI() {
+  const btn = document.getElementById("btn-login");
+  const errorEl = document.getElementById("login-error");
+  const cooldownEl = document.getElementById("login-cooldown");
+
+  if (cooldownTimer && cooldownSec <= 0) {
+    clearInterval(cooldownTimer);
+    cooldownTimer = null;
+  }
+
+  if (btn) {
+    btn.disabled = cooldownSec > 0;
+    btn.textContent = "Accedi";
+  }
+  if (errorEl) errorEl.style.display = "none";
+  if (cooldownEl && cooldownSec <= 0) {
+    cooldownEl.style.display = "none";
+    cooldownEl.textContent = "";
+  }
+}
+
+async function handleLogin() {
+  if (!firebaseReady || !db) {
+    showBootstrapError("Impossibile inizializzare i servizi cloud.");
+    return;
+  }
+  if (cooldownSec > 0) return;
+  const username = document.getElementById("inp-username").value.trim().toLowerCase();
+  const password = document.getElementById("inp-password").value;
+  if (!username || !password) {
+    showLoginError("Inserisci username e password");
+    return;
+  }
+
+  const btn = document.getElementById("btn-login");
+  btn.disabled = true;
+  btn.textContent = "Accesso in corso...";
+  document.getElementById("login-error").style.display = "none";
+
+  try {
+    await waitAuth();
+    const hash = await sha256(password.trim());
+    const snap = await db.collection(COLLECTIONS.users)
+      .where("username", "==", username)
+      .limit(1)
+      .get();
+
+    if (snap.empty) throw new Error("Credenziali non valide");
+
+    const userDoc = snap.docs[0];
+    const user = { id: userDoc.id, ...userDoc.data() };
+    if (!user.isActive) throw new Error("Utente disabilitato");
+    if (user.passwordHash !== hash) throw new Error("Credenziali non valide");
+
+    currentUser = user;
+    loginAttempts = 0;
+    resetLoginUI();
+    showApp();
+  } catch (error) {
+    loginAttempts += 1;
+    if (loginAttempts >= 5) {
+      loginAttempts = 0;
+      cooldownSec = 60;
+      startCooldown();
+      showLoginError("Troppi tentativi. Riprova tra 1 minuto.");
+    } else {
+      showLoginError(`${error.message} (tentativo ${loginAttempts}/5)`);
+    }
+    btn.disabled = false;
+    btn.textContent = "Accedi";
+  }
+}
+
+function showLoginError(msg) {
+  const el = document.getElementById("login-error");
+  el.textContent = msg;
+  el.style.display = "block";
+}
+
+function startCooldown() {
+  const el = document.getElementById("login-cooldown");
+  const btn = document.getElementById("btn-login");
+  btn.disabled = true;
+  clearInterval(cooldownTimer);
+  cooldownTimer = setInterval(() => {
+    cooldownSec -= 1;
+    el.textContent = `Troppi tentativi. Riprova tra ${cooldownSec} secondi.`;
+    el.style.display = "block";
+    if (cooldownSec <= 0) {
+      clearInterval(cooldownTimer);
+      cooldownTimer = null;
+      el.style.display = "none";
+      btn.disabled = false;
+      btn.textContent = "Accedi";
+    }
+  }, 1000);
+}
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Enter" && document.getElementById("login-screen").style.display !== "none") {
+    handleLogin();
+  }
+});
+
+function handleLogout() {
+  currentUser = null;
+  clearUnsubs();
+  document.getElementById("app").style.display = "none";
+  document.getElementById("login-screen").style.display = "flex";
+  document.getElementById("inp-username").value = "";
+  document.getElementById("inp-password").value = "";
+  cooldownSec = 0;
+  resetLoginUI();
+}
+
+const NAV = [
+  { id: "dashboard", label: "Dashboard", icon: "▦" },
+  { id: "clients", label: "Clienti", icon: "👥" },
+  { id: "leads", label: "Lead", icon: "🎯" },
+  { id: "calendar", label: "Calendario", icon: "📅" },
+  { id: "collaborators", label: "Team", icon: "👤" },
+  { id: "settings", label: "Impostazioni", icon: "⚙️" }
+];
+
+function buildSidebar() {
+  const nav = document.getElementById("sb-nav");
+  nav.innerHTML = NAV.map(item => `
+    <div class="nav-item ${item.id === activeSection ? "active" : ""}" onclick="navigate('${item.id}')" id="nav-${item.id}">
+      <span class="icon">${item.icon}</span>
+      <span class="label">${item.label}</span>
+    </div>
+  `).join("");
+
+  const name = displayUserName();
+  document.getElementById("sb-username").textContent = name;
+  document.getElementById("sb-role").textContent = currentUser?.role || "—";
+  const avatarEl = document.getElementById("sb-avatar");
+  avatarEl.textContent = name.split(/\s+/).map(w => w[0]).slice(0, 2).join("").toUpperCase() || "?";
+  const hue = [...name].reduce((acc, ch) => acc + ch.charCodeAt(0), 0) % 360;
+  avatarEl.style.background = `linear-gradient(135deg,hsl(${hue},65%,55%),hsl(${hue + 30},60%,40%))`;
+}
+
+function navigate(section, extra) {
+  clearUnsubs();
+  activeSection = section;
+  document.querySelectorAll(".nav-item").forEach(el => el.classList.remove("active"));
+  const navEl = document.getElementById(`nav-${section}`);
+  if (navEl) navEl.classList.add("active");
+
+  const main = document.getElementById("main");
+  main.style.animation = "none";
+  main.offsetHeight;
+  main.style.animation = "fadeIn .25s ease";
+
+  if (section === "dashboard") renderDashboard();
+  if (section === "clients") extra ? renderClientDetail(extra) : renderClients();
+  if (section === "leads") renderLeads();
+  if (section === "calendar") renderCalendar();
+  if (section === "collaborators") renderCollaborators();
+  if (section === "settings") renderSettings();
+}
+
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("collapsed");
+}
+
+function showApp() {
+  document.getElementById("login-screen").style.display = "none";
+  document.getElementById("app").style.display = "flex";
+  buildSidebar();
+  navigate("dashboard");
+}
+
+async function renderDashboard() {
+  const main = document.getElementById("main");
+  main.innerHTML = `<div style="padding:32px">${spinner()}</div>`;
+  try {
+    await waitAuth();
+    const [clientsSnap, leadsSnap, eventsSnap, tasksSnap] = await Promise.all([
+      db.collection(COLLECTIONS.clients).get(),
+      db.collection(COLLECTIONS.leads).get(),
+      db.collection(COLLECTIONS.events).get(),
+      db.collection(COLLECTIONS.tasks).get()
+    ]);
+
+    const clients = clientsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+      .sort((a, b) => (toDateValue(b.createdAt)?.getTime() || 0) - (toDateValue(a.createdAt)?.getTime() || 0));
+    const leads = leadsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+      .sort((a, b) => (toDateValue(b.createdAt)?.getTime() || 0) - (toDateValue(a.createdAt)?.getTime() || 0));
+    const tasks = tasksSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const completedTasks = tasks.filter(task => task.isCompleted).length;
+    const recentClients = clients.slice(0, 5);
+    const recentLeads = leads.slice(0, 4);
+
+    main.innerHTML = `
+      <div style="padding:32px">
+        <div style="margin-bottom:28px">
+          <h1 class="page-title">Dashboard</h1>
+          <p class="page-sub">Benvenuto, ${esc(displayUserName())} — dati condivisi con PITCRM</p>
+        </div>
+
+        <div class="grid-stats">
+          ${[
+            { label: "Clienti", value: clients.length, icon: "👥", color: "#1565C0" },
+            { label: "Lead", value: leads.length, icon: "🎯", color: "#E65100" },
+            { label: "Eventi", value: eventsSnap.size, icon: "📅", color: "#2E7D32" },
+            { label: "Task completati", value: `${completedTasks}/${tasksSnap.size}`, icon: "✅", color: "#C1272D" }
+          ].map(item => `
+            <div class="card stat-card">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+                <div class="stat-icon">${item.icon}</div>
+                <div style="width:9px;height:9px;border-radius:50%;background:${item.color}"></div>
+              </div>
+              <div class="stat-value">${item.value}</div>
+              <div class="stat-label">${item.label}</div>
+            </div>
+          `).join("")}
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div class="card" style="padding:24px">
+            <h3 style="font-size:15px;font-weight:800;margin-bottom:16px">👥 Clienti Recenti</h3>
+            ${recentClients.length === 0 ? emptyState("👥", "Nessun cliente", "") : recentClients.map(client => `
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="navigate('clients','${client.id}')">
+                ${avatar(clientDisplayName(client), 36)}
+                <div style="flex:1;min-width:0">
+                  <div style="font-weight:700;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(clientDisplayName(client))}</div>
+                  <div style="font-size:12px;color:var(--gray)">${esc(client.businessType || "—")}</div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+          <div class="card" style="padding:24px">
+            <h3 style="font-size:15px;font-weight:800;margin-bottom:16px">🎯 Lead Recenti</h3>
+            ${recentLeads.length === 0 ? emptyState("🎯", "Nessun lead", "") : recentLeads.map(lead => `
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
+                <div style="flex:1">
+                  <div style="font-weight:700;font-size:14px">${esc(lead.companyName || "Lead senza nome")}</div>
+                  <div style="font-size:12px;color:var(--gray)">${esc([lead.referentFirstName, lead.referentLastName].filter(Boolean).join(" ") || "—")}</div>
+                </div>
+                ${badge(lead.leadStatus || "—", getLeadStatusColor(lead.leadStatus))}
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      </div>
+    `;
+  } catch (error) {
+    main.innerHTML = `<div style="padding:32px"><div class="error-box">Errore caricamento dati: ${esc(error.message)}</div></div>`;
+  }
+}
+
+function renderClients() {
+  clearUnsubs();
+  const main = document.getElementById("main");
+  main.innerHTML = `
+    <div style="padding:32px">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Clienti</h1>
+          <p class="page-sub" id="clients-count">Caricamento...</p>
+        </div>
+        ${canEditData() ? `<button class="btn btn-primary" onclick="openClientForm()">+ Nuovo Cliente</button>` : ""}
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" id="client-search" placeholder="Cerca per ragione sociale, P.IVA, codice fiscale..." oninput="filterClients(this.value)">
+        <button class="search-clear" onclick="clearClientSearch()" style="display:none" id="clear-cs">×</button>
+      </div>
+      <div id="clients-grid">${spinner()}</div>
+    </div>
+  `;
+
+  waitAuth().then(() => {
+    const unsub = db.collection(COLLECTIONS.clients).onSnapshot(snapshot => {
+      allClients = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        .sort((a, b) => clientDisplayName(a).localeCompare(clientDisplayName(b), "it"));
+      const countEl = document.getElementById("clients-count");
+      if (countEl) countEl.textContent = `${allClients.length} clienti totali`;
+      renderClientsGrid(allClients.filter(client => clientMatchesSearch(client, clientSearch)));
+    }, error => {
+      const el = document.getElementById("clients-grid");
+      if (el) el.innerHTML = `<div class="error-box">Errore: ${esc(error.message)}</div>`;
+    });
+    _activeUnsubs.push(unsub);
+  });
+}
+
+function clientMatchesSearch(client, query) {
+  if (!query) return true;
+  const q = query.toLowerCase();
+  return [
+    clientDisplayName(client),
+    client.vatNumber,
+    clientFiscalCode(client),
+    clientEmail(client),
+    clientPhone(client)
+  ].some(value => String(value || "").toLowerCase().includes(q));
+}
+
+function filterClients(query) {
+  clientSearch = query;
+  const clearBtn = document.getElementById("clear-cs");
+  if (clearBtn) clearBtn.style.display = query ? "block" : "none";
+  renderClientsGrid(allClients.filter(client => clientMatchesSearch(client, query)));
+}
+
+function clearClientSearch() {
+  clientSearch = "";
+  const input = document.getElementById("client-search");
+  if (input) input.value = "";
+  const clearBtn = document.getElementById("clear-cs");
+  if (clearBtn) clearBtn.style.display = "none";
+  renderClientsGrid(allClients);
+}
+
+function renderClientsGrid(clients) {
+  const grid = document.getElementById("clients-grid");
+  if (!grid) return;
+  if (clients.length === 0) {
+    grid.innerHTML = emptyState("👥", clientSearch ? "Nessun risultato" : "Nessun cliente", clientSearch ? "Prova un termine diverso" : "Aggiungi il primo cliente");
+    return;
+  }
+
+  grid.innerHTML = `<div class="grid-2">${clients.map(client => `
+    <div class="card card-hover" style="padding:20px" onclick="navigate('clients','${client.id}')">
+      <div style="display:flex;align-items:flex-start;gap:13px">
+        ${avatar(clientDisplayName(client), 44)}
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:800;font-size:15px;margin-bottom:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(clientDisplayName(client))}</div>
+          ${client.businessType ? badge(esc(client.businessType), "#6B6B6B") : ""}
+        </div>
+        ${canEditData() ? `
+          <div style="display:flex;gap:5px" onclick="event.stopPropagation()">
+            <button class="btn-icon blue" onclick="openClientForm('${client.id}')">✏️</button>
+            <button class="btn-icon red" onclick="deleteClient('${client.id}','${esc(clientDisplayName(client))}')">🗑️</button>
+          </div>
+        ` : ""}
+      </div>
+      <div style="margin-top:12px;font-size:13px;color:var(--gray);display:flex;flex-direction:column;gap:3px">
+        ${client.vatNumber ? `<span>P.IVA: <b>${esc(client.vatNumber)}</b></span>` : ""}
+        ${clientFiscalCode(client) ? `<span>CF: <b>${esc(clientFiscalCode(client))}</b></span>` : ""}
+        ${clientEmail(client) ? `<span>✉️ ${esc(clientEmail(client))}</span>` : ""}
+        ${clientPhone(client) ? `<span>📞 ${esc(clientPhone(client))}</span>` : ""}
+      </div>
+    </div>
+  `).join("")}</div>`;
+}
+
+async function deleteClient(id, name) {
+  if (!canEditData()) return;
+  if (!confirm(`Eliminare il cliente "${name}"?`)) return;
+  try {
+    await db.collection(COLLECTIONS.clients).doc(id).delete();
+    toast("Cliente eliminato");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+  }
+}
+
+async function openClientForm(id) {
+  if (!canEditData()) return;
+  _editingClientId = id || null;
+  let data = {};
+  if (id) {
+    await waitAuth();
+    const snap = await db.collection(COLLECTIONS.clients).doc(id).get();
+    data = snap.data() || {};
+  }
+
+  const modal = document.createElement("div");
+  modal.className = "modal-overlay";
+  modal.id = "client-modal";
+  modal.innerHTML = `
+    <div class="modal" style="max-width:760px">
+      <div class="modal-header">
+        <div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">${id ? "Modifica Cliente" : "Nuovo Cliente"}</div></div>
+        <button class="modal-close" onclick="closeModal('client-modal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group" style="grid-column:span 2">
+            <label class="form-label">Ragione Sociale <span class="req">*</span></label>
+            <input id="cf-businessName" class="form-control" value="${esc(data.businessName || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tipo Attività</label>
+            <input id="cf-businessType" class="form-control" value="${esc(data.businessType || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">P.IVA</label>
+            <input id="cf-vatNumber" class="form-control" value="${esc(data.vatNumber || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Codice Fiscale</label>
+            <input id="cf-businessFiscalCode" class="form-control" value="${esc(data.businessFiscalCode || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Contatto</label>
+            <input id="cf-contactEmail" class="form-control" type="email" value="${esc(data.contactEmail || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Telefono</label>
+            <input id="cf-contactPhone" class="form-control" value="${esc(data.contactPhone || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nome Titolare</label>
+            <input id="cf-ownerFirstName" class="form-control" value="${esc(data.ownerFirstName || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cognome Titolare</label>
+            <input id="cf-ownerLastName" class="form-control" value="${esc(data.ownerLastName || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Titolare</label>
+            <input id="cf-ownerEmail" class="form-control" type="email" value="${esc(data.ownerEmail || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Città</label>
+            <input id="cf-legalCity" class="form-control" value="${esc(data.legalCity || "")}">
+          </div>
+          <div class="form-group" style="grid-column:span 2">
+            <label class="form-label">Indirizzo</label>
+            <input id="cf-legalStreet" class="form-control" value="${esc(data.legalStreet || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Paese</label>
+            <input id="cf-legalCountry" class="form-control" value="${esc(data.legalCountry || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Settori (separati da virgola)</label>
+            <input id="cf-sectors" class="form-control" value="${esc((data.sectors || []).join(", "))}">
+          </div>
+          <div class="form-group" style="grid-column:span 2">
+            <label class="form-label">Note</label>
+            <textarea id="cf-notes" class="form-control">${esc(data.notes || "")}</textarea>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+          <button class="btn btn-secondary" onclick="closeModal('client-modal')">Annulla</button>
+          <button class="btn btn-primary" id="btn-save-client" onclick="saveClient()">${id ? "Salva Modifiche" : "Crea Cliente"}</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  document.getElementById("cf-businessName").focus();
+}
+
+async function saveClient() {
+  const businessName = document.getElementById("cf-businessName").value.trim();
+  if (!businessName) {
+    toast("La ragione sociale è obbligatoria", "error");
+    return;
+  }
+
+  const btn = document.getElementById("btn-save-client");
+  btn.disabled = true;
+  btn.textContent = "Salvataggio...";
+
+  try {
+    await waitAuth();
+    const docRef = _editingClientId ? db.collection(COLLECTIONS.clients).doc(_editingClientId) : db.collection(COLLECTIONS.clients).doc();
+    const sectors = document.getElementById("cf-sectors").value
+      .split(",")
+      .map(item => item.trim())
+      .filter(Boolean);
+
+    const payload = {
+      id: docRef.id,
+      businessName,
+      businessType: document.getElementById("cf-businessType").value.trim() || "Ditta individuale",
+      atecoCode: "",
+      vatNumber: document.getElementById("cf-vatNumber").value.trim(),
+      uniqueCode: "",
+      businessFiscalCode: document.getElementById("cf-businessFiscalCode").value.trim(),
+      originCollaboratorName: "",
+      sourceCollaboratorId: "",
+      originClientName: "",
+      originClientPartnerId: "",
+      ownerFirstName: document.getElementById("cf-ownerFirstName").value.trim(),
+      ownerLastName: document.getElementById("cf-ownerLastName").value.trim(),
+      ownerBirthPlace: "",
+      ownerFiscalCode: "",
+      ownerEmail: document.getElementById("cf-ownerEmail").value.trim(),
+      ownerStreet: "",
+      ownerCap: "",
+      legalStreet: document.getElementById("cf-legalStreet").value.trim(),
+      legalCap: "",
+      legalCity: document.getElementById("cf-legalCity").value.trim(),
+      legalCountry: document.getElementById("cf-legalCountry").value.trim(),
+      contactEmail: document.getElementById("cf-contactEmail").value.trim(),
+      contactPec: "",
+      website: "",
+      contactMobile: "",
+      contactPhone: document.getElementById("cf-contactPhone").value.trim(),
+      sectors,
+      notes: document.getElementById("cf-notes").value.trim(),
+      q_retroactiveCredits: "No",
+      q_beniStrumentali: "No",
+      q_creditRecovered: "No",
+      q_creditRecoveredTypes: [],
+      q_cumulativeCredits: "No",
+      q_previousYearsCredits: "Non ha recuperato nessun credito",
+      q_investByDecember: "No",
+      q_investByDecemberDescription: "",
+      q_freePreAnalysis: "No",
+      q_photovoltaic: "Non presenti, e non intenzionato a realizzarli",
+      q_rdProcesses: "No, e non intenzionato ad implementarli",
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    if (!_editingClientId) payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+    await docRef.set(payload, { merge: true });
+    toast(_editingClientId ? "Cliente aggiornato ✓" : "Cliente creato ✓");
+    closeModal("client-modal");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+    btn.disabled = false;
+    btn.textContent = "Salva";
+  }
+}
+
+async function renderClientDetail(clientId) {
+  const main = document.getElementById("main");
+  main.innerHTML = `<div style="padding:32px">${spinner()}</div>`;
+  try {
+    await waitAuth();
+    const snap = await db.collection(COLLECTIONS.clients).doc(clientId).get();
+    if (!snap.exists) {
+      main.innerHTML = `<div style="padding:32px"><div class="error-box">Cliente non trovato</div></div>`;
+      return;
+    }
+    _detailClient = { id: snap.id, ...snap.data() };
+    _detailTab = "info";
+    drawClientDetail();
+  } catch (error) {
+    main.innerHTML = `<div style="padding:32px"><div class="error-box">Errore: ${esc(error.message)}</div></div>`;
+  }
+}
+
+function drawClientDetail() {
+  const client = _detailClient;
+  const hue = [...clientDisplayName(client)].reduce((acc, ch) => acc + ch.charCodeAt(0), 0) % 360;
+  const tabLabels = {
+    info: "Info",
+    events: "📅 Eventi",
+    tasks: "✅ Task",
+    logs: "📋 Log",
+    attachments: "📎 Allegati"
+  };
+  const main = document.getElementById("main");
+  main.innerHTML = `
+    <div style="padding:32px">
+      <button class="back-btn" onclick="navigate('clients')">← Torna ai Clienti</button>
+
+      <div class="detail-hero" style="background:linear-gradient(135deg,hsl(${hue},60%,28%),hsl(${hue + 40},55%,20%))">
+        ${avatar(clientDisplayName(client), 64)}
+        <div class="detail-info">
+          <div class="detail-title">${esc(clientDisplayName(client))}</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            ${client.businessType ? badge(esc(client.businessType), "rgba(255,255,255,.8)") : ""}
+            ${client.vatNumber ? badge(`P.IVA ${esc(client.vatNumber)}`, "rgba(255,255,255,.65)") : ""}
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        ${Object.entries(tabLabels).map(([key, label]) => `
+          <button class="tab ${key === _detailTab ? "active" : ""}" onclick="switchDetailTab('${key}')">${label}</button>
+        `).join("")}
+      </div>
+
+      <div id="detail-content"></div>
+    </div>
+  `;
+  loadDetailTab(_detailTab);
+}
+
+function switchDetailTab(tab) {
+  _detailTab = tab;
+  clearUnsubs();
+  drawClientDetail();
+}
+
+function loadDetailTab(tab) {
+  const client = _detailClient;
+  const content = document.getElementById("detail-content");
+  if (!content) return;
+
+  if (tab === "info") {
+    content.innerHTML = `
+      <div class="card" style="padding:24px">
+        <div class="info-grid">
+          ${[
+            ["Ragione Sociale", client.businessName],
+            ["Tipo Attività", client.businessType],
+            ["P.IVA", client.vatNumber],
+            ["Codice Fiscale", client.businessFiscalCode],
+            ["Email Contatto", client.contactEmail],
+            ["Telefono", client.contactPhone],
+            ["Email Titolare", client.ownerEmail],
+            ["Titolare", [client.ownerFirstName, client.ownerLastName].filter(Boolean).join(" ")],
+            ["Indirizzo", client.legalStreet],
+            ["Città", client.legalCity],
+            ["Paese", client.legalCountry],
+            ["Settori", (client.sectors || []).join(", ")]
+          ].filter(([, value]) => value).map(([label, value]) => `
+            <div class="info-field"><label>${esc(label)}</label><span>${esc(value)}</span></div>
+          `).join("")}
+          ${client.notes ? `<div class="info-field" style="grid-column:span 2"><label>Note</label><span style="white-space:pre-wrap;font-weight:400;color:var(--gray)">${esc(client.notes)}</span></div>` : ""}
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  if (tab === "events") {
+    content.innerHTML = `
+      <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+        ${canEditData() ? `<button class="btn btn-primary btn-sm" onclick="openEventForm('${client.id}')">+ Nuovo Evento</button>` : ""}
+      </div>
+      <div id="events-list">${spinner()}</div>
+    `;
+    const unsub = db.collection(COLLECTIONS.events).where("clientId", "==", client.id).onSnapshot(snapshot => {
+      const events = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        .sort((a, b) => (toDateValue(a.startAt)?.getTime() || 0) - (toDateValue(b.startAt)?.getTime() || 0));
+      const el = document.getElementById("events-list");
+      if (!el) return;
+      if (events.length === 0) {
+        el.innerHTML = emptyState("📅", "Nessun evento", "Aggiungi il primo evento");
+        return;
+      }
+      el.innerHTML = events.map(event => `
+        <div class="card" style="padding:16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div style="font-weight:700;font-size:14px">${esc(event.title)}</div>
+            <div style="font-size:13px;color:var(--gray);margin-top:3px">${formatDateTime(event.startAt)}</div>
+            ${event.notes ? `<div style="font-size:12px;color:var(--gray-light);margin-top:4px">${esc(event.notes)}</div>` : ""}
+          </div>
+          ${canEditData() ? `<button class="btn-icon red" onclick="deleteEvent('${event.id}')">🗑️</button>` : ""}
+        </div>
+      `).join("");
+    }, error => {
+      const el = document.getElementById("events-list");
+      if (el) el.innerHTML = `<div class="error-box">Errore: ${esc(error.message)}</div>`;
+    });
+    _activeUnsubs.push(unsub);
+    return;
+  }
+
+  if (tab === "tasks") {
+    content.innerHTML = `
+      <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+        ${canEditData() ? `<button class="btn btn-primary btn-sm" onclick="openTaskForm('${client.id}')">+ Nuovo Task</button>` : ""}
+      </div>
+      <div id="tasks-list">${spinner()}</div>
+    `;
+    const unsub = db.collection(COLLECTIONS.tasks).where("clientId", "==", client.id).onSnapshot(snapshot => {
+      const tasks = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        .sort((a, b) => (toDateValue(a.dueAt)?.getTime() || 0) - (toDateValue(b.dueAt)?.getTime() || 0));
+      const el = document.getElementById("tasks-list");
+      if (!el) return;
+      if (tasks.length === 0) {
+        el.innerHTML = emptyState("✅", "Nessun task", "Aggiungi il primo task");
+        return;
+      }
+      el.innerHTML = tasks.map(task => `
+        <div class="card" style="padding:16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="task-check ${task.isCompleted ? "done" : ""}" onclick="toggleTask('${task.id}',${task.isCompleted})"></div>
+            <div>
+              <div style="font-weight:600;font-size:14px;${task.isCompleted ? "text-decoration:line-through;opacity:.55" : ""}">${esc(task.title)}</div>
+              <div style="font-size:12px;color:var(--gray)">Scadenza: ${formatDate(task.dueAt)}</div>
+            </div>
+          </div>
+          ${canEditData() ? `<button class="btn-icon red" onclick="deleteTask('${task.id}')">🗑️</button>` : ""}
+        </div>
+      `).join("");
+    }, error => {
+      const el = document.getElementById("tasks-list");
+      if (el) el.innerHTML = `<div class="error-box">Errore: ${esc(error.message)}</div>`;
+    });
+    _activeUnsubs.push(unsub);
+    return;
+  }
+
+  if (tab === "logs") {
+    content.innerHTML = `
+      ${canEditData() ? `
+        <div class="card" style="padding:20px;margin-bottom:14px">
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Nuova nota attività</label>
+            <textarea id="client-log-text" class="form-control" placeholder="Aggiungi una nota per questo cliente"></textarea>
+          </div>
+          <div style="display:flex;justify-content:flex-end;margin-top:12px">
+            <button class="btn btn-primary btn-sm" onclick="addClientLog('${client.id}')">Salva Log</button>
+          </div>
+        </div>
+      ` : ""}
+      <div id="logs-list">${spinner()}</div>
+    `;
+    const unsub = db.collection(COLLECTIONS.clients).doc(client.id).collection("logs").onSnapshot(snapshot => {
+      const logs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        .sort((a, b) => (toDateValue(b.createdAt)?.getTime() || 0) - (toDateValue(a.createdAt)?.getTime() || 0));
+      const el = document.getElementById("logs-list");
+      if (!el) return;
+      if (logs.length === 0) {
+        el.innerHTML = emptyState("📋", "Nessun log", "Le attività appariranno qui");
+        return;
+      }
+      el.innerHTML = `<div class="card" style="padding:20px">${logs.map(log => `
+        <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--red);margin-top:6px;flex-shrink:0"></div>
+          <div>
+            <div style="font-size:14px">${esc(log.text || "—")}</div>
+            <div style="font-size:12px;color:var(--gray-light);margin-top:2px">${formatDateTime(log.createdAt)} — ${esc(log.createdByNameSnapshot || "sistema")}</div>
+          </div>
+        </div>
+      `).join("")}</div>`;
+    }, error => {
+      const el = document.getElementById("logs-list");
+      if (el) el.innerHTML = `<div class="error-box">Errore: ${esc(error.message)}</div>`;
+    });
+    _activeUnsubs.push(unsub);
+    return;
+  }
+
+  if (tab === "attachments") {
+    content.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="font-size:13px;color:var(--gray)">Archiviazione Supabase collegata al bucket <strong style="color:var(--black)">${esc(SUPABASE.bucket)}</strong></div>
+        ${canEditData() ? `
+          <div>
+            <input id="attachment-file" type="file" style="display:none" onchange="handleAttachmentSelected('${client.id}', this)">
+            <button class="btn btn-primary btn-sm" onclick="document.getElementById('attachment-file').click()">+ Carica Allegato</button>
+          </div>
+        ` : ""}
+      </div>
+      <div id="attachments-list">${spinner()}</div>
+    `;
+    const unsub = db.collection(COLLECTIONS.attachments).where("clientId", "==", client.id).onSnapshot(snapshot => {
+      const attachments = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        .sort((a, b) => (toDateValue(b.createdAt)?.getTime() || 0) - (toDateValue(a.createdAt)?.getTime() || 0));
+      const el = document.getElementById("attachments-list");
+      if (!el) return;
+      if (attachments.length === 0) {
+        el.innerHTML = emptyState("📎", "Nessun allegato", "Carica il primo documento su Supabase");
+        return;
+      }
+      el.innerHTML = `<div class="card" style="padding:12px 20px">${attachments.map(item => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)">
+          <div>
+            <div style="font-weight:700;font-size:14px">${esc(item.fileName || "Documento")}</div>
+            <div style="font-size:12px;color:var(--gray-light)">${formatDateTime(item.createdAt)}</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-secondary btn-sm" onclick="downloadAttachment('${esc(item.storagePath)}','${esc(item.fileName || "allegato")}')">Apri</button>
+            ${canEditData() ? `<button class="btn-icon red" onclick="deleteAttachment('${client.id}','${item.id}','${esc(item.fileName || "allegato")}')">🗑️</button>` : ""}
+          </div>
+        </div>
+      `).join("")}</div>`;
+    }, error => {
+      const el = document.getElementById("attachments-list");
+      if (el) el.innerHTML = `<div class="error-box">Errore: ${esc(error.message)}</div>`;
+    });
+    _activeUnsubs.push(unsub);
+  }
+}
+
+async function addClientLog(clientId) {
+  const text = document.getElementById("client-log-text").value.trim();
+  if (!text) {
+    toast("Inserisci un testo per il log", "error");
+    return;
+  }
+  try {
+    const docRef = db.collection(COLLECTIONS.clients).doc(clientId).collection("logs").doc();
+    await docRef.set({
+      id: docRef.id,
+      text,
+      createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+      createdByUid: currentUser.id,
+      createdByNameSnapshot: displayUserName()
+    }, { merge: true });
+    document.getElementById("client-log-text").value = "";
+    toast("Log salvato ✓");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+  }
+}
+
+async function handleAttachmentSelected(clientId, input) {
+  const file = input.files?.[0];
+  if (!file) return;
+  try {
+    const upload = await presignUpload(clientId, file);
+    await uploadToSignedUrl(upload.signedUrl, file);
+    await db.collection(COLLECTIONS.attachments).doc(upload.attachmentId).set({
+      clientId,
+      fileName: file.name,
+      storagePath: upload.path,
+      createdByUid: currentUser.id,
+      createdAt: firebase.firestore.Timestamp.fromDate(new Date())
+    }, { merge: true });
+    toast("Allegato caricato ✓");
+  } catch (error) {
+    toast(`Errore upload: ${error.message}`, "error");
+  } finally {
+    input.value = "";
+  }
+}
+
+async function downloadAttachment(storagePath, fileName) {
+  try {
+    const resp = await presignDownload(storagePath);
+    window.open(resp.signedUrl, "_blank", "noopener");
+  } catch (error) {
+    toast(`Errore apertura ${fileName}: ${error.message}`, "error");
+  }
+}
+
+async function deleteAttachment(clientId, attachmentId, fileName) {
+  if (!confirm(`Eliminare il riferimento all'allegato "${fileName}"?`)) return;
+  try {
+    await db.collection(COLLECTIONS.attachments).doc(attachmentId).delete();
+    toast("Allegato rimosso ✓");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+  }
+}
+
+function renderLeads() {
+  clearUnsubs();
+  const main = document.getElementById("main");
+  main.innerHTML = `
+    <div style="padding:32px">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Lead</h1>
+          <p class="page-sub" id="leads-count">Caricamento...</p>
+        </div>
+        ${canEditData() ? `<button class="btn btn-primary" onclick="openLeadForm()">+ Nuovo Lead</button>` : ""}
+      </div>
+      <div class="status-filters" id="lead-filters">
+        ${["all", ...LEAD_STATUSES].map(value => `
+          <button class="status-filter ${value === _leadFilter ? "active" : ""}"
+            style="${value === _leadFilter ? `background:${value === "all" ? "#6B6B6B" : getLeadStatusColor(value)};color:#fff` : `color:${value === "all" ? "#6B6B6B" : getLeadStatusColor(value)}`}"
+            onclick="setLeadFilter('${value}')">${value === "all" ? "Tutti" : value}</button>
+        `).join("")}
+      </div>
+      <div id="leads-list">${spinner()}</div>
+    </div>
+  `;
+
+  const unsub = db.collection(COLLECTIONS.leads).onSnapshot(snapshot => {
+    allLeads = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+      .sort((a, b) => (toDateValue(b.createdAt)?.getTime() || 0) - (toDateValue(a.createdAt)?.getTime() || 0));
+    const countEl = document.getElementById("leads-count");
+    if (countEl) countEl.textContent = `${allLeads.length} lead totali`;
+    renderLeadsList();
+  }, error => {
+    const el = document.getElementById("leads-list");
+    if (el) el.innerHTML = `<div class="error-box">Errore: ${esc(error.message)}</div>`;
+  });
+  _activeUnsubs.push(unsub);
+}
+
+function setLeadFilter(value) {
+  _leadFilter = value;
+  renderLeads();
+}
+
+function renderLeadsList() {
+  const el = document.getElementById("leads-list");
+  if (!el) return;
+  const leads = _leadFilter === "all" ? allLeads : allLeads.filter(lead => lead.leadStatus === _leadFilter);
+  if (leads.length === 0) {
+    el.innerHTML = emptyState("🎯", "Nessun lead", "Aggiungi il primo lead o cambia filtro");
+    return;
+  }
+
+  el.innerHTML = `<div style="display:flex;flex-direction:column;gap:10px">${leads.map(lead => `
+    <div class="card" style="padding:18px">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;flex-wrap:wrap">
+            <span style="font-weight:800;font-size:15px">${esc(lead.companyName || "Lead senza nome")}</span>
+            ${badge(lead.leadStatus || "—", getLeadStatusColor(lead.leadStatus))}
+          </div>
+          <div style="font-size:13px;color:var(--gray)">${esc([lead.referentFirstName, lead.referentLastName].filter(Boolean).join(" ") || "Nessun referente")}</div>
+          ${lead.notes ? `<div style="font-size:13px;color:var(--gray);margin-top:4px">${esc(lead.notes)}</div>` : ""}
+          <div style="font-size:12px;color:var(--gray-light);margin-top:5px">${formatDate(lead.createdAt)}</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          ${canEditData() && lead.leadStatus !== "Convertito in cliente" ? `<button class="btn btn-secondary btn-sm" onclick="convertLead('${lead.id}')">→ Cliente</button>` : ""}
+          ${canEditData() ? `<button class="btn-icon blue" onclick="openLeadForm('${lead.id}')">✏️</button>` : ""}
+          ${canEditData() ? `<button class="btn-icon red" onclick="deleteLead('${lead.id}','${esc(lead.companyName || "lead")}')">🗑️</button>` : ""}
+        </div>
+      </div>
+    </div>
+  `).join("")}</div>`;
+}
+
+async function convertLead(id) {
+  if (!canEditData()) return;
+  const lead = allLeads.find(item => item.id === id);
+  if (!lead) return;
+  if (!confirm(`Convertire "${lead.companyName}" in cliente?`)) return;
+
+  try {
+    const clientRef = db.collection(COLLECTIONS.clients).doc();
+    await clientRef.set({
+      id: clientRef.id,
+      businessName: lead.companyName || "Nuovo cliente",
+      businessType: lead.subjectType || "Ditta individuale",
+      vatNumber: "",
+      uniqueCode: "",
+      businessFiscalCode: "",
+      originCollaboratorName: lead.leadSourcePartnerName || "",
+      sourceCollaboratorId: lead.leadSourcePartnerId || "",
+      originClientName: "",
+      originClientPartnerId: "",
+      ownerFirstName: lead.referentFirstName || "",
+      ownerLastName: lead.referentLastName || "",
+      ownerBirthPlace: "",
+      ownerFiscalCode: "",
+      ownerEmail: lead.email || "",
+      ownerStreet: "",
+      ownerCap: "",
+      legalStreet: "",
+      legalCap: "",
+      legalCity: lead.city || "",
+      legalCountry: lead.province || "",
+      contactEmail: lead.email || "",
+      contactPec: "",
+      website: "",
+      contactMobile: lead.phone || "",
+      contactPhone: lead.phone || "",
+      sectors: lead.activitySector ? [lead.activitySector] : [],
+      notes: lead.notes || "",
+      q_retroactiveCredits: "No",
+      q_beniStrumentali: "No",
+      q_creditRecovered: "No",
+      q_creditRecoveredTypes: [],
+      q_cumulativeCredits: "No",
+      q_previousYearsCredits: "Non ha recuperato nessun credito",
+      q_investByDecember: "No",
+      q_investByDecemberDescription: "",
+      q_freePreAnalysis: "No",
+      q_photovoltaic: "Non presenti, e non intenzionato a realizzarli",
+      q_rdProcesses: "No, e non intenzionato ad implementarli",
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+
+    await db.collection(COLLECTIONS.leads).doc(id).set({
+      leadStatus: "Convertito in cliente",
+      convertedToClientId: clientRef.id,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+
+    toast("Lead convertito in cliente ✓");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+  }
+}
+
+async function deleteLead(id, title) {
+  if (!canEditData()) return;
+  if (!confirm(`Eliminare il lead "${title}"?`)) return;
+  try {
+    await db.collection(COLLECTIONS.leads).doc(id).delete();
+    toast("Lead eliminato");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+  }
+}
+
+async function openLeadForm(id) {
+  if (!canEditData()) return;
+  _editingLeadId = id || null;
+  let data = {};
+  if (id) {
+    await waitAuth();
+    const snap = await db.collection(COLLECTIONS.leads).doc(id).get();
+    data = snap.data() || {};
+  }
+
+  const modal = document.createElement("div");
+  modal.className = "modal-overlay";
+  modal.id = "lead-modal";
+  modal.innerHTML = `
+    <div class="modal" style="max-width:640px">
+      <div class="modal-header">
+        <div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">${id ? "Modifica Lead" : "Nuovo Lead"}</div></div>
+        <button class="modal-close" onclick="closeModal('lead-modal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group" style="grid-column:span 2">
+            <label class="form-label">Azienda / Lead <span class="req">*</span></label>
+            <input id="lf-companyName" class="form-control" value="${esc(data.companyName || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nome referente</label>
+            <input id="lf-referentFirstName" class="form-control" value="${esc(data.referentFirstName || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cognome referente</label>
+            <input id="lf-referentLastName" class="form-control" value="${esc(data.referentLastName || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Telefono</label>
+            <input id="lf-phone" class="form-control" value="${esc(data.phone || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input id="lf-email" class="form-control" type="email" value="${esc(data.email || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Città</label>
+            <input id="lf-city" class="form-control" value="${esc(data.city || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Provincia</label>
+            <input id="lf-province" class="form-control" value="${esc(data.province || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Settore</label>
+            <input id="lf-activitySector" class="form-control" value="${esc(data.activitySector || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stato</label>
+            <select id="lf-leadStatus" class="form-control">
+              ${LEAD_STATUSES.map(status => `<option value="${status}" ${data.leadStatus === status ? "selected" : ""}>${status}</option>`).join("")}
+            </select>
+          </div>
+          <div class="form-group" style="grid-column:span 2">
+            <label class="form-label">Note</label>
+            <textarea id="lf-notes" class="form-control">${esc(data.notes || "")}</textarea>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn btn-secondary" onclick="closeModal('lead-modal')">Annulla</button>
+          <button class="btn btn-primary" id="btn-save-lead" onclick="saveLead()">${id ? "Salva" : "Crea Lead"}</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  document.getElementById("lf-companyName").focus();
+}
+
+async function saveLead() {
+  const companyName = document.getElementById("lf-companyName").value.trim();
+  if (!companyName) {
+    toast("Il nome azienda è obbligatorio", "error");
+    return;
+  }
+
+  const btn = document.getElementById("btn-save-lead");
+  btn.disabled = true;
+  btn.textContent = "...";
+
+  try {
+    await waitAuth();
+    const docRef = _editingLeadId ? db.collection(COLLECTIONS.leads).doc(_editingLeadId) : db.collection(COLLECTIONS.leads).doc();
+    const payload = {
+      id: docRef.id,
+      companyName,
+      referentFirstName: document.getElementById("lf-referentFirstName").value.trim(),
+      referentLastName: document.getElementById("lf-referentLastName").value.trim(),
+      phone: document.getElementById("lf-phone").value.trim(),
+      email: document.getElementById("lf-email").value.trim(),
+      city: document.getElementById("lf-city").value.trim(),
+      province: document.getElementById("lf-province").value.trim(),
+      activitySector: document.getElementById("lf-activitySector").value.trim(),
+      leadSource: "Altro",
+      subjectType: "-",
+      mainInterest: "-",
+      expectedInvestment: "-",
+      timeframe: "Media",
+      interestLevel: "Medio",
+      leadStatus: document.getElementById("lf-leadStatus").value,
+      nextAction: "Chiamata",
+      assignedTo: displayUserName(),
+      assignedToId: currentUser.id,
+      notes: document.getElementById("lf-notes").value.trim(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    if (!_editingLeadId) payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+    await docRef.set(payload, { merge: true });
+    toast(_editingLeadId ? "Lead aggiornato ✓" : "Lead creato ✓");
+    closeModal("lead-modal");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+    btn.disabled = false;
+    btn.textContent = "Salva";
+  }
+}
+
+const MONTHS_IT = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
+const DAYS_IT = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"];
+
+function renderCalendar() {
+  clearUnsubs();
+  const main = document.getElementById("main");
+  main.innerHTML = `<div style="padding:32px"><div class="cal-grid"><div id="cal-picker-col"></div><div id="cal-day-col"></div></div></div>`;
+  const unsubEvents = db.collection(COLLECTIONS.events).onSnapshot(snapshot => {
+    allEvents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    drawCalPicker();
+    drawDayView();
+  });
+  const unsubTasks = db.collection(COLLECTIONS.tasks).onSnapshot(snapshot => {
+    allTasks = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    drawCalPicker();
+    drawDayView();
+  });
+  _activeUnsubs.push(unsubEvents, unsubTasks);
+}
+
+function isSameDay(d1, d2) {
+  return d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
+}
+
+function getEventsForDay(date) {
+  return allEvents.filter(event => {
+    const start = toDateValue(event.startAt);
+    return start && isSameDay(start, date);
+  });
+}
+
+function getTasksForDay(date) {
+  return allTasks.filter(task => {
+    const due = toDateValue(task.dueAt);
+    return due && isSameDay(due, date);
+  });
+}
+
+function drawCalPicker() {
+  const el = document.getElementById("cal-picker-col");
+  if (!el) return;
+  const year = calDate.getFullYear();
+  const month = calDate.getMonth();
+  const firstWeekday = (new Date(year, month, 1).getDay() + 6) % 7;
+  const days = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
+
+  el.innerHTML = `
+    <div class="card" style="padding:20px;margin-bottom:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <button class="btn-icon" onclick="calChangeMonth(-1)">‹</button>
+        <span style="font-weight:800;font-size:15px">${MONTHS_IT[month]} ${year}</span>
+        <button class="btn-icon" onclick="calChangeMonth(1)">›</button>
+      </div>
+      <div class="cal-days">
+        ${DAYS_IT.map(day => `<div class="cal-day-hdr">${day}</div>`).join("")}
+        ${Array(firstWeekday).fill("<div></div>").join("")}
+        ${Array.from({ length: days }, (_, index) => {
+          const day = index + 1;
+          const current = new Date(year, month, day);
+          const selected = isSameDay(current, calDate);
+          const isToday = isSameDay(current, today);
+          const hasEvents = getEventsForDay(current).length > 0;
+          const hasTasks = getTasksForDay(current).length > 0;
+          return `
+            <div class="cal-day ${selected ? "selected" : isToday ? "today" : ""}" onclick="calSelectDay(${year},${month},${day})">
+              ${day}
+              ${(hasEvents || hasTasks) && !selected ? `<div class="cal-dots">${hasEvents ? `<div class="cal-dot" style="background:#1565C0"></div>` : ""}${hasTasks ? `<div class="cal-dot" style="background:#2E7D32"></div>` : ""}</div>` : ""}
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </div>
+    <div class="card" style="padding:16px">
+      <div style="font-size:13px;font-weight:700;margin-bottom:10px">${calDate.toLocaleDateString("it-IT", { weekday: "long", day: "numeric", month: "long" })}</div>
+      <div style="display:flex;gap:10px">
+        <div style="flex:1;background:rgba(21,101,192,.08);border-radius:10px;padding:10px 12px">
+          <div style="font-size:22px;font-weight:900;color:#1565C0">${getEventsForDay(calDate).length}</div>
+          <div style="font-size:11px;color:var(--gray)">eventi</div>
+        </div>
+        <div style="flex:1;background:rgba(46,125,50,.08);border-radius:10px;padding:10px 12px">
+          <div style="font-size:22px;font-weight:900;color:#2E7D32">${getTasksForDay(calDate).length}</div>
+          <div style="font-size:11px;color:var(--gray)">task</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function drawDayView() {
+  const el = document.getElementById("cal-day-col");
+  if (!el) return;
+  const events = getEventsForDay(calDate).sort((a, b) => (toDateValue(a.startAt)?.getTime() || 0) - (toDateValue(b.startAt)?.getTime() || 0));
+  const tasks = getTasksForDay(calDate).sort((a, b) => (toDateValue(a.dueAt)?.getTime() || 0) - (toDateValue(b.dueAt)?.getTime() || 0));
+
+  el.innerHTML = `
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+        <h2 style="font-size:19px;font-weight:900">${calDate.toLocaleDateString("it-IT", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</h2>
+        ${canEditData() ? `
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-secondary btn-sm" onclick="openTaskForm()">+ Task</button>
+            <button class="btn btn-primary btn-sm" onclick="openEventForm()">+ Evento</button>
+          </div>
+        ` : ""}
+      </div>
+      ${events.length > 0 ? `
+        <div style="font-size:12px;font-weight:800;color:#1565C0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">📅 EVENTI</div>
+        ${events.map(event => `
+          <div class="card" style="padding:15px;margin-bottom:9px;border-left:3px solid #1565C0">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start">
+              <div>
+                <div style="font-weight:700;font-size:14px">${esc(event.title)}</div>
+                <div style="font-size:13px;color:var(--gray);margin-top:3px">${formatDateTime(event.startAt)}</div>
+                <div style="font-size:12px;color:var(--gray-light);margin-top:4px">${esc(event.clientNameSnapshot || "—")}</div>
+              </div>
+              ${canEditData() ? `<button class="btn-icon red" onclick="deleteEvent('${event.id}')">🗑️</button>` : ""}
+            </div>
+          </div>
+        `).join("")}
+      ` : ""}
+      ${tasks.length > 0 ? `
+        <div style="font-size:12px;font-weight:800;color:#2E7D32;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;margin-top:${events.length > 0 ? 16 : 0}px">✅ TASK</div>
+        ${tasks.map(task => `
+          <div class="card" style="padding:15px;margin-bottom:9px;border-left:3px solid #2E7D32">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div class="task-check ${task.isCompleted ? "done" : ""}" onclick="toggleTask('${task.id}',${task.isCompleted})"></div>
+              <div style="flex:1">
+                <div style="font-weight:600;font-size:14px;${task.isCompleted ? "text-decoration:line-through;opacity:.55" : ""}">${esc(task.title)}</div>
+                <div style="font-size:12px;color:var(--gray)">Scadenza: ${formatDate(task.dueAt)}</div>
+                ${task.clientNameSnapshot ? `<div style="font-size:12px;color:var(--gray-light)">${esc(task.clientNameSnapshot)}</div>` : ""}
+              </div>
+              ${canEditData() ? `<button class="btn-icon red" onclick="deleteTask('${task.id}')">🗑️</button>` : ""}
+            </div>
+          </div>
+        `).join("")}
+      ` : ""}
+      ${events.length === 0 && tasks.length === 0 ? emptyState("📅", "Nessun evento o task", "Aggiungi un evento o un task per questa data") : ""}
+    </div>
+  `;
+}
+
+function calChangeMonth(dir) {
+  calDate = new Date(calDate.getFullYear(), calDate.getMonth() + dir, 1);
+  drawCalPicker();
+  drawDayView();
+}
+
+function calSelectDay(year, month, day) {
+  calDate = new Date(year, month, day);
+  drawCalPicker();
+  drawDayView();
+}
+
+async function openEventForm(defaultClientId) {
+  if (!canEditData()) return;
+  const clients = await ensureClientsLoaded();
+  const pad = value => String(value).padStart(2, "0");
+  const date = `${calDate.getFullYear()}-${pad(calDate.getMonth() + 1)}-${pad(calDate.getDate())}`;
+
+  const modal = document.createElement("div");
+  modal.className = "modal-overlay";
+  modal.id = "event-modal";
+  modal.innerHTML = `
+    <div class="modal" style="max-width:520px">
+      <div class="modal-header">
+        <div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">Nuovo Evento</div></div>
+        <button class="modal-close" onclick="closeModal('event-modal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Titolo <span class="req">*</span></label>
+          <input id="ef-title" class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cliente <span class="req">*</span></label>
+          <select id="ef-client" class="form-control">
+            <option value="">Seleziona cliente</option>
+            ${clients.map(client => `<option value="${client.id}" ${defaultClientId === client.id ? "selected" : ""}>${esc(clientDisplayName(client))}</option>`).join("")}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Data <span class="req">*</span></label>
+          <input id="ef-date" class="form-control" type="date" value="${date}">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Ora inizio</label>
+            <input id="ef-start" class="form-control" type="time" value="09:00">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ora fine</label>
+            <input id="ef-end" class="form-control" type="time" value="10:00">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Note</label>
+          <textarea id="ef-notes" class="form-control" rows="3"></textarea>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn btn-secondary" onclick="closeModal('event-modal')">Annulla</button>
+          <button class="btn btn-primary" id="btn-save-event" onclick="saveEvent()">Crea Evento</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  document.getElementById("ef-title").focus();
+}
+
+async function saveEvent() {
+  const title = document.getElementById("ef-title").value.trim();
+  const date = document.getElementById("ef-date").value;
+  const clientId = document.getElementById("ef-client").value;
+  if (!title || !date || !clientId) {
+    toast("Titolo, cliente e data sono obbligatori", "error");
+    return;
+  }
+
+  const btn = document.getElementById("btn-save-event");
+  btn.disabled = true;
+  btn.textContent = "...";
+
+  try {
+    const client = (await ensureClientsLoaded()).find(item => item.id === clientId);
+    const docRef = db.collection(COLLECTIONS.events).doc();
+    await docRef.set({
+      id: docRef.id,
+      title,
+      startAt: new Date(`${date}T${document.getElementById("ef-start").value}`),
+      endAt: new Date(`${date}T${document.getElementById("ef-end").value}`),
+      practiceId: null,
+      practiceCodeSnapshot: null,
+      clientId,
+      clientNameSnapshot: clientDisplayName(client),
+      leadId: null,
+      notes: document.getElementById("ef-notes").value.trim(),
+      createdByUid: currentUser.id
+    }, { merge: true });
+    toast("Evento creato ✓");
+    closeModal("event-modal");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+    btn.disabled = false;
+    btn.textContent = "Salva";
+  }
+}
+
+async function deleteEvent(id) {
+  if (!canEditData()) return;
+  if (!confirm("Eliminare evento?")) return;
+  try {
+    await db.collection(COLLECTIONS.events).doc(id).delete();
+    toast("Evento eliminato");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+  }
+}
+
+async function openTaskForm(defaultClientId) {
+  if (!canEditData()) return;
+  const clients = await ensureClientsLoaded();
+  const pad = value => String(value).padStart(2, "0");
+  const date = `${calDate.getFullYear()}-${pad(calDate.getMonth() + 1)}-${pad(calDate.getDate())}`;
+
+  const modal = document.createElement("div");
+  modal.className = "modal-overlay";
+  modal.id = "task-modal";
+  modal.innerHTML = `
+    <div class="modal" style="max-width:520px">
+      <div class="modal-header">
+        <div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">Nuovo Task</div></div>
+        <button class="modal-close" onclick="closeModal('task-modal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Titolo <span class="req">*</span></label>
+          <input id="tf-title" class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cliente</label>
+          <select id="tf-client" class="form-control">
+            <option value="">Nessun cliente</option>
+            ${clients.map(client => `<option value="${client.id}" ${defaultClientId === client.id ? "selected" : ""}>${esc(clientDisplayName(client))}</option>`).join("")}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Scadenza <span class="req">*</span></label>
+          <input id="tf-due" class="form-control" type="date" value="${date}">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Note</label>
+          <textarea id="tf-notes" class="form-control"></textarea>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn btn-secondary" onclick="closeModal('task-modal')">Annulla</button>
+          <button class="btn btn-primary" id="btn-save-task" onclick="saveTask()">Crea Task</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  document.getElementById("tf-title").focus();
+}
+
+async function saveTask() {
+  const title = document.getElementById("tf-title").value.trim();
+  const due = document.getElementById("tf-due").value;
+  if (!title || !due) {
+    toast("Titolo e scadenza sono obbligatori", "error");
+    return;
+  }
+
+  const btn = document.getElementById("btn-save-task");
+  btn.disabled = true;
+  btn.textContent = "...";
+
+  try {
+    const clientId = document.getElementById("tf-client").value;
+    const client = clientId ? (await ensureClientsLoaded()).find(item => item.id === clientId) : null;
+    const docRef = db.collection(COLLECTIONS.tasks).doc();
+    await docRef.set({
+      id: docRef.id,
+      title,
+      dueAt: new Date(`${due}T09:00:00`),
+      startAt: null,
+      endAt: null,
+      assignedToUid: currentUser.id,
+      assignedToNameSnapshot: displayUserName(),
+      isCompleted: false,
+      notes: document.getElementById("tf-notes").value.trim(),
+      clientId: clientId || null,
+      clientNameSnapshot: client ? clientDisplayName(client) : null,
+      practiceId: null,
+      practiceCodeSnapshot: null,
+      leadId: null,
+      createdByUid: currentUser.id
+    }, { merge: true });
+    toast("Task creato ✓");
+    closeModal("task-modal");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+    btn.disabled = false;
+    btn.textContent = "Salva";
+  }
+}
+
+async function toggleTask(id, isDone) {
+  if (!canEditData()) return;
+  try {
+    await db.collection(COLLECTIONS.tasks).doc(id).set({ isCompleted: !isDone }, { merge: true });
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+  }
+}
+
+async function deleteTask(id) {
+  if (!canEditData()) return;
+  if (!confirm("Eliminare task?")) return;
+  try {
+    await db.collection(COLLECTIONS.tasks).doc(id).delete();
+    toast("Task eliminato");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+  }
+}
+
+function renderCollaborators() {
+  clearUnsubs();
+  const main = document.getElementById("main");
+  main.innerHTML = `
+    <div style="padding:32px">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Team</h1>
+          <p class="page-sub" id="collabs-count">Caricamento...</p>
+        </div>
+        ${canEditData() ? `<button class="btn btn-primary" onclick="openCollabForm()">+ Nuovo</button>` : ""}
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" placeholder="Cerca collaboratore..." oninput="filterCollabs(this.value)">
+      </div>
+      <div id="collabs-grid">${spinner()}</div>
+    </div>
+  `;
+
+  const unsub = db.collection(COLLECTIONS.collaborators).onSnapshot(snapshot => {
+    allCollabs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+      .sort((a, b) => collaboratorFullName(a).localeCompare(collaboratorFullName(b), "it"));
+    const countEl = document.getElementById("collabs-count");
+    if (countEl) countEl.textContent = `${allCollabs.length} collaboratori`;
+    renderCollabsGrid(allCollabs.filter(collab => collaboratorMatchesSearch(collab, collabSearch)));
+  }, error => {
+    const el = document.getElementById("collabs-grid");
+    if (el) el.innerHTML = `<div class="error-box">Errore: ${esc(error.message)}</div>`;
+  });
+  _activeUnsubs.push(unsub);
+}
+
+function collaboratorFullName(collab) {
+  return [collab.name, collab.lastName].filter(Boolean).join(" ").trim() || collab.name || "Collaboratore";
+}
+
+function collaboratorMatchesSearch(collab, query) {
+  if (!query) return true;
+  const q = query.toLowerCase();
+  return [collaboratorFullName(collab), collab.email, collab.role, collab.companyName].some(value => String(value || "").toLowerCase().includes(q));
+}
+
+function filterCollabs(query) {
+  collabSearch = query;
+  renderCollabsGrid(allCollabs.filter(collab => collaboratorMatchesSearch(collab, query)));
+}
+
+function renderCollabsGrid(collabs) {
+  const el = document.getElementById("collabs-grid");
+  if (!el) return;
+  if (collabs.length === 0) {
+    el.innerHTML = emptyState("👤", "Nessun collaboratore", "Aggiungi il primo membro del team");
+    return;
+  }
+
+  el.innerHTML = `<div class="grid-3">${collabs.map(collab => `
+    <div class="card" style="padding:20px">
+      <div style="display:flex;align-items:center;gap:13px;margin-bottom:13px">
+        ${avatar(collaboratorFullName(collab), 48)}
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:800;font-size:15px;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(collaboratorFullName(collab))}</div>
+          ${collab.role ? badge(esc(collab.role), "#6B6B6B") : ""}
+        </div>
+      </div>
+      ${collab.email ? `<div style="font-size:13px;color:var(--gray);margin-bottom:3px">✉️ ${esc(collab.email)}</div>` : ""}
+      ${collab.phone ? `<div style="font-size:13px;color:var(--gray);margin-bottom:3px">📞 ${esc(collab.phone)}</div>` : ""}
+      ${collab.companyName ? `<div style="font-size:13px;color:var(--gray);margin-bottom:12px">🏢 ${esc(collab.companyName)}</div>` : ""}
+      ${canEditData() ? `
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-secondary btn-sm" style="flex:1" onclick="openCollabForm('${collab.id}')">Modifica</button>
+          <button class="btn-icon red" onclick="deleteCollab('${collab.id}','${esc(collaboratorFullName(collab))}')">🗑️</button>
+        </div>
+      ` : ""}
+    </div>
+  `).join("")}</div>`;
+}
+
+async function deleteCollab(id, name) {
+  if (!canEditData()) return;
+  if (!confirm(`Eliminare "${name}"?`)) return;
+  try {
+    await db.collection(COLLECTIONS.collaborators).doc(id).delete();
+    toast("Collaboratore eliminato");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+  }
+}
+
+async function openCollabForm(id) {
+  if (!canEditData()) return;
+  _editingCollabId = id || null;
+  let data = {};
+  if (id) {
+    await waitAuth();
+    const snap = await db.collection(COLLECTIONS.collaborators).doc(id).get();
+    data = snap.data() || {};
+  }
+
+  const modal = document.createElement("div");
+  modal.className = "modal-overlay";
+  modal.id = "collab-modal";
+  modal.innerHTML = `
+    <div class="modal" style="max-width:560px">
+      <div class="modal-header">
+        <div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">${id ? "Modifica" : "Nuovo Collaboratore"}</div></div>
+        <button class="modal-close" onclick="closeModal('collab-modal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome <span class="req">*</span></label>
+            <input id="col-name" class="form-control" value="${esc(data.name || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cognome</label>
+            <input id="col-lastName" class="form-control" value="${esc(data.lastName || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ruolo</label>
+            <input id="col-role" class="form-control" value="${esc(data.role || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tipo</label>
+            <select id="col-type" class="form-control">
+              ${[
+                ["internal_member", "Membro interno"],
+                ["commercial_partner", "Partner commerciale"],
+                ["professional_partner", "Partner professionista"]
+              ].map(([value, label]) => `<option value="${value}" ${data.type === value ? "selected" : ""}>${label}</option>`).join("")}
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input id="col-email" class="form-control" type="email" value="${esc(data.email || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Telefono</label>
+            <input id="col-phone" class="form-control" value="${esc(data.phone || "")}">
+          </div>
+          <div class="form-group" style="grid-column:span 2">
+            <label class="form-label">Azienda</label>
+            <input id="col-companyName" class="form-control" value="${esc(data.companyName || "")}">
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+          <button class="btn btn-secondary" onclick="closeModal('collab-modal')">Annulla</button>
+          <button class="btn btn-primary" id="btn-save-collab" onclick="saveCollab()">${id ? "Salva" : "Aggiungi"}</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  document.getElementById("col-name").focus();
+}
+
+async function saveCollab() {
+  const name = document.getElementById("col-name").value.trim();
+  if (!name) {
+    toast("Il nome è obbligatorio", "error");
+    return;
+  }
+
+  const btn = document.getElementById("btn-save-collab");
+  btn.disabled = true;
+  btn.textContent = "...";
+
+  try {
+    await waitAuth();
+    const docRef = _editingCollabId ? db.collection(COLLECTIONS.collaborators).doc(_editingCollabId) : db.collection(COLLECTIONS.collaborators).doc();
+    await docRef.set({
+      id: docRef.id,
+      name,
+      lastName: document.getElementById("col-lastName").value.trim(),
+      email: document.getElementById("col-email").value.trim(),
+      role: document.getElementById("col-role").value.trim(),
+      type: document.getElementById("col-type").value,
+      status: "active",
+      companyName: document.getElementById("col-companyName").value.trim(),
+      phone: document.getElementById("col-phone").value.trim(),
+      address: "",
+      cityRegion: "",
+      website: "",
+      collaborationStartDate: firebase.firestore.Timestamp.fromDate(new Date()),
+      assignedInternalReferent: "",
+      competenceArea: "vendite",
+      internalNotes: "",
+      lastInteractionDate: firebase.firestore.Timestamp.fromDate(new Date()),
+      companyRole: "",
+      assignedKPI: "",
+      managedCases: 0,
+      inProgressCases: 0,
+      closedCases: 0,
+      performance: 0,
+      activityCalendarNotes: "",
+      assignedTasksNotes: "",
+      communicationHistoryNotes: "",
+      commercialPartnerKind: "segnalatore",
+      geographicArea: "",
+      referenceSector: "",
+      commissionPercentage: 0,
+      paymentMethod: "",
+      payoutFrequency: "",
+      broughtCases: 0,
+      approvedCases: 0,
+      rejectedCases: 0,
+      generatedRevenue: 0,
+      accruedCommissions: 0,
+      paidCommissions: 0,
+      profession: "",
+      professionalRegister: "",
+      registrationNumber: "",
+      specializations: "",
+      interventionGeographicArea: "",
+      professionalCollaborationMode: "a_pratica",
+      assignedProfessionalCases: 0,
+      completedProfessionalCases: 0
+    }, { merge: true });
+    toast(_editingCollabId ? "Collaboratore aggiornato ✓" : "Collaboratore aggiunto ✓");
+    closeModal("collab-modal");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+    btn.disabled = false;
+    btn.textContent = "Salva";
+  }
+}
+
+function renderSettings() {
+  clearUnsubs();
+  const main = document.getElementById("main");
+  const isAdmin = currentUser?.role === "admin";
+  main.innerHTML = `
+    <div style="padding:32px">
+      <h1 class="page-title" style="margin-bottom:24px">Impostazioni</h1>
+
+      <div class="card" style="padding:24px;margin-bottom:20px">
+        <h3 style="font-size:15px;font-weight:800;margin-bottom:16px">👤 Profilo</h3>
+        <div style="display:flex;align-items:center;gap:16px">
+          ${avatar(displayUserName(), 56)}
+          <div>
+            <div style="font-weight:800;font-size:16px">${esc(displayUserName())}</div>
+            <div style="font-size:13px;color:var(--gray);margin:3px 0">${esc(currentUser?.email || "—")}</div>
+            ${badge(currentUser?.role || "—", "#C1272D")}
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:24px;margin-bottom:20px">
+        <h3 style="font-size:15px;font-weight:800;margin-bottom:12px">🔥 Backend</h3>
+        <div style="font-size:13px;color:var(--gray);line-height:1.8">
+          <div>Firebase Project: <strong style="color:var(--black)">pitcrm-7e69c</strong></div>
+          <div>Users collection: <strong style="color:var(--black)">${COLLECTIONS.users}</strong></div>
+          <div>Clients collection: <strong style="color:var(--black)">${COLLECTIONS.clients}</strong></div>
+          <div>Supabase project: <strong style="color:var(--black)">${SUPABASE.projectRef}</strong></div>
+          <div>Supabase bucket: <strong style="color:var(--black)">${SUPABASE.bucket}</strong></div>
+        </div>
+        <div style="margin-top:12px;padding:10px 14px;background:rgba(46,125,50,.08);border-radius:10px;font-size:13px;color:#2E7D32;font-weight:700">
+          ✅ Web app allineata agli stessi backend usati da PITCRM
+        </div>
+      </div>
+
+      ${isAdmin ? `
+        <div class="card" style="padding:24px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <h3 style="font-size:15px;font-weight:800">👥 Gestione Utenti</h3>
+            <button class="btn btn-primary btn-sm" onclick="openUserForm()">+ Nuovo Utente</button>
+          </div>
+          <div id="users-list">${spinner()}</div>
+        </div>
+      ` : `
+        <div class="card" style="padding:24px">
+          <p style="color:var(--gray);font-size:14px">La gestione utenti è disponibile solo per gli amministratori.</p>
+        </div>
+      `}
+    </div>
+  `;
+
+  if (!isAdmin) return;
+
+  const unsub = db.collection(COLLECTIONS.users).onSnapshot(snapshot => {
+    const users = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+      .sort((a, b) => displayUserName(a).localeCompare(displayUserName(b), "it"));
+    const el = document.getElementById("users-list");
+    if (!el) return;
+    if (users.length === 0) {
+      el.innerHTML = emptyState("👤", "Nessun utente", "");
+      return;
+    }
+    el.innerHTML = `<div class="table-wrap"><table>
+      <thead><tr><th>Utente</th><th>Email</th><th>Ruolo</th><th>Stato</th><th></th></tr></thead>
+      <tbody>${users.map(user => `
+        <tr>
+          <td><div style="display:flex;align-items:center;gap:10px">${avatar(displayUserName(user), 32)}<div><div style="font-weight:700">${esc(displayUserName(user))}</div><div style="font-size:12px;color:var(--gray)">@${esc(user.username || "—")}</div></div></div></td>
+          <td style="color:var(--gray)">${esc(user.email || "—")}</td>
+          <td>${badge(user.role || "—", user.role === "admin" ? "#C1272D" : "#6B6B6B")}</td>
+          <td><div style="display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:${user.isActive ? "#2E7D32" : "#A8A8A8"}"></div><span style="font-size:13px">${user.isActive ? "Attivo" : "Inattivo"}</span></div></td>
+          <td><div style="display:flex;gap:5px;justify-content:flex-end">
+            <button class="btn-icon" style="font-size:12px" onclick="toggleUserActive('${user.id}',${user.isActive})">${user.isActive ? "Disabilita" : "Abilita"}</button>
+            <button class="btn-icon blue" onclick="openUserForm('${user.id}')">✏️</button>
+            ${user.id !== currentUser?.id ? `<button class="btn-icon red" onclick="deleteUser('${user.id}','${esc(user.username)}')">🗑️</button>` : ""}
+          </div></td>
+        </tr>
+      `).join("")}</tbody>
+    </table></div>`;
+  }, error => {
+    const el = document.getElementById("users-list");
+    if (el) el.innerHTML = `<div class="error-box">Errore permessi: ${esc(error.message)}</div>`;
+  });
+  _activeUnsubs.push(unsub);
+}
+
+async function toggleUserActive(id, isActive) {
+  try {
+    await db.collection(COLLECTIONS.users).doc(id).set({ isActive: !isActive }, { merge: true });
+    toast("Utente aggiornato ✓");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+  }
+}
+
+async function deleteUser(id, username) {
+  if (!confirm(`Eliminare l'utente "${username}"?`)) return;
+  try {
+    await db.collection(COLLECTIONS.users).doc(id).delete();
+    toast("Utente eliminato");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+  }
+}
+
+async function openUserForm(id) {
+  _editingUserId = id || null;
+  let data = {};
+  if (id) {
+    await waitAuth();
+    const snap = await db.collection(COLLECTIONS.users).doc(id).get();
+    data = snap.data() || {};
+  }
+
+  const modal = document.createElement("div");
+  modal.className = "modal-overlay";
+  modal.id = "user-modal";
+  modal.innerHTML = `
+    <div class="modal" style="max-width:460px">
+      <div class="modal-header">
+        <div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">${id ? "Modifica Utente" : "Nuovo Utente"}</div></div>
+        <button class="modal-close" onclick="closeModal('user-modal')">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Username <span class="req">*</span></label>
+            <input id="uf-username" class="form-control" value="${esc(data.username || "")}" ${id ? "readonly" : ""} style="${id ? "background:#F9FAFB;color:#9CA3AF" : ""}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nome Completo <span class="req">*</span></label>
+            <input id="uf-name" class="form-control" value="${esc(data.name || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input id="uf-email" class="form-control" type="email" value="${esc(data.email || "")}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ruolo</label>
+            <select id="uf-role" class="form-control">
+              ${["admin", "internal", "external", "client"].map(role => `<option value="${role}" ${data.role === role ? "selected" : ""}>${role.charAt(0).toUpperCase() + role.slice(1)}</option>`).join("")}
+            </select>
+          </div>
+          <div class="form-group" style="grid-column:span 2">
+            <label class="form-label">${id ? "Nuova Password (lascia vuoto per non cambiare)" : "Password"} ${!id ? '<span class="req">*</span>' : ""}</label>
+            <input id="uf-password" class="form-control" type="password" placeholder="••••••••">
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+          <button class="btn btn-secondary" onclick="closeModal('user-modal')">Annulla</button>
+          <button class="btn btn-primary" id="btn-save-user" onclick="saveUser()">${id ? "Salva" : "Crea Utente"}</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  document.getElementById("uf-name").focus();
+}
+
+async function saveUser() {
+  const username = document.getElementById("uf-username").value.trim().toLowerCase();
+  const name = document.getElementById("uf-name").value.trim();
+  const password = document.getElementById("uf-password").value;
+  if (!username || !name) {
+    toast("Username e nome obbligatori", "error");
+    return;
+  }
+  if (!_editingUserId && !password) {
+    toast("La password è obbligatoria", "error");
+    return;
+  }
+
+  const btn = document.getElementById("btn-save-user");
+  btn.disabled = true;
+  btn.textContent = "...";
+
+  try {
+    const payload = {
+      username,
+      name,
+      email: document.getElementById("uf-email").value.trim(),
+      role: document.getElementById("uf-role").value,
+      isActive: true,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    if (password) payload.passwordHash = await sha256(password);
+
+    if (_editingUserId) {
+      await db.collection(COLLECTIONS.users).doc(_editingUserId).set(payload, { merge: true });
+      toast("Utente aggiornato ✓");
+    } else {
+      payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+      await db.collection(COLLECTIONS.users).doc(username).set(payload, { merge: true });
+      toast("Utente creato ✓");
+    }
+    closeModal("user-modal");
+  } catch (error) {
+    toast(`Errore: ${error.message}`, "error");
+    btn.disabled = false;
+    btn.textContent = "Salva";
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MODAL UTILS
+// ═══════════════════════════════════════════════════════════════
+function closeModal(id) {
+  const el=document.getElementById(id);
+  if (el) el.remove();
+}
+// Close on overlay click
+document.addEventListener("click", e => {
+  if (e.target.classList.contains("modal-overlay")) e.target.remove();
+});
+
+// ═══════════════════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════════════════
+function bootApp() {
+  if (_bootStarted) return;
+  _bootStarted = true;
+
+  const startupMessage = location.protocol === "file:"
+    ? "Apertura file locale rilevata. Inizializzo i servizi cloud per consentire il login."
+    : "Inizializzo i servizi cloud...";
+
+  setLoginInitializing(startupMessage);
+
+  const hardTimeout = setTimeout(() => {
+    if (!firebaseReady) {
+      showBootstrapError("Caricamento servizi troppo lento o bloccato sul dispositivo.");
+    }
+  }, 3500);
+
+  initializeFirebase().then(() => {
+    clearTimeout(hardTimeout);
+    if (!firebaseReady || !db || !auth) {
+      showBootstrapError(firebaseInitError?.message || "Il file HTML e stato aperto ma gli SDK Firebase non sono raggiungibili.");
+      return;
+    }
+    showLoginScreen();
+    resetLoginUI();
+  });
+}
+
+document.addEventListener("DOMContentLoaded", bootApp);
+window.addEventListener("load", bootApp);
+setTimeout(bootApp, 250);
+</script>
+</body>
+</html>
