@@ -258,6 +258,106 @@
   .client-history-item::before{content:"";position:absolute;left:-20px;top:26px;width:14px;height:14px;border-radius:999px;background:linear-gradient(135deg,#C1272D,#8F1118);box-shadow:0 0 0 4px rgba(193,39,45,.10),0 8px 16px rgba(193,39,45,.18)}
   .client-history-item:hover{transform:translateY(-3px);box-shadow:0 18px 34px rgba(15,23,42,.09);border-color:rgba(193,39,45,.22)}
   .client-history-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px}
+
+  /* Team desktop */
+  .team-desktop-shell{padding:28px 28px 34px}
+  .team-desktop-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:24px 26px;border-radius:24px;background:linear-gradient(135deg,#8F1118 0%,#B51E25 45%,#C1272D 100%);color:#fff;box-shadow:0 18px 36px rgba(193,39,45,.16);margin-bottom:20px;overflow:hidden;position:relative}
+  .team-desktop-hero::before{content:"";position:absolute;right:-70px;top:-55px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.08)}
+  .team-desktop-hero::after{content:"";position:absolute;left:-50px;bottom:-80px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
+  .team-desktop-hero-copy,.team-desktop-hero-actions{position:relative;z-index:1}
+  .team-desktop-kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:8px}
+  .team-desktop-title{font-size:34px;font-weight:900;line-height:1.02;letter-spacing:-.03em}
+  .team-desktop-sub{font-size:14px;color:rgba(255,255,255,.82);margin-top:10px;max-width:560px}
+  .team-desktop-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:18px}
+  .team-desktop-search{margin:0}
+  .team-desktop-search .search-input{height:48px;padding-left:44px;border-radius:16px;background:#fff;box-shadow:0 10px 26px rgba(15,23,42,.05)}
+  .team-desktop-search .search-icon{font-size:15px}
+  .team-desktop-sections{display:flex;flex-direction:column;gap:22px}
+  .team-desktop-section{background:#fff;border:1px solid var(--border);border-radius:24px;padding:22px 22px 20px;box-shadow:0 10px 24px rgba(15,23,42,.05)}
+  .team-desktop-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:18px}
+  .team-desktop-section-title{font-size:22px;font-weight:900;color:var(--black);line-height:1.05}
+  .team-desktop-section-sub{font-size:13px;color:var(--gray);margin-top:6px}
+  .team-desktop-section-count{font-size:13px;font-weight:800;color:var(--gray);white-space:nowrap}
+  .team-desktop-partner-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .team-desktop-partner-group{padding:18px;border-radius:20px;background:#FCFCFD;border:1px solid rgba(0,0,0,.05)}
+  .team-desktop-partner-group-title{font-size:16px;font-weight:900;color:var(--black)}
+  .team-desktop-partner-group-sub{font-size:12px;color:var(--gray);margin-top:4px;margin-bottom:14px}
+  .team-desktop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .team-desktop-card{background:#fff;border:1px solid rgba(15,23,42,.06);border-radius:24px;padding:18px 18px 16px;box-shadow:0 10px 24px rgba(15,23,42,.04);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+  .team-desktop-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(15,23,42,.08);border-color:rgba(193,39,45,.18)}
+  .team-desktop-card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px}
+  .team-desktop-card-copy{flex:1;min-width:0}
+  .team-desktop-card-name{font-size:20px;font-weight:900;color:var(--black);line-height:1.1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .team-desktop-card-role{font-size:13px;color:var(--gray);margin-top:7px}
+  .team-desktop-card-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .team-desktop-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#F8F8F9;border:1px solid rgba(15,23,42,.06);font-size:11px;font-weight:800;color:var(--gray-dark)}
+  .team-desktop-card-meta{display:grid;gap:8px;padding-top:12px}
+  .team-desktop-meta-row{display:flex;align-items:center;gap:8px;min-width:0}
+  .team-desktop-meta-icon{width:18px;flex-shrink:0;color:var(--gray-light);text-align:center}
+  .team-desktop-meta-text{font-size:13px;color:var(--gray-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .team-desktop-card-actions{display:flex;gap:10px;margin-top:16px}
+  .team-desktop-card-actions .btn,.team-desktop-card-actions .btn-icon{height:38px}
+  .network-insight-stack{display:flex;flex-direction:column;gap:18px}
+  .network-timeline{display:flex;flex-direction:column;gap:12px}
+  .network-timeline-item{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-top:1px solid rgba(15,23,42,.06)}
+  .network-timeline-item:first-child{border-top:none;padding-top:0}
+  .network-timeline-dot{width:12px;height:12px;border-radius:999px;flex-shrink:0;margin-top:6px;background:var(--red)}
+  .network-timeline-dot.task{background:#2E7D32}
+  .network-timeline-dot.note{background:#C1272D}
+  .network-timeline-dot.event{background:#1565C0}
+  .network-timeline-copy{min-width:0}
+  .network-timeline-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-light);margin-bottom:5px}
+  .network-timeline-title{font-size:15px;font-weight:900;color:var(--black);line-height:1.25}
+  .network-timeline-meta{font-size:13px;color:var(--gray);margin-top:5px;line-height:1.45}
+  .network-empty-note{font-size:14px;color:var(--gray);line-height:1.6}
+
+  /* Pre-analysis desktop */
+  .preanalysis-shell{padding:28px;display:flex;flex-direction:column;gap:18px}
+  .preanalysis-shell .page-header{margin-bottom:0}
+  .preanalysis-layout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:18px;align-items:start}
+  .preanalysis-list{background:#fff;border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:0 10px 24px rgba(15,23,42,.04);display:flex;flex-direction:column;gap:12px}
+  .preanalysis-list-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .preanalysis-list-title{font-size:18px;font-weight:900;color:var(--black)}
+  .preanalysis-list-count{font-size:12px;font-weight:800;color:var(--gray)}
+  .preanalysis-card{border:1px solid rgba(15,23,42,.07);border-radius:14px;padding:14px;background:#fff;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+  .preanalysis-card:hover,.preanalysis-card.active{transform:translateY(-1px);box-shadow:0 12px 26px rgba(15,23,42,.07);border-color:rgba(193,39,45,.22)}
+  .preanalysis-card-title{font-size:15px;font-weight:900;color:var(--black);line-height:1.2}
+  .preanalysis-card-meta{font-size:12px;color:var(--gray);margin-top:6px}
+  .preanalysis-card-total{font-size:17px;font-weight:900;color:var(--red);margin-top:10px}
+  .preanalysis-editor{display:flex;flex-direction:column;gap:16px}
+  .preanalysis-panel{background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 10px 24px rgba(15,23,42,.04)}
+  .preanalysis-panel-title{font-size:18px;font-weight:900;color:var(--black);margin-bottom:14px}
+  .preanalysis-meta-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .preanalysis-upload{border:1.5px dashed rgba(193,39,45,.28);border-radius:16px;background:#FFF8F8;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .preanalysis-upload-copy{font-size:13px;color:var(--gray);line-height:1.45}
+  .preanalysis-ai-overlay{position:fixed;inset:0;z-index:1200;background:rgba(248,249,251,.78);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeIn .18s ease}
+  .preanalysis-ai-card{width:min(480px,100%);border:1px solid rgba(193,39,45,.16);border-radius:28px;background:linear-gradient(145deg,#fff,rgba(255,247,247,.96));box-shadow:0 28px 80px rgba(15,23,42,.18);padding:30px;text-align:center;position:relative;overflow:hidden}
+  .preanalysis-ai-card:before{content:"";position:absolute;inset:-90px -80px auto auto;width:220px;height:220px;border-radius:999px;background:rgba(193,39,45,.12)}
+  .preanalysis-ai-orb{width:76px;height:76px;border-radius:24px;margin:0 auto 18px;background:linear-gradient(135deg,#C1272D,#E44D55);box-shadow:0 18px 34px rgba(193,39,45,.25);display:flex;align-items:center;justify-content:center;color:#fff;font-size:30px;position:relative}
+  .preanalysis-ai-orb:after{content:"";position:absolute;inset:-8px;border-radius:30px;border:2px solid rgba(193,39,45,.18);animation:aiPulse 1.25s ease-in-out infinite}
+  .preanalysis-ai-title{font-size:24px;font-weight:950;color:var(--black);line-height:1.1;margin-bottom:8px}
+  .preanalysis-ai-copy{font-size:14px;line-height:1.55;color:var(--gray);margin:0 auto 20px;max-width:360px}
+  .preanalysis-ai-progress{height:8px;border-radius:999px;background:rgba(15,23,42,.06);overflow:hidden;margin:18px 0}
+  .preanalysis-ai-progress span{display:block;height:100%;width:42%;border-radius:999px;background:linear-gradient(90deg,#C1272D,#F36A70);animation:aiProgress 1.6s ease-in-out infinite}
+  .preanalysis-ai-steps{display:grid;gap:8px;text-align:left;margin-top:18px}
+  .preanalysis-ai-step{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;color:var(--gray-dark);padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.72);border:1px solid rgba(15,23,42,.05)}
+  .preanalysis-ai-step-dot{width:9px;height:9px;border-radius:999px;background:var(--red);box-shadow:0 0 0 5px rgba(193,39,45,.09)}
+  @keyframes aiPulse{0%,100%{transform:scale(.92);opacity:.45}50%{transform:scale(1.06);opacity:1}}
+  @keyframes aiProgress{0%{transform:translateX(-110%);width:42%}50%{width:68%}100%{transform:translateX(240%);width:42%}}
+  .preanalysis-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+  .preanalysis-kpi{border:1px solid rgba(15,23,42,.06);border-radius:14px;background:#FAFAFB;padding:14px}
+  .preanalysis-kpi-label{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-light)}
+  .preanalysis-kpi-value{font-size:20px;font-weight:900;color:var(--black);margin-top:6px}
+  .preanalysis-table-wrap{overflow:auto;border:1px solid var(--border);border-radius:16px}
+  .preanalysis-table{width:100%;border-collapse:collapse;min-width:1120px;background:#fff}
+  .preanalysis-table th{position:sticky;top:0;background:#F8F8F9;color:var(--gray-dark);font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:10px;border-bottom:1px solid var(--border);z-index:1}
+  .preanalysis-table td{padding:8px;border-bottom:1px solid rgba(15,23,42,.06);vertical-align:top}
+  .preanalysis-table input,.preanalysis-table select,.preanalysis-table textarea{width:100%;border:1px solid rgba(15,23,42,.09);border-radius:10px;padding:8px;font-family:inherit;font-size:12px;background:#fff;outline:none}
+  .preanalysis-table textarea{min-height:38px;resize:vertical}
+  .preanalysis-table input:focus,.preanalysis-table select:focus,.preanalysis-table textarea:focus{border-color:var(--red)}
+  .preanalysis-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+  .preanalysis-empty{padding:28px;text-align:center;color:var(--gray);border:1px dashed rgba(15,23,42,.12);border-radius:16px;background:#FAFAFB}
+  body[data-device="mobile"] .preanalysis-shell{display:none!important}
   .client-history-head-main{display:flex;align-items:flex-start;gap:12px;min-width:0}
   .client-history-icon{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;background:linear-gradient(135deg,#C1272D,#8F1118);border:1px solid rgba(193,39,45,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 18px rgba(193,39,45,.16);text-transform:uppercase}
   .client-history-title-wrap{min-width:0}
@@ -928,6 +1028,7 @@
   <div id="mobile-tabbar"></div>
 </div>
 
+<script src="assets/preanalysis-template.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════
 // CONFIG
@@ -959,7 +1060,8 @@ const COLLECTIONS = {
   clientHistory: "client_history",
   practices: "practices",
   practicePayments: "practice_payments",
-  commissionRules: "commission_rules"
+  commissionRules: "commission_rules",
+  preAnalyses: "pre_analyses"
 };
 
 const SUPABASE = { projectRef: "jeskuaofhyjldbuhpnvh", bucket: "pitcrm-attachments" };
@@ -1003,6 +1105,19 @@ const COLLABORATOR_TYPES = [
   {value:"commercial_partner",label:"Partner commerciale"},
   {value:"professional_partner",label:"Partner professionista"}
 ];
+
+const PREANALYSIS_CATEGORIES = ["Impianti","Macchinari","Attrezzature","Terreni/Immobili"];
+const PREANALYSIS_TEMPLATE_URL = "assets/preanalisi-zesunica-template.xlsx";
+const PREANALYSIS_AI_FUNCTION = "preanalysis-ai";
+const PREANALYSIS_AI_MAX_FILE_BYTES = 18 * 1024 * 1024;
+const PREANALYSIS_EXCEL_START_ROW = 65;
+const PREANALYSIS_EXCEL_BASE_DATA_ROWS = 7;
+const PREANALYSIS_EXCEL_INSERT_BEFORE_ROW = 72;
+const PREANALYSIS_EXCEL_TEMPLATE_ROW = 70;
+const PREANALYSIS_EXCEL_MAX_ROWS = 200;
+const JSZIP_URL = "https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js";
+const PDFJS_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
+const PDFJS_WORKER_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
 
 // ═══════════════════════════════════════════════════════════════
 // FIREBASE INIT
@@ -1048,6 +1163,29 @@ function toast(msg,type="success"){
   el.className=`toast ${type}`;el.textContent=msg;
   document.getElementById("toast").appendChild(el);
   setTimeout(()=>el.remove(),3500);
+}
+
+function showPreAnalysisAiLoader(fileCount){
+  closePreAnalysisAiLoader();
+  const overlay=document.createElement("div");
+  overlay.id="preanalysis-ai-loader";
+  overlay.className="preanalysis-ai-overlay";
+  overlay.innerHTML=`<div class="preanalysis-ai-card">
+    <div class="preanalysis-ai-orb">AI</div>
+    <div class="preanalysis-ai-title">Analisi documenti in corso</div>
+    <div class="preanalysis-ai-copy">Sto leggendo ${fileCount===1?"il documento":"i documenti"}, individuando imponibili netti, date, numeri e classificazione ZES.</div>
+    <div class="preanalysis-ai-progress"><span></span></div>
+    <div class="preanalysis-ai-steps">
+      <div class="preanalysis-ai-step"><span class="preanalysis-ai-step-dot"></span>Lettura PDF e immagini</div>
+      <div class="preanalysis-ai-step"><span class="preanalysis-ai-step-dot"></span>Estrazione fornitore, numero, data e imponibile</div>
+      <div class="preanalysis-ai-step"><span class="preanalysis-ai-step-dot"></span>Classificazione tra impianti, macchinari, attrezzature e immobili</div>
+    </div>
+  </div>`;
+  document.body.appendChild(overlay);
+}
+
+function closePreAnalysisAiLoader(){
+  document.getElementById("preanalysis-ai-loader")?.remove();
 }
 
 function esc(str){
@@ -1119,6 +1257,7 @@ function canEditData(){return["admin","internal"].includes(currentUser?.role)}
 function isAdmin(){return currentUser?.role==="admin"}
 function getLeadStatusColor(status){return LEAD_STATUS_COLORS[status]||"#6B6B6B"}
 function getPracticeStatus(value){return PRACTICE_STATUSES.find(s=>s.value===value)||{label:value,color:"#6B6B6B"}}
+function fieldValue(id){const el=document.getElementById(id);return el?String(el.value||"").trim():""}
 function getPracticeType(value){return PRACTICE_TYPES.find(t=>t.value===value)||{label:value,icon:"💼"}}
 
 async function sha256(msg){
@@ -1140,15 +1279,18 @@ let calViewMode="week",calShowEvents=true,calShowTasks=true;
 let allInternalUsers=[];
 let allCollabs=[],collabSearch="";
 let allPractices=[],practiceSearch="",_practiceQuickFilter="all";
+let allPreAnalyses=[],preAnalysisSearch="",_currentPreAnalysisId=null,_preAnalysisRows=[];
 let _editingClientId=null,_editingLeadId=null,_editingCollabId=null;
 let _editingUserId=null,_editingPracticeId=null;
 let _detailClient=null,_detailTab="info";
 let _detailClientAttachments=[],_detailHistoryItems=[];
 let _detailLead=null,_leadDetailTab="summary";
+let _detailCollab=null;
 let _detailPractice=null,_practiceCollectedAmount=0;
 let _activeUnsubs=[];
 let _notificationItems=[],_notificationCollectionItems=[],_taskNotificationItems=[],_notificationsUnsub=null,_taskNotificationsUnsub=null;
 let _tabletSidebarChoice={portrait:null,landscape:null};
+let _networkPage="collaborators";
 
 function clearUnsubs(){_activeUnsubs.forEach(u=>u&&u());_activeUnsubs=[]}
 function currentRole(){return currentUser?.role||"internal"}
@@ -1173,7 +1315,8 @@ function visibleNavItems(role=currentRole()){
     {id:"leads",label:"Lead",icon:"🎯",visible:perms.canViewLeads},
     {id:"clients",label:"Clienti",icon:"👥",visible:perms.canViewClients},
     {id:"practices",label:"Pratiche",icon:"💼",visible:perms.canViewClients},
-    {id:"collaborators",label:"Team",icon:"👤",visible:perms.canViewTeam}
+    {id:"preanalysis",label:"Pre-analisi",icon:"📊",visible:perms.canViewClients&&currentDeviceMode()==="desktop"},
+    {id:"collaborators",label:"Rete",icon:"👤",visible:perms.canViewTeam}
   ].filter(item=>item.visible);
 }
 function mobileNavIcon(id){
@@ -1406,7 +1549,8 @@ const NAV=[
   {id:"leads",label:"Lead",icon:"🎯"},
   {id:"clients",label:"Clienti",icon:"👥"},
   {id:"practices",label:"Pratiche",icon:"💼"},
-  {id:"collaborators",label:"Team",icon:"👤"},
+  {id:"preanalysis",label:"Pre-analisi",icon:"📊"},
+  {id:"collaborators",label:"Rete",icon:"👤"},
   {id:"settings",label:"Impostazioni",icon:"⚙️"},
   {id:"profile",label:"Profilo",icon:"🙍"}
 ];
@@ -1558,8 +1702,9 @@ function navigate(section,extra){
   if(section==="clients")extra?renderClientDetail(extra):renderClients();
   else if(section==="leads")extra?renderLeadDetail(extra):renderLeads();
   else if(section==="practices")extra?renderPracticeDetail(extra):renderPractices();
+  else if(section==="preanalysis")renderPreAnalysis();
   else if(section==="calendar")renderCalendar();
-  else if(section==="collaborators")renderCollaborators();
+  else if(section==="collaborators")extra?renderCollabDetail(extra):renderCollaborators();
   else if(section==="settings")renderSettings();
   else if(section==="profile")renderProfile();
 }
@@ -3544,6 +3689,997 @@ async function savePractice(){
 }
 
 // ═══════════════════════════════════════════════════════════════
+// PRE-ANALISI ZES
+// ═══════════════════════════════════════════════════════════════
+function preAnalysisBlankRow(fileName=""){
+  return {
+    sourceFileName:fileName,
+    documentType:"PREVENTIVO",
+    supplier:"",
+    documentNumber:"",
+    documentDate:"",
+    taxableAmount:"",
+    category:"Macchinari",
+    description:"",
+    confidence:0,
+    needsReview:true,
+    extractionSource:"locale"
+  };
+}
+
+function renderPreAnalysis(){
+  clearUnsubs();
+  if(currentDeviceMode()!=="desktop"){navigate(defaultSectionForUser());return}
+  const main=document.getElementById("main");
+  main.innerHTML=`
+    <div class="preanalysis-shell">
+      <div class="page-header">
+        <div>
+          <div class="page-label">ZES UNICA</div>
+          <h1>Pre-analisi</h1>
+          <p>Carica preventivi, fatture e pro-forme, verifica le righe e salva la checklist nel CRM.</p>
+        </div>
+        <button class="btn btn-primary" onclick="newPreAnalysis()">+ Nuova Pre-analisi</button>
+      </div>
+      <div class="preanalysis-layout">
+        <div class="preanalysis-list">
+          <div class="preanalysis-list-head">
+            <div>
+              <div class="preanalysis-list-title">Archivio</div>
+              <div class="preanalysis-list-count" id="preanalysis-count">0 pre-analisi</div>
+            </div>
+          </div>
+          <div class="searchbar" style="margin:0">
+            <span>🔍</span>
+            <input placeholder="Cerca pre-analisi..." value="${esc(preAnalysisSearch)}" oninput="preAnalysisSearch=this.value;renderPreAnalysisList()">
+          </div>
+          <div id="preanalysis-list-items">${spinner()}</div>
+        </div>
+        <div class="preanalysis-editor" id="preanalysis-editor">
+          <div class="preanalysis-empty">
+            <b>Seleziona o crea una pre-analisi</b><br>
+            Le righe estratte dai documenti compariranno qui prima del salvataggio.
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  ensureClientsLoaded().catch(()=>{});
+  waitAuth().then(()=>{
+    const unsub=db.collection(COLLECTIONS.preAnalyses)
+      .orderBy("updatedAt","desc")
+      .onSnapshot(snapshot=>{
+        allPreAnalyses=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
+        renderPreAnalysisList();
+        if(_currentPreAnalysisId){
+          const selected=allPreAnalyses.find(item=>item.id===_currentPreAnalysisId);
+          if(selected)renderPreAnalysisEditor(selected);
+        }
+      },error=>{
+        document.getElementById("preanalysis-list-items").innerHTML=`<div class="preanalysis-empty">Errore caricamento: ${esc(error.message)}</div>`;
+      });
+    _activeUnsubs.push(unsub);
+  });
+}
+
+function filteredPreAnalyses(){
+  const q=preAnalysisSearch.trim().toLowerCase();
+  if(!q)return allPreAnalyses;
+  return allPreAnalyses.filter(item=>[
+    item.title,item.clientNameSnapshot,item.region,item.year
+  ].some(value=>String(value||"").toLowerCase().includes(q)));
+}
+
+function renderPreAnalysisList(){
+  const wrap=document.getElementById("preanalysis-list-items");
+  const count=document.getElementById("preanalysis-count");
+  if(!wrap)return;
+  const items=filteredPreAnalyses();
+  if(count)count.textContent=`${items.length} pre-analisi`;
+  if(!items.length){
+    wrap.innerHTML=`<div class="preanalysis-empty">Nessuna pre-analisi salvata.</div>`;
+    return;
+  }
+  wrap.innerHTML=items.map(item=>{
+    const totals=preAnalysisTotals(item.rows||[]);
+    return `<div class="preanalysis-card ${item.id===_currentPreAnalysisId?"active":""}" onclick="loadPreAnalysis('${item.id}')">
+      <div class="preanalysis-card-title">${esc(item.title||item.clientNameSnapshot||"Pre-analisi senza titolo")}</div>
+      <div class="preanalysis-card-meta">${esc(item.clientNameSnapshot||"Cliente non selezionato")} • ${esc(item.year||"2026")} • ${esc(item.region||"Regione non indicata")}</div>
+      <div class="preanalysis-card-total">${formatMoney(totals.total)}</div>
+    </div>`;
+  }).join("");
+}
+
+async function newPreAnalysis(){
+  await ensureClientsLoaded();
+  _currentPreAnalysisId=null;
+  _preAnalysisRows=[];
+  renderPreAnalysisEditor({
+    title:"Nuova pre-analisi ZES 2026",
+    year:2026,
+    region:"",
+    companySize:"",
+    rows:[]
+  });
+}
+
+function loadPreAnalysis(id){
+  const record=allPreAnalyses.find(item=>item.id===id);
+  if(!record)return;
+  _currentPreAnalysisId=id;
+  _preAnalysisRows=(record.rows||[]).map(row=>({...preAnalysisBlankRow(),...row}));
+  renderPreAnalysisList();
+  renderPreAnalysisEditor(record);
+}
+
+function preAnalysisDateInput(value){
+  return normalizePreAnalysisDate(value);
+}
+
+function preAnalysisClientOptions(selectedId=""){
+  return `<option value="">Nessun cliente</option>${allClients
+    .slice()
+    .sort((a,b)=>clientDisplayName(a).localeCompare(clientDisplayName(b),"it"))
+    .map(client=>`<option value="${client.id}" ${client.id===selectedId?"selected":""}>${esc(clientDisplayName(client))}</option>`)
+    .join("")}`;
+}
+
+function renderPreAnalysisEditor(record={}){
+  const editor=document.getElementById("preanalysis-editor");
+  if(!editor)return;
+  _preAnalysisRows=(record.rows||_preAnalysisRows||[]).map(row=>({...preAnalysisBlankRow(),...row}));
+  const totals=preAnalysisTotals(_preAnalysisRows);
+  const selectedRegion=record.region||"";
+  const selectedCompanySize=["Piccola","Media","Grande"].includes(record.companySize)?record.companySize:"";
+  editor.innerHTML=`
+    <div class="preanalysis-panel">
+      <div class="preanalysis-panel-title">Dati pre-analisi</div>
+      <div class="preanalysis-meta-grid">
+        <div class="form-group"><label class="form-label">Titolo</label><input id="pa-title" class="form-control" value="${esc(record.title||"")}"></div>
+        <div class="form-group"><label class="form-label">Cliente</label><select id="pa-client" class="form-control">${preAnalysisClientOptions(record.clientId||"")}</select></div>
+        <div class="form-group"><label class="form-label">Anno</label><input id="pa-year" class="form-control" type="number" value="${esc(record.year||2026)}"></div>
+        <div class="form-group"><label class="form-label">Regione</label>
+          <select id="pa-region" class="form-control">
+            <option value="" ${!selectedRegion?"selected":""}>Seleziona regione</option>
+            ${["Abruzzo","Basilicata","Calabria","Campania","Molise","Puglia","Sardegna","Sicilia"].map(region=>`<option value="${region}" ${region===selectedRegion?"selected":""}>${region}</option>`).join("")}
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Dimensione impresa</label>
+          <select id="pa-size" class="form-control">
+            <option value="" ${!selectedCompanySize?"selected":""}>Seleziona dimensione</option>
+            ${["Piccola","Media","Grande"].map(size=>`<option value="${size}" ${size===selectedCompanySize?"selected":""}>${size}</option>`).join("")}
+          </select>
+        </div>
+        <div class="form-group" style="grid-column:span 3"><label class="form-label">Note</label><input id="pa-notes" class="form-control" value="${esc(record.notes||"")}" placeholder="Annotazioni interne"></div>
+      </div>
+    </div>
+
+    <div class="preanalysis-panel">
+      <div class="preanalysis-upload">
+        <div>
+          <div class="preanalysis-panel-title" style="margin-bottom:4px">Documenti da analizzare con AI</div>
+          <div class="preanalysis-upload-copy">Carica fatture, preventivi o pro-forme. L'estrazione viene eseguita dall'AI e inserita solo quando i dati vengono letti correttamente.</div>
+        </div>
+        <label class="btn btn-secondary" style="margin:0">
+          + Carica documenti
+          <input type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.webp" style="display:none" onchange="handlePreAnalysisFiles(this)">
+        </label>
+      </div>
+    </div>
+
+    <div class="preanalysis-kpis">
+      <div class="preanalysis-kpi"><div class="preanalysis-kpi-label">Totale</div><div class="preanalysis-kpi-value">${formatMoney(totals.total)}</div></div>
+      ${PREANALYSIS_CATEGORIES.map(cat=>`<div class="preanalysis-kpi"><div class="preanalysis-kpi-label">${esc(cat)}</div><div class="preanalysis-kpi-value">${formatMoney(totals.byCategory[cat]||0)}</div></div>`).join("")}
+    </div>
+
+    <div class="preanalysis-panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px">
+        <div>
+          <div class="preanalysis-panel-title" style="margin-bottom:2px">Righe checklist</div>
+          <div class="preanalysis-upload-copy">${_preAnalysisRows.length} righe investimento</div>
+        </div>
+        <button class="btn btn-secondary" onclick="addPreAnalysisRow()">+ Riga manuale</button>
+      </div>
+      <div id="preanalysis-rows">${renderPreAnalysisRows()}</div>
+      <div class="preanalysis-actions" style="margin-top:14px">
+        ${_currentPreAnalysisId?`<button class="btn btn-secondary" onclick="deletePreAnalysis('${_currentPreAnalysisId}')">Elimina</button>`:""}
+        <button class="btn btn-secondary" onclick="exportCurrentPreAnalysis()">Esporta Excel</button>
+        <button class="btn btn-primary" onclick="savePreAnalysis()">Salva nel CRM</button>
+      </div>
+    </div>`;
+}
+
+function renderPreAnalysisRows(){
+  if(!_preAnalysisRows.length)return `<div class="preanalysis-empty">Carica documenti o inserisci una riga manuale.</div>`;
+  return `<div class="preanalysis-table-wrap"><table class="preanalysis-table">
+    <thead><tr>
+      <th>File</th><th>Tipo</th><th>Fornitore</th><th>Numero</th><th>Data</th><th>Imponibile</th><th>Categoria</th><th>Descrizione</th><th>Analisi</th><th></th>
+    </tr></thead>
+    <tbody>
+      ${_preAnalysisRows.map((row,index)=>`<tr>
+        <td><input data-pa-index="${index}" data-pa-field="sourceFileName" value="${esc(row.sourceFileName||"")}" onchange="commitPreAnalysisRow(${index},'sourceFileName',this.value)"></td>
+        <td><select data-pa-index="${index}" data-pa-field="documentType" onchange="commitPreAnalysisRow(${index},'documentType',this.value)">
+          ${["PREVENTIVO","FATTURA","PRO-FORMA"].map(type=>`<option value="${type}" ${row.documentType===type?"selected":""}>${type}</option>`).join("")}
+        </select></td>
+        <td><input data-pa-index="${index}" data-pa-field="supplier" value="${esc(row.supplier||"")}" onchange="commitPreAnalysisRow(${index},'supplier',this.value)" placeholder="Fornitore"></td>
+        <td><input data-pa-index="${index}" data-pa-field="documentNumber" value="${esc(row.documentNumber||"")}" onchange="commitPreAnalysisRow(${index},'documentNumber',this.value)" placeholder="Numero"></td>
+        <td><input data-pa-index="${index}" data-pa-field="documentDate" type="date" value="${esc(preAnalysisDateInput(row.documentDate))}" onchange="commitPreAnalysisRow(${index},'documentDate',this.value)"></td>
+        <td><input data-pa-index="${index}" data-pa-field="taxableAmount" type="number" step="0.01" value="${esc(row.taxableAmount||"")}" onchange="commitPreAnalysisRow(${index},'taxableAmount',this.value)" placeholder="0,00"></td>
+        <td><select data-pa-index="${index}" data-pa-field="category" onchange="commitPreAnalysisRow(${index},'category',this.value)">
+          ${PREANALYSIS_CATEGORIES.map(cat=>`<option value="${cat}" ${row.category===cat?"selected":""}>${cat}</option>`).join("")}
+        </select></td>
+        <td><textarea data-pa-index="${index}" data-pa-field="description" onchange="commitPreAnalysisRow(${index},'description',this.value)" placeholder="Descrizione sintetica">${esc(row.description||"")}</textarea></td>
+        <td>
+          <div style="font-size:11px;font-weight:900;color:${row.needsReview?"#C1272D":"#2E7D32"}">${row.extractionSource==="AI"?"AI":"Locale"}</div>
+          <div style="font-size:11px;color:var(--gray)">${row.confidence?Math.round(Number(row.confidence)*100)+"%":row.needsReview?"Da verificare":"OK"}</div>
+        </td>
+        <td><button class="icon-btn danger" onclick="removePreAnalysisRow(${index})">🗑️</button></td>
+      </tr>`).join("")}
+    </tbody>
+  </table></div>`;
+}
+
+function refreshPreAnalysisRows(){
+  const wrap=document.getElementById("preanalysis-rows");
+  if(wrap)wrap.innerHTML=renderPreAnalysisRows();
+  const current=preAnalysisDraftFromForm();
+  renderPreAnalysisEditor({...current,rows:_preAnalysisRows});
+}
+
+function updatePreAnalysisRow(index,field,value){
+  if(!_preAnalysisRows[index])return;
+  _preAnalysisRows[index][field]=value;
+  if(field==="taxableAmount"){
+    _preAnalysisRows[index][field]=String(value||"").replace(",",".");
+  }
+}
+
+function commitPreAnalysisRow(index,field,value){
+  updatePreAnalysisRow(index,field,value);
+  refreshPreAnalysisRows();
+}
+
+function syncPreAnalysisRowsFromDom(){
+  document.querySelectorAll("[data-pa-index][data-pa-field]").forEach(el=>{
+    const index=parseInt(el.dataset.paIndex,10);
+    const field=el.dataset.paField;
+    if(Number.isNaN(index)||!field||!_preAnalysisRows[index])return;
+    updatePreAnalysisRow(index,field,el.value);
+  });
+}
+
+function addPreAnalysisRow(row={}){
+  _preAnalysisRows.push({...preAnalysisBlankRow(),...row});
+  refreshPreAnalysisRows();
+}
+
+function removePreAnalysisRow(index){
+  _preAnalysisRows.splice(index,1);
+  refreshPreAnalysisRows();
+}
+
+async function handlePreAnalysisFiles(input){
+  const files=Array.from(input.files||[]);
+  if(!files.length)return;
+  showPreAnalysisAiLoader(files.length);
+  try{
+    const rows=await analyzePreAnalysisFilesWithAI(files);
+    if(rows.length){
+      _preAnalysisRows.push(...rows);
+      toast("Documenti analizzati con AI ✓");
+    }else{
+      throw new Error("Nessuna riga restituita dall'AI");
+    }
+    refreshPreAnalysisRows();
+  }catch(error){
+    console.warn("Pre-analysis AI failed",error);
+    toast(`Analisi AI non riuscita: ${error.message}`,"error");
+  }finally{
+    closePreAnalysisAiLoader();
+    input.value="";
+  }
+}
+
+async function analyzePreAnalysisFilesWithAI(files){
+  const documents=[];
+  for(const file of files){
+    if(file.size>PREANALYSIS_AI_MAX_FILE_BYTES){
+      throw new Error(`${file.name} supera il limite di 18 MB per l'analisi AI`);
+    }
+    const base64=await fileToBase64(file);
+    if(!base64)throw new Error(`${file.name}: lettura file non riuscita`);
+    documents.push({
+      fileName:file.name,
+      mimeType:file.type||mimeTypeFromFileName(file.name),
+      base64
+    });
+  }
+  const response=await fetch(supabaseFunctionUrl(PREANALYSIS_AI_FUNCTION),{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({documents})
+  });
+  const payload=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(payload.error||`AI non disponibile (${response.status})`);
+  return normalizePreAnalysisAiRows(payload.rows||[]);
+}
+
+function normalizePreAnalysisAiRows(rows){
+  return (Array.isArray(rows)?rows:[]).map(row=>{
+    const normalized={...preAnalysisBlankRow(row.sourceFileName||""),...row};
+    normalized.documentType=["FATTURA","PREVENTIVO","PRO-FORMA"].includes(normalized.documentType)?normalized.documentType:"PREVENTIVO";
+    normalized.category=PREANALYSIS_CATEGORIES.includes(normalized.category)?normalized.category:guessPreAnalysisCategory(`${normalized.description} ${normalized.sourceFileName}`);
+    normalized.taxableAmount=normalizeItalianAmount(normalized.taxableAmount);
+    normalized.documentDate=normalizePreAnalysisDate(normalized.documentDate);
+    normalized.extractionSource=normalized.extractionSource||"AI";
+    normalized.confidence=Number(normalized.confidence||0);
+    normalized.needsReview=Boolean(normalized.needsReview)||!normalized.supplier||!normalized.taxableAmount;
+    return normalized;
+  });
+}
+
+function fileToBase64(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(String(reader.result||"").split(",")[1]||"");
+    reader.onerror=()=>reject(reader.error||new Error("Impossibile leggere il file"));
+    reader.readAsDataURL(file);
+  });
+}
+
+function mimeTypeFromFileName(fileName){
+  const ext=String(fileName||"").split(".").pop()?.toLowerCase();
+  if(ext==="pdf")return"application/pdf";
+  if(ext==="png")return"image/png";
+  if(ext==="jpg"||ext==="jpeg")return"image/jpeg";
+  if(ext==="webp")return"image/webp";
+  return"application/octet-stream";
+}
+
+async function extractPreAnalysisRowFromFile(file){
+  const text=await extractPreAnalysisTextFromFile(file);
+  const name=file.name||"";
+  const combined=`${name}\n${text.slice(0,12000)}`;
+  const type=guessPreAnalysisDocType(combined);
+  const row=preAnalysisBlankRow(name);
+  row.documentType=type;
+  row.documentNumber=guessPreAnalysisNumber(combined,type);
+  row.documentDate=guessPreAnalysisDate(combined);
+  row.taxableAmount=guessPreAnalysisAmount(combined);
+  row.supplier=guessPreAnalysisSupplier(combined,name);
+  row.category=guessPreAnalysisCategory(combined);
+  row.description=guessPreAnalysisDescription(row,combined);
+  row.confidence=preAnalysisLocalConfidence(row);
+  row.needsReview=row.confidence<0.8;
+  return row;
+}
+
+async function extractPreAnalysisTextFromFile(file){
+  const mime=file.type||mimeTypeFromFileName(file.name);
+  if(mime==="application/pdf"||String(file.name||"").toLowerCase().endsWith(".pdf")){
+    const pdfText=await extractPreAnalysisPdfText(file);
+    if(pdfText.trim())return pdfText;
+  }
+  if(mime.startsWith("text/")){
+    try{return await file.text()}catch(error){return""}
+  }
+  return"";
+}
+
+async function ensurePdfJsLoaded(){
+  if(window.pdfjsLib)return window.pdfjsLib;
+  const mod=await import(PDFJS_URL);
+  window.pdfjsLib=mod;
+  window.pdfjsLib.GlobalWorkerOptions.workerSrc=PDFJS_WORKER_URL;
+  return window.pdfjsLib;
+}
+
+async function extractPreAnalysisPdfText(file){
+  try{
+    const pdfjs=await ensurePdfJsLoaded();
+    const data=new Uint8Array(await file.arrayBuffer());
+    const pdf=await pdfjs.getDocument({data}).promise;
+    const pageTexts=[];
+    const maxPages=Math.min(pdf.numPages,12);
+    for(let pageNumber=1;pageNumber<=maxPages;pageNumber++){
+      const page=await pdf.getPage(pageNumber);
+      const content=await page.getTextContent();
+      pageTexts.push(content.items.map(item=>item.str||"").join(" "));
+    }
+    return pageTexts.join("\n");
+  }catch(error){
+    console.warn("PDF text extraction failed",error);
+    return"";
+  }
+}
+
+function preAnalysisLocalConfidence(row){
+  let score=0.15;
+  if(row.documentType)score+=0.15;
+  if(row.supplier)score+=0.2;
+  if(row.documentNumber)score+=0.1;
+  if(row.documentDate)score+=0.15;
+  if(row.taxableAmount)score+=0.2;
+  if(row.description)score+=0.05;
+  return Math.min(1,Number(score.toFixed(2)));
+}
+
+function guessPreAnalysisDocType(text){
+  const value=String(text||"").toLowerCase();
+  if(value.includes("pro-forma")||value.includes("pro forma"))return"PRO-FORMA";
+  if(value.includes("preventivo")||value.includes("offerta")||/\bprev\b/.test(value))return"PREVENTIVO";
+  if(value.includes("fattura")||/\bft\b|\bfatt\b|\bfattura elettronica\b/.test(value))return"FATTURA";
+  return"PREVENTIVO";
+}
+
+function guessPreAnalysisNumber(text,type){
+  const value=String(text||"");
+  const patterns=[
+    /(fattura|preventivo|pro[-\s]?forma|documento|ft\.?|n\.|numero)\s*(?:n\.?|numero)?\s*[:#-]?\s*([A-Z0-9/_-]{1,22})/i,
+    /\b(?:ft|fatt|prev|proforma)\s*[-_ ]?([0-9]{1,8}[A-Z0-9/_-]*)/i,
+    /\b(?:nr|num|numero)\s*[:#-]?\s*([A-Z0-9/_-]{1,22})/i
+  ];
+  for(const pattern of patterns){
+    const match=value.match(pattern);
+    if(match?.[2])return match[2];
+    if(match?.[1]&&!/fattura|preventivo|forma|numero/i.test(match[1]))return match[1];
+  }
+  const fileGuess=value.match(/\b(?:ft|fattura|preventivo|pro-forma|proforma)?\s*([0-9]{1,4})\b/i);
+  return fileGuess?.[1]||"";
+}
+
+function guessPreAnalysisDate(text){
+  const value=String(text||"");
+  const match=value.match(/\b([0-3]?\d)[./-]([01]?\d)[./-]((?:20)?\d{2})\b/);
+  if(!match)return"";
+  const day=match[1].padStart(2,"0");
+  const month=match[2].padStart(2,"0");
+  const year=match[3].length===2?`20${match[3]}`:match[3];
+  return `${year}-${month}-${day}`;
+}
+
+function guessPreAnalysisAmount(text){
+  const value=String(text||"");
+  const patterns=[
+    /totale\s+imponibile[^0-9]{0,80}([0-9]{1,3}(?:[.\s][0-9]{3})*(?:,[0-9]{2})|[0-9]+(?:\.[0-9]{2})?)/i,
+    /imponibile[^0-9]{0,80}([0-9]{1,3}(?:[.\s][0-9]{3})*(?:,[0-9]{2})|[0-9]+(?:\.[0-9]{2})?)/i,
+    /(?:totale\s+merce|totale\s+netto|netto\s+a\s+pagare|subtotale|importo\s+netto|base\s+imponibile)[^0-9]{0,80}([0-9]{1,3}(?:[.\s][0-9]{3})*(?:,[0-9]{2})|[0-9]+(?:\.[0-9]{2})?)/i,
+    /(?:euro|€)\s*([0-9]{1,3}(?:[.\s][0-9]{3})*(?:,[0-9]{2})|[0-9]+(?:\.[0-9]{2})?)/i,
+    /\b([0-9]{1,3}(?:[.\s][0-9]{3})*,[0-9]{2})\s*(?:€|euro)\b/i
+  ];
+  for(const pattern of patterns){
+    const match=value.match(pattern);
+    if(match?.[1])return normalizeItalianAmount(match[1]);
+  }
+  const candidates=[...value.matchAll(/\b([0-9]{1,3}(?:[.\s][0-9]{3})*,[0-9]{2})\b/g)]
+    .map(match=>parseFloat(normalizeItalianAmount(match[1])))
+    .filter(amount=>amount>20&&amount<50000000)
+    .sort((a,b)=>b-a);
+  if(candidates.length)return String(candidates[0]);
+  return"";
+}
+
+function normalizeItalianAmount(value){
+  const raw=String(value||"").trim().replace(/\s/g,"").replace(/[^\d,.-]/g,"");
+  if(raw.includes(","))return raw.replace(/\./g,"").replace(",",".");
+  return raw;
+}
+
+function normalizePreAnalysisDate(value){
+  if(!value)return"";
+  const raw=String(value||"").trim();
+  const iso=raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(iso)return`${iso[1]}-${iso[2]}-${iso[3]}`;
+  const italian=raw.match(/\b([0-3]?\d)[./-]([01]?\d)[./-]((?:20)?\d{2})\b/);
+  if(italian){
+    const day=italian[1].padStart(2,"0");
+    const month=italian[2].padStart(2,"0");
+    const year=italian[3].length===2?`20${italian[3]}`:italian[3];
+    return `${year}-${month}-${day}`;
+  }
+  const d=toDateValue(raw);
+  return d?d.toISOString().slice(0,10):"";
+}
+
+function guessPreAnalysisSupplier(text,fileName){
+  const value=String(text||"");
+  const supplierPatterns=[
+    /(fornitore|cedente\/prestatore|cedente|emittente|intestatario|spett\.le)\s*[:\n-]\s*([A-ZÀ-Ù0-9 &'.,-]{3,90})/i,
+    /^([A-ZÀ-Ù0-9 &'.,-]{3,80})\s+(?:srl|s\.r\.l\.|spa|s\.p\.a\.|sas|snc|ditta|società)/im,
+    /\b([A-ZÀ-Ù][A-ZÀ-Ù &'.,-]{2,70}\s+(?:SRL|S\.R\.L\.|SPA|S\.P\.A\.|SAS|SNC))\b/
+  ];
+  for(const pattern of supplierPatterns){
+    const match=value.match(pattern);
+    if(match?.[2])return cleanSupplierName(match[2]);
+    if(match?.[1])return cleanSupplierName(match[1]);
+  }
+  return cleanSupplierName(String(fileName||"").replace(/\.[^.]+$/,"").replace(/\b(ft|fattura|preventivo|pro[-\s]?forma|del|n)\b/gi,""));
+}
+
+function cleanSupplierName(value){
+  return String(value||"")
+    .replace(/\s+/g," ")
+    .replace(/\b\d{1,2}[./-]\d{1,2}[./-]\d{2,4}\b/g,"")
+    .replace(/\b(ft|fattura|preventivo|pro[-\s]?forma|del|n\.?)\b/gi,"")
+    .trim()
+    .slice(0,80);
+}
+
+function guessPreAnalysisCategory(text){
+  const value=String(text||"").toLowerCase();
+  if(/terren|immobil|edil|ristruttur|muratur|paviment|piastrell|bagno|opere|cantiere|infiss|controsoffitt|cartongess|facciat|intonac|reception/.test(value))return"Terreni/Immobili";
+  if(/attrezz|arred|cucina|tavol|sedi|vetrin|bancone|forno|frigo|lavastoviglie|abbattitore|cappa|lavello|scaffal|mobili|materass|banco/.test(value))return"Attrezzature";
+  if(/macchinar|macchina|impianto produttivo|linea produzione|pressa|tornio|fresa|compressore|carrello elevatore|muletto/.test(value))return"Macchinari";
+  if(/impiant|clima|ascensor|elettric|idraulic|fotovoltaic|condizion|riscaldamento|pompa di calore|caldaia|antincendio|videosorveglianza/.test(value))return"Impianti";
+  return"Macchinari";
+}
+
+function guessPreAnalysisDescription(row,text){
+  const category=row.category||"Macchinari";
+  const supplier=row.supplier?` - ${row.supplier}`:"";
+  const hints=String(text||"").toLowerCase();
+  if(hints.includes("ascensore"))return`Intervento impianto ascensore${supplier}`;
+  if(hints.includes("cucina"))return`Fornitura cucina e attrezzature operative${supplier}`;
+  if(hints.includes("clima")||hints.includes("condizion"))return`Impianto climatizzazione${supplier}`;
+  return `${category} oggetto di investimento${supplier}`;
+}
+
+function preAnalysisDraftFromForm(){
+  syncPreAnalysisRowsFromDom();
+  const clientId=fieldValue("pa-client");
+  const client=allClients.find(item=>item.id===clientId);
+  return {
+    id:_currentPreAnalysisId||"",
+    title:fieldValue("pa-title")||"Pre-analisi ZES",
+    clientId,
+    clientNameSnapshot:client?clientDisplayName(client):"",
+    year:parseInt(fieldValue("pa-year"),10)||2026,
+    region:fieldValue("pa-region"),
+    companySize:fieldValue("pa-size"),
+    notes:fieldValue("pa-notes"),
+    rows:_preAnalysisRows.map(row=>({
+      ...row,
+      taxableAmount:normalizeItalianAmount(row.taxableAmount),
+      documentDate:normalizePreAnalysisDate(row.documentDate)
+    }))
+  };
+}
+
+function preAnalysisTotals(rows=[]){
+  const byCategory=PREANALYSIS_CATEGORIES.reduce((acc,cat)=>({...acc,[cat]:0}),{});
+  let total=0;
+  rows.forEach(row=>{
+    const amount=parseFloat(normalizeItalianAmount(row.taxableAmount))||0;
+    total+=amount;
+    if(byCategory[row.category]!==undefined)byCategory[row.category]+=amount;
+  });
+  return {total,byCategory};
+}
+
+function formatMoney(value){
+  return (Number(value)||0).toLocaleString("it-IT",{style:"currency",currency:"EUR",maximumFractionDigits:2});
+}
+
+async function savePreAnalysis(){
+  if(!canEditData())return;
+  const draft=preAnalysisDraftFromForm();
+  if(!draft.rows.length){toast("Inserisci almeno una riga di investimento","error");return}
+  try{
+    await waitAuth();
+    const docRef=draft.id?db.collection(COLLECTIONS.preAnalyses).doc(draft.id):db.collection(COLLECTIONS.preAnalyses).doc();
+    const payload={
+      ...draft,
+      id:docRef.id,
+      totals:preAnalysisTotals(draft.rows),
+      updatedAt:firebase.firestore.FieldValue.serverTimestamp(),
+      updatedByUid:currentUser?.id||"",
+      updatedByNameSnapshot:displayUserName()
+    };
+    if(!draft.id){
+      payload.createdAt=firebase.firestore.FieldValue.serverTimestamp();
+      payload.createdByUid=currentUser?.id||"";
+      payload.createdByNameSnapshot=displayUserName();
+    }
+    await docRef.set(payload,{merge:true});
+    _currentPreAnalysisId=docRef.id;
+    toast("Pre-analisi salvata nel CRM ✓");
+  }catch(error){
+    toast(`Errore salvataggio: ${error.message}`,"error");
+  }
+}
+
+async function deletePreAnalysis(id){
+  if(!canEditData()||!id)return;
+  if(!confirm("Eliminare questa pre-analisi?"))return;
+  try{
+    await db.collection(COLLECTIONS.preAnalyses).doc(id).delete();
+    _currentPreAnalysisId=null;
+    _preAnalysisRows=[];
+    renderPreAnalysisEditor({});
+    toast("Pre-analisi eliminata");
+  }catch(error){toast(`Errore eliminazione: ${error.message}`,"error")}
+}
+
+async function exportCurrentPreAnalysis(){
+  const draft=preAnalysisDraftFromForm();
+  if(!draft.rows.length){toast("Aggiungi almeno una riga prima dell'export","error");return}
+  if(!draft.region||!draft.companySize){toast("Seleziona regione e dimensione impresa prima dell'export","error");return}
+  if(draft.rows.length>PREANALYSIS_EXCEL_MAX_ROWS){
+    toast(`Puoi esportare massimo ${PREANALYSIS_EXCEL_MAX_ROWS} righe per volta`,"error");
+    return;
+  }
+  try{
+    await exportPreAnalysisToExcel(draft);
+    toast("Excel esportato ✓");
+  }catch(error){
+    toast(`Errore export Excel: ${error.message}`,"error");
+  }
+}
+
+async function ensureJSZipLoaded(){
+  if(window.JSZip)return window.JSZip;
+  await loadExternalScript(JSZIP_URL,12000);
+  if(!window.JSZip)throw new Error("Libreria Excel non disponibile");
+  return window.JSZip;
+}
+
+async function exportPreAnalysisToExcel(record){
+  const JSZip=await ensureJSZipLoaded();
+  const buffer=await loadPreAnalysisTemplateBuffer();
+  const zip=await JSZip.loadAsync(buffer);
+  let sheet=await zip.file("xl/worksheets/sheet1.xml").async("string");
+  sheet=preparePreAnalysisWorksheet(sheet,record.rows.length,record.rows);
+  sheet=setWorksheetCell(sheet,"D3",record.clientNameSnapshot||record.title||"", "string");
+  sheet=setWorksheetCell(sheet,"E3",excelSerialDate(new Date()), "number");
+  sheet=setWorksheetCell(sheet,"D5",record.companySize||"", "string");
+  sheet=setWorksheetCell(sheet,"E5",record.region||"", "string");
+
+  const startRow=PREANALYSIS_EXCEL_START_ROW;
+  const baseClearEnd=startRow+PREANALYSIS_EXCEL_BASE_DATA_ROWS-1;
+  for(let i=0;i<Math.max(record.rows.length,PREANALYSIS_EXCEL_BASE_DATA_ROWS);i++){
+    const rowNumber=startRow+i;
+    const row=record.rows[i];
+    if(!row){
+      if(rowNumber>baseClearEnd)continue;
+      sheet=clearPreAnalysisInvestmentRow(sheet,rowNumber,true);
+      continue;
+    }
+    sheet=writePreAnalysisInvestmentRow(sheet,rowNumber,row,record,i===0);
+  }
+  sheet=updatePreAnalysisWorkbookCalculations(sheet,record);
+  zip.file("xl/worksheets/sheet1.xml",sheet);
+  await stabilizePreAnalysisWorkbook(zip);
+  const blob=await zip.generateAsync({type:"blob"});
+  const safeName=(record.clientNameSnapshot||record.title||"pre-analisi").replace(/[^\wÀ-ÿ-]+/g,"_").replace(/_+/g,"_");
+  downloadBlob(blob,`Checklist-ZESUNICA_2026_${safeName}.xlsx`);
+}
+
+async function stabilizePreAnalysisWorkbook(zip){
+  zip.remove("xl/calcChain.xml");
+  const relsFile=zip.file("xl/_rels/workbook.xml.rels");
+  if(relsFile){
+    let rels=await relsFile.async("string");
+    rels=rels.replace(/<Relationship\b[^>]*relationships\/calcChain[^>]*\/>/g,"");
+    zip.file("xl/_rels/workbook.xml.rels",rels);
+  }
+  const contentTypesFile=zip.file("[Content_Types].xml");
+  if(contentTypesFile){
+    let contentTypes=await contentTypesFile.async("string");
+    contentTypes=contentTypes.replace(/<Override\b[^>]*PartName="\/xl\/calcChain\.xml"[^>]*\/>/g,"");
+    zip.file("[Content_Types].xml",contentTypes);
+  }
+  const workbookFile=zip.file("xl/workbook.xml");
+  if(workbookFile){
+    let workbook=await workbookFile.async("string");
+    const calcPr=`<calcPr calcId="191029" calcMode="auto" iterate="1" iterateCount="100" iterateDelta="0.001"/>`;
+    workbook=workbook.includes("<calcPr")
+      ? workbook.replace(/<calcPr\b[^>]*\/>/,calcPr)
+      : workbook.replace("</workbook>",`${calcPr}</workbook>`);
+    zip.file("xl/workbook.xml",workbook);
+  }
+}
+
+function preparePreAnalysisWorksheet(sheet,rowCount,rows=[]){
+  const startRow=PREANALYSIS_EXCEL_START_ROW;
+  const baseEnd=startRow+PREANALYSIS_EXCEL_BASE_DATA_ROWS-1;
+  const visibleRows=Math.max(rowCount,1);
+  const dataEnd=startRow+visibleRows-1;
+  const extraRows=Math.max(0,visibleRows-PREANALYSIS_EXCEL_BASE_DATA_ROWS);
+  if(extraRows>0){
+    sheet=shiftWorksheetRows(sheet,PREANALYSIS_EXCEL_INSERT_BEFORE_ROW,extraRows);
+    const insertedRows=[];
+    for(let targetRow=PREANALYSIS_EXCEL_INSERT_BEFORE_ROW;targetRow<=dataEnd;targetRow++){
+      insertedRows.push(clonePreAnalysisDataRow(sheet,targetRow));
+    }
+    const shiftedInsertBefore=PREANALYSIS_EXCEL_INSERT_BEFORE_ROW+extraRows;
+    const anchorPattern=new RegExp(`<row\\b[^>]*\\br="${shiftedInsertBefore}"[^>]*(?:>[\\s\\S]*?<\\/row>|\\s*\\/>)`);
+    sheet=sheet.replace(anchorPattern,`${insertedRows.join("")}$&`);
+  }
+  sheet=unhideWorksheetRows(sheet,startRow,Math.max(dataEnd,baseEnd));
+  sheet=extendPreAnalysisMerge(sheet,dataEnd);
+  sheet=updatePreAnalysisTotals(sheet,rows,dataEnd);
+  return sheet;
+}
+
+function shiftWorksheetRows(xml,fromRow,delta){
+  if(delta<=0)return xml;
+  xml=xml.replace(/(<row\b[^>]*\br=")(\d+)(")/g,(match,prefix,row,suffix)=>{
+    const rowNumber=parseInt(row,10);
+    return rowNumber>=fromRow?`${prefix}${rowNumber+delta}${suffix}`:match;
+  });
+  return xml.replace(/(\$?[A-Z]{1,3}\$?)(\d+)/g,(match,col,row)=>{
+    const rowNumber=parseInt(row,10);
+    return rowNumber>=fromRow?`${col}${rowNumber+delta}`:match;
+  });
+}
+
+function clonePreAnalysisDataRow(sheet,targetRow){
+  const sourceRow=PREANALYSIS_EXCEL_TEMPLATE_ROW;
+  const sourcePattern=new RegExp(`<row\\b[^>]*\\br="${sourceRow}"[^>]*(?:>[\\s\\S]*?<\\/row>|\\s*\\/>)`);
+  const source=sheet.match(sourcePattern)?.[0];
+  if(!source){
+    const cells=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"].map(col=>cellXml(`${col}${targetRow}`,"","string")).join("");
+    return `<row r="${targetRow}" spans="1:23" ht="19" x14ac:dyDescent="0.35">${cells}</row>`;
+  }
+  let row=source
+    .replace(new RegExp(`\\br="${sourceRow}"`),`r="${targetRow}"`)
+    .replace(/\bhidden="1"/g,"")
+    .replace(/\bcustomHeight="1"/g,"")
+    .replace(/\bht="[^"]*"/,`ht="19"`);
+  row=row.replace(new RegExp(`(\\$?[A-Z]{1,3}\\$?)${sourceRow}\\b`,"g"),`$1${targetRow}`);
+  row=row.replace(new RegExp(`<c\\b(?=[^>]*\\br="[P-W]${targetRow}")[^>]*(?:>[\\s\\S]*?<\\/c>|\\s*\\/>)`,"g"),"");
+  return row;
+}
+
+function unhideWorksheetRows(xml,startRow,endRow){
+  for(let rowNumber=startRow;rowNumber<=endRow;rowNumber++){
+    const rowPattern=new RegExp(`<row\\b[^>]*\\br="${rowNumber}"[^>]*(?:>[\\s\\S]*?<\\/row>|\\s*\\/>)`);
+    xml=xml.replace(rowPattern,row=>row
+      .replace(/\s+hidden="1"/g,"")
+      .replace(/\s+customHeight="1"/g,"")
+      .replace(/\s+ht="[^"]*"/,` ht="19"`));
+  }
+  return xml;
+}
+
+function extendPreAnalysisMerge(xml,dataEnd){
+  xml=xml.replace(/<mergeCell ref="C65:C\d+"\s*\/>/,`<mergeCell ref="C65:C${dataEnd}"/>`);
+  return xml;
+}
+
+function updatePreAnalysisTotals(sheet,rows,dataEnd){
+  const totals=preAnalysisTotals(rows);
+  sheet=setWorksheetFormulaCell(sheet,"S66",`SUM(I65:I${dataEnd})`,totals.total);
+  sheet=setWorksheetFormulaCell(sheet,"T66",`SUM(J65:J${dataEnd})`,totals.byCategory["Impianti"]||0);
+  sheet=setWorksheetFormulaCell(sheet,"U66",`SUM(K65:K${dataEnd})`,totals.byCategory["Macchinari"]||0);
+  sheet=setWorksheetFormulaCell(sheet,"V66",`SUM(L65:L${dataEnd})`,totals.byCategory["Attrezzature"]||0);
+  sheet=setWorksheetFormulaCell(sheet,"W66",`SUM(M65:M${dataEnd})`,totals.byCategory["Terreni/Immobili"]||0);
+  return sheet;
+}
+
+function writePreAnalysisInvestmentRow(sheet,rowNumber,row,record,isFirstDataRow){
+  sheet=clearPreAnalysisInvestmentRow(sheet,rowNumber,false);
+  const amount=parseFloat(normalizeItalianAmount(row.taxableAmount))||0;
+  const isPreventivo=row.documentType==="PREVENTIVO"||row.documentType==="PRO-FORMA";
+  sheet=setWorksheetCell(sheet,`C${rowNumber}`,isFirstDataRow?(record.year||2026):"","number");
+  sheet=setWorksheetCell(sheet,`D${rowNumber}`,row.supplier||row.sourceFileName||"","string");
+  sheet=setWorksheetCell(sheet,`E${rowNumber}`,isPreventivo?(row.documentNumber||""):"","string");
+  sheet=setWorksheetCell(sheet,`F${rowNumber}`,isPreventivo&&row.documentDate?excelSerialDate(row.documentDate):"","number");
+  sheet=setWorksheetCell(sheet,`G${rowNumber}`,!isPreventivo?(row.documentNumber||""):"","string");
+  sheet=setWorksheetCell(sheet,`H${rowNumber}`,!isPreventivo&&row.documentDate?excelSerialDate(row.documentDate):"","number");
+  sheet=setWorksheetCell(sheet,`I${rowNumber}`,amount,"number");
+  sheet=setWorksheetCell(sheet,`J${rowNumber}`,row.category==="Impianti"?amount:"","number");
+  sheet=setWorksheetCell(sheet,`K${rowNumber}`,row.category==="Macchinari"?amount:"","number");
+  sheet=setWorksheetCell(sheet,`L${rowNumber}`,row.category==="Attrezzature"?amount:"","number");
+  sheet=setWorksheetCell(sheet,`M${rowNumber}`,row.category==="Terreni/Immobili"?amount:"","number");
+  sheet=setWorksheetCell(sheet,`N${rowNumber}`,row.description||"","string");
+  return sheet;
+}
+
+function clearPreAnalysisInvestmentRow(sheet,rowNumber,clearYear=true){
+  const columns=[...(clearYear?["C"]:[]),"D","E","F","G","H","I","J","K","L","M","N"];
+  columns.forEach(col=>{sheet=clearWorksheetCell(sheet,`${col}${rowNumber}`)});
+  return sheet;
+}
+
+function preAnalysisExcelLayout(rowCount){
+  const visibleRows=Math.max(rowCount,1);
+  const dataEnd=PREANALYSIS_EXCEL_START_ROW+visibleRows-1;
+  const extraRows=Math.max(0,visibleRows-PREANALYSIS_EXCEL_BASE_DATA_ROWS);
+  return {
+    dataEnd,
+    summaryRow:73+extraRows,
+    rateRow:78+extraRows,
+    currentYearRow:84+extraRows,
+    totalRow:85+extraRows,
+    creditRow:87+extraRows,
+    lookupHeaderRow:106+extraRows,
+    lookupStartRow:107+extraRows,
+    lookupEndRow:114+extraRows
+  };
+}
+
+function preAnalysisAidRate(region,size){
+  const normalizedRegion=String(region||"").trim();
+  const normalizedSize=String(size||"").trim();
+  const table={
+    "Abruzzo":{Grande:.15,Media:.25,Piccola:.35},
+    "Molise":{Grande:.30,Media:.40,Piccola:.50},
+    "Basilicata":{Grande:.30,Media:.40,Piccola:.50},
+    "Calabria":{Grande:.40,Media:.50,Piccola:.60},
+    "Campania":{Grande:.40,Media:.50,Piccola:.60},
+    "Puglia":{Grande:.40,Media:.50,Piccola:.60},
+    "Sardegna":{Grande:.30,Media:.40,Piccola:.50},
+    "Sicilia":{Grande:.40,Media:.50,Piccola:.60}
+  };
+  return table[normalizedRegion]?.[normalizedSize]||0;
+}
+
+function updatePreAnalysisWorkbookCalculations(sheet,record){
+  const rows=record.rows||[];
+  const layout=preAnalysisExcelLayout(rows.length);
+  const totals=preAnalysisTotals(rows);
+  const impianti=totals.byCategory["Impianti"]||0;
+  const macchinari=totals.byCategory["Macchinari"]||0;
+  const attrezzature=totals.byCategory["Attrezzature"]||0;
+  const terreni=totals.byCategory["Terreni/Immobili"]||0;
+  const nonImmobili=impianti+macchinari+attrezzature;
+  const immobiliAmmissibili=Math.min(terreni,nonImmobili);
+  const investimentiAmmissibili=impianti+macchinari+attrezzature+immobiliAmmissibili;
+  const agevolabile=investimentiAmmissibili<200000?0:investimentiAmmissibili;
+  const aliquota=preAnalysisAidRate(record.region,record.companySize);
+  const aliquotaCredito=aliquota*0.176668;
+  const creditoMassimo=agevolabile*aliquotaCredito;
+
+  sheet=setWorksheetFormulaCell(sheet,"S68","T66+U66+V66",nonImmobili);
+  sheet=setWorksheetFormulaCell(sheet,`I${layout.summaryRow}`,`J${layout.summaryRow}+K${layout.summaryRow}+L${layout.summaryRow}+M${layout.summaryRow}`,investimentiAmmissibili);
+  sheet=setWorksheetFormulaCell(sheet,`J${layout.summaryRow}`,"T66",impianti);
+  sheet=setWorksheetFormulaCell(sheet,`K${layout.summaryRow}`,"U66",macchinari);
+  sheet=setWorksheetFormulaCell(sheet,`L${layout.summaryRow}`,"V66",attrezzature);
+  sheet=setWorksheetFormulaCell(sheet,`M${layout.summaryRow}`,`IF(W66<(S68),W66,S68)`,immobiliAmmissibili);
+
+  sheet=setWorksheetFormulaCell(sheet,`L${layout.rateRow}`,`INDEX(E${layout.lookupStartRow}:G${layout.lookupEndRow},MATCH(E5,D${layout.lookupStartRow}:D${layout.lookupEndRow},0), MATCH(D5,E${layout.lookupHeaderRow}:G${layout.lookupHeaderRow},0))`,aliquota);
+  sheet=setWorksheetFormulaCell(sheet,`I${layout.currentYearRow}`,`I${layout.summaryRow}`,investimentiAmmissibili);
+  sheet=setWorksheetFormulaCell(sheet,`J${layout.currentYearRow}`,`IF(I${layout.currentYearRow}<200000,0,I${layout.currentYearRow})`,agevolabile);
+  sheet=setWorksheetFormulaCell(sheet,`N${layout.currentYearRow}`,`J${layout.currentYearRow}*$L$${layout.rateRow}`,agevolabile*aliquota);
+  sheet=setWorksheetFormulaCell(sheet,`P${layout.currentYearRow}`,`L${layout.rateRow}*17.6668%`,aliquotaCredito);
+  sheet=setWorksheetFormulaCell(sheet,`I${layout.totalRow}`,`SUM(I${layout.rateRow-2}:I${layout.currentYearRow})`,investimentiAmmissibili);
+  sheet=setWorksheetFormulaCell(sheet,`J${layout.totalRow}`,`J${layout.currentYearRow}`,agevolabile);
+  sheet=setWorksheetFormulaCell(sheet,`N${layout.totalRow}`,`SUM(N${layout.rateRow-2}:N${layout.currentYearRow})`,agevolabile*aliquota);
+  sheet=setWorksheetFormulaCell(sheet,`P${layout.creditRow}`,`J${layout.currentYearRow}*P${layout.currentYearRow}`,creditoMassimo);
+  return sheet;
+}
+
+async function loadPreAnalysisTemplateBuffer(){
+  if(window.PREANALYSIS_TEMPLATE_BASE64){
+    return base64ToArrayBuffer(window.PREANALYSIS_TEMPLATE_BASE64);
+  }
+  const basePath=window.location.href.replace(/[#?].*$/,"").replace(/\/[^\/]*$/,"/");
+  const candidates=[
+    PREANALYSIS_TEMPLATE_URL,
+    `./${PREANALYSIS_TEMPLATE_URL}`,
+    `${basePath}${PREANALYSIS_TEMPLATE_URL}`,
+    `/assets/preanalisi-zesunica-template.xlsx`
+  ];
+  const errors=[];
+  for(const url of [...new Set(candidates)]){
+    try{return await fetchArrayBuffer(url)}
+    catch(error){errors.push(`${url}: ${error.message}`)}
+  }
+  throw new Error(`Modello Excel non caricato. ${errors[0]||"Percorso non disponibile"}`);
+}
+
+function base64ToArrayBuffer(base64){
+  const clean=String(base64||"").replace(/\s/g,"");
+  const binary=atob(clean);
+  const bytes=new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+  return bytes.buffer;
+}
+
+async function fetchArrayBuffer(url){
+  try{
+    const response=await fetch(url,{cache:"no-store"});
+    if(response.ok)return await response.arrayBuffer();
+    throw new Error(`HTTP ${response.status}`);
+  }catch(fetchError){
+    return await xhrArrayBuffer(url,fetchError);
+  }
+}
+
+function xhrArrayBuffer(url,originalError){
+  return new Promise((resolve,reject)=>{
+    const xhr=new XMLHttpRequest();
+    xhr.open("GET",url,true);
+    xhr.responseType="arraybuffer";
+    xhr.onload=()=>xhr.status===200||xhr.status===0
+      ? resolve(xhr.response)
+      : reject(new Error(`HTTP ${xhr.status}`));
+    xhr.onerror=()=>reject(originalError instanceof Error?originalError:new Error("Failed to fetch"));
+    xhr.send();
+  });
+}
+
+function xmlEscape(value){
+  return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function excelSerialDate(value){
+  const d=value instanceof Date?value:new Date(value);
+  if(Number.isNaN(d.getTime()))return"";
+  const epoch=Date.UTC(1899,11,30);
+  return Math.floor((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-epoch)/86400000);
+}
+
+function cellXml(cellRef,value,type,styleAttr=""){
+  const style=styleAttr?` ${styleAttr}`:"";
+  if(value===""||value===null||value===undefined)return`<c r="${cellRef}"${style}/>`;
+  if(type==="string")return`<c r="${cellRef}"${style} t="inlineStr"><is><t>${xmlEscape(value)}</t></is></c>`;
+  return`<c r="${cellRef}"${style}><v>${xmlEscape(value)}</v></c>`;
+}
+
+function setWorksheetCell(xml,cellRef,value,type="string"){
+  const cellPattern=worksheetCellPattern(cellRef);
+  const existing=xml.match(cellPattern);
+  const style=existing?.[0]?.match(/\bs="[^"]*"/)?.[0]||"";
+  const replacement=cellXml(cellRef,value,type,style);
+  if(existing)return xml.replace(cellPattern,replacement);
+  return insertWorksheetCell(xml,cellRef,replacement);
+}
+
+function setWorksheetFormulaCell(xml,cellRef,formula,value=0){
+  const cellPattern=worksheetCellPattern(cellRef);
+  const existing=xml.match(cellPattern);
+  const style=existing?.[0]?.match(/\bs="[^"]*"/)?.[0]||"";
+  const styleAttr=style?` ${style}`:"";
+  const replacement=`<c r="${cellRef}"${styleAttr}><f>${xmlEscape(formula)}</f><v>${xmlEscape(value)}</v></c>`;
+  if(existing)return xml.replace(cellPattern,replacement);
+  return insertWorksheetCell(xml,cellRef,replacement);
+}
+
+function insertWorksheetCell(xml,cellRef,cellMarkup){
+  const rowNumber=cellRef.match(/\d+/)?.[0];
+  const rowPattern=new RegExp(`<row\\b[^>]*\\br="${rowNumber}"[^>]*(?:>[\\s\\S]*?<\\/row>|\\s*\\/>)`);
+  const row=xml.match(rowPattern)?.[0];
+  if(!row)return xml.replace("</sheetData>",`<row r="${rowNumber}">${cellMarkup}</row></sheetData>`);
+  const targetColumn=worksheetColumnIndex(cellRef.replace(/\d+/g,""));
+  const cells=[...row.matchAll(/<c\b(?=[^>]*\br="([A-Z]+)\d+")[^>]*\/>|<c\b(?=[^>]*\br="([A-Z]+)\d+")[^>]*>[\s\S]*?<\/c>/g)];
+  const nextCell=cells.find(match=>worksheetColumnIndex(match[1]||match[2])>targetColumn);
+  const updatedRow=nextCell
+    ? row.replace(nextCell[0],`${cellMarkup}${nextCell[0]}`)
+    : row.replace("</row>",`${cellMarkup}</row>`);
+  return xml.replace(rowPattern,updatedRow);
+}
+
+function worksheetColumnIndex(col){
+  return String(col||"").split("").reduce((acc,char)=>acc*26+(char.charCodeAt(0)-64),0);
+}
+
+function clearWorksheetCell(xml,cellRef){
+  const cellPattern=worksheetCellPattern(cellRef);
+  const existing=xml.match(cellPattern);
+  if(!existing)return xml;
+  const style=existing?.[0]?.match(/\bs="[^"]*"/)?.[0]||"";
+  return xml.replace(cellPattern,cellXml(cellRef,"","string",style));
+}
+
+function worksheetCellPattern(cellRef){
+  const escaped=String(cellRef||"").replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  return new RegExp(`<c\\b(?=[^>]*\\br="${escaped}")[^>]*\\/>|<c\\b(?=[^>]*\\br="${escaped}")[^>]*>[\\s\\S]*?<\\/c>`);
+}
+
+function downloadBlob(blob,fileName){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download=fileName;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+// ═══════════════════════════════════════════════════════════════
 // CALENDAR
 // ═══════════════════════════════════════════════════════════════
 const MONTHS_IT=["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
@@ -4222,21 +5358,58 @@ async function deleteTask(id){
 function renderCollaborators(){
   clearUnsubs();
   const main=document.getElementById("main");
-  main.innerHTML=`<div style="padding:32px">
-    <div class="page-header">
-      <div><h1 class="page-title">Team</h1><p class="page-sub" id="collabs-count">Caricamento...</p></div>
-      ${canEditData()?`<button class="btn btn-primary" onclick="openCollabForm()">+ Nuovo</button>`:""}
-    </div>
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input class="search-input" placeholder="Cerca collaboratore..." oninput="filterCollabs(this.value)">
-    </div>
-    <div id="collabs-grid">${spinner()}</div>
-  </div>`;
+  const isDesktop=currentDeviceMode()==="desktop";
+  const createLabel=_networkPage==="collaborators"?"+ Nuovo Collaboratore":"+ Nuovo Partner";
+  main.innerHTML=isDesktop
+    ? `<div class="team-desktop-shell">
+        <div class="team-desktop-hero">
+          <div class="team-desktop-hero-copy">
+            <div class="team-desktop-kicker">Collaboratori e Partner</div>
+            <div class="team-desktop-title">Rete</div>
+            <div class="team-desktop-sub">Gestisci collaboratori interni, partner commerciali e partner professionisti in un'unica vista ordinata e coerente con il resto della piattaforma.</div>
+          </div>
+          <div class="team-desktop-hero-actions">
+            ${canEditData()?`<button class="btn btn-secondary" style="background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.24);color:#fff" onclick="openCollabForm()">${createLabel}</button>`:""}
+          </div>
+        </div>
+        <div class="team-desktop-toolbar">
+          <div class="search-wrap team-desktop-search">
+            <span class="search-icon">🔍</span>
+            <input class="search-input" placeholder="Cerca nella rete..." oninput="filterCollabs(this.value)">
+          </div>
+          <div class="page-sub" id="collabs-count" style="margin:0;text-align:right">Caricamento...</div>
+        </div>
+        <div class="client-detail-tabs" style="margin:0 0 18px">
+          <button class="client-detail-tab ${_networkPage==="collaborators"?"active":""}" onclick="switchNetworkPage('collaborators')">Collaboratori</button>
+          <button class="client-detail-tab ${_networkPage==="partners"?"active":""}" onclick="switchNetworkPage('partners')">Partner</button>
+        </div>
+        <div id="collabs-grid">${spinner()}</div>
+      </div>`
+    : `<div style="padding:32px">
+        <div class="page-header">
+          <div><h1 class="page-title">Rete</h1><p class="page-sub" id="collabs-count">Caricamento...</p></div>
+          ${canEditData()?`<button class="btn btn-primary" onclick="openCollabForm()">${createLabel}</button>`:""}
+        </div>
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input class="search-input" placeholder="Cerca nella rete..." oninput="filterCollabs(this.value)">
+        </div>
+        <div class="tabs" style="margin-bottom:18px">
+          <button class="tab ${_networkPage==="collaborators"?"active":""}" onclick="switchNetworkPage('collaborators')">Collaboratori</button>
+          <button class="tab ${_networkPage==="partners"?"active":""}" onclick="switchNetworkPage('partners')">Partner</button>
+        </div>
+        <div id="collabs-grid">${spinner()}</div>
+      </div>`;
 
   const unsub=db.collection(COLLECTIONS.collaborators).onSnapshot(snapshot=>{
     allCollabs=snapshot.docs.map(doc=>({id:doc.id,...doc.data()})).sort((a,b)=>collaboratorFullName(a).localeCompare(collaboratorFullName(b),"it"));
-    const countEl=document.getElementById("collabs-count");if(countEl)countEl.textContent=`${allCollabs.length} collaboratori`;
+    const countEl=document.getElementById("collabs-count");
+    if(countEl){
+      const totalLabel=_networkPage==="collaborators"
+        ? `${allCollabs.filter(isInternalCollaborator).length} collaboratori`
+        : `${allCollabs.filter(isPartnerCollaborator).length} partner`;
+      countEl.textContent=totalLabel;
+    }
     renderCollabsGrid(allCollabs.filter(c=>collaboratorMatchesSearch(c,collabSearch)));
   },error=>{const el=document.getElementById("collabs-grid");if(el)el.innerHTML=`<div class="error-box">Errore: ${esc(error.message)}</div>`});
   _activeUnsubs.push(unsub);
@@ -4245,12 +5418,217 @@ function renderCollaborators(){
 function collaboratorFullName(collab){return[collab.name,collab.lastName].filter(Boolean).join(" ").trim()||"Collaboratore"}
 function collaboratorMatchesSearch(collab,query){if(!query)return true;const q=query.toLowerCase();return[collaboratorFullName(collab),collab.email,collab.role,collab.companyName].some(v=>String(v||"").toLowerCase().includes(q))}
 function filterCollabs(query){collabSearch=query;renderCollabsGrid(allCollabs.filter(c=>collaboratorMatchesSearch(c,query)))}
+function switchNetworkPage(page){_networkPage=page;renderCollaborators()}
+function isInternalCollaborator(collab){return (collab?.type||"internal_member")==="internal_member"}
+function isCommercialPartner(collab){return collab?.type==="commercial_partner"}
+function isProfessionalPartner(collab){return collab?.type==="professional_partner"}
+function isPartnerCollaborator(collab){return isCommercialPartner(collab)||isProfessionalPartner(collab)}
+function collabTypeLabel(value){return COLLABORATOR_TYPES.find(t=>t.value===value)?.label||value||"—"}
+function collabCategoryLabel(collab){return isInternalCollaborator(collab)?"Collaboratore":isCommercialPartner(collab)?"Partner commerciale":"Partner professionista"}
+function collabPrimaryOrgLabel(collab){return isPartnerCollaborator(collab)?"Azienda / Studio":"—"}
+function latestBy(items,...keys){
+  return [...items].sort((a,b)=>{
+    const aTime=keys.map(key=>toDateValue(a?.[key])?.getTime()||0).find(Boolean)||0;
+    const bTime=keys.map(key=>toDateValue(b?.[key])?.getTime()||0).find(Boolean)||0;
+    return bTime-aTime;
+  })[0]||null;
+}
+function dateInputValue(value,fallback=""){
+  const date=toDateValue(value);
+  return date?date.toISOString().slice(0,10):fallback;
+}
+function renderNetworkTimelineItem(kind,label,title,meta){
+  return `<div class="network-timeline-item">
+    <div class="network-timeline-dot ${kind}"></div>
+    <div class="network-timeline-copy">
+      <div class="network-timeline-label">${esc(label)}</div>
+      <div class="network-timeline-title">${esc(title||"Nessuna attivita registrata")}</div>
+      <div class="network-timeline-meta">${esc(meta||"Ancora nessun elemento disponibile")}</div>
+    </div>
+  </div>`;
+}
+async function findMatchingInternalUser(collab){
+  const users=await ensureAssignableUsersLoaded();
+  const fullName=collaboratorFullName(collab).toLowerCase();
+  const email=String(collab.email||"").trim().toLowerCase();
+  return users.find(user=>email&&String(user.email||"").trim().toLowerCase()===email)
+    || users.find(user=>displayUserName(user).toLowerCase()===fullName)
+    || null;
+}
+async function loadCollabDetailInsights(collab){
+  const partnerInfoEl=document.getElementById("network-partner-info");
+  const partnerPerformanceEl=document.getElementById("network-partner-performance");
+  const partnerCommissionEl=document.getElementById("network-partner-commission");
+  const timelineEl=document.getElementById("network-collab-timeline");
+  try{
+    if(isPartnerCollaborator(collab)){
+      const [practicesSnap,clientsSnap]=await Promise.all([
+        db.collection(COLLECTIONS.practices).where("collaboratorOriginId","==",collab.id).get(),
+        db.collection(COLLECTIONS.clients).where("sourceCollaboratorId","==",collab.id).get()
+      ]);
+      const practices=practicesSnap.docs.map(doc=>({id:doc.id,...doc.data()}));
+      const clients=clientsSnap.docs.map(doc=>({id:doc.id,...doc.data()}));
+      const generatedValue=practices.reduce((sum,practice)=>sum+(Number(practice.expectedCompanyRevenue)||0),0);
+      const maturedCommissions=practices.reduce((sum,practice)=>sum+(Number(practice.collaboratorCompensationMatured)||0),0) || Number(collab.accruedCommissions||0);
+      const expectedComp=practices.reduce((sum,practice)=>sum+(Number(practice.collaboratorCompensationExpected)||0),0);
+      const paidComp=practices.reduce((sum,practice)=>sum+(Number(practice.collaboratorCompensationPaid)||0),0);
+      if(partnerInfoEl){
+        partnerInfoEl.innerHTML=`<div class="client-data-grid">
+          ${[
+            ["Da quando collaborate",formatDate(collab.collaborationStartDate)],
+            ["Referente interno",collab.assignedInternalReferent||"—"],
+            ["Ultimo contatto",formatDate(collab.lastInteractionDate)],
+            ["Stato relazione",collab.status||"Attivo"],
+            ["Area geografica",collab.geographicArea||"—"],
+            ["Settore di riferimento",collab.referenceSector||"—"]
+          ].map(([label,value])=>`<div class="client-data-item"><div class="client-data-item-label">${esc(label)}</div><div class="client-data-item-value">${esc(value||"—")}</div></div>`).join("")}
+        </div>`;
+      }
+      if(partnerPerformanceEl){
+        partnerPerformanceEl.innerHTML=`<div class="client-summary-cards">
+          ${[
+            ["Pratiche generate",String(practices.length),"Totale pratiche associate al partner"],
+            ["Clienti portati",String(clients.length),"Anagrafiche clienti collegate"],
+            ["Valore generato",formatEuro(generatedValue),"Somma fee prevista sulle pratiche"],
+            ["Commissioni maturate",formatEuro(maturedCommissions),"Valore maturato disponibile"]
+          ].map(([label,value,hint])=>`<div class="client-summary-card"><div class="client-summary-label">${esc(label)}</div><div class="client-summary-value" style="font-size:22px;line-height:1.15">${esc(value)}</div><div class="client-summary-hint">${esc(hint)}</div></div>`).join("")}
+        </div>`;
+      }
+      if(partnerCommissionEl){
+        partnerCommissionEl.innerHTML=`<div class="client-data-grid">
+          ${[
+            ["Percentuale commissione",collab.commissionPercentage?`${collab.commissionPercentage}%`:"—"],
+            ["Pratiche segnalate",String(practices.length)],
+            ["Compensi attesi",formatEuro(expectedComp)],
+            ["Compensi pagati",formatEuro(paidComp)]
+          ].map(([label,value])=>`<div class="client-data-item"><div class="client-data-item-label">${esc(label)}</div><div class="client-data-item-value">${esc(value||"—")}</div></div>`).join("")}
+        </div>`;
+      }
+      return;
+    }
+    const matchedUser=await findMatchingInternalUser(collab);
+    const fullName=collaboratorFullName(collab);
+    const [tasksSnap,eventsSnap,historySnap]=await Promise.all([
+      db.collection(COLLECTIONS.tasks).get(),
+      db.collection(COLLECTIONS.events).get(),
+      db.collection(COLLECTIONS.clientHistory).get().catch(()=>({docs:[]})),
+    ]);
+    const tasks=tasksSnap.docs.map(doc=>({id:doc.id,...doc.data()})).filter(item=>
+      (matchedUser?.id&&item.assignedToUid===matchedUser.id) || item.assignedToNameSnapshot===fullName
+    );
+    const events=eventsSnap.docs.map(doc=>({id:doc.id,...doc.data()})).filter(item=>matchedUser?.id&&item.createdByUid===matchedUser.id);
+    const notes=historySnap.docs.map(doc=>({id:doc.id,...doc.data()})).filter(item=>
+      (matchedUser?.id&&item.createdByUid===matchedUser.id) || item.createdByNameSnapshot===fullName
+    );
+    const latestTask=latestBy(tasks,"dueAt","createdAt");
+    const latestEvent=latestBy(events,"startAt","createdAt");
+    const latestNote=latestBy(notes,"createdAt");
+    if(timelineEl){
+      timelineEl.innerHTML=`<div class="network-timeline">
+        ${renderNetworkTimelineItem("task","Ultimo task",latestTask?.title||"Nessun task assegnato",latestTask?`${formatDateTime(latestTask.dueAt||latestTask.createdAt)}${latestTask.clientNameSnapshot?` · ${latestTask.clientNameSnapshot}`:""}`:"Non risultano task collegati a questo collaboratore")}
+        ${renderNetworkTimelineItem("note","Ultima nota",latestNote?.subject||"Nessuna nota registrata",latestNote?`${formatDateTime(latestNote.createdAt)}${latestNote.text?` · ${String(latestNote.text).slice(0,80)}`:""}`:"Non risultano note recenti nello storico clienti")}
+        ${renderNetworkTimelineItem("event","Ultimo evento",latestEvent?.title||"Nessun evento registrato",latestEvent?`${formatDateTime(latestEvent.startAt)}${latestEvent.clientNameSnapshot?` · ${latestEvent.clientNameSnapshot}`:""}`:"Non risultano eventi recenti collegati a questo collaboratore")}
+      </div>`;
+    }
+  }catch(error){
+    const fallback=`<div class="network-empty-note">Non sono riuscito a caricare i dati collegati a questa scheda. ${esc(error.message||"")}</div>`;
+    if(partnerInfoEl)partnerInfoEl.innerHTML=fallback;
+    if(partnerPerformanceEl)partnerPerformanceEl.innerHTML=fallback;
+    if(partnerCommissionEl)partnerCommissionEl.innerHTML=fallback;
+    if(timelineEl)timelineEl.innerHTML=fallback;
+  }
+}
+function renderCollabCategoryFields(type,data={}){
+  if(type==="internal_member")return "";
+  return `
+    <div class="form-group" style="grid-column:span 2"><label class="form-label">Azienda / Studio</label><input id="col-companyName" class="form-control" value="${esc(data.companyName||"")}"></div>
+    <div class="form-group"><label class="form-label">Area geografica</label><input id="col-geographicArea" class="form-control" value="${esc(data.geographicArea||"")}"></div>
+    <div class="form-group"><label class="form-label">Settore di riferimento</label><input id="col-referenceSector" class="form-control" value="${esc(data.referenceSector||"")}"></div>
+    <div class="form-group"><label class="form-label">Percentuale commissione</label><input id="col-commissionPercentage" class="form-control" type="number" min="0" step="0.01" value="${esc(String(data.commissionPercentage||""))}"></div>
+    <div class="form-group"><label class="form-label">Referente interno assegnato</label><input id="col-assignedInternalReferent" class="form-control" value="${esc(data.assignedInternalReferent||"")}"></div>
+    <div class="form-group"><label class="form-label">Da quando collaborate</label><input id="col-collaborationStartDate" class="form-control" type="date" value="${esc(dateInputValue(data.collaborationStartDate,dateInputValue(new Date())))}"></div>
+    <div class="form-group"><label class="form-label">Ultimo contatto</label><input id="col-lastInteractionDate" class="form-control" type="date" value="${esc(dateInputValue(data.lastInteractionDate,dateInputValue(new Date())))}"></div>
+    <div class="form-group"><label class="form-label">Stato relazione</label><input id="col-status" class="form-control" value="${esc(data.status||"Attivo")}"></div>
+  `;
+}
 
 function renderCollabsGrid(collabs){
   const el=document.getElementById("collabs-grid");if(!el)return;
-  if(collabs.length===0){el.innerHTML=emptyState("👤","Nessun collaboratore","Aggiungi il primo membro del team");return}
+  if(collabs.length===0){el.innerHTML=emptyState("👤","Nessun contatto in rete","Aggiungi il primo contatto della rete");return}
   const typeLabel=v=>COLLABORATOR_TYPES.find(t=>t.value===v)?.label||v||"—";
-  el.innerHTML=`<div class="grid-3">${collabs.map(collab=>`
+  if(currentDeviceMode()==="desktop"){
+    const collaborators=collabs.filter(isInternalCollaborator);
+    const commercialPartners=collabs.filter(isCommercialPartner);
+    const professionalPartners=collabs.filter(isProfessionalPartner);
+    const renderDesktopCard=collab=>`
+      <div class="team-desktop-card" onclick="navigate('collaborators','${collab.id}')">
+        <div class="team-desktop-card-top">
+          ${avatar(collaboratorFullName(collab),58)}
+          <div class="team-desktop-card-copy">
+            <div class="team-desktop-card-name">${esc(collaboratorFullName(collab))}</div>
+            <div class="team-desktop-card-role">${esc(collab.role||"Ruolo non specificato")}</div>
+            <div class="team-desktop-card-chips">
+              ${collab.type?`<span class="team-desktop-chip">${esc(collabCategoryLabel(collab))}</span>`:""}
+            </div>
+          </div>
+        </div>
+        <div class="team-desktop-card-meta">
+          ${collab.email?`<div class="team-desktop-meta-row"><span class="team-desktop-meta-icon">✉️</span><span class="team-desktop-meta-text">${esc(collab.email)}</span></div>`:""}
+          ${collab.phone?`<div class="team-desktop-meta-row"><span class="team-desktop-meta-icon">📞</span><span class="team-desktop-meta-text">${esc(collab.phone)}</span></div>`:""}
+          ${isPartnerCollaborator(collab)&&collab.companyName?`<div class="team-desktop-meta-row"><span class="team-desktop-meta-icon">🏢</span><span class="team-desktop-meta-text">${esc(collab.companyName)}</span></div>`:""}
+        </div>
+        ${canEditData()?`<div class="team-desktop-card-actions" onclick="event.stopPropagation()">
+          <button class="btn btn-secondary" style="flex:1" onclick="openCollabForm('${collab.id}')">Modifica</button>
+          <button class="btn-icon red" onclick="deleteCollab('${collab.id}','${esc(collaboratorFullName(collab))}')">🗑️</button>
+        </div>`:""}
+      </div>
+    `;
+    el.innerHTML=_networkPage==="collaborators"
+      ? `<div class="team-desktop-sections">
+          <section class="team-desktop-section">
+            <div class="team-desktop-section-head">
+              <div>
+                <div class="team-desktop-section-title">Collaboratori</div>
+                <div class="team-desktop-section-sub">Membri operativi interni della struttura.</div>
+              </div>
+              <div class="team-desktop-section-count">${collaborators.length} elementi</div>
+            </div>
+            ${collaborators.length?`<div class="team-desktop-grid">${collaborators.map(renderDesktopCard).join("")}</div>`:emptyState("👤","Nessun collaboratore interno","Aggiungi il primo collaboratore interno")}
+          </section>
+        </div>`
+      : `<div class="team-desktop-sections">
+          <section class="team-desktop-section">
+            <div class="team-desktop-section-head">
+              <div>
+                <div class="team-desktop-section-title">Partner</div>
+                <div class="team-desktop-section-sub">Partner esterni suddivisi tra area commerciale e professionale.</div>
+              </div>
+              <div class="team-desktop-section-count">${commercialPartners.length+professionalPartners.length} elementi</div>
+            </div>
+            <div class="team-desktop-partner-groups">
+              <div class="team-desktop-partner-group">
+                <div class="team-desktop-partner-group-title">Partner commerciali</div>
+                <div class="team-desktop-partner-group-sub">Segnalatori, referral e sviluppo commerciale.</div>
+                ${commercialPartners.length?`<div class="team-desktop-grid" style="grid-template-columns:1fr">${commercialPartners.map(renderDesktopCard).join("")}</div>`:emptyState("🤝","Nessun partner commerciale","Aggiungi il primo partner commerciale")}
+              </div>
+              <div class="team-desktop-partner-group">
+                <div class="team-desktop-partner-group-title">Partner professionisti</div>
+                <div class="team-desktop-partner-group-sub">Professionisti e partner specialistici collegati alla rete.</div>
+                ${professionalPartners.length?`<div class="team-desktop-grid" style="grid-template-columns:1fr">${professionalPartners.map(renderDesktopCard).join("")}</div>`:emptyState("💼","Nessun partner professionista","Aggiungi il primo partner professionista")}
+              </div>
+            </div>
+          </section>
+        </div>`;
+    return;
+  }
+  const visibleCollabs=_networkPage==="collaborators"?collabs.filter(isInternalCollaborator):collabs.filter(isPartnerCollaborator);
+  if(!visibleCollabs.length){
+    el.innerHTML=_networkPage==="collaborators"
+      ? emptyState("👤","Nessun collaboratore interno","Aggiungi il primo collaboratore interno")
+      : emptyState("🤝","Nessun partner","Aggiungi il primo partner della rete");
+    return;
+  }
+  el.innerHTML=`<div class="grid-3">${visibleCollabs.map(collab=>`
     <div class="card" style="padding:20px">
       <div style="display:flex;align-items:center;gap:13px;margin-bottom:13px">
         ${avatar(collaboratorFullName(collab),48)}
@@ -4259,10 +5637,10 @@ function renderCollabsGrid(collabs){
           ${collab.role?badge(collab.role,"#6B6B6B"):""}
         </div>
       </div>
-      ${collab.type?`<div style="font-size:12px;color:var(--gray);margin-bottom:8px">${esc(typeLabel(collab.type))}</div>`:""}
+      ${collab.type?`<div style="font-size:12px;color:var(--gray);margin-bottom:8px">${esc(collabCategoryLabel(collab))}</div>`:""}
       ${collab.email?`<div style="font-size:13px;color:var(--gray);margin-bottom:3px">✉️ ${esc(collab.email)}</div>`:""}
       ${collab.phone?`<div style="font-size:13px;color:var(--gray);margin-bottom:3px">📞 ${esc(collab.phone)}</div>`:""}
-      ${collab.companyName?`<div style="font-size:13px;color:var(--gray);margin-bottom:12px">🏢 ${esc(collab.companyName)}</div>`:""}
+      ${isPartnerCollaborator(collab)&&collab.companyName?`<div style="font-size:13px;color:var(--gray);margin-bottom:12px">🏢 ${esc(collab.companyName)}</div>`:""}
       ${canEditData()?`<div style="display:flex;gap:8px">
         <button class="btn btn-secondary btn-sm" style="flex:1" onclick="openCollabForm('${collab.id}')">Modifica</button>
         <button class="btn-icon red" onclick="deleteCollab('${collab.id}','${esc(collaboratorFullName(collab))}')">🗑️</button>
@@ -4271,10 +5649,118 @@ function renderCollabsGrid(collabs){
   `).join("")}</div>`;
 }
 
+async function renderCollabDetail(collabId){
+  const main=document.getElementById("main");
+  main.innerHTML=`<div style="padding:24px">${spinner()}</div>`;
+  try{
+    await waitAuth();
+    const snap=await db.collection(COLLECTIONS.collaborators).doc(collabId).get();
+    if(!snap.exists){main.innerHTML=`<div style="padding:32px"><div class="error-box">Membro del team non trovato</div></div>`;return}
+    _detailCollab={id:snap.id,...snap.data()};
+    drawCollabDetail();
+  }catch(error){
+    main.innerHTML=`<div style="padding:32px"><div class="error-box">Errore: ${esc(error.message)}</div></div>`;
+  }
+}
+
+function drawCollabDetail(){
+  const collab=_detailCollab;
+  if(!collab)return;
+  const fullName=collaboratorFullName(collab);
+  const hue=[...fullName].reduce((acc,ch)=>acc+ch.charCodeAt(0),0)%360;
+  const typeLabel=collabCategoryLabel(collab);
+  const summaryCards=isInternalCollaborator(collab)?[
+    {label:"Ruolo",value:collab.role||"—",hint:"Funzione attuale del collaboratore"},
+    {label:"Categoria",value:typeLabel||"—",hint:"Profilo anagrafico essenziale"},
+    {label:"Stato",value:collab.status||"Attivo",hint:"Presenza nella rete interna"}
+  ]:[
+    {label:"Ruolo",value:collab.role||"—",hint:"Funzione attuale del partner"},
+    {label:"Categoria",value:typeLabel||"—",hint:"Tipologia di relazione"},
+    {label:"Commissione",value:collab.commissionPercentage?`${collab.commissionPercentage}%`:"—",hint:collab.assignedInternalReferent||"Referente interno non assegnato"}
+  ];
+  const anagraficaFields=isInternalCollaborator(collab)?[
+    ["Nome",collab.name],
+    ["Cognome",collab.lastName],
+    ["Ruolo",collab.role],
+    ["Email",collab.email],
+    ["Telefono",collab.phone],
+    ["Stato",collab.status||"Attivo"]
+  ]:[
+    ["Nome",collab.name],
+    ["Cognome",collab.lastName],
+    ["Ruolo",collab.role],
+    ["Email",collab.email],
+    ["Telefono",collab.phone],
+    ["Azienda / Studio",collab.companyName],
+    ["Stato",collab.status||"Attivo"]
+  ];
+  const main=document.getElementById("main");
+  main.innerHTML=`<div class="client-detail-shell">
+    <button class="back-btn" onclick="navigate('collaborators')">← Torna alla Rete</button>
+    <div class="client-detail-hero" style="background:linear-gradient(135deg,hsl(${hue},60%,28%),hsl(${(hue+26)%360},58%,22%))">
+      ${avatar(fullName,68)}
+      <div class="client-detail-hero-copy">
+        <div class="client-detail-kicker">Dettaglio Rete</div>
+        <div class="client-detail-name">${esc(fullName)}</div>
+        <div class="client-native-badges">
+          ${collab.role?badge(collab.role,"rgba(255,255,255,.9)"):""}
+          ${typeLabel?badge(typeLabel,"rgba(255,255,255,.9)"):""}
+        </div>
+      </div>
+    </div>
+    <div class="client-detail-grid" style="margin-top:20px">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div class="client-summary-cards">
+          ${summaryCards.map(card=>`<div class="client-summary-card">
+            <div class="client-summary-label">${esc(card.label)}</div>
+            <div class="client-summary-value" style="font-size:22px;line-height:1.15">${esc(card.value)}</div>
+            <div class="client-summary-hint">${esc(card.hint)}</div>
+          </div>`).join("")}
+        </div>
+        <div class="client-panel">
+          <div class="client-panel-title">Anagrafica</div>
+          <div class="client-data-grid">
+            ${anagraficaFields.map(([label,value])=>`<div class="client-data-item"><div class="client-data-item-label">${esc(label)}</div><div class="client-data-item-value">${esc(value||"—")}</div></div>`).join("")}
+          </div>
+        </div>
+        ${isPartnerCollaborator(collab)?`<div class="network-insight-stack">
+          <div class="client-panel">
+            <div class="client-panel-title">Relazione partner</div>
+            <div id="network-partner-info"><div class="network-empty-note">Sto caricando i dati della relazione partner...</div></div>
+          </div>
+          <div class="client-panel">
+            <div class="client-panel-title">Performance partner</div>
+            <div id="network-partner-performance"><div class="network-empty-note">Sto calcolando pratiche, clienti e valore generato...</div></div>
+          </div>
+          <div class="client-panel">
+            <div class="client-panel-title">Compensi e commissioni</div>
+            <div id="network-partner-commission"><div class="network-empty-note">Sto preparando il riepilogo economico del partner...</div></div>
+          </div>
+        </div>`:`<div class="client-panel">
+          <div class="client-panel-title">Timeline attività</div>
+          <div id="network-collab-timeline"><div class="network-empty-note">Sto caricando gli ultimi task, note ed eventi di questo collaboratore...</div></div>
+        </div>`}
+      </div>
+      <div class="client-panel">
+        <div class="client-panel-title">Azioni rapide</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          ${canEditData()?`<button class="btn btn-primary" onclick="openCollabForm('${collab.id}')">Modifica Membro</button>`:""}
+          ${canEditData()?`<button class="btn btn-danger" onclick="deleteCollab('${collab.id}','${esc(fullName)}')">Elimina Membro</button>`:""}
+        </div>
+      </div>
+    </div>
+  </div>`;
+  loadCollabDetailInsights(collab);
+}
+
 async function deleteCollab(id,name){
   if(!canEditData())return;
   if(!confirm(`Eliminare "${name}"?`))return;
-  try{await db.collection(COLLECTIONS.collaborators).doc(id).delete();toast("Collaboratore eliminato")}
+  try{
+    await db.collection(COLLECTIONS.collaborators).doc(id).delete();
+    if(_detailCollab?.id===id){_detailCollab=null;navigate("collaborators")}
+    toast("Collaboratore eliminato")
+  }
   catch(error){toast(`Errore: ${error.message}`,"error")}
 }
 
@@ -4282,10 +5768,11 @@ async function openCollabForm(id){
   if(!canEditData())return;
   _editingCollabId=id||null;let data={};
   if(id){await waitAuth();const snap=await db.collection(COLLECTIONS.collaborators).doc(id).get();data=snap.data()||{}}
+  const currentType=data.type||"internal_member";
   const modal=document.createElement("div");modal.className="modal-overlay";modal.id="collab-modal";
   modal.innerHTML=`<div class="modal" style="max-width:560px">
     <div class="modal-header">
-      <div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">${id?"Modifica":"Nuovo Collaboratore"}</div></div>
+      <div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">${id?"Modifica Contatto Rete":"Nuovo Contatto Rete"}</div></div>
       <button class="modal-close" onclick="closeModal('collab-modal')">×</button>
     </div>
     <div class="modal-body">
@@ -4294,13 +5781,13 @@ async function openCollabForm(id){
         <div class="form-group"><label class="form-label">Cognome</label><input id="col-lastName" class="form-control" value="${esc(data.lastName||"")}"></div>
         <div class="form-group"><label class="form-label">Ruolo</label><input id="col-role" class="form-control" value="${esc(data.role||"")}"></div>
         <div class="form-group"><label class="form-label">Tipo</label>
-          <select id="col-type" class="form-control">
+          <select id="col-type" class="form-control" onchange="renderCollabTypeFieldsInForm()">
             ${COLLABORATOR_TYPES.map(t=>`<option value="${t.value}" ${data.type===t.value?"selected":""}>${t.label}</option>`).join("")}
           </select>
         </div>
         <div class="form-group"><label class="form-label">Email</label><input id="col-email" class="form-control" type="email" value="${esc(data.email||"")}"></div>
         <div class="form-group"><label class="form-label">Telefono</label><input id="col-phone" class="form-control" value="${esc(data.phone||"")}"></div>
-        <div class="form-group" style="grid-column:span 2"><label class="form-label">Azienda</label><input id="col-companyName" class="form-control" value="${esc(data.companyName||"")}"></div>
+        <div id="collab-type-fields" style="display:contents">${renderCollabCategoryFields(currentType,data)}</div>
       </div>
       <div style="display:flex;gap:10px;justify-content:flex-end">
         <button class="btn btn-secondary" onclick="closeModal('collab-modal')">Annulla</button>
@@ -4311,6 +5798,23 @@ async function openCollabForm(id){
   document.body.appendChild(modal);document.getElementById("col-name").focus();
 }
 
+function renderCollabTypeFieldsInForm(){
+  const type=fieldValue("col-type")||"internal_member";
+  const holder=document.getElementById("collab-type-fields");
+  if(!holder)return;
+  const data={
+    companyName:fieldValue("col-companyName"),
+    geographicArea:fieldValue("col-geographicArea"),
+    referenceSector:fieldValue("col-referenceSector"),
+    commissionPercentage:fieldValue("col-commissionPercentage"),
+    assignedInternalReferent:fieldValue("col-assignedInternalReferent"),
+    collaborationStartDate:fieldValue("col-collaborationStartDate"),
+    lastInteractionDate:fieldValue("col-lastInteractionDate"),
+    status:fieldValue("col-status")
+  };
+  holder.innerHTML=renderCollabCategoryFields(type,data);
+}
+
 async function saveCollab(){
   const name=document.getElementById("col-name").value.trim();
   if(!name){toast("Il nome è obbligatorio","error");return}
@@ -4318,7 +5822,64 @@ async function saveCollab(){
   try{
     await waitAuth();
     const docRef=_editingCollabId?db.collection(COLLECTIONS.collaborators).doc(_editingCollabId):db.collection(COLLECTIONS.collaborators).doc();
-    await docRef.set({id:docRef.id,name,lastName:document.getElementById("col-lastName").value.trim(),email:document.getElementById("col-email").value.trim(),role:document.getElementById("col-role").value.trim(),type:document.getElementById("col-type").value,status:"active",companyName:document.getElementById("col-companyName").value.trim(),phone:document.getElementById("col-phone").value.trim(),address:"",cityRegion:"",website:"",collaborationStartDate:firebase.firestore.Timestamp.fromDate(new Date()),assignedInternalReferent:"",competenceArea:"vendite",internalNotes:"",lastInteractionDate:firebase.firestore.Timestamp.fromDate(new Date()),companyRole:"",assignedKPI:"",managedCases:0,inProgressCases:0,closedCases:0,performance:0,activityCalendarNotes:"",assignedTasksNotes:"",communicationHistoryNotes:"",commercialPartnerKind:"segnalatore",geographicArea:"",referenceSector:"",commissionPercentage:0,paymentMethod:"",payoutFrequency:"",broughtCases:0,approvedCases:0,rejectedCases:0,generatedRevenue:0,accruedCommissions:0,paidCommissions:0,profession:"",professionalRegister:"",registrationNumber:"",specializations:"",interventionGeographicArea:"",professionalCollaborationMode:"a_pratica",assignedProfessionalCases:0,completedProfessionalCases:0},{merge:true});
+    const type=fieldValue("col-type")||"internal_member";
+    const isPartner=type!=="internal_member";
+    const collaborationStartValue=fieldValue("col-collaborationStartDate");
+    const lastInteractionValue=fieldValue("col-lastInteractionDate");
+    const currentStatus=isPartner?(fieldValue("col-status")||"Attivo"):"active";
+    await docRef.set({
+      id:docRef.id,
+      name,
+      lastName:fieldValue("col-lastName"),
+      email:fieldValue("col-email"),
+      role:fieldValue("col-role"),
+      type,
+      status:currentStatus,
+      companyName:isPartner?fieldValue("col-companyName"):"",
+      phone:fieldValue("col-phone"),
+      address:"",
+      cityRegion:"",
+      website:"",
+      collaborationStartDate:isPartner&&collaborationStartValue?firebase.firestore.Timestamp.fromDate(new Date(`${collaborationStartValue}T00:00:00`)):firebase.firestore.Timestamp.fromDate(new Date()),
+      assignedInternalReferent:isPartner?fieldValue("col-assignedInternalReferent"):"",
+      competenceArea:"",
+      internalNotes:"",
+      lastInteractionDate:isPartner&&lastInteractionValue?firebase.firestore.Timestamp.fromDate(new Date(`${lastInteractionValue}T00:00:00`)):firebase.firestore.Timestamp.fromDate(new Date()),
+      companyRole:"",
+      assignedKPI:"",
+      managedCases:0,
+      inProgressCases:0,
+      closedCases:0,
+      performance:0,
+      activityCalendarNotes:"",
+      assignedTasksNotes:"",
+      communicationHistoryNotes:"",
+      commercialPartnerKind:isCommercialPartner({type})?"segnalatore":"",
+      geographicArea:isPartner?fieldValue("col-geographicArea"):"",
+      referenceSector:isPartner?fieldValue("col-referenceSector"):"",
+      commissionPercentage:isPartner?Number(fieldValue("col-commissionPercentage")||0):0,
+      paymentMethod:"",
+      payoutFrequency:"",
+      broughtCases:0,
+      approvedCases:0,
+      rejectedCases:0,
+      generatedRevenue:0,
+      accruedCommissions:0,
+      paidCommissions:0,
+      profession:"",
+      professionalRegister:"",
+      registrationNumber:"",
+      specializations:"",
+      interventionGeographicArea:"",
+      professionalCollaborationMode:isProfessionalPartner({type})?"a_pratica":"",
+      assignedProfessionalCases:0,
+      completedProfessionalCases:0
+    },{merge:true});
+    if(_detailCollab?.id===docRef.id){
+      const snap=await docRef.get();
+      _detailCollab={id:snap.id,...snap.data()};
+      drawCollabDetail();
+    }
     toast(_editingCollabId?"Collaboratore aggiornato ✓":"Collaboratore aggiunto ✓");closeModal("collab-modal");
   }catch(error){toast(`Errore: ${error.message}`,"error");btn.disabled=false;btn.textContent="Salva"}
 }
@@ -4370,7 +5931,7 @@ function renderSettings(){
       ${permRow("📅","Calendario",perms.canViewCalendar)}
       ${permRow("🎯","Lead",perms.canViewLeads)}
       ${permRow("👥","Clienti",perms.canViewClients)}
-      ${permRow("👤","Team",perms.canViewTeam)}
+      ${permRow("👤","Rete",perms.canViewTeam)}
       <div style="border-top:1px solid var(--border);margin:8px 0"></div>
       ${permRow("✏️","Modifica",perms.canEdit)}
       ${permRow("➕","Aggiunta",perms.canAdd)}
@@ -4524,7 +6085,7 @@ function renderProfile(){
       ${permRow("📅","Calendario",perms.canViewCalendar)}
       ${permRow("🎯","Lead",perms.canViewLeads)}
       ${permRow("👥","Clienti",perms.canViewClients)}
-      ${permRow("👤","Team",perms.canViewTeam)}
+      ${permRow("👤","Rete",perms.canViewTeam)}
       <div style="border-top:1px solid var(--border);margin:8px 0"></div>
       ${permRow("✏️","Modifica",perms.canEdit)}
       ${permRow("➕","Aggiunta",perms.canAdd)}
