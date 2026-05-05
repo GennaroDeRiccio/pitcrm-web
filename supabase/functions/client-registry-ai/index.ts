@@ -1,12 +1,14 @@
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 
 const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY") || "";
-const GEMINI_MODEL = Deno.env.get("GEMINI_CLIENT_REGISTRY_MODEL") || "gemini-2.5-flash";
+const GEMINI_MODEL = Deno.env.get("GEMINI_CLIENT_REGISTRY_MODEL") || "gemini-2.0-flash";
 const GEMINI_FALLBACK_MODELS = Array.from(
   new Set([
-    GEMINI_MODEL,
     "gemini-2.0-flash",
-    "gemini-1.5-flash",
+    "gemini-2.5-flash-lite",
+    "gemini-2.0-flash-lite",
+    GEMINI_MODEL,
+    "gemini-2.5-flash",
   ]),
 );
 
@@ -71,6 +73,11 @@ function isTemporaryGeminiError(statusCode: number, errorText: string) {
     parsed.status === "UNAVAILABLE" ||
     parsed.status === "RESOURCE_EXHAUSTED"
   );
+}
+
+function isUnsupportedGeminiModel(statusCode: number, errorText: string) {
+  const parsed = parseGeminiErrorStatus(errorText);
+  return statusCode === 404 || parsed.status === "NOT_FOUND";
 }
 
 function userFriendlyGeminiError(errorText: string, fallback = "AI temporaneamente non disponibile") {
@@ -294,11 +301,16 @@ async function generateRegistryAnalysis(parts: GeminiPart[]) {
       lastStatus = response.status;
       lastErrorText = await response.text();
 
+      if (isUnsupportedGeminiModel(response.status, lastErrorText)) {
+        break;
+      }
+
       if (!isTemporaryGeminiError(response.status, lastErrorText)) {
         throw new Error(userFriendlyGeminiError(lastErrorText, `Gemini: ${lastErrorText}`));
       }
 
-      await sleep(700 * (attempt + 1) + Math.floor(Math.random() * 350));
+      if (response.status === 503) break;
+      await sleep(900 * (attempt + 1) + Math.floor(Math.random() * 500));
     }
   }
 

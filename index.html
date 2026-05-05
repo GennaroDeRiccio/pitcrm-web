@@ -4409,7 +4409,7 @@ async function handlePreAnalysisFiles(input){
     refreshPreAnalysisRows();
   }catch(error){
     console.warn("Pre-analysis AI failed",error);
-    toast(`Analisi AI non riuscita: ${error.message}`,"error");
+    toast(`Analisi AI non riuscita: ${prettifySupabaseError(error,"l'analisi dei documenti")}`,"error");
   }finally{
     closePreAnalysisAiLoader();
     input.value="";
