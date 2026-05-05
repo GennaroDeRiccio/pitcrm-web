@@ -2,6 +2,13 @@ import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 
 const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY") || "";
 const GEMINI_MODEL = Deno.env.get("GEMINI_CLIENT_REGISTRY_MODEL") || "gemini-2.5-flash";
+const GEMINI_FALLBACK_MODELS = Array.from(
+  new Set([
+    GEMINI_MODEL,
+    "gemini-2.0-flash",
+    "gemini-1.5-flash",
+  ]),
+);
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -36,6 +43,45 @@ function cleanBase64(value: string) {
 
 function cleanString(value: unknown, max = 180) {
   return String(value || "").replace(/\s+/g, " ").trim().slice(0, max);
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function parseGeminiErrorStatus(errorText: string) {
+  try {
+    const parsed = JSON.parse(errorText);
+    const status = parsed?.error?.status || parsed?.status || "";
+    const code = Number(parsed?.error?.code || parsed?.code || 0);
+    return { status: String(status), code };
+  } catch {
+    return { status: "", code: 0 };
+  }
+}
+
+function isTemporaryGeminiError(statusCode: number, errorText: string) {
+  const parsed = parseGeminiErrorStatus(errorText);
+  return (
+    statusCode === 429 ||
+    statusCode === 500 ||
+    statusCode === 502 ||
+    statusCode === 503 ||
+    statusCode === 504 ||
+    parsed.status === "UNAVAILABLE" ||
+    parsed.status === "RESOURCE_EXHAUSTED"
+  );
+}
+
+function userFriendlyGeminiError(errorText: string, fallback = "AI temporaneamente non disponibile") {
+  const parsed = parseGeminiErrorStatus(errorText);
+  if (parsed.status === "UNAVAILABLE" || parsed.code === 503) {
+    return "Gemini è temporaneamente sovraccarico. Riprova tra qualche minuto oppure ricarica la visura.";
+  }
+  if (parsed.status === "RESOURCE_EXHAUSTED" || parsed.code === 429) {
+    return "Limite temporaneo Gemini raggiunto. Attendi qualche minuto e riprova.";
+  }
+  return fallback;
 }
 
 function onlyDigits(value: unknown, max = 32) {
@@ -215,6 +261,50 @@ const responseSchema = {
   ],
 };
 
+async function generateRegistryAnalysis(parts: GeminiPart[]) {
+  let lastErrorText = "";
+  let lastStatus = 500;
+
+  for (const model of GEMINI_FALLBACK_MODELS) {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "x-goog-api-key": GEMINI_API_KEY,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          contents: [{ role: "user", parts }],
+          generationConfig: {
+            temperature: 0.03,
+            topP: 0.2,
+            topK: 20,
+            responseMimeType: "application/json",
+            responseJsonSchema: responseSchema,
+          },
+        }),
+      });
+
+      if (response.ok) {
+        return await response.json();
+      }
+
+      lastStatus = response.status;
+      lastErrorText = await response.text();
+
+      if (!isTemporaryGeminiError(response.status, lastErrorText)) {
+        throw new Error(userFriendlyGeminiError(lastErrorText, `Gemini: ${lastErrorText}`));
+      }
+
+      await sleep(700 * (attempt + 1) + Math.floor(Math.random() * 350));
+    }
+  }
+
+  throw new Error(userFriendlyGeminiError(lastErrorText, `AI temporaneamente non disponibile (${lastStatus})`));
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -248,31 +338,7 @@ serve(async (req) => {
       },
     ];
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "x-goog-api-key": GEMINI_API_KEY,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        contents: [{ role: "user", parts }],
-        generationConfig: {
-          temperature: 0.03,
-          topP: 0.2,
-          topK: 20,
-          responseMimeType: "application/json",
-          responseJsonSchema: responseSchema,
-        },
-      }),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      return jsonResponse({ error: `Gemini: ${errorText}` }, 500);
-    }
-
-    const result = await response.json();
+    const result = await generateRegistryAnalysis(parts);
     const outputText = result.candidates?.[0]?.content?.parts
       ?.map((part: { text?: string }) => part.text || "")
       .join("")

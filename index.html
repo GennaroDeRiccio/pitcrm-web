@@ -1319,6 +1319,8 @@ function isFetchFailure(error){
 
 function prettifySupabaseError(error,action){
   const raw=String(error?.message||error||"Errore sconosciuto");
+  if(/temporaneamente sovraccarico|try again later|unavailable|503/i.test(raw))return `AI temporaneamente sovraccarica durante ${action}. Riprova tra qualche minuto.`;
+  if(/resource_exhausted|quota|429|limite temporaneo/i.test(raw))return `Limite temporaneo AI raggiunto durante ${action}. Attendi qualche minuto e riprova.`;
   if(/project paused/i.test(raw))return `Progetto Supabase in pausa durante ${action}. Riattivalo dal dashboard e riprova.`;
   if(isFetchFailure(error))return `Connessione a Supabase non riuscita durante ${action}. Se il progetto è in pausa, riattivalo dal dashboard Supabase.`;
   return raw;
