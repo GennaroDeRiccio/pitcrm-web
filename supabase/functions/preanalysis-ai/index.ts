@@ -109,14 +109,20 @@ function normalizeDate(value: unknown) {
 function normalizeRows(value: unknown) {
   const data = value as { rows?: Array<Record<string, unknown>> };
   if (!Array.isArray(data?.rows)) return [];
-  const rowsByFile = new Map<string, ReturnType<typeof normalizeSingleRow>>();
-  for (const row of data.rows) {
+  return data.rows.map((row, index) => {
     const normalized = normalizeSingleRow(row);
-    const key = normalized.sourceFileName || `document-${rowsByFile.size + 1}`;
-    const existing = rowsByFile.get(key);
-    rowsByFile.set(key, existing ? mergeDuplicateDocumentRows(existing, normalized) : normalized);
-  }
-  return [...rowsByFile.values()];
+    return {
+      ...normalized,
+      sourceFileName: normalized.sourceFileName || `document-${index + 1}`,
+    };
+  });
+}
+
+function normalizeDescription(value: unknown) {
+  return String(value || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 120);
 }
 
 function normalizeSingleRow(row: Record<string, unknown>) {
@@ -132,31 +138,11 @@ function normalizeSingleRow(row: Record<string, unknown>) {
       documentDate: normalizeDate(row.documentDate),
       taxableAmount,
       category: ["Impianti", "Macchinari", "Attrezzature", "Terreni/Immobili"].includes(category) ? category : "Macchinari",
-      description: String(row.description || "").trim().slice(0, 260),
+      description: normalizeDescription(row.description),
       confidence: Math.max(0, Math.min(1, Number(row.confidence || 0))),
       needsReview: Boolean(row.needsReview) || !supplier || !taxableAmount,
       extractionSource: "AI",
     };
-}
-
-function mergeDuplicateDocumentRows(first: ReturnType<typeof normalizeSingleRow>, second: ReturnType<typeof normalizeSingleRow>) {
-  const firstAmount = Number(first.taxableAmount || 0);
-  const secondAmount = Number(second.taxableAmount || 0);
-  const mergedAmount = firstAmount && secondAmount && firstAmount !== secondAmount
-    ? String(firstAmount + secondAmount)
-    : String(firstAmount || secondAmount || "");
-  return {
-    ...first,
-    documentType: first.documentType || second.documentType,
-    supplier: first.supplier || second.supplier,
-    documentNumber: first.documentNumber || second.documentNumber,
-    documentDate: first.documentDate || second.documentDate,
-    taxableAmount: mergedAmount,
-    category: first.category || second.category,
-    description: [first.description, second.description].filter(Boolean).join(" + ").slice(0, 260),
-    confidence: Math.min(first.confidence || 0, second.confidence || 0),
-    needsReview: true,
-  };
 }
 
 function extractionPrompt() {
@@ -164,10 +150,12 @@ function extractionPrompt() {
     "Sei un analista contabile italiano specializzato in pre-analisi ZES Unica 2026.",
     "Analizza con attenzione tutti i documenti allegati: fatture, preventivi, pro-forme, offerte, conferme d'ordine, ordini, contratti e documenti scansionati.",
     "Devi estrarre righe di investimento da inserire in una checklist Excel.",
-    "REGOLA ASSOLUTA: restituisci ESATTAMENTE UNA RIGA PER OGNI FILE allegato.",
-    "Non creare mai due righe per lo stesso PDF/immagine, anche se contiene più pagine, più prodotti, più aliquote IVA, più acconti, più lavorazioni o più categorie potenziali.",
-    "Se un file contiene più beni/servizi nello stesso documento, aggrega tutto in una sola riga: imponibile totale netto del documento e descrizione sintetica complessiva.",
-    "Se un file contiene più categorie, scegli la categoria prevalente per importo o per natura principale dell'investimento.",
+    "REGOLA ASSOLUTA: restituisci una riga per ogni documento contabile distinto trovato, non una riga per file.",
+    "Se un singolo PDF/immagine contiene più fatture, più preventivi o più pro-forme distinti, crea una riga separata per ciascun documento.",
+    "Quindi lo stesso sourceFileName può comparire in più righe quando dentro lo stesso PDF ci sono più documenti autonomi.",
+    "Due documenti sono distinti quando hanno numero, data, intestazione, totale/imponibile o sezione autonoma diversa.",
+    "Se invece un documento singolo contiene più pagine, più prodotti, più aliquote IVA, più acconti o più lavorazioni, resta una sola riga per quel documento e somma le basi imponibili.",
+    "Se un documento singolo contiene più categorie, scegli la categoria prevalente per importo o per natura principale dell'investimento.",
     "",
     "OBIETTIVO CAMPI DA ESTRARRE",
     "- sourceFileName: nome file indicato prima dell'allegato.",
@@ -177,7 +165,7 @@ function extractionPrompt() {
     "- documentDate: data documento in formato YYYY-MM-DD.",
     "- taxableAmount: imponibile/base imponibile/subtotale netto, non totale ivato. Solo numero decimale con punto.",
     "- category: una tra Impianti, Macchinari, Attrezzature, Terreni/Immobili.",
-    "- description: descrizione sintetica dell'investimento utile in checklist.",
+    "- description: descrizione molto sintetica dell'investimento utile in checklist.",
     "- confidence: valore 0-1.",
     "- needsReview: true se il dato è incerto o manca imponibile/data/fornitore.",
     "",
@@ -202,7 +190,8 @@ function extractionPrompt() {
     "- Se il documento è un preventivo senza IVA esplicita, usa il totale dell'offerta solo se sembra un importo netto o se l'IVA non è indicata.",
     "- Ignora ritenute, bolli, spese incasso, arrotondamenti, acconti già pagati e totale pagamento quando non sono imponibile investimento.",
     "5. Descrizione:",
-    "- Crea una descrizione professionale di massimo 18 parole, basata sui beni/servizi effettivi.",
+    "- Crea una descrizione professionale di massimo 8-10 parole, basata sui beni/servizi effettivi.",
+    "- Evita dettagli superflui, marche minori, ripetizioni e frasi lunghe.",
     "- Evita descrizioni generiche come 'macchinari oggetto di investimento' se nel documento ci sono dettagli utili.",
     "",
     "Classificazione:",
@@ -216,7 +205,7 @@ function extractionPrompt() {
     "- Se l'importo scelto è un totale ivato perché non trovi imponibile, needsReview=true.",
     "- Se trovi più importi candidati, scegli quello più coerente con imponibile/base imponibile e non il più grande per forza.",
     "- Se un PDF ha più pagine, controlla riepiloghi e ultime pagine prima di decidere l'imponibile.",
-    "- Prima di rispondere controlla che il numero di rows sia uguale al numero di file allegati.",
+    "- Prima di rispondere controlla che il numero di rows sia uguale al numero di documenti contabili distinti trovati, non necessariamente al numero di file allegati.",
     "- Il campo sourceFileName deve corrispondere esattamente a uno dei nomi file ricevuti.",
     "- Non inventare valori. Se un campo non è ricavabile lascia stringa vuota e needsReview=true.",
     "",

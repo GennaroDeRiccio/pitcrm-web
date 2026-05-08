@@ -4293,12 +4293,10 @@ function renderPracticeBalanceRows(balance,practice){
     {label:"Investimento",hint:"Importo base della pratica",value:formatEuro(balance.investmentAmount)},
     {label:"Credito recuperato cliente",hint:`${formatPercent(balance.creditPercent)} sull'investimento`,value:formatEuro(balance.creditAmount)},
     {label:"Compenso lordo Professioni in Team",hint:`${formatPercent(balance.pitPercent)} sul credito recuperato`,value:formatEuro(balance.grossPitAmount)},
-    {label:`Compenso ${partnerName}`,hint:`${formatPercent(balance.partnerPercent)} sul compenso Professioni in Team`,value:formatEuro(balance.partnerAmount)},
-    {label:"Compenso netto Professioni in Team",hint:"Compenso lordo meno quota partner",value:formatEuro(balance.pitAmount)},
-    {label:"Acconto Professioni in Team",hint:balance.advanceAmount>0?"Gia scalato dal residuo":"Nessun acconto registrato",value:formatEuro(balance.advanceAmount)}
+    {label:`Compenso ${partnerName}`,hint:`${formatPercent(balance.partnerPercent)} sul compenso Professioni in Team`,value:formatEuro(balance.partnerAmount)}
   ];
   return `${rows.map(row=>`<div class="practice-balance-row"><span class="practice-balance-detail"><span>${esc(row.label)}</span><small>${esc(row.hint)}</small></span><strong>${row.value}</strong></div>`).join("")}
-    <div class="practice-balance-row highlight"><span class="practice-balance-detail"><span>Residuo Professioni in Team</span><small>Compenso netto meno acconto</small></span><strong>${formatEuro(balance.pitResidualAmount)}</strong></div>`;
+    <div class="practice-balance-row highlight"><span class="practice-balance-detail"><span>Compenso Professioni in Team</span><small>${balance.advanceAmount>0?`Di cui ${formatEuro(balance.advanceAmount)} di acconto`:"Compenso netto"}</small></span><strong>${formatEuro(balance.pitAmount)}</strong></div>`;
 }
 
 function renderPractices(){
@@ -5183,7 +5181,9 @@ async function exportPreAnalysisToExcel(record){
   const buffer=await loadPreAnalysisTemplateBuffer();
   const zip=await JSZip.loadAsync(buffer);
   let sheet=await zip.file("xl/worksheets/sheet1.xml").async("string");
+  const extraRows=preAnalysisExtraExcelRows(record.rows.length);
   sheet=preparePreAnalysisWorksheet(sheet,record.rows.length,record.rows);
+  await shiftPreAnalysisWorkbookAnchors(zip,PREANALYSIS_EXCEL_INSERT_BEFORE_ROW,extraRows);
   sheet=setWorksheetCell(sheet,"D3",record.clientNameSnapshot||record.title||"", "string");
   sheet=setWorksheetCell(sheet,"E3",excelSerialDate(new Date()), "number");
   sheet=setWorksheetCell(sheet,"D5",record.companySize||"", "string");
@@ -5207,6 +5207,11 @@ async function exportPreAnalysisToExcel(record){
   const blob=await zip.generateAsync({type:"blob"});
   const safeName=(record.clientNameSnapshot||record.title||"pre-analisi").replace(/[^\wÀ-ÿ-]+/g,"_").replace(/_+/g,"_");
   downloadBlob(blob,`Checklist-ZESUNICA_2026_${safeName}.xlsx`);
+}
+
+function preAnalysisExtraExcelRows(rowCount){
+  const visibleRows=Math.max(rowCount,1);
+  return Math.max(0,visibleRows-PREANALYSIS_EXCEL_BASE_DATA_ROWS);
 }
 
 async function stabilizePreAnalysisWorkbook(zip){
@@ -5239,7 +5244,7 @@ function preparePreAnalysisWorksheet(sheet,rowCount,rows=[]){
   const baseEnd=startRow+PREANALYSIS_EXCEL_BASE_DATA_ROWS-1;
   const visibleRows=Math.max(rowCount,1);
   const dataEnd=startRow+visibleRows-1;
-  const extraRows=Math.max(0,visibleRows-PREANALYSIS_EXCEL_BASE_DATA_ROWS);
+  const extraRows=preAnalysisExtraExcelRows(rowCount);
   if(extraRows>0){
     sheet=shiftWorksheetRows(sheet,PREANALYSIS_EXCEL_INSERT_BEFORE_ROW,extraRows);
     const insertedRows=[];
@@ -5254,6 +5259,22 @@ function preparePreAnalysisWorksheet(sheet,rowCount,rows=[]){
   sheet=extendPreAnalysisMerge(sheet,dataEnd);
   sheet=updatePreAnalysisTotals(sheet,rows,dataEnd);
   return sheet;
+}
+
+async function shiftPreAnalysisWorkbookAnchors(zip,fromRow,delta){
+  if(delta<=0)return;
+  const drawingPaths=Object.keys(zip.files).filter(path=>/^xl\/drawings\/drawing\d+\.xml$/.test(path));
+  const zeroBasedFromRow=fromRow-1;
+  for(const path of drawingPaths){
+    const file=zip.file(path);
+    if(!file)continue;
+    let xml=await file.async("string");
+    xml=xml.replace(/(<(?:xdr:)?row>)(\d+)(<\/(?:xdr:)?row>)/g,(match,prefix,row,suffix)=>{
+      const rowNumber=parseInt(row,10);
+      return rowNumber>=zeroBasedFromRow?`${prefix}${rowNumber+delta}${suffix}`:match;
+    });
+    zip.file(path,xml);
+  }
 }
 
 function shiftWorksheetRows(xml,fromRow,delta){
@@ -5340,7 +5361,7 @@ function clearPreAnalysisInvestmentRow(sheet,rowNumber,clearYear=true){
 function preAnalysisExcelLayout(rowCount){
   const visibleRows=Math.max(rowCount,1);
   const dataEnd=PREANALYSIS_EXCEL_START_ROW+visibleRows-1;
-  const extraRows=Math.max(0,visibleRows-PREANALYSIS_EXCEL_BASE_DATA_ROWS);
+  const extraRows=preAnalysisExtraExcelRows(rowCount);
   return {
     dataEnd,
     summaryRow:73+extraRows,
