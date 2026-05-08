@@ -115,7 +115,8 @@
   .nav-item .active-bar{position:absolute;right:0;top:50%;transform:translateY(-50%);width:3px;height:18px;background:rgba(255,255,255,.85);border-radius:2px}
   .sb-divider{border:none;border-top:1px solid rgba(255,255,255,.1);margin:6px 10px}
   .sb-footer{padding:10px 12px 12px;border-top:1px solid rgba(255,255,255,.12);flex-shrink:0;min-width:0}
-  .sb-user{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .sb-user{display:flex;align-items:center;gap:10px;margin-bottom:10px;border-radius:12px;padding:6px;cursor:pointer;transition:background .16s ease,transform .16s ease}
+  .sb-user:hover{background:rgba(255,255,255,.14);transform:translateY(-1px)}
   .sb-user-name{color:#fff;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .sb-user-role{color:rgba(255,255,255,.6);font-size:11px}
   .sb-btns{display:flex;gap:8px}
@@ -224,8 +225,8 @@
   .grid-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:28px}
 
   /* Clients */
-  .clients-shell{padding:28px 28px 32px}
-  .clients-header-tools{display:flex;flex-direction:column;gap:14px;margin-bottom:20px}
+  .clients-shell{padding:32px;display:flex;flex-direction:column;gap:20px}
+  .clients-header-tools{display:flex;flex-direction:column;gap:14px;margin-bottom:0}
   .clients-toolbar{display:flex;align-items:center;gap:10px}
   .clients-view-toggle{display:flex;align-items:center;gap:6px;padding:5px;background:#F1F2F4;border:1px solid var(--border);border-radius:14px}
   .clients-view-btn{border:none;background:transparent;color:var(--gray);font-size:13px;font-weight:800;padding:9px 14px;border-radius:10px;cursor:pointer;font-family:inherit}
@@ -281,7 +282,7 @@
   .client-history-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px}
 
   /* Team desktop */
-  .team-desktop-shell{padding:28px 28px 34px}
+  .team-desktop-shell{padding:32px;display:flex;flex-direction:column;gap:20px}
   .team-desktop-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:24px 26px;border-radius:24px;background:linear-gradient(135deg,#8F1118 0%,#B51E25 45%,#C1272D 100%);color:#fff;box-shadow:0 18px 36px rgba(193,39,45,.16);margin-bottom:20px;overflow:hidden;position:relative}
   .team-desktop-hero::before{content:"";position:absolute;right:-70px;top:-55px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.08)}
   .team-desktop-hero::after{content:"";position:absolute;left:-50px;bottom:-80px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
@@ -289,7 +290,7 @@
   .team-desktop-kicker{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:8px}
   .team-desktop-title{font-size:34px;font-weight:900;line-height:1.02;letter-spacing:-.03em}
   .team-desktop-sub{font-size:14px;color:rgba(255,255,255,.82);margin-top:10px;max-width:560px}
-  .team-desktop-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:18px}
+  .team-desktop-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:0}
   .team-desktop-search{margin:0}
   .team-desktop-search .search-input{height:48px;padding-left:44px;border-radius:16px;background:#fff;box-shadow:0 10px 26px rgba(15,23,42,.05)}
   .team-desktop-search .search-icon{font-size:15px}
@@ -334,7 +335,7 @@
   .network-empty-note{font-size:14px;color:var(--gray);line-height:1.6}
 
   /* Pre-analysis desktop */
-  .preanalysis-shell{padding:28px;display:flex;flex-direction:column;gap:18px}
+  .preanalysis-shell{padding:32px;display:flex;flex-direction:column;gap:20px}
   .preanalysis-shell .page-header{margin-bottom:0}
   .preanalysis-layout{position:relative;display:grid;grid-template-columns:340px minmax(0,1fr);gap:18px;align-items:start;transition:grid-template-columns .36s cubic-bezier(.22,1,.36,1),gap .36s cubic-bezier(.22,1,.36,1)}
   .preanalysis-layout.archive-collapsed{grid-template-columns:56px minmax(0,1fr);gap:18px}
@@ -709,10 +710,28 @@
   .practice-balance-row:last-child{border-bottom:none}
   .practice-balance-row span{font-size:13px;font-weight:800;color:var(--gray)}
   .practice-balance-row strong{font-size:15px;font-weight:950;color:var(--black)}
+  .practice-balance-detail{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .practice-balance-detail small{font-size:11px;font-weight:750;color:var(--gray-light);line-height:1.25}
+  .practice-balance-row.highlight{margin-top:8px;padding:14px;border-radius:16px;border:none;background:linear-gradient(135deg,rgba(193,39,45,.1),rgba(193,39,45,.04))}
+  .practice-balance-row.highlight span,.practice-balance-row.highlight strong{color:var(--red)}
+  .practice-balance-row.highlight strong{font-size:20px}
   .practice-form-scenario{border:1px solid rgba(193,39,45,.16);border-radius:18px;background:#FFFDFD;padding:16px;margin-bottom:12px}
   .practice-form-scenario-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
   .practice-form-scenario-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
   .practice-form-preview{font-size:12px;font-weight:900;color:var(--red);background:rgba(193,39,45,.08);border-radius:12px;padding:10px;margin-top:10px}
+  .practice-form-subsection{border:1px solid rgba(15,23,42,.06);border-radius:20px;background:linear-gradient(180deg,#fff,#FBFBFC);padding:16px;margin-top:14px}
+  .practice-form-subtitle{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+  .practice-form-subtitle:before{content:"";width:8px;height:8px;border-radius:999px;background:var(--red);box-shadow:0 0 0 5px rgba(193,39,45,.08)}
+  .practice-form-subsection .form-row{margin-bottom:0}
+  .practice-code-preview{background:#F7F7F8!important;color:var(--gray-dark);font-weight:850}
+  .practice-collapsible-head{cursor:pointer;border:none;background:transparent;width:100%;padding:0;font-family:inherit;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .practice-collapsible-head .client-form-section-head{margin-bottom:0;flex:1}
+  .practice-collapsible-toggle{width:42px;height:42px;border-radius:14px;border:1px solid rgba(193,39,45,.18);background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+  .practice-collapsible-toggle svg{width:18px;height:18px;stroke:currentColor;transition:transform .18s ease}
+  .practice-collapsible-section.open .practice-collapsible-toggle{background:rgba(193,39,45,.08);box-shadow:0 10px 22px rgba(193,39,45,.08)}
+  .practice-collapsible-section.open .practice-collapsible-toggle svg{transform:rotate(180deg)}
+  .practice-collapsible-body{display:none;margin-top:14px}
+  .practice-collapsible-section.open .practice-collapsible-body{display:block}
   .practice-result-block{margin-top:16px;padding:18px;border-radius:18px;background:linear-gradient(135deg,#FFF5F5,#fff);border:1px solid rgba(193,39,45,.18);box-shadow:0 12px 28px rgba(193,39,45,.08)}
   .practice-result-heading{font-size:12px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
   .practice-result-row{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:13px 0;border-bottom:1px solid rgba(193,39,45,.12)}
@@ -807,7 +826,7 @@
     .modal{width:min(100%,920px)}
     .calendar-shell{grid-template-columns:minmax(0,1fr) 248px}
     .calendar-bar{flex-wrap:wrap}
-    .clients-shell,.client-detail-shell{padding:24px}
+    .clients-shell,.client-detail-shell,.team-desktop-shell,.preanalysis-shell{padding:24px}
     .clients-toolbar{flex-wrap:wrap}
     .clients-view-toggle{margin-left:auto}
   }
@@ -883,7 +902,7 @@
     .clients-mobile-shell{padding:14px 14px 28px}
     .clients-mobile-panel,.clients-mobile-card,.client-panel{border-radius:22px}
     .clients-mobile-summary{grid-template-columns:1fr 1fr}
-    .practice-page{padding:16px;gap:16px}
+    .practice-page,.clients-shell,.team-desktop-shell,.preanalysis-shell{padding:16px;gap:16px}
     .practice-hero{border-radius:26px;padding:24px}
     .practice-hero-row{flex-direction:column}
     .practice-hero-title{font-size:38px}
@@ -995,10 +1014,15 @@
   .calendar-slot{height:52px;border-bottom:1px solid rgba(0,0,0,.05)}
   .calendar-now-line{position:absolute;left:0;right:0;height:2px;background:rgba(193,39,45,.9);box-shadow:0 0 0 1px rgba(193,39,45,.06);z-index:5}
   .calendar-now-line::before{content:'';position:absolute;left:10px;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:var(--red)}
-  .calendar-entry{position:absolute;border-radius:16px;padding:12px 13px 12px 15px;overflow:hidden;cursor:pointer;box-shadow:0 10px 24px rgba(15,23,42,.12);min-height:84px}
+  .calendar-entry{position:absolute;border-radius:14px;padding:9px 10px 9px 13px;overflow:hidden;cursor:pointer;box-shadow:0 10px 24px rgba(15,23,42,.12);min-height:44px;transition:transform .16s ease,box-shadow .16s ease,filter .16s ease}
+  .calendar-entry:hover{transform:translateY(-1px) scale(1.015);box-shadow:0 16px 30px rgba(15,23,42,.18);filter:saturate(1.06);z-index:80!important}
   .calendar-entry::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:4px;border-radius:4px;background:currentColor}
-  .calendar-entry-title{font-size:15px;font-weight:900;line-height:1.2;color:inherit;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word}
-  .calendar-entry-meta{font-size:11px;font-weight:800;line-height:1.35;color:inherit;opacity:.96;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word}
+  .calendar-entry-title{font-size:13px;font-weight:900;line-height:1.12;color:inherit;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word}
+  .calendar-entry-meta{font-size:10px;font-weight:800;line-height:1.2;color:inherit;opacity:.96;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word}
+  .calendar-entry.compact{padding:7px 8px 7px 12px;border-radius:12px}
+  .calendar-entry.compact .calendar-entry-title{font-size:12px;line-height:1.08;margin-bottom:2px;-webkit-line-clamp:1}
+  .calendar-entry.compact .calendar-entry-meta{font-size:9px;-webkit-line-clamp:1}
+  .calendar-entry.tiny .calendar-entry-meta{display:none}
   .calendar-entry.event{background:rgba(21,101,192,.24);color:#0f57c8;border:1px solid rgba(21,101,192,.34)}
   .calendar-entry.task{background:rgba(46,125,50,.24);color:#1f6f30;border:1px solid rgba(46,125,50,.34)}
   .calendar-entry.task.done{background:rgba(107,107,107,.16);color:#5b5b5b;border-color:rgba(107,107,107,.22);opacity:.9}
@@ -1214,6 +1238,7 @@ const LEAD_STATUS_COLORS = {
 };
 
 const PRACTICE_TYPES = [
+  {value:"",label:"-",icon:"briefcase"},
   {value:"ZES_UNICA",label:"ZES Unica",icon:"building"},
   {value:"NUOVA_SABATINI",label:"Nuova Sabatini",icon:"coins"},
   {value:"CONTRATTO_SVILUPPO",label:"Contratto Sviluppo",icon:"file-text"},
@@ -1223,16 +1248,9 @@ const PRACTICE_TYPES = [
 ];
 
 const PRACTICE_STATUSES = [
-  {value:"OPEN",label:"Open",color:"#1565C0"},
-  {value:"QUALIFIED",label:"Qualified",color:"#00838F"},
-  {value:"FEASIBILITY",label:"Feasibility",color:"#E65100"},
-  {value:"DOCS_COLLECTION",label:"Raccolta documenti",color:"#F57F17"},
-  {value:"SUBMITTED",label:"Inviata",color:"#7B1FA2"},
-  {value:"UNDER_REVIEW",label:"In revisione",color:"#1976D2"},
-  {value:"APPROVED",label:"Approvata",color:"#2E7D32"},
-  {value:"LIQUIDATED",label:"Liquidata",color:"#1B5E20"},
-  {value:"CLOSED",label:"Chiusa",color:"#6B6B6B"},
-  {value:"LOST",label:"Persa",color:"#C62828"}
+  {value:"OPEN",label:"Aperta",color:"#1565C0"},
+  {value:"IN_PROGRESS",label:"In corso",color:"#E65100"},
+  {value:"CLOSED",label:"Conclusa",color:"#2E7D32"}
 ];
 
 const COMMISSION_MODES = [
@@ -1435,9 +1453,12 @@ function displayUserName(user=currentUser){return user?.name||user?.username||"U
 function canEditData(){return["admin","internal"].includes(currentUser?.role)}
 function isAdmin(){return currentUser?.role==="admin"}
 function getLeadStatusColor(status){return LEAD_STATUS_COLORS[status]||"#6B6B6B"}
-function getPracticeStatus(value){return PRACTICE_STATUSES.find(s=>s.value===value)||{label:value,color:"#6B6B6B"}}
+function getPracticeStatus(value){
+  const normalized=["APPROVED","LIQUIDATED","CLOSED"].includes(value)?"CLOSED":["QUALIFIED","FEASIBILITY","DOCS_COLLECTION","SUBMITTED","UNDER_REVIEW"].includes(value)?"IN_PROGRESS":(value||"OPEN");
+  return PRACTICE_STATUSES.find(s=>s.value===normalized)||PRACTICE_STATUSES[0];
+}
 function fieldValue(id){const el=document.getElementById(id);return el?String(el.value||"").trim():""}
-function getPracticeType(value){return PRACTICE_TYPES.find(t=>t.value===value)||{label:value,icon:"briefcase"}}
+function getPracticeType(value){return PRACTICE_TYPES.find(t=>t.value===(value||""))||{label:value||"-",icon:"briefcase"}}
 
 async function sha256(msg){
   const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(msg));
@@ -1809,20 +1830,13 @@ function buildSidebar(){
         ${item.id===activeSection?'<div class="active-bar"></div>':""}
       </div>
     `).join("")}
-    <hr class="sb-divider">
-    <div class="sb-section-label">ACCOUNT</div>
-    <div class="nav-item ${activeSection===accountSection?"active":""}" onclick="navigate('${accountSection}')" id="nav-${accountSection}">
-      <span class="icon">${appIcon(accountSection==="settings"?"settings":"user")}</span>
-      <span class="label">${accountSection==="settings"?"Impostazioni":"Profilo"}</span>
-      ${activeSection===accountSection?'<div class="active-bar"></div>':""}
-    </div>
   `;
   const name=displayUserName();
   const hue=[...name].reduce((acc,ch)=>acc+ch.charCodeAt(0),0)%360;
   const footer=document.querySelector(".sb-footer");
   if(footer){
     footer.innerHTML=`
-      <div class="sb-user">
+      <div class="sb-user" role="button" tabindex="0" onclick="navigate('${accountSection}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('${accountSection}')}">
         <div id="sb-avatar" class="avatar" style="width:30px;height:30px;font-size:12px"></div>
         <div>
           <div class="sb-user-name" id="sb-username">${esc(name)}</div>
@@ -1831,7 +1845,6 @@ function buildSidebar(){
       </div>
       <div class="sb-quick-actions">
         <button class="sb-quick-btn" onclick="openNotificationsCenter()">${appIcon("bell")} Notifiche${unread?`<span class="notif-dot">${Math.min(unread,99)}</span>`:""}</button>
-        <button class="sb-quick-btn" onclick="navigate('${accountSection}')">${appIcon(accountSection==="settings"?"settings":"user")} ${accountSection==="settings"?"Impostazioni":"Profilo"}</button>
       </div>
       <div class="sb-btns">
         <button class="sb-btn" onclick="handleLogout()">Esci</button>
@@ -1846,6 +1859,21 @@ function buildSidebar(){
 }
 
 function sectionTitle(section=activeSection){return NAV.find(i=>i.id===section)?.label||"Professioni in Team"}
+function renderPageHero({kicker,title,subtitle,buttonHtml=""}){
+  return `<section class="practice-hero">
+    <div class="practice-hero-row">
+      <div>
+        <div class="practice-hero-kicker">${esc(kicker||"")}</div>
+        <div class="practice-hero-title">${esc(title||"")}</div>
+        <div class="practice-hero-sub">${esc(subtitle||"")}</div>
+      </div>
+      ${buttonHtml?`<div>${buttonHtml}</div>`:""}
+    </div>
+  </section>`;
+}
+function renderHeroPrimaryButton(label,handler){
+  return `<button class="btn" style="background:#fff;color:var(--red);font-weight:950;padding:13px 20px;border-radius:16px;box-shadow:0 14px 28px rgba(15,23,42,.08)" onclick="${handler}">${esc(label)}</button>`;
+}
 function currentDeviceMode(){
   const ua=navigator.userAgent||"";
   const platform=navigator.platform||"";
@@ -2171,17 +2199,15 @@ const CLIENT_BUSINESS_TYPES=["Tutti","Ditta individuale","Associazione professio
 
 function renderClientsDesktopShell(){
   return `<div class="clients-shell">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Clienti</h1>
-        <p class="page-sub" id="clients-count">Caricamento...</p>
-      </div>
-      <div class="page-header-actions">
-        ${canEditData()?`<button class="btn btn-primary" onclick="openClientForm()">+ Nuovo Cliente</button>`:""}
-      </div>
-    </div>
+    ${renderPageHero({
+      kicker:"Gestione anagrafiche e relazioni",
+      title:"Clienti",
+      subtitle:"Archivio clienti, dati aziendali, referenti, attività e storico sincronizzato.",
+      buttonHtml:canEditData()?renderHeroPrimaryButton("+ Nuovo Cliente","openClientForm()"):""
+    })}
     <div class="clients-header-tools">
       <div class="clients-toolbar">
+        <p class="page-sub" id="clients-count" style="margin:0;font-weight:800">Caricamento...</p>
         <div class="search-wrap" style="margin-bottom:0;flex:1">
           <span class="search-icon">${appIcon("search")}</span>
           <input class="search-input" id="client-search" value="${esc(clientSearch)}" placeholder="Cerca per nome, P.IVA o Codice Fiscale" oninput="filterClients(this.value)">
@@ -3313,17 +3339,15 @@ function renderLeads(){
 
 function renderLeadsDesktopShell(){
   return `<div class="clients-shell">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Lead</h1>
-        <p class="page-sub" id="leads-count">Caricamento...</p>
-      </div>
-      <div class="page-header-actions">
-        ${canEditData()?`<button class="btn btn-primary" onclick="openLeadForm()">+ Nuovo Lead</button>`:""}
-      </div>
-    </div>
+    ${renderPageHero({
+      kicker:"Pipeline commerciale",
+      title:"Lead",
+      subtitle:"Gestisci opportunità, contatti e conversioni con una vista ordinata e pronta all'azione.",
+      buttonHtml:canEditData()?renderHeroPrimaryButton("+ Nuovo Lead","openLeadForm()"):""
+    })}
     <div class="clients-header-tools">
       <div class="clients-toolbar">
+        <p class="page-sub" id="leads-count" style="margin:0;font-weight:800">Caricamento...</p>
         <div class="search-wrap" style="margin-bottom:0;flex:1">
           <span class="search-icon">${appIcon("search")}</span>
           <input class="search-input" id="lead-search" value="${esc(leadSearch)}" placeholder="Cerca azienda, referente, email o telefono" oninput="filterLeads(this.value)">
@@ -4241,7 +4265,7 @@ function calculatePracticeScenario(scenario={},practice={}){
     commercialAmount:partnerKind==="commercial"?partnerAmount:0,
     professionalAmount:partnerKind==="professional"?partnerAmount:0,
     partnerAmount,
-    advanceAmount:numberOr(scenario.advanceAmount,0)
+    advanceAmount:numberOr(practice.advanceAmount,numberOr(scenario.advanceAmount,0))
   };
 }
 function practiceBalance(practice,payments=[]){
@@ -4257,6 +4281,19 @@ function practiceBalance(practice,payments=[]){
 function practicePaymentTypeLabel(type){return type==="COMMERCIAL_PARTNER_PAYMENT"?"Pagamento partner commerciale":type==="PROFESSIONAL_PARTNER_PAYMENT"?"Pagamento partner professionista":"Incasso cliente"}
 function renderPracticeResultBlock(items,title="Risultato"){
   return `<div class="practice-result-block"><div class="practice-result-heading">${esc(title)}</div>${items.map((item,index)=>`<div class="practice-result-row ${index===0?"primary":""}"><div class="practice-result-label">${esc(item.label)}</div><div class="practice-result-value">${item.value}</div></div>`).join("")}</div>`;
+}
+function renderPracticeBalanceRows(balance,practice){
+  const partnerName=practice.partnerNameSnapshot||practice.commercialPartnerNameSnapshot||practice.professionalPartnerNameSnapshot||"Partner";
+  const pitTotal=balance.pitAmount+balance.advanceAmount;
+  const rows=[
+    {label:"Investimento",hint:"Importo base della pratica",value:formatEuro(balance.investmentAmount)},
+    {label:"Credito recuperato cliente",hint:`${formatPercent(balance.creditPercent)} sull'investimento`,value:formatEuro(balance.creditAmount)},
+    {label:"Compenso Professioni in Team",hint:`${formatPercent(balance.pitPercent)} sul credito recuperato`,value:formatEuro(balance.pitAmount)},
+    {label:"Acconto Professioni in Team",hint:balance.advanceAmount>0?"Da sommare al compenso maturato":"Nessun acconto registrato",value:formatEuro(balance.advanceAmount)},
+    {label:`Compenso ${partnerName}`,hint:`${formatPercent(balance.partnerPercent)} sul credito recuperato`,value:formatEuro(balance.partnerAmount)}
+  ];
+  return `${rows.map(row=>`<div class="practice-balance-row"><span class="practice-balance-detail"><span>${esc(row.label)}</span><small>${esc(row.hint)}</small></span><strong>${row.value}</strong></div>`).join("")}
+    <div class="practice-balance-row highlight"><span class="practice-balance-detail"><span>Totale Professioni in Team</span><small>Compenso + acconto</small></span><strong>${formatEuro(pitTotal)}</strong></div>`;
 }
 
 function renderPractices(){
@@ -4311,13 +4348,13 @@ function getFilteredPractices(){
 function renderPracticesMetrics(){
   const el=document.getElementById("practices-metrics");if(!el)return;
   const balances=allPractices.map(p=>practiceBalance(p));
-  const credit=balances.reduce((s,b)=>s+b.creditAmount,0),fee=balances.reduce((s,b)=>s+b.totalFee,0),pit=balances.reduce((s,b)=>s+b.pitAmount,0),collected=balances.reduce((s,b)=>s+b.collected,0),partners=balances.reduce((s,b)=>s+b.commercialAmount+b.professionalAmount,0);
+  const credit=balances.reduce((s,b)=>s+b.creditAmount,0),fee=balances.reduce((s,b)=>s+b.totalFee,0),pit=balances.reduce((s,b)=>s+b.pitAmount,0),advances=balances.reduce((s,b)=>s+b.advanceAmount,0),partners=balances.reduce((s,b)=>s+b.commercialAmount+b.professionalAmount,0);
   el.innerHTML=[
-    ["Credito gestito",formatEuro(credit),"Previsionale o ufficiale"],["Compensi totali",formatEuro(fee),"PIT + partner"],["Compenso PIT",formatEuro(pit),"Compenso nostro"],["Incassato",formatEuro(collected),"Acconti e saldi"],["Partner",formatEuro(partners),`${allPractices.filter(practiceHasOfficialOutcome).length} ufficiali`]
+    ["Credito gestito",formatEuro(credit),"Previsionale o ufficiale"],["Compensi totali",formatEuro(fee),"PIT + partner"],["Compenso PIT",formatEuro(pit+advances),advances>0?`${formatEuro(advances)} acconti inclusi`:"Compenso nostro"],["Partner",formatEuro(partners),`${allPractices.filter(practiceHasOfficialOutcome).length} ufficiali`]
   ].map(([label,value,hint])=>`<div class="practice-money-card"><div class="practice-money-label">${label}</div><div class="practice-money-value">${value}</div><div class="practice-money-hint">${hint}</div></div>`).join("");
   const side=document.getElementById("practice-global-balance");
   if(side)side.innerHTML=[
-    ["Pratiche totali",String(allPractices.length)],["Dato ufficiale",String(allPractices.filter(practiceHasOfficialOutcome).length)],["Da incassare",formatEuro(Math.max(fee-collected,0))],["Margine PIT",formatEuro(pit)],["Quote partner",formatEuro(partners)]
+    ["Pratiche totali",String(allPractices.length)],["Dato ufficiale",String(allPractices.filter(practiceHasOfficialOutcome).length)],["Compenso PIT",formatEuro(pit+advances)],["Acconti PIT",formatEuro(advances)],["Quote partner",formatEuro(partners)]
   ].map(([l,v])=>`<div class="practice-balance-row"><span>${l}</span><strong>${v}</strong></div>`).join("");
 }
 function renderPracticesList(){
@@ -4333,7 +4370,7 @@ function renderPracticeCard(practice){
     <div class="practice-card-title-new">${esc(practice.title||practice.practiceCode||"Pratica senza nome")}</div>
     <div style="font-size:13px;font-weight:800;color:var(--gray)">${esc(practice.clientNameSnapshot||"Cliente non selezionato")}</div>
     <div class="practice-card-meta"><span class="practice-mini-chip">${appIcon(ptype.icon)} ${esc(ptype.label)}</span><span class="practice-mini-chip">${appIcon(practiceHasOfficialOutcome(practice)?"check":"target")} ${practiceHasOfficialOutcome(practice)?"Ufficiale":"Scenario"}</span>${(practice.partnerNameSnapshot||practice.commercialPartnerNameSnapshot||practice.professionalPartnerNameSnapshot)?`<span class="practice-mini-chip">${appIcon("user")} ${esc(practice.partnerNameSnapshot||practice.commercialPartnerNameSnapshot||practice.professionalPartnerNameSnapshot)}</span>`:""}</div>
-    <div class="practice-card-economy"><div><span>Credito</span><strong>${formatEuro(balance.creditAmount)}</strong></div><div><span>Compensi</span><strong>${formatEuro(balance.totalFee)}</strong></div><div><span>PIT</span><strong>${formatEuro(balance.pitAmount)}</strong></div><div><span>Incassato</span><strong>${formatEuro(balance.collected)}</strong></div></div>
+    <div class="practice-card-economy"><div><span>Credito</span><strong>${formatEuro(balance.creditAmount)}</strong></div><div><span>Compensi</span><strong>${formatEuro(balance.totalFee)}</strong></div><div><span>PIT</span><strong>${formatEuro(balance.pitAmount+balance.advanceAmount)}</strong></div><div><span>Partner</span><strong>${formatEuro(balance.partnerAmount)}</strong></div></div>
   </article>`;
 }
 async function renderPracticeDetail(practiceId){
@@ -4344,9 +4381,8 @@ async function renderPracticeDetail(practiceId){
     const snap=await db.collection(COLLECTIONS.practices).doc(practiceId).get();
     if(!snap.exists){main.innerHTML=`<div style="padding:32px"><div class="error-box">Pratica non trovata</div></div>`;return}
     _detailPractice={id:snap.id,...snap.data()};
-    const paymentsSnap=await db.collection(COLLECTIONS.practicePayments).where("practiceId","==",practiceId).get();
-    _practicePayments=paymentsSnap.docs.map(doc=>({id:doc.id,...doc.data()})).sort((a,b)=>(toDateValue(b.date)?.getTime()||0)-(toDateValue(a.date)?.getTime()||0));
-    _practiceCollectedAmount=_practicePayments.filter(p=>p.type==="CLIENT_PAYMENT").reduce((sum,doc)=>sum+(Number(doc.amount)||0),0);
+    _practicePayments=[];
+    _practiceCollectedAmount=0;
     drawPracticeDetail();
   }catch(error){main.innerHTML=`<div style="padding:32px"><div class="error-box">Errore: ${esc(error.message)}</div></div>`}
 }
@@ -4359,43 +4395,24 @@ function renderPracticeScenarioCard(scenario,practice){
   resultRows.push({label:"Investimento",value:formatEuro(c.investmentAmount)});
   return `<div class="practice-scenario-card ${scenario.isReference?"reference":""}"><div class="practice-scenario-top"><div><div class="practice-scenario-name">${esc(scenario.name||"Scenario")}</div><div style="font-size:12px;font-weight:800;color:var(--gray)">${scenario.isReference?"Scenario di riferimento":"Simulazione libera"}</div></div><span class="practice-status-pill" style="color:var(--red);background:rgba(193,39,45,.08)">${formatPercent(c.creditPercent)}</span></div>${renderPracticeResultBlock(resultRows,"Risultato scenario")}${scenario.notes?`<div style="font-size:12px;font-weight:700;color:var(--gray);margin-top:10px">${esc(scenario.notes)}</div>`:""}</div>`;
 }
-function renderPracticeOfficialResult(practice,balance,scenarios=[]){
+function renderPracticeOfficialResult(practice,balance){
   const clientName=practice.clientNameSnapshot||"Cliente";
   const partnerName=practice.partnerNameSnapshot||practice.commercialPartnerNameSnapshot||practice.professionalPartnerNameSnapshot||"Partner";
-  const reference=scenarios.find(s=>s.isReference)||scenarios[0]||{};
-  const advance=numberOr(reference.advanceAmount,0);
+  const advance=numberOr(practice.advanceAmount,balance.advanceAmount||0);
   const pitLabel=advance>0?`Compenso Professioni in Team (con acconto di ${formatEuro(advance)})`:"Compenso Professioni in Team";
   const rows=[{label:`Credito recuperato ${clientName}`,value:formatEuro(balance.creditAmount)},{label:pitLabel,value:formatEuro(balance.pitAmount+advance)},{label:`Compenso ${partnerName}`,value:formatEuro(balance.partnerAmount)}];
   return renderPracticeResultBlock(rows,"Risultato ufficiale");
 }
 function drawPracticeDetail(){
-  const practice=_detailPractice,status=getPracticeStatus(practice.status),ptype=getPracticeType(practice.practiceType),balance=practiceBalance(practice,_practicePayments),scenarios=normalizePracticeScenarios(practice.scenarios,practice),official=normalizePracticeOfficial(practice.officialOutcome||practice.official||{},practice),isOfficial=practiceHasOfficialOutcome(practice);
+  const practice=_detailPractice,status=getPracticeStatus(practice.status),ptype=getPracticeType(practice.practiceType),balance=practiceBalance(practice),scenarios=normalizePracticeScenarios(practice.scenarios,practice),official=normalizePracticeOfficial(practice.officialOutcome||practice.official||{},practice),isOfficial=practiceHasOfficialOutcome(practice);
   const main=document.getElementById("main");
   main.innerHTML=`<div class="practice-page"><button class="back-btn" onclick="navigate('practices')">← Torna alle Pratiche</button>
     <section class="practice-hero" style="background:linear-gradient(135deg,${status.color},#102A43)"><div class="practice-hero-row"><div><div class="practice-hero-kicker">${esc(ptype.label)} · ${esc(status.label)}</div><div class="practice-hero-title">${esc(practice.title||practice.practiceCode||"Pratica")}</div><div class="practice-hero-sub">${esc(practice.clientNameSnapshot||"Cliente non selezionato")} · ${isOfficial?"Dato ufficiale inserito":"Bilancio su scenario di riferimento"}</div></div>${canEditData()?`<button class="btn" style="background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.22);font-weight:900" onclick="openPracticeForm('${practice.id}')">${appIcon("edit")} Modifica</button>`:""}</div></section>
-    <div class="practice-dashboard">${[["Investimento",formatEuro(balance.investmentAmount),balance.mode],["Credito",formatEuro(balance.creditAmount),formatPercent(balance.creditPercent)],["Compenso PIT",formatEuro(balance.pitAmount),formatPercent(balance.pitPercent)],["Compenso partner",formatEuro(balance.partnerAmount),formatPercent(balance.partnerPercent)],["Da incassare",formatEuro(Math.max(balance.pitAmount-balance.collected,0)),`${formatEuro(balance.collected)} incassati`]].map(([l,v,h])=>`<div class="practice-money-card"><div class="practice-money-label">${l}</div><div class="practice-money-value">${v}</div><div class="practice-money-hint">${h}</div></div>`).join("")}</div>
     <div class="practice-workspace"><div style="display:flex;flex-direction:column;gap:18px">
-      <section class="practice-section-card"><div class="practice-section-title">${appIcon("file-text")} Dati pratica</div><div class="practice-info-grid">${[["Codice",practice.practiceCode||"—"],["Cliente",practice.clientNameSnapshot||"—"],["Agevolazione",ptype.label],["Stato",status.label],["Investimento",formatEuro(balance.investmentAmount)],["% compenso PIT",formatPercent(balance.pitPercent)],["% compenso partner",formatPercent(balance.partnerPercent)],["Partner",practice.partnerNameSnapshot||practice.commercialPartnerNameSnapshot||practice.professionalPartnerNameSnapshot||"—"],["Tipo partner",balance.partnerKind==="commercial"?"Commerciale":balance.partnerKind==="professional"?"Professionista":"—"],["Inizio",formatDate(practice.openedAt)],["Fine prevista",formatDate(practice.expectedCloseAt)]].map(([l,v])=>`<div class="practice-info-tile"><label>${l}</label><span>${esc(String(v||"—"))}</span></div>`).join("")}</div>${practice.notes?`<div class="practice-info-tile" style="margin-top:12px"><label>Note</label><span style="white-space:pre-wrap;font-weight:700;color:var(--gray-dark)">${esc(practice.notes)}</span></div>`:""}</section>
+      <section class="practice-section-card"><div class="practice-section-title">${appIcon("file-text")} Dati pratica</div><div class="practice-info-grid">${[["Codice",practice.practiceCode||"—"],["Cliente",practice.clientNameSnapshot||"—"],["Agevolazione",ptype.label],["Stato",status.label],["Investimento",formatEuro(balance.investmentAmount)],["% compenso Professioni in Team",formatPercent(balance.pitPercent)],["% compenso partner",formatPercent(balance.partnerPercent)],["Partner",practice.partnerNameSnapshot||practice.commercialPartnerNameSnapshot||practice.professionalPartnerNameSnapshot||"—"],["Tipo partner",balance.partnerKind==="commercial"?"Commerciale":balance.partnerKind==="professional"?"Professionista":"—"],["Inizio",formatDate(practice.openedAt)],["Fine prevista",formatDate(practice.expectedCloseAt)]].map(([l,v])=>`<div class="practice-info-tile"><label>${l}</label><span>${esc(String(v||"—"))}</span></div>`).join("")}</div>${practice.notes?`<div class="practice-info-tile" style="margin-top:12px"><label>Note</label><span style="white-space:pre-wrap;font-weight:700;color:var(--gray-dark)">${esc(practice.notes)}</span></div>`:""}</section>
       <section class="practice-section-card"><div class="practice-section-title">${appIcon("target")} Scenari previsionali</div>${scenarios.length?`<div class="practice-scenarios-grid">${scenarios.map(s=>renderPracticeScenarioCard(s,practice)).join("")}</div>`:`<div style="font-size:14px;color:var(--gray);font-weight:700">Nessuno scenario.</div>`}</section>
-      <section class="practice-section-card"><div class="practice-section-title">${appIcon("check")} Esito ufficiale Agenzia Entrate</div>${isOfficial?`<div class="practice-info-grid" style="margin-bottom:14px">${[["Data esito",formatDate(official.date)],["Credito ufficiale",formatPercent(official.creditPercent)]].map(([l,v])=>`<div class="practice-info-tile"><label>${esc(l)}</label><span>${v}</span></div>`).join("")}</div>${renderPracticeOfficialResult(practice,balance,scenarios)}`:`<div style="font-size:14px;color:var(--gray);font-weight:700">Non hai ancora inserito la data e la percentuale ufficiale.</div>`}</section>
-      <section class="practice-section-card"><div class="practice-section-title">${appIcon("wallet")} Movimenti reali</div>${canEditData()?`<div class="form-row" style="align-items:end"><div class="form-group"><label class="form-label">Tipo movimento</label><select id="practice-movement-type" class="form-control"><option value="CLIENT_PAYMENT">Incasso cliente</option><option value="COMMERCIAL_PARTNER_PAYMENT">Pagamento partner commerciale</option><option value="PROFESSIONAL_PARTNER_PAYMENT">Pagamento partner professionista</option></select></div><div class="form-group"><label class="form-label">Importo (€)</label><input id="payment-amount" class="form-control" type="number" min="0" step="0.01"></div><div class="form-group"><label class="form-label">Nota</label><input id="payment-note" class="form-control"></div><div class="form-group"><button class="btn btn-primary" style="width:100%;justify-content:center" onclick="addPracticePayment('${practice.id}')">+ Registra</button></div></div>`:""}<div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">${_practicePayments.length?_practicePayments.map(item=>`<div class="practice-balance-row"><span>${esc(practicePaymentTypeLabel(item.type))} · ${formatDate(item.date)}${item.note?` · ${esc(item.note)}`:""}</span><strong>${formatEuro(item.amount)}</strong></div>`).join(""):`<div style="font-size:13px;color:var(--gray);font-weight:700">Nessun movimento registrato.</div>`}</div></section>
-    </div><aside class="practice-side-panel"><section class="practice-section-card"><div class="practice-section-title">${appIcon("euro")} Bilancio pratica</div>${[["Compenso PIT",formatEuro(balance.pitAmount)],["Incassato dal cliente",formatEuro(balance.collected)],["Da incassare PIT",formatEuro(Math.max(balance.pitAmount-balance.collected,0))],["Partner maturato",formatEuro(balance.partnerAmount)],["Partner pagato",formatEuro(balance.commercialPaid+balance.professionalPaid)],["Compensi totali",formatEuro(balance.totalFee)]].map(([l,v])=>`<div class="practice-balance-row"><span>${l}</span><strong>${v}</strong></div>`).join("")}</section></aside></div></div>`;
-}
-async function addPracticePayment(practiceId){
-  const amount=parseFloat(document.getElementById("payment-amount").value);
-  if(!amount||amount<=0){toast("Inserisci un importo valido","error");return}
-  try{
-    await waitAuth();
-    const type=document.getElementById("practice-movement-type")?.value||"CLIENT_PAYMENT";
-    const docRef=db.collection(COLLECTIONS.practicePayments).doc();
-    await docRef.set({id:docRef.id,practiceId,amount,note:document.getElementById("payment-note").value.trim(),date:firebase.firestore.Timestamp.fromDate(new Date()),type,createdByUid:currentUser.id},{merge:true});
-    const patch={updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
-    if(type==="CLIENT_PAYMENT")patch.totalClientCollected=Number(_detailPractice.totalClientCollected||0)+amount;
-    if(type==="COMMERCIAL_PARTNER_PAYMENT")patch.commercialPartnerPaid=Number(_detailPractice.commercialPartnerPaid||0)+amount;
-    if(type==="PROFESSIONAL_PARTNER_PAYMENT")patch.professionalPartnerPaid=Number(_detailPractice.professionalPartnerPaid||0)+amount;
-    await db.collection(COLLECTIONS.practices).doc(practiceId).set(patch,{merge:true});
-    toast("Movimento registrato ✓");renderPracticeDetail(practiceId);
-  }catch(error){toast(`Errore: ${error.message}`,"error")}
+      <section class="practice-section-card"><div class="practice-section-title">${appIcon("check")} Esito ufficiale Agenzia Entrate</div>${isOfficial?`<div class="practice-info-grid" style="margin-bottom:14px">${[["Data esito",formatDate(official.date)],["Credito ufficiale",formatPercent(official.creditPercent)]].map(([l,v])=>`<div class="practice-info-tile"><label>${esc(l)}</label><span>${v}</span></div>`).join("")}</div>${renderPracticeOfficialResult(practice,balance)}`:`<div style="font-size:14px;color:var(--gray);font-weight:700">Non hai ancora inserito la data e la percentuale ufficiale.</div>`}</section>
+    </div><aside class="practice-side-panel"><section class="practice-section-card"><div class="practice-section-title">${appIcon("euro")} Bilancio pratica</div>${renderPracticeBalanceRows(balance,practice)}</section></aside></div></div>`;
 }
 function practiceFormPartnerOptions(items,selectedId){return items.map(c=>{const nm=collaboratorFullName(c);return`<option value="${c.id}|${esc(nm)}" ${selectedId===c.id?"selected":""}>${esc(nm)}</option>`}).join("")}
 function updatePracticePartnerOptions(){
@@ -4407,13 +4424,13 @@ function updatePracticePartnerOptions(){
   select.innerHTML=`<option value="">${type?"Nessun partner":"Prima scegli il tipo partner"}</option>${list.map(item=>`<option value="${item.id}|${esc(item.name)}" ${selected.startsWith(`${item.id}|`)?"selected":""}>${esc(item.name)}</option>`).join("")}`;
   updatePracticeScenarioPreviews();updatePracticeOfficialPreview();
 }
-function renderPracticeScenarioEditor(){return _practiceFormScenarios.map((s,i)=>`<div class="practice-form-scenario" data-scenario-index="${i}"><div class="practice-form-scenario-head"><div style="display:flex;align-items:center;gap:8px"><input type="radio" name="practice-reference-scenario" ${s.isReference?"checked":""} onchange="setPracticeReferenceScenario(${i})"><strong>Scenario ${i+1}</strong></div><button class="btn-icon red" onclick="removePracticeScenarioRow(${i})">${appIcon("trash")}</button></div><div class="practice-form-scenario-grid">${[["Nome scenario","scenario-name","text",s.name],["% credito ipotizzata","scenario-creditPercent","number",s.creditPercent],["Acconto ipotizzato PIT (€)","scenario-advanceAmount","number",s.advanceAmount]].map(([label,cls,type,value])=>`<div class="form-group"><label class="form-label">${label}</label><input class="form-control ${cls}" type="${type}" step="0.01" value="${esc(practiceInputValue(value))}" oninput="updatePracticeScenarioPreviews()"></div>`).join("")}<div class="form-group" style="grid-column:span 4"><label class="form-label">Note</label><input class="form-control scenario-notes" value="${esc(s.notes||"")}"></div></div><div class="practice-form-preview scenario-preview"></div></div>`).join("")}
-function readPracticeScenariosFromForm(){return [...document.querySelectorAll("#practice-scenarios-editor .practice-form-scenario")].map((row,i)=>({id:_practiceFormScenarios[i]?.id||`scenario-${Date.now()}-${i}`,name:row.querySelector(".scenario-name")?.value.trim()||`Scenario ${i+1}`,creditPercent:optionalNumber(row.querySelector(".scenario-creditPercent")?.value),advanceAmount:optionalNumber(row.querySelector(".scenario-advanceAmount")?.value),notes:row.querySelector(".scenario-notes")?.value.trim()||"",isReference:row.querySelector('input[name="practice-reference-scenario"]')?.checked||false}))}
+function renderPracticeScenarioEditor(){return _practiceFormScenarios.map((s,i)=>`<div class="practice-form-scenario" data-scenario-index="${i}"><div class="practice-form-scenario-head"><div style="display:flex;align-items:center;gap:8px"><input type="radio" name="practice-reference-scenario" ${s.isReference?"checked":""} onchange="setPracticeReferenceScenario(${i})"><strong>Scenario ${i+1}</strong></div><button class="btn-icon red" onclick="removePracticeScenarioRow(${i})">${appIcon("trash")}</button></div><div class="practice-form-scenario-grid">${[["Nome scenario","scenario-name","text",s.name],["% credito ipotizzata","scenario-creditPercent","number",s.creditPercent]].map(([label,cls,type,value])=>`<div class="form-group"><label class="form-label">${label}</label><input class="form-control ${cls}" type="${type}" step="0.01" value="${esc(practiceInputValue(value))}" oninput="updatePracticeScenarioPreviews()"></div>`).join("")}<div class="form-group" style="grid-column:span 4"><label class="form-label">Note</label><input class="form-control scenario-notes" value="${esc(s.notes||"")}"></div></div><div class="practice-form-preview scenario-preview"></div></div>`).join("")}
+function readPracticeScenariosFromForm(){return [...document.querySelectorAll("#practice-scenarios-editor .practice-form-scenario")].map((row,i)=>({id:_practiceFormScenarios[i]?.id||`scenario-${Date.now()}-${i}`,name:row.querySelector(".scenario-name")?.value.trim()||`Scenario ${i+1}`,creditPercent:optionalNumber(row.querySelector(".scenario-creditPercent")?.value),notes:row.querySelector(".scenario-notes")?.value.trim()||"",isReference:row.querySelector('input[name="practice-reference-scenario"]')?.checked||false}))}
 function rerenderPracticeScenarioEditor(){const holder=document.getElementById("practice-scenarios-editor");if(holder){holder.innerHTML=renderPracticeScenarioEditor();updatePracticeScenarioPreviews()}}
 function addPracticeScenarioRow(){_practiceFormScenarios=readPracticeScenariosFromForm();_practiceFormScenarios.push({id:`scenario-${Date.now()}`,name:`Scenario ${_practiceFormScenarios.length+1}`,isReference:!_practiceFormScenarios.length});rerenderPracticeScenarioEditor()}
 function removePracticeScenarioRow(index){_practiceFormScenarios=readPracticeScenariosFromForm().filter((_,i)=>i!==index);if(_practiceFormScenarios.length&&!_practiceFormScenarios.some(s=>s.isReference))_practiceFormScenarios[0].isReference=true;rerenderPracticeScenarioEditor()}
 function setPracticeReferenceScenario(index){_practiceFormScenarios=readPracticeScenariosFromForm().map((s,i)=>({...s,isReference:i===index}));rerenderPracticeScenarioEditor()}
-function practiceFormBaseForCalc(){const partnerKind=document.getElementById("pf-partner-kind")?.value||"";return{investmentAmount:optionalNumber(document.getElementById("pf-investment")?.value),feePercent:optionalNumber(document.getElementById("pf-feePercent")?.value),partnerPercent:optionalNumber(document.getElementById("pf-partnerPercent")?.value),partnerKind}}
+function practiceFormBaseForCalc(){const partnerKind=document.getElementById("pf-partner-kind")?.value||"";return{investmentAmount:optionalNumber(document.getElementById("pf-investment")?.value),feePercent:optionalNumber(document.getElementById("pf-feePercent")?.value),partnerPercent:optionalNumber(document.getElementById("pf-partnerPercent")?.value),advanceAmount:optionalNumber(document.getElementById("pf-advanceAmount")?.value),partnerKind}}
 function practiceFormNamesForPreview(){
   const clientRaw=document.getElementById("pf-client")?.value||"";
   const partnerRaw=document.getElementById("pf-partner")?.value||"";
@@ -4423,7 +4440,12 @@ function practiceFormNamesForPreview(){
   };
 }
 function updatePracticeScenarioPreviews(){const base=practiceFormBaseForCalc(),names=practiceFormNamesForPreview();document.querySelectorAll("#practice-scenarios-editor .practice-form-scenario").forEach((row,index)=>{const c=calculatePracticeScenario(readPracticeScenariosFromForm()[index]||{},base);const pitLabel=c.advanceAmount>0?`Compenso Professioni in Team (con acconto di ${formatEuro(c.advanceAmount)})`:"Compenso Professioni in Team";const resultRows=[{label:`Credito recuperato ${names.clientName}`,value:formatEuro(c.creditAmount)},{label:pitLabel,value:formatEuro(c.pitAmount+c.advanceAmount)},{label:`Compenso ${names.partnerName}`,value:formatEuro(c.partnerAmount)},{label:"Investimento",value:formatEuro(c.investmentAmount)}];const preview=row.querySelector(".scenario-preview");if(preview)preview.innerHTML=renderPracticeResultBlock(resultRows,"Risultato scenario")})}
-function updatePracticeOfficialPreview(){const official={creditPercent:optionalNumber(document.getElementById("pf-official-creditPercent")?.value)},names=practiceFormNamesForPreview();const c=calculatePracticeScenario(official,practiceFormBaseForCalc());const scenarios=readPracticeScenariosFromForm(),reference=scenarios.find(s=>s.isReference)||scenarios[0]||{},advance=numberOr(reference.advanceAmount,0);const pitLabel=advance>0?`Compenso Professioni in Team (con acconto di ${formatEuro(advance)})`:"Compenso Professioni in Team";const rows=[{label:`Credito recuperato ${names.clientName}`,value:formatEuro(c.creditAmount)},{label:pitLabel,value:formatEuro(c.pitAmount+advance)},{label:`Compenso ${names.partnerName}`,value:formatEuro(c.partnerAmount)}];const el=document.getElementById("practice-official-preview");if(el)el.innerHTML=renderPracticeResultBlock(rows,"Risultato ufficiale")}
+function updatePracticeOfficialPreview(){const official={creditPercent:optionalNumber(document.getElementById("pf-official-creditPercent")?.value)},names=practiceFormNamesForPreview();const c=calculatePracticeScenario(official,practiceFormBaseForCalc());const pitLabel=c.advanceAmount>0?`Compenso Professioni in Team (con acconto di ${formatEuro(c.advanceAmount)})`:"Compenso Professioni in Team";const rows=[{label:`Credito recuperato ${names.clientName}`,value:formatEuro(c.creditAmount)},{label:pitLabel,value:formatEuro(c.pitAmount+c.advanceAmount)},{label:`Compenso ${names.partnerName}`,value:formatEuro(c.partnerAmount)}];const el=document.getElementById("practice-official-preview");if(el)el.innerHTML=renderPracticeResultBlock(rows,"Risultato ufficiale")}
+function togglePracticeScenariosSection(){
+  const section=document.getElementById("practice-scenarios-section");
+  if(!section)return;
+  section.classList.toggle("open");
+}
 async function openPracticeForm(id){
   if(!canEditData())return;
   _editingPracticeId=id||null;let data={};
@@ -4440,23 +4462,34 @@ async function openPracticeForm(id){
   const selectedPartnerName=data.partnerNameSnapshot||(selectedPartnerKind==="professional"?data.professionalPartnerNameSnapshot:(data.commercialPartnerNameSnapshot||data.collaboratorOriginNameSnapshot||""));
   _practiceFormScenarios=normalizePracticeScenarios(data.scenarios,data);if(!_practiceFormScenarios.length)_practiceFormScenarios=[{id:`scenario-${Date.now()}`,name:"Scenario base",isReference:true}];
   const official=normalizePracticeOfficial(data.officialOutcome||data.official||{},data);
+  const fallbackAdvance=numberOr(data.advanceAmount,numberOr(_practiceFormScenarios.find(s=>s.isReference)?.advanceAmount,numberOr(_practiceFormScenarios[0]?.advanceAmount,0)));
   const modal=document.createElement("div");modal.className="modal-overlay";modal.id="practice-modal";
   modal.innerHTML=`<div class="modal" style="max-width:1120px"><div class="modal-header"><div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">${id?"Modifica Pratica":"Nuova Pratica"}</div></div><button class="modal-close" onclick="closeModal('practice-modal')">×</button></div><div class="modal-body"><div class="client-form-sections">
-    <section class="client-form-section"><div class="client-form-section-head"><div><div class="client-form-section-title">Dati pratica</div><div class="client-form-section-sub">Cliente, agevolazione, partner e investimento</div></div></div><div class="form-row">
-      <div class="form-group"><label class="form-label">Nome pratica <span class="req">*</span></label><input id="pf-title" class="form-control" value="${esc(data.title||"")}"></div>
-      <div class="form-group"><label class="form-label">Cliente <span class="req">*</span></label><select id="pf-client" class="form-control" onchange="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"><option value="">Seleziona cliente</option>${allClients.map(c=>`<option value="${c.id}|${esc(clientDisplayName(c))}" ${data.clientId===c.id?"selected":""}>${esc(clientDisplayName(c))}</option>`).join("")}</select></div>
-      <div class="form-group"><label class="form-label">Tipo agevolazione</label><select id="pf-type" class="form-control">${PRACTICE_TYPES.map(t=>`<option value="${t.value}" ${data.practiceType===t.value?"selected":""}>${t.label}</option>`).join("")}</select></div>
-      <div class="form-group"><label class="form-label">Stato</label><select id="pf-status" class="form-control">${PRACTICE_STATUSES.map(s=>`<option value="${s.value}" ${(data.status||"OPEN")===s.value?"selected":""}>${s.label}</option>`).join("")}</select></div>
-      <div class="form-group"><label class="form-label">Tipo partner</label><select id="pf-partner-kind" class="form-control" onchange="updatePracticePartnerOptions()"><option value="" ${!selectedPartnerKind?"selected":""}>Nessun partner</option><option value="commercial" ${selectedPartnerKind==="commercial"?"selected":""}>Partner commerciale</option><option value="professional" ${selectedPartnerKind==="professional"?"selected":""}>Partner professionista</option></select></div>
-      <div class="form-group"><label class="form-label">Partner</label><select id="pf-partner" class="form-control" onchange="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"><option value="${selectedPartnerId?`${selectedPartnerId}|${esc(selectedPartnerName)}`:""}">${selectedPartnerName?esc(selectedPartnerName):(selectedPartnerKind?"Nessun partner":"Prima scegli il tipo partner")}</option></select></div>
-      <div class="form-group"><label class="form-label">Investimento (€)</label><input id="pf-investment" class="form-control" type="number" step="0.01" value="${esc(practiceInputValue(data.investmentAmount??data.finalInvestmentAmount))}" oninput="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"></div>
-      <div class="form-group"><label class="form-label">% compenso PIT sul credito</label><input id="pf-feePercent" class="form-control" type="number" step="0.01" value="${esc(practiceInputValue(data.feePercent??data.pitPercent??official.feePercent??official.pitPercent))}" oninput="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"></div>
-      <div class="form-group"><label class="form-label">% compenso partner sul credito</label><input id="pf-partnerPercent" class="form-control" type="number" step="0.01" value="${esc(practiceInputValue(data.partnerPercent??official.partnerPercent??data.collaboratorCommissionValue??0))}" oninput="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"></div>
-      <div class="form-group"><label class="form-label">Data inizio</label><input id="pf-openedAt" class="form-control" type="date" value="${dateInputValue(data.openedAt,new Date().toISOString().slice(0,10))}"></div>
-      <div class="form-group"><label class="form-label">Fine prevista</label><input id="pf-closeAt" class="form-control" type="date" value="${dateInputValue(data.expectedCloseAt)}"></div>
-      <div class="form-group" style="grid-column:span 2"><label class="form-label">Note</label><textarea id="pf-notes" class="form-control">${esc(data.notes||"")}</textarea></div>
+    <section class="client-form-section"><div class="client-form-section-head"><div><div class="client-form-section-title">Dati pratica</div><div class="client-form-section-sub">Dati principali, investimento e partner collegato</div></div></div>
+      <div class="practice-form-subsection"><div class="practice-form-subtitle">Informazioni pratica</div><div class="form-row">
+        <div class="form-group"><label class="form-label">Codice</label><input class="form-control practice-code-preview" value="${esc(data.practiceCode||"Automatico alla creazione")}" readonly></div>
+        <div class="form-group"><label class="form-label">Nome pratica <span class="req">*</span></label><input id="pf-title" class="form-control" value="${esc(data.title||"")}"></div>
+        <div class="form-group"><label class="form-label">Cliente <span class="req">*</span></label><select id="pf-client" class="form-control" onchange="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"><option value="">Seleziona cliente</option>${allClients.map(c=>`<option value="${c.id}|${esc(clientDisplayName(c))}" ${data.clientId===c.id?"selected":""}>${esc(clientDisplayName(c))}</option>`).join("")}</select></div>
+        <div class="form-group"><label class="form-label">Tipo agevolazione</label><select id="pf-type" class="form-control">${PRACTICE_TYPES.map(t=>`<option value="${t.value}" ${(data.practiceType||"")===t.value?"selected":""}>${t.label}</option>`).join("")}</select></div>
+        <div class="form-group"><label class="form-label">Stato</label><select id="pf-status" class="form-control">${PRACTICE_STATUSES.map(s=>`<option value="${s.value}" ${getPracticeStatus(data.status).value===s.value?"selected":""}>${s.label}</option>`).join("")}</select></div>
+        <div class="form-group"><label class="form-label">Investimento (€)</label><input id="pf-investment" class="form-control" type="number" step="0.01" value="${esc(practiceInputValue(data.investmentAmount??data.finalInvestmentAmount))}" oninput="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"></div>
+        <div class="form-group"><label class="form-label">% compenso PIT sul credito</label><input id="pf-feePercent" class="form-control" type="number" step="0.01" value="${esc(practiceInputValue(data.feePercent??data.pitPercent??official.feePercent??official.pitPercent))}" oninput="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"></div>
+        <div class="form-group"><label class="form-label">Data inizio</label><input id="pf-openedAt" class="form-control" type="date" value="${dateInputValue(data.openedAt,new Date().toISOString().slice(0,10))}"></div>
+        <div class="form-group"><label class="form-label">Fine prevista</label><input id="pf-closeAt" class="form-control" type="date" value="${dateInputValue(data.expectedCloseAt)}"></div>
+      </div></div>
+      <div class="practice-form-subsection"><div class="practice-form-subtitle">Partner collegato</div><div class="form-row">
+        <div class="form-group"><label class="form-label">Tipo partner</label><select id="pf-partner-kind" class="form-control" onchange="updatePracticePartnerOptions()"><option value="" ${!selectedPartnerKind?"selected":""}>Nessun partner</option><option value="commercial" ${selectedPartnerKind==="commercial"?"selected":""}>Partner commerciale</option><option value="professional" ${selectedPartnerKind==="professional"?"selected":""}>Partner professionista</option></select></div>
+        <div class="form-group"><label class="form-label">Partner</label><select id="pf-partner" class="form-control" onchange="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"><option value="${selectedPartnerId?`${selectedPartnerId}|${esc(selectedPartnerName)}`:""}">${selectedPartnerName?esc(selectedPartnerName):(selectedPartnerKind?"Nessun partner":"Prima scegli il tipo partner")}</option></select></div>
+        <div class="form-group"><label class="form-label">% compenso partner sul credito</label><input id="pf-partnerPercent" class="form-control" type="number" step="0.01" value="${esc(practiceInputValue(data.partnerPercent??official.partnerPercent??data.collaboratorCommissionValue??0))}" oninput="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"></div>
+      </div></div>
+      <div class="practice-form-subsection"><div class="practice-form-subtitle">Note</div><div class="form-row"><div class="form-group" style="grid-column:span 2"><label class="form-label">Note</label><textarea id="pf-notes" class="form-control">${esc(data.notes||"")}</textarea></div></div></div>
+    </section>
+    <section class="client-form-section"><div class="client-form-section-head"><div><div class="client-form-section-title">Acconto Professioni in Team</div><div class="client-form-section-sub">Aggiungi, modifica o rimuovi l'acconto direttamente dalla pratica</div></div></div><div class="form-row">
+      <div class="form-group"><label class="form-label">Importo acconto PIT (€)</label><input id="pf-advanceAmount" class="form-control" type="number" step="0.01" min="0" value="${esc(practiceInputValue(fallbackAdvance))}" oninput="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"></div>
+      <div class="form-group"><label class="form-label">Data acconto</label><input id="pf-advanceDate" class="form-control" type="date" value="${dateInputValue(data.advanceDate)}"></div>
+      <div class="form-group" style="grid-column:span 2"><label class="form-label">Nota acconto</label><input id="pf-advanceNote" class="form-control" value="${esc(data.advanceNote||"")}" placeholder="Es. Acconto alla firma, bonifico ricevuto..."></div>
     </div></section>
-    <section class="client-form-section"><div class="client-form-section-head"><div><div class="client-form-section-title">Scenari previsionali</div><div class="client-form-section-sub">Ogni scenario usa investimento, compenso e riparto impostati nei dati pratica</div></div><button class="btn btn-secondary btn-sm" onclick="addPracticeScenarioRow()">+ Scenario</button></div><div id="practice-scenarios-editor">${renderPracticeScenarioEditor()}</div></section>
+    <section class="client-form-section practice-collapsible-section" id="practice-scenarios-section"><button type="button" class="practice-collapsible-head" onclick="togglePracticeScenariosSection()"><div class="client-form-section-head"><div><div class="client-form-section-title">Scenari previsionali</div><div class="client-form-section-sub">Apri la tendina per creare o modificare le simulazioni</div></div></div><span class="practice-collapsible-toggle">${appIcon("chevron-down")}</span></button><div class="practice-collapsible-body"><div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();addPracticeScenarioRow()">+ Scenario</button></div><div id="practice-scenarios-editor">${renderPracticeScenarioEditor()}</div></div></section>
     <section class="client-form-section"><div class="client-form-section-head"><div><div class="client-form-section-title">Esito ufficiale Agenzia Entrate</div><div class="client-form-section-sub">Inserisci solo data e percentuale ufficiale: il resto viene calcolato dai dati pratica</div></div></div><div class="form-row">
       <div class="form-group"><label class="form-label">Data esito</label><input id="pf-official-date" class="form-control" type="date" value="${dateInputValue(official.date)}"></div>
       <div class="form-group"><label class="form-label">% credito ufficiale</label><input id="pf-official-creditPercent" class="form-control" type="number" step="0.01" value="${esc(practiceInputValue(official.creditPercent))}" oninput="updatePracticeOfficialPreview()"></div>
@@ -4480,14 +4513,14 @@ async function savePractice(){
     const professionalPartnerId=partnerKind==="professional"?partnerId:"";
     const professionalPartnerName=partnerKind==="professional"?partnerName:"";
     let scenarios=readPracticeScenariosFromForm();if(scenarios.length&&!scenarios.some(s=>s.isReference))scenarios[0].isReference=true;
-    const basePractice={investmentAmount:optionalNumber(fieldValue("pf-investment"))||0,feePercent:optionalNumber(fieldValue("pf-feePercent"))||0,partnerPercent:optionalNumber(fieldValue("pf-partnerPercent"))||0,partnerKind};
+    const basePractice={investmentAmount:optionalNumber(fieldValue("pf-investment"))||0,feePercent:optionalNumber(fieldValue("pf-feePercent"))||0,partnerPercent:optionalNumber(fieldValue("pf-partnerPercent"))||0,advanceAmount:optionalNumber(fieldValue("pf-advanceAmount"))||0,partnerKind};
     const officialCalc=calculatePracticeScenario({creditPercent:optionalNumber(fieldValue("pf-official-creditPercent"))},basePractice);
-    const officialOutcome={isOfficial:Boolean(fieldValue("pf-official-creditPercent")),date:fieldValue("pf-official-date")?new Date(fieldValue("pf-official-date")):null,creditPercent:optionalNumber(fieldValue("pf-official-creditPercent")),creditAmount:officialCalc.creditAmount,feePercent:basePractice.feePercent,totalFee:officialCalc.totalFee,pitPercent:basePractice.feePercent,partnerPercent:basePractice.partnerPercent,partnerKind,notes:fieldValue("pf-official-notes")};
+    const officialOutcome={isOfficial:Boolean(fieldValue("pf-official-creditPercent")),date:fieldValue("pf-official-date")?new Date(fieldValue("pf-official-date")):null,creditPercent:optionalNumber(fieldValue("pf-official-creditPercent")),creditAmount:officialCalc.creditAmount,feePercent:basePractice.feePercent,totalFee:officialCalc.totalFee,pitPercent:basePractice.feePercent,partnerPercent:basePractice.partnerPercent,advanceAmount:basePractice.advanceAmount,partnerKind,notes:fieldValue("pf-official-notes")};
     const docRef=_editingPracticeId?db.collection(COLLECTIONS.practices).doc(_editingPracticeId):db.collection(COLLECTIONS.practices).doc();
     const year=new Date().getFullYear(),practiceCode=_editingPracticeId?(_detailPractice?.practiceCode||`PIT-${year}-${docRef.id.slice(0,6).toUpperCase()}`):`PIT-${year}-${docRef.id.slice(0,6).toUpperCase()}`;
     const draft={...basePractice,finalInvestmentAmount:basePractice.investmentAmount,scenarios,officialOutcome,totalClientCollected:Number(_detailPractice?.totalClientCollected)||0,commercialPartnerPaid:Number(_detailPractice?.commercialPartnerPaid)||0,professionalPartnerPaid:Number(_detailPractice?.professionalPartnerPaid)||0};
     const balance=practiceBalance(draft,_editingPracticeId?_practicePayments:[]);
-    const payload={id:docRef.id,practiceCode,title,clientId,clientNameSnapshot:clientName,practiceType,status,year,investmentAmount:draft.investmentAmount,finalInvestmentAmount:draft.finalInvestmentAmount,feePercent:draft.feePercent,pitPercent:draft.feePercent,partnerPercent:draft.partnerPercent,partnerKind,partnerId:partnerId||"",partnerNameSnapshot:partnerName||"",openedAt:fieldValue("pf-openedAt")?new Date(fieldValue("pf-openedAt")):new Date(),expectedCloseAt:fieldValue("pf-closeAt")?new Date(fieldValue("pf-closeAt")):null,notes:fieldValue("pf-notes"),commercialPartnerId:commercialPartnerId||"",commercialPartnerNameSnapshot:commercialPartnerName||"",professionalPartnerId:professionalPartnerId||"",professionalPartnerNameSnapshot:professionalPartnerName||"",collaboratorOriginId:commercialPartnerId||"",collaboratorOriginNameSnapshot:commercialPartnerName||"",collaboratorOriginType:partnerKind?"PARTNER":"",ownerInternalUserId:currentUser.id,ownerInternalUserNameSnapshot:displayUserName(),scenarios,officialOutcome,expectedIncentiveAmount:balance.creditAmount,expectedCompanyRevenue:balance.totalFee,collaboratorCommissionMode:"PERCENT_OF_REVENUE",collaboratorCommissionValue:balance.partnerPercent,collaboratorCompensationExpected:balance.partnerAmount,collaboratorCompensationMatured:practiceHasOfficialOutcome(draft)?balance.partnerAmount:0,commercialPartnerDue:balance.commercialAmount,professionalPartnerDue:balance.professionalAmount,pitRevenue:balance.pitAmount,updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+    const payload={id:docRef.id,practiceCode,title,clientId,clientNameSnapshot:clientName,practiceType,status,year,investmentAmount:draft.investmentAmount,finalInvestmentAmount:draft.finalInvestmentAmount,feePercent:draft.feePercent,pitPercent:draft.feePercent,partnerPercent:draft.partnerPercent,advanceAmount:draft.advanceAmount,advanceDate:fieldValue("pf-advanceDate")?new Date(fieldValue("pf-advanceDate")):null,advanceNote:fieldValue("pf-advanceNote"),partnerKind,partnerId:partnerId||"",partnerNameSnapshot:partnerName||"",openedAt:fieldValue("pf-openedAt")?new Date(fieldValue("pf-openedAt")):new Date(),expectedCloseAt:fieldValue("pf-closeAt")?new Date(fieldValue("pf-closeAt")):null,notes:fieldValue("pf-notes"),commercialPartnerId:commercialPartnerId||"",commercialPartnerNameSnapshot:commercialPartnerName||"",professionalPartnerId:professionalPartnerId||"",professionalPartnerNameSnapshot:professionalPartnerName||"",collaboratorOriginId:commercialPartnerId||"",collaboratorOriginNameSnapshot:commercialPartnerName||"",collaboratorOriginType:partnerKind?"PARTNER":"",ownerInternalUserId:currentUser.id,ownerInternalUserNameSnapshot:displayUserName(),scenarios,officialOutcome,expectedIncentiveAmount:balance.creditAmount,expectedCompanyRevenue:balance.totalFee,collaboratorCommissionMode:"PERCENT_OF_REVENUE",collaboratorCommissionValue:balance.partnerPercent,collaboratorCompensationExpected:balance.partnerAmount,collaboratorCompensationMatured:practiceHasOfficialOutcome(draft)?balance.partnerAmount:0,commercialPartnerDue:balance.commercialAmount,professionalPartnerDue:balance.professionalAmount,pitRevenue:balance.pitAmount,updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
     if(!_editingPracticeId)payload.createdAt=firebase.firestore.FieldValue.serverTimestamp();
     await docRef.set(payload,{merge:true});
     toast(_editingPracticeId?"Pratica aggiornata ✓":"Pratica creata ✓");closeModal("practice-modal");if(activeSection==="practices"&&_detailPractice?.id===docRef.id)renderPracticeDetail(docRef.id);
@@ -4520,14 +4553,12 @@ function renderPreAnalysis(){
   const main=document.getElementById("main");
   main.innerHTML=`
     <div class="preanalysis-shell">
-      <div class="page-header">
-        <div>
-          <div class="page-label">ZES UNICA</div>
-          <h1>Pre-analisi</h1>
-          <p>Carica preventivi, fatture e pro-forme, verifica le righe e salva la checklist nel CRM.</p>
-        </div>
-        <button class="btn btn-primary" onclick="newPreAnalysis()">+ Nuova Pre-analisi</button>
-      </div>
+      ${renderPageHero({
+        kicker:"ZES Unica",
+        title:"Pre-analisi",
+        subtitle:"Carica preventivi, fatture e pro-forme, verifica le righe e salva la checklist nel CRM.",
+        buttonHtml:renderHeroPrimaryButton("+ Nuova Pre-analisi","newPreAnalysis()")
+      })}
       <div class="preanalysis-layout ${_preAnalysisArchiveCollapsed?"archive-collapsed":""}" id="preanalysis-layout">
         <button class="preanalysis-archive-toggle" id="preanalysis-archive-toggle" onclick="togglePreAnalysisArchive()" title="${_preAnalysisArchiveCollapsed?"Apri archivio":"Chiudi archivio"}">${appIcon(_preAnalysisArchiveCollapsed?"chevron-right":"chevron-left")}</button>
         <div class="preanalysis-list">
@@ -5793,7 +5824,7 @@ function renderMiniCalendar(){
 function renderTimedCalendar(){
   const visibleDays=getVisibleDays();
   const cols=visibleDays.length;
-  const hourHeight=60;
+  const hourHeight=52;
   return `<div style="display:flex;flex-direction:column;flex:1;min-height:0">
     <div class="calendar-day-header" style="--cols:${cols}">
       <div></div>
@@ -5823,14 +5854,21 @@ function renderTimedColumn(day,hourHeight){
   </div>`;
 }
 function renderTimedEntries(items,day,hourHeight){
+  const minEntryHeight=44;
+  const minVisualMinutes=(minEntryHeight/hourHeight)*60;
+  const layoutItems=items.map(item=>{
+    const startMs=item.start.getTime();
+    const visualEndMs=startMs+(minVisualMinutes*60*1000);
+    return {...item,layoutEnd:new Date(Math.max(item.end.getTime(),visualEndMs))};
+  });
   const clusters=[];
-  items.forEach(item=>{
+  layoutItems.forEach(item=>{
     const last=clusters[clusters.length-1];
     if(!last||item.start>=last.end){
-      clusters.push({items:[item],end:item.end});
+      clusters.push({items:[item],end:item.layoutEnd});
     }else{
       last.items.push(item);
-      if(item.end>last.end)last.end=item.end;
+      if(item.layoutEnd>last.end)last.end=item.layoutEnd;
     }
   });
   return clusters.map(cluster=>{
@@ -5838,7 +5876,7 @@ function renderTimedEntries(items,day,hourHeight){
     cluster.items.forEach(item=>{
       let placed=false;
       for(const col of columns){
-        if(col[col.length-1].end<=item.start){col.push(item);placed=true;break}
+        if(col[col.length-1].layoutEnd<=item.start){col.push(item);placed=true;break}
       }
       if(!placed)columns.push([item]);
     });
@@ -5848,15 +5886,20 @@ function renderTimedEntries(items,day,hourHeight){
     const width=`calc((100% - ${leftInset * 2}px - ${gap * Math.max(totalColumns - 1, 0)}px) / ${totalColumns})`;
     return columns.map((column,columnIndex)=>column.map(item=>{
       const startMinutes=(item.start.getHours()*60)+item.start.getMinutes();
-      const endMinutes=(item.end.getHours()*60)+item.end.getMinutes();
+      let endMinutes=(item.end.getHours()*60)+item.end.getMinutes();
+      if(endMinutes<=startMinutes)endMinutes=startMinutes+30;
       const top=(startMinutes/60)*hourHeight;
-      const height=Math.max(84,((Math.max(endMinutes,startMinutes+90)-startMinutes)/60)*hourHeight);
+      const durationMinutes=Math.max(endMinutes-startMinutes,15);
+      const height=Math.max(minEntryHeight,(durationMinutes/60)*hourHeight);
       const left=`calc(${leftInset}px + ${columnIndex} * (${width} + ${gap}px))`;
       const title=item.kind==="event"?item.data.title:item.data.title;
       const meta=item.kind==="event"
         ? `${formatTime(item.start)} - ${formatTime(item.end)}${item.data.clientNameSnapshot?` · ${item.data.clientNameSnapshot}`:""}`
         : `${formatTime(item.start)} - ${formatTime(item.end)}${item.data.clientNameSnapshot?` · ${item.data.clientNameSnapshot}`:item.data.assignedToNameSnapshot?` · ${item.data.assignedToNameSnapshot}`:""}`;
-      return `<div class="calendar-entry ${item.kind} ${item.kind==="task"&&item.data.isCompleted?"done":""}" style="top:${top+4}px;left:${left};width:${width};height:${height-8}px;z-index:${20+columnIndex}" onclick="openCalendarItemDetails('${item.kind}','${item.data.id}')">
+      const visualHeight=Math.max(minEntryHeight,height-8);
+      const compactClass=visualHeight<58?" compact":"";
+      const tinyClass=visualHeight<48?" tiny":"";
+      return `<div class="calendar-entry ${item.kind}${compactClass}${tinyClass} ${item.kind==="task"&&item.data.isCompleted?"done":""}" style="top:${top+4}px;left:${left};width:${width};height:${visualHeight}px;z-index:${20+columnIndex}" onclick="openCalendarItemDetails('${item.kind}','${item.data.id}')">
         <div class="calendar-entry-title" style="${item.kind==='task'&&item.data.isCompleted?'text-decoration:line-through;':''}">${esc(title|| (item.kind==="event"?"Evento":"Task"))}</div>
         <div class="calendar-entry-meta">${esc(meta)}</div>
       </div>`;
@@ -6121,7 +6164,8 @@ async function openTaskForm(defaultClientId){
       </div>
       <div class="form-group"><label class="form-label">Assegna a</label>
         <select id="tf-assignee" class="form-control">
-          ${assignableUsers.map(user=>`<option value="${user.id}" ${user.id===currentUser?.id?"selected":""}>${esc(displayUserName(user))}</option>`).join("")}
+          <option value="" selected>-</option>
+          ${assignableUsers.map(user=>`<option value="${user.id}">${esc(displayUserName(user))}</option>`).join("")}
         </select>
       </div>
       <div class="form-group"><label class="form-label">Scadenza <span class="req">*</span></label><input id="tf-due" class="form-control" type="date" value="${date}"></div>
@@ -6151,11 +6195,10 @@ async function saveTask(){
     const end=document.getElementById("tf-end").value||"10:00";
     const [clients,assignableUsers]=await Promise.all([ensureClientsLoaded(),ensureAssignableUsersLoaded()]);
     const client=clientId?clients.find(c=>c.id===clientId):null;
-    const assignee=assignableUsers.find(user=>user.id===assigneeId)||currentUser;
-    if(!assignee?.id){throw new Error("Seleziona un membro del team per l'assegnazione")}
+    const assignee=assigneeId?assignableUsers.find(user=>user.id===assigneeId):null;
     const taskRef=db.collection(COLLECTIONS.tasks).doc();
     const assignerName=displayUserName();
-    const taskPayload={id:taskRef.id,title,dueAt:new Date(`${due}T${start}`),startAt:new Date(`${due}T${start}`),endAt:new Date(`${due}T${end}`),assignedToUid:assignee.id,assignedToNameSnapshot:displayUserName(assignee),assignedByUid:currentUser.id,assignedByNameSnapshot:assignerName,isCompleted:false,notes:document.getElementById("tf-notes").value.trim(),clientId:clientId||null,clientNameSnapshot:client?clientDisplayName(client):null,practiceId:null,practiceCodeSnapshot:null,leadId:null,createdByUid:currentUser.id,createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+    const taskPayload={id:taskRef.id,title,dueAt:new Date(`${due}T${start}`),startAt:new Date(`${due}T${start}`),endAt:new Date(`${due}T${end}`),assignedToUid:assignee?.id||"",assignedToNameSnapshot:assignee?displayUserName(assignee):"",assignedByUid:currentUser.id,assignedByNameSnapshot:assignerName,isCompleted:false,notes:document.getElementById("tf-notes").value.trim(),clientId:clientId||null,clientNameSnapshot:client?clientDisplayName(client):null,practiceId:null,practiceCodeSnapshot:null,leadId:null,createdByUid:currentUser.id,createdAt:firebase.firestore.FieldValue.serverTimestamp()};
     await taskRef.set(taskPayload,{merge:true});
     toast("Task creato ✓");closeModal("task-modal");
   }catch(error){toast(`Errore: ${error.message}`,"error");btn.disabled=false;btn.textContent="Salva"}
@@ -6180,20 +6223,16 @@ async function deleteTask(id){
 function renderCollaborators(){
   clearUnsubs();
   const main=document.getElementById("main");
-  const isDesktop=currentDeviceMode()==="desktop";
+  const isDesktop=currentDeviceMode()!=="mobile";
   const createLabel=_networkPage==="collaborators"?"+ Nuovo Collaboratore":"+ Nuovo Partner";
   main.innerHTML=isDesktop
     ? `<div class="team-desktop-shell">
-        <div class="team-desktop-hero">
-          <div class="team-desktop-hero-copy">
-            <div class="team-desktop-kicker">Collaboratori e Partner</div>
-            <div class="team-desktop-title">Rete</div>
-            <div class="team-desktop-sub">Gestisci collaboratori interni, partner commerciali e partner professionisti in un'unica vista ordinata e coerente con il resto della piattaforma.</div>
-          </div>
-          <div class="team-desktop-hero-actions">
-            ${canEditData()?`<button class="btn btn-secondary" style="background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.24);color:#fff" onclick="openCollabForm()">${createLabel}</button>`:""}
-          </div>
-        </div>
+        ${renderPageHero({
+          kicker:"Collaboratori e Partner",
+          title:"Rete",
+          subtitle:"Gestisci collaboratori interni, partner commerciali e partner professionisti in un'unica vista ordinata.",
+          buttonHtml:canEditData()?renderHeroPrimaryButton(createLabel,"openCollabForm()"):""
+        })}
         <div class="team-desktop-toolbar">
           <div class="search-wrap team-desktop-search">
             <span class="search-icon">${appIcon("search")}</span>
