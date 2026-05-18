@@ -81,6 +81,8 @@
   .mobile-user-role{font-size:10px;font-weight:700;color:#8A9099;margin-top:2px;text-transform:capitalize;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .mobile-topbar-actions{display:flex;align-items:center;gap:8px;flex:none}
   .mobile-icon-btn{width:40px;height:40px;border:none;border-radius:50%;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 8px 18px rgba(15,23,42,.08);display:flex;align-items:center;justify-content:center;color:#94A3B8;font-size:17px;cursor:pointer;position:relative;border:1px solid rgba(226,232,240,.8)}
+  .mobile-icon-btn.mobile-finance-btn{color:var(--red);background:linear-gradient(180deg,#FFF6F6,#FFEDED);border-color:rgba(193,39,45,.16)}
+  .mobile-icon-btn.mobile-finance-btn.active{background:linear-gradient(180deg,var(--red-dark),var(--red));color:#fff;border-color:rgba(193,39,45,.35);box-shadow:0 10px 20px rgba(193,39,45,.18)}
   .mobile-icon-btn svg{width:19px;height:19px;display:block;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
   .notif-dot{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--red);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 12px rgba(193,39,45,.3)}
   .mobile-tabbar{position:fixed;left:0;right:0;bottom:0;z-index:75;padding:0;background:linear-gradient(180deg,rgba(243,244,246,0),rgba(243,244,246,.7) 28%,#F3F4F6 100%);pointer-events:none}
@@ -337,6 +339,8 @@
   /* Pre-analysis desktop */
   .preanalysis-shell{padding:32px;display:flex;flex-direction:column;gap:20px}
   .preanalysis-shell .page-header{margin-bottom:0}
+  .finance-shell{padding:32px;display:flex;flex-direction:column;gap:20px;height:100%;min-height:0;overflow:hidden}
+  .finance-shell .page-header{margin-bottom:0}
   .preanalysis-layout{position:relative;display:grid;grid-template-columns:340px minmax(0,1fr);gap:18px;align-items:start;transition:grid-template-columns .36s cubic-bezier(.22,1,.36,1),gap .36s cubic-bezier(.22,1,.36,1)}
   .preanalysis-layout.archive-collapsed{grid-template-columns:56px minmax(0,1fr);gap:18px}
   .preanalysis-list{min-width:0;background:#fff;border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:0 10px 24px rgba(15,23,42,.04);display:flex;flex-direction:column;gap:12px;overflow:hidden;transition:opacity .24s ease,transform .36s cubic-bezier(.22,1,.36,1),padding .24s ease,border-color .24s ease,box-shadow .24s ease}
@@ -360,6 +364,44 @@
   .preanalysis-card-meta{font-size:12px;color:var(--gray);margin-top:6px}
   .preanalysis-card-total{font-size:17px;font-weight:900;color:var(--red);margin-top:10px}
   .preanalysis-editor{display:flex;flex-direction:column;gap:16px}
+  .finance-layout{position:relative;display:grid;grid-template-columns:340px minmax(0,1fr);gap:18px;align-items:stretch;flex:1;min-height:0;transition:grid-template-columns .36s cubic-bezier(.22,1,.36,1),gap .36s cubic-bezier(.22,1,.36,1)}
+  .finance-layout.archive-collapsed{grid-template-columns:56px minmax(0,1fr);gap:18px}
+  .finance-chat-list{min-width:0;min-height:0;background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 10px 24px rgba(15,23,42,.04);display:flex;flex-direction:column;gap:16px;overflow:hidden;transition:opacity .24s ease,transform .36s cubic-bezier(.22,1,.36,1),padding .24s ease,border-color .24s ease,box-shadow .24s ease}
+  .finance-layout.archive-collapsed .finance-chat-list{opacity:0;transform:translateX(-14px);pointer-events:none;padding:0;border-color:transparent;box-shadow:none}
+  .finance-chat-toggle{position:absolute;left:282px;top:18px;z-index:4;width:42px;height:42px;border:none;border-radius:13px;background:linear-gradient(180deg,var(--red-dark),var(--red));color:#fff;box-shadow:0 12px 24px rgba(193,39,45,.22);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:left .36s cubic-bezier(.22,1,.36,1),transform .18s ease,box-shadow .18s ease}
+  .finance-chat-toggle:hover{transform:translateY(-1px);box-shadow:0 16px 30px rgba(193,39,45,.26)}
+  .finance-chat-toggle svg{width:18px;height:18px;stroke:#fff}
+  .finance-layout.archive-collapsed .finance-chat-toggle{left:0}
+  .finance-chat-list-head{padding-right:62px;min-height:56px;align-items:flex-start}
+  .finance-saved-list{display:flex;flex-direction:column;gap:10px;flex:1;min-height:0;overflow-y:auto;padding:0 4px 4px 0}
+  .finance-saved-card{position:relative;width:100%;text-align:left;min-height:82px;display:block;flex-shrink:0;margin-top:0;border-color:transparent!important;box-shadow:inset 0 0 0 1.5px rgba(193,39,45,.24)!important}
+  .finance-saved-card:hover,.finance-saved-card.active{box-shadow:inset 0 0 0 1.5px rgba(193,39,45,.3),0 12px 26px rgba(15,23,42,.07)!important}
+  .finance-saved-card-main{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;min-width:0}
+  .finance-saved-card-copy{min-width:0;padding-right:4px}
+  .finance-chat-delete{width:24px;height:24px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;color:#C1272D;font-weight:950;line-height:1;flex-shrink:0;transition:background .15s ease}
+  .finance-chat-delete:hover{background:rgba(193,39,45,.08)}
+  .finance-chat-editor{display:flex;flex-direction:column;min-height:0;height:100%}
+  .finance-chat-scroll{flex:1;min-height:0;overflow:auto;padding:18px;background:#FAFAFA}
+  .finance-chat-input{height:74px;min-height:74px;max-height:74px;resize:none!important;overflow-y:auto;flex:1;min-width:0}
+  .finance-chat-input::-webkit-resizer{display:none}
+  .finance-message{display:flex;margin-bottom:12px}
+  .finance-message.user{justify-content:flex-end}
+  .finance-message.ai{justify-content:flex-start}
+  .finance-message-bubble{max-width:78%;padding:12px 14px;border-radius:12px;box-shadow:0 8px 18px rgba(15,23,42,.04)}
+  .finance-message.user .finance-message-bubble{background:var(--red);color:#fff;border:0}
+  .finance-message.ai .finance-message-bubble{background:#fff;color:var(--black);border:1px solid var(--border)}
+  .finance-message-author{font-size:12px;font-weight:900;margin-bottom:6px;opacity:.78}
+  .finance-markdown{font-size:14px;line-height:1.58;color:inherit}
+  .finance-markdown p{margin:0 0 10px}
+  .finance-markdown p:last-child{margin-bottom:0}
+  .finance-markdown strong{font-weight:950;color:var(--black)}
+  .finance-markdown em{font-style:italic}
+  .finance-markdown ul,.finance-markdown ol{margin:7px 0 12px;padding-left:20px}
+  .finance-markdown li{margin:5px 0;padding-left:2px}
+  .finance-markdown h4{font-size:15px;font-weight:950;color:var(--black);margin:14px 0 7px}
+  .finance-markdown h4:first-child{margin-top:0}
+  .finance-message.user .finance-markdown strong,.finance-message.user .finance-markdown h4{color:#fff}
+  .finance-attachments-note{margin-top:8px;font-size:12px;opacity:.78}
   .preanalysis-panel{background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 10px 24px rgba(15,23,42,.04)}
   .preanalysis-panel-title{font-size:18px;font-weight:900;color:var(--black);margin-bottom:14px}
   .preanalysis-meta-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
@@ -393,24 +435,34 @@
   .preanalysis-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
   .preanalysis-empty{padding:28px;text-align:center;color:var(--gray);border:1px dashed rgba(15,23,42,.12);border-radius:16px;background:#FAFAFB}
   body[data-device="mobile"] .preanalysis-shell{display:none!important}
-  body[data-device="tablet"] .preanalysis-shell{padding:22px;gap:16px}
+  body[data-device="tablet"] .preanalysis-shell,body[data-device="tablet"] .finance-shell{padding:22px;gap:16px}
   body[data-device="tablet"] .preanalysis-shell .page-header{align-items:flex-start}
   body[data-device="tablet"] .preanalysis-shell .page-header h1{font-size:34px;line-height:1}
   body[data-device="tablet"] .preanalysis-layout{grid-template-columns:300px minmax(0,1fr);gap:16px}
+  body[data-device="tablet"] .finance-layout{grid-template-columns:300px minmax(0,1fr);gap:16px}
   body[data-device="tablet"] .preanalysis-layout.archive-collapsed{grid-template-columns:54px minmax(0,1fr);gap:16px}
+  body[data-device="tablet"] .finance-layout.archive-collapsed{grid-template-columns:54px minmax(0,1fr);gap:16px}
   body[data-device="tablet"] .preanalysis-archive-toggle{left:246px}
+  body[data-device="tablet"] .finance-chat-toggle{left:246px}
   body[data-device="tablet"] .preanalysis-layout.archive-collapsed .preanalysis-archive-toggle{left:0}
+  body[data-device="tablet"] .finance-layout.archive-collapsed .finance-chat-toggle{left:0}
   body[data-device="tablet"] .preanalysis-meta-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   body[data-device="tablet"] .preanalysis-meta-grid .form-group[style*="grid-column"]{grid-column:span 2!important}
   body[data-device="tablet"] .preanalysis-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
   body[data-device="tablet"] .preanalysis-upload{align-items:stretch}
   body[data-device="tablet"] .preanalysis-table{min-width:1080px}
   body[data-device="tablet"][data-tablet-orientation="portrait"] .preanalysis-layout{grid-template-columns:minmax(0,1fr);gap:0}
+  body[data-device="tablet"][data-tablet-orientation="portrait"] .finance-layout{grid-template-columns:minmax(0,1fr);gap:0}
   body[data-device="tablet"][data-tablet-orientation="portrait"] .preanalysis-layout.archive-collapsed{grid-template-columns:54px minmax(0,1fr);gap:14px}
+  body[data-device="tablet"][data-tablet-orientation="portrait"] .finance-layout.archive-collapsed{grid-template-columns:54px minmax(0,1fr);gap:14px}
   body[data-device="tablet"][data-tablet-orientation="portrait"] .preanalysis-layout:not(.archive-collapsed) .preanalysis-list{position:absolute;left:0;top:0;width:min(320px,calc(100vw - 92px));z-index:3}
+  body[data-device="tablet"][data-tablet-orientation="portrait"] .finance-layout:not(.archive-collapsed) .finance-chat-list{position:absolute;left:0;top:0;width:min(320px,calc(100vw - 92px));z-index:3}
   body[data-device="tablet"][data-tablet-orientation="portrait"] .preanalysis-layout:not(.archive-collapsed) .preanalysis-editor{grid-column:1}
+  body[data-device="tablet"][data-tablet-orientation="portrait"] .finance-layout:not(.archive-collapsed) .finance-chat-editor{grid-column:1}
   body[data-device="tablet"][data-tablet-orientation="portrait"] .preanalysis-archive-toggle{left:min(276px,calc(100vw - 136px))}
+  body[data-device="tablet"][data-tablet-orientation="portrait"] .finance-chat-toggle{left:min(276px,calc(100vw - 136px))}
   body[data-device="tablet"][data-tablet-orientation="portrait"] .preanalysis-layout.archive-collapsed .preanalysis-archive-toggle{left:0}
+  body[data-device="tablet"][data-tablet-orientation="portrait"] .finance-layout.archive-collapsed .finance-chat-toggle{left:0}
   body[data-device="tablet"][data-tablet-orientation="portrait"] .preanalysis-meta-grid{grid-template-columns:1fr}
   body[data-device="tablet"][data-tablet-orientation="portrait"] .preanalysis-meta-grid .form-group[style*="grid-column"]{grid-column:auto!important}
   body[data-device="tablet"][data-tablet-orientation="portrait"] .preanalysis-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -665,20 +717,73 @@
   .practice-chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--gray);font-weight:600}
   .practice-chip .app-icon,.calendar-detail-chip .app-icon,.client-history-meta-chip .app-icon{width:14px;height:14px;stroke:#fff;background:var(--red);border-radius:999px;padding:3px;box-sizing:content-box}
   .practice-page{padding:32px;display:flex;flex-direction:column;gap:20px}
+  #practice-subpage{display:grid;gap:20px}
   .practice-hero{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(135deg,#971B20,#D22630);padding:28px;color:#fff;box-shadow:0 22px 55px rgba(193,39,45,.18)}
   .practice-hero:after{content:"";position:absolute;right:-70px;top:-95px;width:260px;height:260px;border-radius:999px;background:rgba(255,255,255,.11)}
   .practice-hero-row{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
   .practice-hero-kicker{font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:6px}
   .practice-hero-title{font-size:38px;font-weight:950;letter-spacing:-.04em;line-height:1}
   .practice-hero-sub{font-size:15px;font-weight:700;color:rgba(255,255,255,.86);margin-top:10px;max-width:760px}
+  .practice-subnav{display:inline-flex;gap:6px;background:#F1F2F4;border-radius:16px;padding:6px;width:max-content;max-width:100%}
+  .practice-subtab{border:none;background:transparent;border-radius:12px;padding:10px 16px;font-family:inherit;font-size:13px;font-weight:900;color:var(--gray);cursor:pointer;transition:background .16s ease,color .16s ease,box-shadow .16s ease}
+  .practice-subtab.active{background:#fff;color:var(--red);box-shadow:0 8px 18px rgba(15,23,42,.07)}
   .practice-dashboard{display:grid;grid-template-columns:repeat(5,minmax(150px,1fr));gap:14px}
   .practice-money-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 10px 26px rgba(15,23,42,.05)}
   .practice-money-label{font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-light);margin-bottom:8px}
   .practice-money-value{font-size:24px;font-weight:950;letter-spacing:-.03em;color:var(--black)}
   .practice-money-hint{font-size:12px;font-weight:700;color:var(--gray);margin-top:5px}
   .practice-workspace{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:20px;align-items:start}
+  .practice-workspace.single{grid-template-columns:minmax(0,1fr)}
   .practice-list-card{border-radius:24px;background:#fff;border:1px solid var(--border);box-shadow:0 16px 36px rgba(15,23,42,.06);overflow:hidden}
   .practice-list-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 22px;border-bottom:1px solid var(--border)}
+  .prenotativa-client-card{margin:14px 0 14px;padding:14px;border-radius:18px;background:linear-gradient(180deg,#FFF,#FFF7F7);border:1px solid rgba(193,39,45,.12)}
+  .prenotativa-client-label{font-size:11px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-light);margin-bottom:5px}
+  .prenotativa-client-name{font-size:18px;font-weight:950;letter-spacing:-.035em;color:var(--black);line-height:1.15}
+  .prenotativa-drop-grid{display:grid;gap:12px}
+  .prenotativa-upload{position:relative;min-width:0;border:1.5px solid rgba(193,39,45,.14);background:#fff;border-radius:18px;padding:16px;display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;gap:13px;cursor:pointer;box-shadow:0 10px 24px rgba(15,23,42,.045);transition:border-color .16s ease,background .16s ease,transform .16s ease,box-shadow .16s ease}
+  .prenotativa-upload:hover{border-color:rgba(193,39,45,.34);background:#FFFBFB;transform:translateY(-1px);box-shadow:0 14px 30px rgba(193,39,45,.08)}
+  .prenotativa-upload.loaded{border-color:rgba(46,125,50,.22);background:linear-gradient(180deg,#fff,#F7FFF9)}
+  .prenotativa-upload-icon{width:44px;height:44px;border-radius:15px;background:var(--red);color:#fff;display:grid;place-items:center;flex:none}
+  .prenotativa-upload.loaded .prenotativa-upload-icon{background:var(--success)}
+  .prenotativa-upload-title{display:block;font-size:14px;font-weight:950;color:var(--black);line-height:1.2;overflow-wrap:anywhere;word-break:break-word}
+  .prenotativa-upload-sub{display:block;max-width:100%;font-size:11px;font-weight:800;color:var(--gray);margin-top:4px;line-height:1.35;overflow-wrap:anywhere;word-break:break-word}
+  .prenotativa-upload-status{display:inline-flex;align-items:center;gap:5px;margin-top:9px;padding:5px 8px;border-radius:999px;background:#F4F4F5;color:var(--gray);font-size:10px;font-weight:950;letter-spacing:.04em;text-transform:uppercase}
+  .prenotativa-upload.loaded .prenotativa-upload-status{background:rgba(46,125,50,.1);color:var(--success)}
+  .prenotativa-summary{display:grid;gap:8px;margin-top:12px}
+  .prenotativa-summary-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-top:1px solid rgba(15,23,42,.06);padding-top:8px;font-size:12px}
+  .prenotativa-summary-row:first-child{border-top:none;padding-top:0}
+  .prenotativa-summary-row span{color:var(--gray);font-weight:800}
+  .prenotativa-summary-row strong{text-align:right;color:var(--black);font-weight:950}
+  .prenotativa-status{font-size:12px;line-height:1.45;color:var(--gray);font-weight:800;margin-top:10px}
+  .prenotativa-preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  .prenotativa-preview-description{resize:none;min-height:170px;line-height:1.45}
+  .prenotativa-char-count{font-size:12px;font-weight:900;color:var(--gray);text-align:right;margin-top:6px}
+  .prenotativa-char-count.ok{color:var(--success)}
+  .prenotativa-warning{border:1px solid rgba(230,81,0,.16);background:#FFF8ED;color:#9A4B00;border-radius:12px;padding:12px 14px;font-size:13px;font-weight:800;line-height:1.45;margin-bottom:16px}
+  .prenotativa-page-grid{display:grid;grid-template-columns:minmax(360px,430px) minmax(0,1fr);gap:20px;align-items:start;min-height:0}
+  .prenotativa-main-card{border-radius:24px;background:#fff;border:1px solid var(--border);box-shadow:0 16px 36px rgba(15,23,42,.06);padding:22px}
+  .prenotativa-next-list{display:grid;gap:10px;margin-top:14px}
+  .prenotativa-next-item{display:flex;align-items:flex-start;gap:10px;padding:12px;border-radius:14px;background:#FAFAFB;border:1px solid rgba(15,23,42,.06);font-size:13px;color:var(--gray);font-weight:800;line-height:1.45}
+  .prenotativa-next-item strong{display:block;color:var(--black);font-weight:950;margin-bottom:2px}
+  .prenotativa-actions{display:grid;gap:8px;margin-top:12px}
+  .prenotativa-pdf-card{display:flex;flex-direction:column;gap:0;min-height:0;height:calc(100vh - 224px);padding:12px;overflow:hidden}
+  .prenotativa-pdf-head{display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .prenotativa-pdf-title{font-size:13px;font-weight:900;color:var(--gray);margin-top:3px}
+  .prenotativa-pdf-preview{flex:1;min-height:0;border-radius:18px;border:1px solid rgba(15,23,42,.08);background:#EEF1F4;overflow:auto;display:flex}
+  .prenotativa-pdf-preview iframe{width:100%;height:72vh;min-height:560px;border:0;background:#fff}
+  .prenotativa-pdf-pages{width:100%;display:grid;gap:18px;align-content:start;justify-items:center;padding:18px;background:#EEF1F4}
+  .prenotativa-pdf-page{display:block;max-width:100%;height:auto;background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.18)}
+  .prenotativa-pdf-placeholder{flex:1;display:grid;place-items:center;text-align:center;color:var(--gray);font-weight:800;line-height:1.45;padding:34px}
+  .prenotativa-archive{margin-top:16px;border-top:1px solid rgba(15,23,42,.07);padding-top:14px}
+  .prenotativa-archive-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .prenotativa-archive-title{font-size:14px;font-weight:950;color:var(--black)}
+  .prenotativa-archive-count{font-size:11px;font-weight:900;color:var(--gray);text-transform:uppercase;letter-spacing:.05em}
+  .prenotativa-archive-list{display:grid;gap:8px;max-height:190px;overflow:auto;padding-right:2px}
+  .prenotativa-archive-item{border:1px solid rgba(193,39,45,.14);border-radius:14px;padding:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFCFC}
+  .prenotativa-archive-name{font-size:12px;font-weight:950;color:var(--black);line-height:1.25;overflow-wrap:anywhere;word-break:break-word}
+  .prenotativa-archive-date{font-size:11px;font-weight:800;color:var(--gray);margin-top:2px;overflow-wrap:anywhere;word-break:break-word}
+  .prenotativa-archive-actions{display:flex;gap:6px;flex:none}
+  .prenotativa-icon-btn{width:34px;height:34px;border-radius:10px;border:1px solid rgba(193,39,45,.24);background:#fff;color:var(--red);display:grid;place-items:center;cursor:pointer}
   .practice-grid-new{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;padding:20px}
   .practice-card-new{position:relative;background:linear-gradient(180deg,#fff,#FFFCFC);border:1px solid rgba(193,39,45,.13);border-radius:22px;padding:20px;cursor:pointer;box-shadow:0 12px 28px rgba(15,23,42,.05);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
   .practice-card-new:hover{transform:translateY(-3px);box-shadow:0 22px 42px rgba(193,39,45,.12);border-color:rgba(193,39,45,.28)}
@@ -826,7 +931,7 @@
     .modal{width:min(100%,920px)}
     .calendar-shell{grid-template-columns:minmax(0,1fr) 248px}
     .calendar-bar{flex-wrap:wrap}
-    .clients-shell,.client-detail-shell,.team-desktop-shell,.preanalysis-shell{padding:24px}
+    .clients-shell,.client-detail-shell,.team-desktop-shell,.preanalysis-shell,.finance-shell{padding:24px}
     .clients-toolbar{flex-wrap:wrap}
     .clients-view-toggle{margin-left:auto}
   }
@@ -846,8 +951,44 @@
     .client-detail-actions .btn{flex:1;justify-content:center}
     .practice-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}
     .practice-workspace{grid-template-columns:1fr}
+    .prenotativa-page-grid{grid-template-columns:1fr}
+    .prenotativa-preview-grid{grid-template-columns:1fr}
     .practice-side-panel{position:static}
     .practice-form-scenario-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+
+  @media(min-width:921px) and (max-width:1180px) and (orientation:landscape){
+    .practice-page{padding:24px;gap:18px}
+    .prenotativa-page-grid{grid-template-columns:minmax(330px,400px) minmax(0,1fr);gap:18px;align-items:start}
+    .prenotativa-main-card{border-radius:24px}
+    .prenotativa-pdf-card{height:calc(100vh - 190px);min-height:0;overflow:hidden}
+    .prenotativa-pdf-preview{min-height:0}
+    .prenotativa-pdf-pages{padding:16px}
+    .prenotativa-client-name{font-size:17px}
+    .prenotativa-upload{padding:14px}
+    .prenotativa-archive-list{max-height:170px}
+  }
+
+  @media(min-width:601px) and (max-width:920px) and (orientation:portrait){
+    .practice-page{padding:22px!important;gap:18px}
+    .practice-hero{border-radius:24px;padding:22px}
+    .practice-hero-title{font-size:34px}
+    .prenotativa-page-grid{grid-template-columns:1fr;gap:18px}
+    #prenotativa-panel{padding:20px}
+    .prenotativa-client-card{margin:12px 0;padding:13px 14px}
+    .prenotativa-client-name{font-size:17px}
+    .prenotativa-drop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .prenotativa-upload{align-items:start;grid-template-columns:40px minmax(0,1fr);padding:14px;min-height:150px}
+    .prenotativa-upload-icon{width:40px;height:40px;border-radius:14px}
+    .prenotativa-upload-title{font-size:13px}
+    .prenotativa-upload-sub{font-size:11px}
+    .prenotativa-actions{grid-template-columns:1fr 1fr;gap:10px}
+    .prenotativa-actions .btn{min-height:48px}
+    .prenotativa-archive{margin-top:14px}
+    .prenotativa-archive-list{max-height:190px}
+    .prenotativa-pdf-card{padding:12px;height:64vh;min-height:520px;overflow:hidden}
+    .prenotativa-pdf-preview{min-height:0;border-radius:18px}
+    .prenotativa-pdf-pages{padding:16px;gap:16px}
   }
 
   @media(max-width:600px), (max-height:600px) and (orientation:landscape){
@@ -877,6 +1018,7 @@
     .modal{border-radius:24px 24px 0 0;max-height:88vh}
     #toast{left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 90px)}
     .toast{max-width:none}
+    body[data-device="mobile"][data-active-section="finance-ai"] #main{height:100dvh;min-height:0;overflow:hidden!important;padding-top:56px;padding-bottom:86px}
     .login-shell{grid-template-columns:1fr;min-height:auto;border-radius:28px}
     .login-brand{padding:28px 24px;min-height:240px}
     .login-brand-title{font-size:34px}
@@ -902,10 +1044,77 @@
     .clients-mobile-shell{padding:14px 14px 28px}
     .clients-mobile-panel,.clients-mobile-card,.client-panel{border-radius:22px}
     .clients-mobile-summary{grid-template-columns:1fr 1fr}
-    .practice-page,.clients-shell,.team-desktop-shell,.preanalysis-shell{padding:16px;gap:16px}
+    .practice-page,.clients-shell,.team-desktop-shell,.preanalysis-shell,.finance-shell{padding:16px;gap:16px}
+    .finance-shell{height:calc(100dvh - 174px);min-height:0;overflow:hidden}
+    .finance-shell .practice-hero{padding:18px;border-radius:22px;flex-shrink:0}
+    .finance-shell .practice-hero-title{font-size:30px;line-height:1}
+    .finance-shell .practice-hero-sub{font-size:13px;line-height:1.35}
+    .finance-shell .practice-hero-kicker{font-size:11px}
+    .finance-shell .practice-hero-row{gap:14px}
+    .finance-shell .practice-hero-row>div:last-child{width:100%}
+    .finance-shell .practice-hero .btn{width:100%;justify-content:center;border-radius:14px;padding:11px 16px}
+    .finance-layout{grid-template-columns:minmax(0,1fr);gap:12px;align-items:stretch}
+    .finance-layout.archive-collapsed{grid-template-columns:minmax(0,1fr);gap:12px}
+    .finance-chat-list{max-height:178px;border-radius:18px;padding:14px;gap:10px}
+    .finance-layout.archive-collapsed .finance-chat-list{max-height:0;opacity:0;transform:translateY(-8px);padding:0;border-color:transparent;box-shadow:none}
+    .finance-chat-list-head{min-height:42px;padding-right:54px}
+    .finance-chat-toggle{left:auto!important;right:14px;top:14px;width:40px;height:40px;border-radius:13px}
+    .finance-layout.archive-collapsed .finance-chat-toggle{left:auto!important;right:14px;top:0}
+    .finance-saved-list{gap:8px}
+    .finance-saved-card{min-height:72px;border-radius:14px;padding:12px}
+    .finance-chat-editor{min-height:0;border-radius:18px}
+    .finance-chat-editor>div:first-child{padding:12px 14px!important}
+    .finance-chat-editor>div:first-child .btn{padding:8px 10px;font-size:12px;white-space:nowrap}
+    .finance-chat-scroll{padding:14px}
+    .finance-message-bubble{max-width:92%;padding:11px 12px}
+    .finance-chat-input{height:58px;min-height:58px;max-height:58px;font-size:13px}
+    #finance-chat-attachments+div{gap:8px!important;align-items:center!important}
+    #finance-chat-file-input+button{width:42px!important;height:42px!important;flex:0 0 42px}
+    #finance-chat-send{height:42px;padding:0 14px}
+    body[data-device="mobile"][data-active-section="finance-ai"] #main>.finance-mobile-shell{height:100%;padding:10px 12px 12px!important;display:flex;flex-direction:column;gap:10px;background:#F3F4F6}
+    .finance-mobile-head{height:58px;flex:none;display:grid;grid-template-columns:44px minmax(0,1fr)44px;align-items:center;gap:10px;background:#fff;border:1px solid rgba(15,23,42,.06);border-radius:22px;padding:8px;box-shadow:0 10px 24px rgba(15,23,42,.06)}
+    .finance-mobile-icon-btn,.finance-mobile-new-btn{width:42px;height:42px;border:none;border-radius:16px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .finance-mobile-icon-btn{background:linear-gradient(180deg,var(--red-dark),var(--red));color:#fff;box-shadow:0 10px 18px rgba(193,39,45,.18)}
+    .finance-mobile-new-btn{background:#FFF2F2;color:var(--red);border:1px solid rgba(193,39,45,.16)}
+    .finance-mobile-icon-btn svg,.finance-mobile-new-btn svg{width:19px;height:19px}
+    .finance-mobile-title-wrap{min-width:0}
+    .finance-mobile-kicker{font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.13em;color:var(--red);line-height:1}
+    .finance-mobile-title{font-size:17px;font-weight:950;color:var(--black);line-height:1.1;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .finance-mobile-layout{position:relative;display:block;flex:1;min-height:0;overflow:hidden}
+    .finance-mobile-chat-card{height:100%;min-height:0;background:#fff;border:1px solid rgba(15,23,42,.06);border-radius:24px;box-shadow:0 14px 30px rgba(15,23,42,.07);overflow:hidden;display:flex;flex-direction:column}
+    .finance-mobile-chat-top{height:58px;flex:none;padding:10px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff}
+    .finance-mobile-ai-dot{width:36px;height:36px;border-radius:14px;display:grid;place-items:center;background:#FFF0F0;color:var(--red);flex:none}
+    .finance-mobile-ai-name{font-size:15px;font-weight:950;color:var(--black);line-height:1.1}
+    .finance-mobile-provider{font-size:11px;font-weight:800;color:var(--gray);line-height:1.2}
+    .finance-mobile-clear{border:1px solid rgba(193,39,45,.22);background:#fff;color:var(--red);border-radius:12px;padding:8px 10px;font-size:12px;font-weight:900;font-family:inherit}
+    .finance-mobile-messages{flex:1;min-height:0;padding:16px 12px;background:#FAFAFB}
+    .finance-mobile-messages .empty{min-height:100%;height:100%;justify-content:center!important;padding:0 16px}
+    .finance-mobile-messages .empty-icon{width:58px;height:58px;margin-bottom:12px}
+    .finance-mobile-messages .empty-title{font-size:18px}
+    .finance-mobile-messages .empty-sub{font-size:13px;line-height:1.35}
+    .finance-mobile-composer{flex:none;padding:10px 10px calc(env(safe-area-inset-bottom,0px) + 10px);border-top:1px solid var(--border);background:#fff}
+    .finance-mobile-compose-row{display:flex;align-items:flex-end;gap:8px}
+    .finance-mobile-attach,.finance-mobile-send{width:44px;height:44px;border:none;border-radius:16px;display:flex;align-items:center;justify-content:center;flex:0 0 44px;cursor:pointer}
+    .finance-mobile-attach{background:#fff;color:var(--red);border:1.5px solid rgba(193,39,45,.28)}
+    .finance-mobile-send{background:var(--red);color:#fff;box-shadow:0 10px 18px rgba(193,39,45,.18)}
+    .finance-mobile-attach svg,.finance-mobile-send svg{width:18px;height:18px}
+    .finance-mobile-composer .finance-chat-input{height:44px;min-height:44px;max-height:92px;border-radius:16px;padding:11px 12px;font-size:14px;line-height:1.35;background:#F9FAFB;resize:none!important}
+    .finance-mobile-drawer{position:absolute!important;left:0;top:0;bottom:0;width:min(86vw,330px);max-height:none!important;z-index:8;border-radius:24px;padding:16px!important;transform:translateX(0);opacity:1;box-shadow:0 24px 60px rgba(15,23,42,.22)}
+    .finance-mobile-layout.archive-collapsed .finance-mobile-drawer{max-height:none!important;transform:translateX(calc(-100% - 16px))!important;opacity:0!important;pointer-events:none;padding:16px!important;border-color:var(--border)!important}
+    .finance-mobile-backdrop{position:absolute;inset:0;z-index:7;border:none;background:rgba(15,23,42,.22);backdrop-filter:blur(3px);opacity:1;pointer-events:auto}
+    .finance-mobile-layout.archive-collapsed .finance-mobile-backdrop{opacity:0;pointer-events:none}
+    .finance-mobile-layout .finance-chat-toggle{display:none}
+    .finance-mobile-layout .finance-chat-list-head{min-height:48px;padding-right:0}
+    .finance-mobile-layout .finance-saved-list{flex:1;min-height:0;overflow-y:auto}
+    .finance-mobile-layout .finance-saved-card{min-height:76px}
     .practice-hero{border-radius:26px;padding:24px}
     .practice-hero-row{flex-direction:column}
     .practice-hero-title{font-size:38px}
+    .practice-subnav{width:100%;overflow:auto}
+    .practice-subtab{flex:1;white-space:nowrap}
+    .prenotativa-page-grid{grid-template-columns:1fr}
+    .prenotativa-main-card{border-radius:22px;padding:16px}
+    .prenotativa-preview-grid{grid-template-columns:1fr}
     .practice-dashboard{grid-template-columns:1fr}
     .practice-list-head{flex-direction:column;align-items:stretch}
     .practice-list-head>div:last-child{min-width:0!important;width:100%}
@@ -925,6 +1134,7 @@
     .mobile-topbar{padding:calc(env(safe-area-inset-top,0px) + 10px) 12px 10px}
     .mobile-topbar-row{grid-template-columns:36px minmax(0,1fr) 36px;gap:12px}
     body[data-device="mobile"] #main{padding-top:56px;padding-bottom:86px}
+    body[data-device="mobile"][data-active-section="finance-ai"] #main{padding-top:56px;padding-bottom:86px}
     .page-title{font-size:20px}
     .page-sub{font-size:13px}
     .quick-actions-grid{grid-template-columns:1fr 1fr;gap:8px}
@@ -962,6 +1172,8 @@
     .mobile-tabbar-inner{gap:3px;padding:8px 6px calc(env(safe-area-inset-bottom,0px) + 8px);border-radius:999px}
     .mobile-tab{padding:7px 2px 5px}
     body[data-device="mobile"] #main{padding-top:54px;padding-bottom:84px}
+    body[data-device="mobile"][data-active-section="finance-ai"] #main{padding-top:54px;padding-bottom:84px}
+    body[data-device="mobile"][data-active-section="finance-ai"] .finance-shell{height:calc(100dvh - 170px)}
     .page-title{font-size:18px}
     .mobile-topbar-row{gap:10px}
     .mobile-user-name{font-size:13px}
@@ -1194,6 +1406,7 @@
 </div>
 
 <script src="assets/preanalysis-template.js"></script>
+<script src="assets/codici-catastali-comuni.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════
 // CONFIG
@@ -1226,7 +1439,8 @@ const COLLECTIONS = {
   practices: "practices",
   practicePayments: "practice_payments",
   commissionRules: "commission_rules",
-  preAnalyses: "pre_analyses"
+  preAnalyses: "pre_analyses",
+  aiUsageLogs: "ai_usage_logs"
 };
 
 const SUPABASE = { projectRef: "jeskuaofhyjldbuhpnvh", bucket: "pitcrm-attachments" };
@@ -1269,8 +1483,24 @@ const PREANALYSIS_CATEGORIES = ["Impianti","Macchinari","Attrezzature","Terreni/
 const PREANALYSIS_TEMPLATE_URL = "assets/preanalisi-zesunica-template.xlsx";
 const PREANALYSIS_AI_FUNCTION = "preanalysis-ai";
 const CLIENT_REGISTRY_AI_FUNCTION = "client-registry-ai";
+const FINANCE_CHAT_AI_FUNCTION = "finance-ai-chat";
+const AI_PROVIDER = "gemini";
+const AI_FUNCTIONS_BY_PROVIDER = {
+  gemini: {
+    client_registry_upload: CLIENT_REGISTRY_AI_FUNCTION,
+    preanalysis_documents: PREANALYSIS_AI_FUNCTION,
+    finance_chat: FINANCE_CHAT_AI_FUNCTION,
+  },
+};
 const PREANALYSIS_AI_MAX_FILE_BYTES = 18 * 1024 * 1024;
 const CLIENT_REGISTRY_AI_MAX_FILE_BYTES = 18 * 1024 * 1024;
+const AI_MONTHLY_LIMITS = {
+  admin: { client_registry_upload: Infinity, preanalysis_documents: Infinity, finance_chat: Infinity },
+  internal: { client_registry_upload: 300, preanalysis_documents: 300, finance_chat: 1000 },
+  external: { client_registry_upload: 80, preanalysis_documents: 80, finance_chat: 300 },
+  client: { client_registry_upload: 30, preanalysis_documents: 30, finance_chat: 120 },
+  default: { client_registry_upload: 30, preanalysis_documents: 30, finance_chat: 120 },
+};
 const PREANALYSIS_EXCEL_START_ROW = 65;
 const PREANALYSIS_EXCEL_BASE_DATA_ROWS = 7;
 const PREANALYSIS_EXCEL_INSERT_BEFORE_ROW = 72;
@@ -1279,6 +1509,12 @@ const PREANALYSIS_EXCEL_MAX_ROWS = 200;
 const JSZIP_URL = "https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js";
 const PDFJS_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
 const PDFJS_WORKER_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
+const PDFLIB_URL = "assets/pdf-lib.min.js";
+const PRENOTATIVA_TEMPLATE_URL = "assets/modello_comunicazione_integrativa_2025.pdf";
+const PRENOTATIVA_TEMPLATE_BASE64_URL = "assets/modello-comunicazione-integrativa-2025-base64.js";
+const PIT_DELEGATE_FISCAL_CODE = "10080141210";
+const PRENOTATIVA_DESCRIPTION_MIN_LENGTH = 800;
+const PRENOTATIVA_DESCRIPTION_MAX_LENGTH = 1000;
 
 // ═══════════════════════════════════════════════════════════════
 // FIREBASE INIT
@@ -1427,6 +1663,282 @@ function supabaseFunctionUrl(name){
   return `https://${SUPABASE.projectRef}.functions.supabase.co/${name}`;
 }
 
+function currentAiProvider(){
+  return AI_PROVIDER;
+}
+
+function aiFunctionName(feature){
+  return AI_FUNCTIONS_BY_PROVIDER[currentAiProvider()]?.[feature]||AI_FUNCTIONS_BY_PROVIDER.gemini[feature]||"";
+}
+
+function aiProviderLabel(provider=currentAiProvider()){
+  return provider==="gemini"?"Gemini":provider==="openai"?"OpenAI":provider||"AI";
+}
+
+function aiFileMetadata(files){
+  return Array.from(files||[]).map(file=>({
+    name:String(file?.name||"").slice(0,180),
+    size:Number(file?.size||0),
+    type:String(file?.type||mimeTypeFromFileName(file?.name||"")).slice(0,120)
+  }));
+}
+
+function aiTotalBytes(files){
+  return Array.from(files||[]).reduce((sum,file)=>sum+Number(file?.size||0),0);
+}
+
+function formatBytes(bytes){
+  const value=Number(bytes||0);
+  if(value<1024)return `${value} B`;
+  if(value<1024*1024)return `${(value/1024).toFixed(1)} KB`;
+  return `${(value/1024/1024).toFixed(2)} MB`;
+}
+
+function aiUsageLocalStorageKey(){
+  return `pitcrm-ai-usage-logs:${currentUser?.id||"guest"}`;
+}
+
+function readLocalAiUsageLogs(){
+  try{
+    return JSON.parse(localStorage.getItem(aiUsageLocalStorageKey())||"[]");
+  }catch{
+    return [];
+  }
+}
+
+function saveLocalAiUsageLog(entry){
+  try{
+    const logs=readLocalAiUsageLogs();
+    logs.unshift(entry);
+    localStorage.setItem(aiUsageLocalStorageKey(),JSON.stringify(logs.slice(0,80)));
+  }catch(error){
+    console.warn("Local AI usage log failed",error);
+  }
+}
+
+function aiCurrentMonthKey(date=new Date()){
+  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}`;
+}
+
+function aiUsageUnits(log){
+  if(log?.feature==="preanalysis_documents")return Math.max(1,Number(log.fileCount||1));
+  return 1;
+}
+
+function aiMonthlyLimit(feature){
+  const role=currentUser?.role||"default";
+  const limits=AI_MONTHLY_LIMITS[role]||AI_MONTHLY_LIMITS.default;
+  return limits[feature]??AI_MONTHLY_LIMITS.default[feature]??0;
+}
+
+function aiMonthlyUsed(feature){
+  const month=aiCurrentMonthKey();
+  return readLocalAiUsageLogs()
+    .filter(log=>{
+      if(log.feature!==feature||["BLOCKED_SIZE","QUOTA_BLOCKED"].includes(log.status))return false;
+      const created=toDateValue(log.createdAtLocal);
+      return created&&aiCurrentMonthKey(created)===month;
+    })
+    .reduce((sum,log)=>sum+aiUsageUnits(log),0);
+}
+
+function ensureAiMonthlyQuota(feature,units=1){
+  const limit=aiMonthlyLimit(feature);
+  if(!Number.isFinite(limit))return;
+  const used=aiMonthlyUsed(feature);
+  if(used+units>limit){
+    const remaining=Math.max(0,limit-used);
+    const error=new Error(`Limite AI mensile raggiunto per questo piano. Disponibili: ${remaining}, richiesti: ${units}.`);
+    error.aiUsageStatus="QUOTA_BLOCKED";
+    throw error;
+  }
+}
+
+function financeChatsStorageKey(){
+  return `pitcrm-finance-chats:${currentUser?.id||"guest"}`;
+}
+
+function financeSidebarStorageKey(){
+  return `pitcrm-finance-sidebar-collapsed:${currentUser?.id||"guest"}`;
+}
+
+function readFinanceChats(){
+  try{return JSON.parse(localStorage.getItem(financeChatsStorageKey())||"[]")}
+  catch{return []}
+}
+
+function saveFinanceChats(chats){
+  try{localStorage.setItem(financeChatsStorageKey(),JSON.stringify(chats.slice(0,40)))}
+  catch(error){console.warn("Finance chats save failed",error)}
+}
+
+function currentFinanceChatId(){
+  try{return localStorage.getItem(`${financeChatsStorageKey()}:current`)||""}
+  catch{return ""}
+}
+
+function setCurrentFinanceChatId(id){
+  try{localStorage.setItem(`${financeChatsStorageKey()}:current`,id)}
+  catch(error){}
+}
+
+function financeSidebarCollapsed(){
+  try{return localStorage.getItem(financeSidebarStorageKey())==="1"}
+  catch{return false}
+}
+
+function financeSidebarHasPreference(){
+  try{return localStorage.getItem(financeSidebarStorageKey())!==null}
+  catch{return false}
+}
+
+function setFinanceSidebarCollapsed(value){
+  try{localStorage.setItem(financeSidebarStorageKey(),value?"1":"0")}
+  catch(error){}
+}
+
+function financeChatTitle(messages){
+  const first=messages.find(item=>item.role==="user")?.content||"Nuova chat";
+  return first.replace(/\s+/g," ").trim().slice(0,48)||"Nuova chat";
+}
+
+function ensureFinanceChat(){
+  let chats=readFinanceChats();
+  let id=currentFinanceChatId();
+  let chat=chats.find(item=>item.id===id);
+  if(!chat){
+    chat={id:`chat-${Date.now()}-${Math.random().toString(16).slice(2)}`,title:"Nuova chat",messages:[],createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};
+    chats.unshift(chat);
+    saveFinanceChats(chats);
+    setCurrentFinanceChatId(chat.id);
+  }
+  _financeChatMessages=Array.isArray(chat.messages)?chat.messages.slice(-30):[];
+  return chat;
+}
+
+function persistCurrentFinanceChat(){
+  const id=currentFinanceChatId();
+  const chats=readFinanceChats();
+  const index=chats.findIndex(item=>item.id===id);
+  if(index<0)return;
+  chats[index]={...chats[index],title:financeChatTitle(_financeChatMessages),messages:_financeChatMessages.slice(-30),updatedAt:new Date().toISOString()};
+  saveFinanceChats(chats.sort((a,b)=>String(b.updatedAt||"").localeCompare(String(a.updatedAt||""))));
+}
+
+function loadFinanceChatMessages(){
+  try{
+    ensureFinanceChat();
+  }catch{
+    _financeChatMessages=[];
+  }
+}
+
+function saveFinanceChatMessages(){
+  try{
+    persistCurrentFinanceChat();
+  }catch(error){
+    console.warn("Finance chat save failed",error);
+  }
+}
+
+function createFinanceChat(){
+  const chats=readFinanceChats();
+  const chat={id:`chat-${Date.now()}-${Math.random().toString(16).slice(2)}`,title:"Nuova chat",messages:[],createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};
+  chats.unshift(chat);
+  saveFinanceChats(chats);
+  setCurrentFinanceChatId(chat.id);
+  if(currentDeviceMode()==="mobile")setFinanceSidebarCollapsed(true);
+  renderFinanceAi();
+}
+
+function selectFinanceChat(id){
+  setCurrentFinanceChatId(id);
+  if(currentDeviceMode()==="mobile")setFinanceSidebarCollapsed(true);
+  renderFinanceAi();
+}
+
+function deleteFinanceChat(id,event){
+  if(event)event.stopPropagation();
+  let chats=readFinanceChats().filter(item=>item.id!==id);
+  saveFinanceChats(chats);
+  if(currentFinanceChatId()===id)setCurrentFinanceChatId(chats[0]?.id||"");
+  renderFinanceAi();
+}
+
+function syncFinanceChatsSidebarState(){
+  const collapsed=financeSidebarCollapsed();
+  const layout=document.getElementById("finance-layout");
+  const button=document.getElementById("finance-chat-toggle");
+  if(!layout||!button)return;
+  layout.classList.toggle("archive-collapsed",collapsed);
+  const isMobile=currentDeviceMode()==="mobile";
+  button.innerHTML=appIcon(isMobile?(collapsed?"menu":"x"):(collapsed?"chevron-right":"chevron-left"));
+  button.title=collapsed?"Apri chat salvate":"Chiudi chat salvate";
+}
+
+function toggleFinanceChatsSidebar(){
+  const layout=document.getElementById("finance-layout");
+  const next=layout?!layout.classList.contains("archive-collapsed"):!financeSidebarCollapsed();
+  setFinanceSidebarCollapsed(next);
+  syncFinanceChatsSidebarState();
+}
+
+function renderFinanceAttachmentPreview(){
+  const wrap=document.getElementById("finance-chat-attachments");
+  if(!wrap)return;
+  wrap.innerHTML=_financeChatFiles.length?`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+    ${_financeChatFiles.map((file,index)=>`<span style="display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:#F9FAFB;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800;color:var(--gray)">
+      ${appIcon("paperclip")} ${esc(file.name)} · ${formatBytes(file.size)}
+      <button type="button" style="border:0;background:transparent;color:#C1272D;font-weight:900;cursor:pointer" onclick="removeFinanceAttachment(${index})">×</button>
+    </span>`).join("")}
+  </div>`:"";
+}
+
+function handleFinanceAttachmentSelected(input){
+  const files=Array.from(input.files||[]);
+  _financeChatFiles=[..._financeChatFiles,...files].slice(0,4);
+  input.value="";
+  renderFinanceAttachmentPreview();
+}
+
+function removeFinanceAttachment(index){
+  _financeChatFiles.splice(index,1);
+  renderFinanceAttachmentPreview();
+}
+
+async function logAiUsage(entry){
+  const now=new Date();
+  const payload={
+    id:`local-${now.getTime()}-${Math.random().toString(16).slice(2)}`,
+    provider:entry.provider||currentAiProvider(),
+    functionName:entry.functionName||"",
+    feature:entry.feature||"",
+    status:entry.status||"UNKNOWN",
+    durationMs:Math.max(0,Math.round(Number(entry.durationMs||0))),
+    fileCount:Number(entry.fileCount||0),
+    totalBytes:Number(entry.totalBytes||0),
+    rowCount:Number(entry.rowCount||0),
+    filledFieldCount:Number(entry.filledFieldCount||0),
+    errorMessage:String(entry.errorMessage||"").slice(0,900),
+    files:Array.isArray(entry.files)?entry.files.slice(0,20):[],
+    relatedClientId:entry.relatedClientId||"",
+    relatedPreAnalysisId:entry.relatedPreAnalysisId||"",
+    userId:currentUser?.id||auth?.currentUser?.uid||"",
+    userName:displayUserName(),
+    userRole:currentUser?.role||"",
+    createdAtLocal:now.toISOString()
+  };
+  saveLocalAiUsageLog(payload);
+  if(!db||!firebaseReady)return;
+  try{
+    await waitAuth();
+    const docRef=db.collection(COLLECTIONS.aiUsageLogs).doc();
+    await docRef.set({...payload,id:docRef.id,createdAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
+  }catch(error){
+    console.warn("AI usage log failed",error);
+  }
+}
+
 function formatEuro(value){
   const n=Number(value)||0;
   return new Intl.NumberFormat("it-IT",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n);
@@ -1478,8 +1990,12 @@ let calDate=new Date(),allEvents=[],allTasks=[];
 let calViewMode="week",calShowEvents=true,calShowTasks=true;
 let allInternalUsers=[];
 let allCollabs=[],collabSearch="";
-let allPractices=[],practiceSearch="",_practiceQuickFilter="all";
+let allPractices=[],practiceSearch="",_practiceQuickFilter="all",_practiceSubPage="flow";
+let _prenotativaDraft={registryFile:null,checklistFile:null,client:null,checklist:null,description:""};
+let _prenotativaPreviewLocations=[];
+let _prenotativaSavedPdfs=[],_prenotativaArchiveLoaded=false,_prenotativaPdfPreviewUrl="",_prenotativaPdfPreviewToken=0;
 let allPreAnalyses=[],preAnalysisSearch="",_currentPreAnalysisId=null,_preAnalysisRows=[],_preAnalysisArchiveCollapsed=false;
+let _financeChatMessages=[],_financeChatFiles=[];
 let _editingClientId=null,_editingLeadId=null,_editingCollabId=null,_clientRegistryPendingFile=null;
 let _editingUserId=null,_editingPracticeId=null;
 let _detailClient=null,_detailTab="info";
@@ -1516,6 +2032,7 @@ function visibleNavItems(role=currentRole()){
     {id:"clients",label:"Clienti",icon:"users",visible:perms.canViewClients},
     {id:"practices",label:"Pratiche",icon:"briefcase",visible:perms.canViewClients},
     {id:"preanalysis",label:"Pre-analisi",icon:"chart",visible:perms.canViewClients&&currentDeviceMode()!=="mobile"},
+    {id:"finance-ai",label:"AI Finance",icon:"zap",visible:perms.canViewClients},
     {id:"collaborators",label:"Rete",icon:"user",visible:perms.canViewTeam}
   ].filter(item=>item.visible);
 }
@@ -1554,10 +2071,15 @@ const ICON_PATHS={
   alert:`<path d="M12 4 21 20H3z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path>`,
   euro:`<path d="M17 6.5A7 7 0 1 0 17 17.5"></path><path d="M6 10h8"></path><path d="M6 14h8"></path>`,
   plus:`<path d="M12 5v14"></path><path d="M5 12h14"></path>`,
+  menu:`<path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path>`,
+  x:`<path d="M6 6l12 12"></path><path d="M18 6 6 18"></path>`,
+  send:`<path d="M21 3 10 14"></path><path d="m21 3-7 18-4-7-7-4z"></path>`,
   handshake:`<path d="M8 12.5 11 15a2 2 0 0 0 2.6-.1l4.9-4.9"></path><path d="M3.5 11 8 6.5l3 3"></path><path d="M20.5 11 16 6.5l-2 2"></path><path d="m7 16 2 2"></path><path d="m15 16-2 2"></path>`,
   flame:`<path d="M12 21c-3.6 0-6-2.5-6-5.7 0-2.4 1.4-4.3 3-5.7.1 1.7.9 2.8 2.1 3.5-.3-3.2 1-5.8 3.4-8.1.4 2.8 2.1 4.3 3.3 6.1.8 1.2 1.2 2.5 1.2 4.1 0 3.3-2.5 5.8-7 5.8Z"></path>`,
   pin:`<path d="M14.5 4.5 19.5 9.5l-3.5 1-4.5 6-1-3.5-3.5-1 6-4.5z"></path><path d="m9.5 14.5-5 5"></path>`,
   info:`<circle cx="12" cy="12" r="9"></circle><path d="M12 10.5v5"></path><path d="M12 7.5h.01"></path>`,
+  eye:`<path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="3"></circle>`,
+  "refresh-cw":`<path d="M20 6v5h-5"></path><path d="M4 18v-5h5"></path><path d="M18.5 9A7 7 0 0 0 6.2 6.2L4 8.4"></path><path d="M5.5 15A7 7 0 0 0 17.8 17.8L20 15.6"></path>`,
   "chevron-right":`<path d="m9 18 6-6-6-6"></path>`,
   "chevron-left":`<path d="m15 18-6-6 6-6"></path>`,
   "external-link":`<path d="M14 4h6v6"></path><path d="m20 4-9 9"></path><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5"></path>`
@@ -1568,7 +2090,7 @@ function appIcon(name,extraClass=""){
 }
 function iconFor(value){return appIcon(value)}
 function mobileNavIcon(id){
-  return appIcon(id==="leads"?"target":id==="clients"?"users":id==="practices"?"briefcase":id==="collaborators"?"user":id);
+  return appIcon(id==="leads"?"target":id==="clients"?"users":id==="practices"?"briefcase":id==="collaborators"?"user":id==="finance-ai"?"zap":id);
 }
 function notificationBellIcon(){
   return appIcon("bell");
@@ -1916,7 +2438,9 @@ function buildMobileChrome(){
   const mobileTabbar=document.getElementById("mobile-tabbar");
   if(!mobileTopbar||!mobileTabbar)return;
   const accountSection=accountSectionId();
-  const mobileNav=visibleNavItems().filter((item,index,array)=>array.findIndex(other=>other.id===item.id)===index);
+  const mobileNav=visibleNavItems()
+    .filter((item,index,array)=>array.findIndex(other=>other.id===item.id)===index)
+    .filter(item=>item.id!=="finance-ai");
   const unread=unreadNotificationsCount();
   const userName=displayUserName();
   const userRole=(currentUser?.role||"utente").replace(/^./,c=>c.toUpperCase());
@@ -1932,6 +2456,7 @@ function buildMobileChrome(){
           </div>
         </div>
         <div class="mobile-topbar-actions">
+          <button class="mobile-icon-btn mobile-finance-btn ${activeSection==="finance-ai"?"active":""}" aria-label="AI Finance" title="AI Finance" onclick="navigate('finance-ai')">${appIcon("zap")}</button>
           <button class="mobile-icon-btn" onclick="openNotificationsCenter()">${notificationBellIcon()}${unread?`<span class="notif-dot">${Math.min(unread,99)}</span>`:""}</button>
         </div>
       </div>
@@ -1960,18 +2485,20 @@ function navigate(section,extra){
   const allowedIds=new Set([...visibleNavItems().map(item=>item.id),accountSectionId()]);
   if(!allowedIds.has(section))section=defaultSectionForUser();
   activeSection=section;
+  document.body.dataset.activeSection=section;
   syncResponsiveAppShell();
   document.querySelectorAll(".nav-item").forEach(el=>el.classList.remove("active"));
   const navEl=document.getElementById(`nav-${section}`);
   if(navEl)navEl.classList.add("active");
   buildSidebar();buildMobileChrome();buildDesktopUtility();
   const main=document.getElementById("main");
-  main.style.overflowY=section==="calendar"&&currentDeviceMode()!=="mobile"?"hidden":"auto";
+  main.style.overflowY=["calendar","finance-ai"].includes(section)?"hidden":"auto";
   main.style.animation="none";main.offsetHeight;main.style.animation="fadeIn .25s ease";
   if(section==="clients")extra?renderClientDetail(extra):renderClients();
   else if(section==="leads")extra?renderLeadDetail(extra):renderLeads();
   else if(section==="practices")extra?renderPracticeDetail(extra):renderPractices();
   else if(section==="preanalysis")renderPreAnalysis();
+  else if(section==="finance-ai")renderFinanceAi();
   else if(section==="calendar")renderCalendar();
   else if(section==="collaborators")extra?renderCollabDetail(extra):renderCollaborators();
   else if(section==="settings")renderSettings();
@@ -2612,25 +3139,64 @@ async function handleClientRegistryUpload(input){
 }
 
 async function analyzeClientRegistryFileWithAI(file){
+  const startedAt=performance.now();
+  const files=[file];
+  const functionName=aiFunctionName("client_registry_upload");
   if(file.size>CLIENT_REGISTRY_AI_MAX_FILE_BYTES){
+    await logAiUsage({
+      functionName,
+      feature:"client_registry_upload",
+      status:"BLOCKED_SIZE",
+      durationMs:performance.now()-startedAt,
+      fileCount:1,
+      totalBytes:aiTotalBytes(files),
+      files:aiFileMetadata(files),
+      errorMessage:`${file.name} supera il limite di 18 MB per Upload Cliente`
+    });
     throw new Error(`${file.name} supera il limite di 18 MB per Upload Cliente`);
   }
-  const base64=await fileToBase64(file);
-  if(!base64)throw new Error(`${file.name}: lettura file non riuscita`);
-  const response=await fetch(supabaseFunctionUrl(CLIENT_REGISTRY_AI_FUNCTION),{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      document:{
-        fileName:file.name,
-        mimeType:file.type||mimeTypeFromFileName(file.name),
-        base64
-      }
-    })
-  });
-  const payload=await response.json().catch(()=>({}));
-  if(!response.ok)throw new Error(payload.error||`AI non disponibile (${response.status})`);
-  return payload.client||{};
+  try{
+    ensureAiMonthlyQuota("client_registry_upload",1);
+    const base64=await fileToBase64(file);
+    if(!base64)throw new Error(`${file.name}: lettura file non riuscita`);
+    const response=await fetch(supabaseFunctionUrl(functionName),{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        document:{
+          fileName:file.name,
+          mimeType:file.type||mimeTypeFromFileName(file.name),
+          base64
+        }
+      })
+    });
+    const payload=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(payload.error||`AI non disponibile (${response.status})`);
+    const client=payload.client||{};
+    await logAiUsage({
+      functionName,
+      feature:"client_registry_upload",
+      status:"SUCCESS",
+      durationMs:performance.now()-startedAt,
+      fileCount:1,
+      totalBytes:aiTotalBytes(files),
+      files:aiFileMetadata(files),
+      filledFieldCount:Object.values(client||{}).filter(value=>String(value||"").trim()).length
+    });
+    return client;
+  }catch(error){
+    await logAiUsage({
+      functionName,
+      feature:"client_registry_upload",
+      status:error?.aiUsageStatus||"ERROR",
+      durationMs:performance.now()-startedAt,
+      fileCount:1,
+      totalBytes:aiTotalBytes(files),
+      files:aiFileMetadata(files),
+      errorMessage:String(error?.message||error||"Errore AI")
+    });
+    throw error;
+  }
 }
 
 async function saveClient(){
@@ -4299,6 +4865,19 @@ function renderPracticeBalanceRows(balance,practice){
     <div class="practice-balance-row highlight"><span class="practice-balance-detail"><span>Compenso Professioni in Team</span><small>${balance.advanceAmount>0?`Di cui ${formatEuro(balance.advanceAmount)} di acconto`:"Compenso netto"}</small></span><strong>${formatEuro(balance.pitAmount)}</strong></div>`;
 }
 
+function renderPracticeHeroAction(){
+  if(!canEditData())return"";
+  const isPrenotativa=_practiceSubPage==="prenotativa";
+  const label=isPrenotativa?"+ Nuova Integrativa":"+ Nuova Pratica";
+  const action=isPrenotativa?"startNewPrenotativaDraft()":"openPracticeForm()";
+  return `<button id="practice-hero-action" class="btn" style="background:#fff;color:var(--red);font-weight:950;padding:13px 20px;border-radius:16px" onclick="${action}">${label}</button>`;
+}
+
+function refreshPracticeHeroAction(){
+  const button=document.getElementById("practice-hero-action");
+  if(button)button.outerHTML=renderPracticeHeroAction();
+}
+
 function renderPractices(){
   clearUnsubs();
   const main=document.getElementById("main");
@@ -4306,14 +4885,55 @@ function renderPractices(){
     <section class="practice-hero">
       <div class="practice-hero-row">
         <div><div class="practice-hero-kicker">Gestione agevolazioni e bilanci</div><div class="practice-hero-title">Pratiche</div><div class="practice-hero-sub">Scenari liberi, dato ufficiale Agenzia Entrate, compensi, acconti e margine netto.</div></div>
-        ${canEditData()?`<button class="btn" style="background:#fff;color:var(--red);font-weight:950;padding:13px 20px;border-radius:16px" onclick="openPracticeForm()">+ Nuova Pratica</button>`:""}
+        ${renderPracticeHeroAction()}
       </div>
     </section>
-    <div id="practices-metrics" class="practice-dashboard"></div>
+    ${renderPracticeSubnav()}
+    <div id="practice-subpage">${renderPracticeSubpageShell()}</div>
+  </div>`;
+  const unsub=db.collection(COLLECTIONS.practices).onSnapshot(snapshot=>{
+    allPractices=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
+    const countEl=document.getElementById("practices-count");if(countEl)countEl.textContent=`${allPractices.length} pratiche totali`;
+    if(_practiceSubPage==="flow"){
+      renderPracticesMetrics();
+      renderPracticesList();
+    }
+  },error=>{const el=document.getElementById("practices-list");if(el)el.innerHTML=`<div class="error-box">Errore: ${esc(error.message)}</div>`});
+  _activeUnsubs.push(unsub);
+}
+
+function renderPracticeSubnav(){
+  return `<div class="practice-subnav">
+    <button class="practice-subtab ${_practiceSubPage==="flow"?"active":""}" onclick="switchPracticeSubpage('flow')">Flusso pratica</button>
+    <button class="practice-subtab ${_practiceSubPage==="prenotativa"?"active":""}" onclick="switchPracticeSubpage('prenotativa')">Comunicazione integrativa</button>
+  </div>`;
+}
+
+function switchPracticeSubpage(page){
+  _practiceSubPage=page;
+  const wrap=document.getElementById("practice-subpage");
+  if(wrap)wrap.innerHTML=renderPracticeSubpageShell();
+  const nav=document.querySelector(".practice-subnav");
+  if(nav)nav.outerHTML=renderPracticeSubnav();
+  refreshPracticeHeroAction();
+  if(page==="flow"){
+    renderPracticesMetrics();
+    renderPracticesList();
+  }else{
+    initPrenotativaSubpage();
+  }
+}
+
+function renderPracticeSubpageShell(){
+  return _practiceSubPage==="prenotativa"?renderPrenotativaSubpage():renderPracticeFlowSubpage();
+}
+
+function renderPracticeFlowSubpage(){
+  return `<div id="practices-metrics" class="practice-dashboard"></div>
     <div class="practice-workspace">
       <section class="practice-list-card">
         <div class="practice-list-head">
-          <div><h2 style="font-size:24px;font-weight:950;letter-spacing:-.04em">Portafoglio pratiche</h2><p class="page-sub" id="practices-count">Caricamento...</p></div>
+          <div><h2 style="font-size:24px;font-weight:950;letter-spacing:-.04em">Portafoglio pratiche</h2><p class="page-sub" id="practices-count">${allPractices.length?`${allPractices.length} pratiche totali`:"Caricamento..."}</p></div>
           <div style="min-width:min(430px,52%);position:relative"><span class="search-icon">${appIcon("search")}</span><input class="search-input" id="practice-search" value="${esc(practiceSearch)}" placeholder="Cerca pratica, cliente, partner..." oninput="filterPractices(this.value)"></div>
         </div>
         <div class="quick-filters" style="padding:16px 20px 0;margin:0">${[
@@ -4325,14 +4945,1506 @@ function renderPractices(){
         <div class="practice-section-card"><div class="practice-section-title">${appIcon("euro")} Bilancio globale</div><div id="practice-global-balance">${spinner()}</div></div>
         <div class="practice-section-card"><div class="practice-section-title">${appIcon("target")} Regola calcolo</div><div style="font-size:13px;line-height:1.55;color:var(--gray);font-weight:700">Se c'è l'esito ufficiale usa quello. Altrimenti usa lo scenario di riferimento o il più recente.</div></div>
       </aside>
+    </div>`;
+}
+
+function renderPrenotativaSubpage(){
+  setTimeout(initPrenotativaSubpage,0);
+  return `<div class="prenotativa-page-grid">
+    ${renderPrenotativaPanel()}
+    ${renderPrenotativaPdfPreviewCard()}
+  </div>`;
+}
+
+function renderPrenotativaPdfPreviewCard(){
+  const confirmed=Boolean(_prenotativaDraft?.pdfDraft);
+  return `<section class="prenotativa-main-card prenotativa-pdf-card" id="prenotativa-preview-card">
+    <div class="prenotativa-pdf-preview" id="prenotativa-pdf-preview">
+      ${confirmed?`<div class="prenotativa-pdf-placeholder">${spinner()}<div style="margin-top:12px">Preparazione anteprima PDF...</div></div>`:`<div class="prenotativa-pdf-placeholder"><div><div style="font-size:34px;color:rgba(193,39,45,.28);margin-bottom:8px">${appIcon("file-text")}</div><strong>Anteprima non ancora pronta</strong><br>Carica i file, rivedi la bozza e conferma i dati.</div></div>`}
+    </div>
+  </section>`;
+}
+
+function renderPrenotativaPanel(){
+  const draft=_prenotativaDraft||{};
+  const client=draft.client||{};
+  const checklist=draft.checklist||{};
+  const ready=Boolean(draft.client&&draft.checklist);
+  const confirmed=Boolean(draft.pdfDraft);
+  const businessName=client.businessName||"Carica la visura per leggere l'impresa";
+  return `<div class="practice-section-card" id="prenotativa-panel">
+    <div class="practice-section-title">${appIcon("file-text")} Comunicazione integrativa</div>
+    <div class="prenotativa-client-card">
+      <div class="prenotativa-client-label">Impresa</div>
+      <div class="prenotativa-client-name">${esc(businessName)}</div>
+    </div>
+    <div class="prenotativa-drop-grid">
+      <label class="prenotativa-upload ${draft.registryFile?"loaded":""}">
+        <input type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/*" style="display:none" onchange="handlePrenotativaRegistryUpload(this)">
+        <span class="prenotativa-upload-icon">${appIcon("building")}</span>
+        <span>
+          <span class="prenotativa-upload-title">Visura camerale</span>
+          <span class="prenotativa-upload-sub">${draft.registryFile?esc(draft.registryFile.name):"PDF o immagine della visura aggiornata."}</span>
+          <span class="prenotativa-upload-status">${draft.registryFile?`${appIcon("check")} Caricata`:"Da caricare"}</span>
+        </span>
+      </label>
+      <label class="prenotativa-upload ${draft.checklistFile?"loaded":""}">
+        <input type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display:none" onchange="handlePrenotativaChecklistUpload(this)">
+        <span class="prenotativa-upload-icon">${appIcon("chart")}</span>
+        <span>
+          <span class="prenotativa-upload-title">Check-list</span>
+          <span class="prenotativa-upload-sub">${draft.checklistFile?esc(draft.checklistFile.name):"File Excel della pre-analisi completata."}</span>
+          <span class="prenotativa-upload-status">${draft.checklistFile?`${appIcon("check")} Caricata`:"Da caricare"}</span>
+        </span>
+      </label>
+    </div>
+    <div class="prenotativa-status">${ready?"Dati base pronti. Controlla la bozza prima di generare il modello PDF.":"Carica visura e check-list per preparare la bozza della comunicazione integrativa."}</div>
+    <div class="prenotativa-actions">
+      <button class="btn btn-secondary" style="width:100%;justify-content:center" ${ready?"":"disabled"} onclick="openPrenotativaPreview()">${appIcon("file-text")} ${confirmed?"Rivedi bozza":"Prepara bozza"}</button>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" ${confirmed?"":"disabled"} onclick="generatePrenotativaPdf()">${appIcon("download")} Salva e scarica PDF</button>
+    </div>
+    ${renderPrenotativaArchive()}
+  </div>`;
+}
+
+function refreshPrenotativaPanel(){
+  const panel=document.getElementById("prenotativa-panel");
+  if(panel)panel.outerHTML=renderPrenotativaPanel();
+}
+
+function refreshPrenotativaPreviewCard(){
+  const card=document.getElementById("prenotativa-preview-card");
+  if(card)card.outerHTML=renderPrenotativaPdfPreviewCard();
+  refreshPrenotativaPdfPreview();
+}
+
+function refreshPrenotativaWorkspace(){
+  refreshPrenotativaPanel();
+  refreshPrenotativaPreviewCard();
+}
+
+function initPrenotativaSubpage(){
+  refreshPrenotativaPanel();
+  loadPrenotativaSavedPdfs();
+  refreshPrenotativaPdfPreview();
+}
+
+function invalidatePrenotativaPdfPreview(){
+  if(_prenotativaPdfPreviewUrl)URL.revokeObjectURL(_prenotativaPdfPreviewUrl);
+  _prenotativaPdfPreviewUrl="";
+  _prenotativaPdfPreviewToken++;
+}
+
+function startNewPrenotativaDraft(){
+  invalidatePrenotativaPdfPreview();
+  _prenotativaDraft={registryFile:null,checklistFile:null,client:null,checklist:null,description:""};
+  _prenotativaPreviewLocations=[];
+  refreshPrenotativaWorkspace();
+  toast("Nuova comunicazione integrativa pronta");
+}
+
+function prenotativaArchiveDb(){
+  return new Promise((resolve,reject)=>{
+    if(!("indexedDB" in window)){
+      reject(new Error("Archivio locale non disponibile in questo browser"));
+      return;
+    }
+    const request=indexedDB.open("pitcrm-comunicazione-integrativa",1);
+    request.onupgradeneeded=event=>{
+      const db=event.target.result;
+      if(!db.objectStoreNames.contains("pdfs"))db.createObjectStore("pdfs",{keyPath:"id"});
+    };
+    request.onsuccess=()=>resolve(request.result);
+    request.onerror=()=>reject(request.error||new Error("Archivio locale non disponibile"));
+  });
+}
+
+function prenotativaArchiveRequest(mode,handler){
+  return prenotativaArchiveDb().then(db=>new Promise((resolve,reject)=>{
+    const tx=db.transaction("pdfs",mode);
+    const store=tx.objectStore("pdfs");
+    const result=handler(store);
+    tx.oncomplete=()=>{db.close();resolve(result?.result)};
+    tx.onerror=()=>{db.close();reject(tx.error||new Error("Operazione archivio non riuscita"))};
+  }));
+}
+
+async function loadPrenotativaSavedPdfs(force=false){
+  if(_prenotativaArchiveLoaded&&!force)return _prenotativaSavedPdfs;
+  try{
+    const records=await prenotativaArchiveRequest("readonly",store=>store.getAll());
+    _prenotativaSavedPdfs=(records||[]).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+    _prenotativaArchiveLoaded=true;
+    refreshPrenotativaPanel();
+  }catch(error){
+    console.warn(error);
+  }
+  return _prenotativaSavedPdfs;
+}
+
+async function saveCompletedPrenotativaPdf(file){
+  const record={
+    id:`ci-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    createdAt:new Date().toISOString(),
+    businessName:file.businessName||"COMUNICAZIONE INTEGRATIVA",
+    businessFiscalCode:file.businessFiscalCode||"",
+    fileName:file.fileName,
+    bytes:file.bytes
+  };
+  await prenotativaArchiveRequest("readwrite",store=>store.put(record));
+  _prenotativaArchiveLoaded=false;
+  await loadPrenotativaSavedPdfs(true);
+  return record;
+}
+
+async function downloadSavedPrenotativaPdf(id){
+  try{
+    const record=await prenotativaArchiveRequest("readonly",store=>store.get(id));
+    if(!record)throw new Error("PDF non trovato nell'archivio locale");
+    downloadBlob(new Blob([record.bytes],{type:"application/pdf"}),record.fileName||"Comunicazione-integrativa.pdf");
+  }catch(error){
+    toast(`Download non riuscito: ${error.message}`,"error");
+  }
+}
+
+async function deleteSavedPrenotativaPdf(id){
+  try{
+    await prenotativaArchiveRequest("readwrite",store=>store.delete(id));
+    _prenotativaArchiveLoaded=false;
+    await loadPrenotativaSavedPdfs(true);
+    toast("PDF rimosso dall'archivio");
+  }catch(error){
+    toast(`Eliminazione non riuscita: ${error.message}`,"error");
+  }
+}
+
+async function refreshPrenotativaPdfPreview(force=false){
+  const wrap=document.getElementById("prenotativa-pdf-preview");
+  if(!wrap||!_prenotativaDraft?.pdfDraft)return;
+  const token=++_prenotativaPdfPreviewToken;
+  wrap.innerHTML=`<div class="prenotativa-pdf-placeholder">${spinner()}<div style="margin-top:12px">Aggiornamento anteprima PDF...</div></div>`;
+  try{
+    const file=await buildPrenotativaPdfFile();
+    const pdfjs=await ensurePdfJsLoaded();
+    const pdf=await pdfjs.getDocument({data:new Uint8Array(file.bytes)}).promise;
+    if(token!==_prenotativaPdfPreviewToken)return;
+    wrap.innerHTML=`<div class="prenotativa-pdf-pages" id="prenotativa-pdf-pages"></div>`;
+    const pagesWrap=document.getElementById("prenotativa-pdf-pages");
+    const viewportWidth=Math.max(360,(wrap.clientWidth||900)-58);
+    for(let pageNumber=1;pageNumber<=pdf.numPages;pageNumber++){
+      if(token!==_prenotativaPdfPreviewToken)return;
+      const page=await pdf.getPage(pageNumber);
+      const baseViewport=page.getViewport({scale:1});
+      const cssScale=Math.min(1.75,viewportWidth/baseViewport.width);
+      const outputScale=Math.min(2,window.devicePixelRatio||1);
+      const viewport=page.getViewport({scale:cssScale});
+      const canvas=document.createElement("canvas");
+      canvas.className="prenotativa-pdf-page";
+      canvas.width=Math.floor(viewport.width*outputScale);
+      canvas.height=Math.floor(viewport.height*outputScale);
+      canvas.style.width=`${Math.floor(viewport.width)}px`;
+      canvas.style.height=`${Math.floor(viewport.height)}px`;
+      const context=canvas.getContext("2d");
+      context.setTransform(outputScale,0,0,outputScale,0,0);
+      pagesWrap.appendChild(canvas);
+      await page.render({canvasContext:context,viewport}).promise;
+    }
+    if(_prenotativaPdfPreviewUrl)URL.revokeObjectURL(_prenotativaPdfPreviewUrl);
+    _prenotativaPdfPreviewUrl=URL.createObjectURL(new Blob([file.bytes],{type:"application/pdf"}));
+  }catch(error){
+    wrap.innerHTML=`<div class="prenotativa-pdf-placeholder"><div><strong>Anteprima non generata</strong><br>${esc(error.message)}</div></div>`;
+  }
+}
+
+function renderPrenotativaArchive(){
+  const items=Array.isArray(_prenotativaSavedPdfs)?_prenotativaSavedPdfs:[];
+  return `<div class="prenotativa-archive">
+    <div class="prenotativa-archive-head">
+      <div class="prenotativa-archive-title">Comunicazioni salvate</div>
+      <div class="prenotativa-archive-count">${items.length} file</div>
+    </div>
+    <div class="prenotativa-archive-list" id="prenotativa-archive-list">
+      ${items.length?items.map(item=>`<div class="prenotativa-archive-item">
+        <div style="min-width:0">
+          <div class="prenotativa-archive-name">${esc(item.businessName||item.fileName||"Comunicazione integrativa")}</div>
+          <div class="prenotativa-archive-date">${esc(formatDateTime(item.createdAt)||"")} · ${esc(item.fileName||"PDF")}</div>
+        </div>
+        <div class="prenotativa-archive-actions">
+          <button class="prenotativa-icon-btn" title="Scarica" onclick="downloadSavedPrenotativaPdf('${esc(item.id)}')">${appIcon("download")}</button>
+          <button class="prenotativa-icon-btn" title="Elimina" onclick="deleteSavedPrenotativaPdf('${esc(item.id)}')">${appIcon("trash")}</button>
+        </div>
+      </div>`).join(""):`<div class="prenotativa-status" style="margin-top:0">I PDF completati appariranno qui dopo il primo salvataggio.</div>`}
     </div>
   </div>`;
-  const unsub=db.collection(COLLECTIONS.practices).onSnapshot(snapshot=>{
-    allPractices=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
-    const countEl=document.getElementById("practices-count");if(countEl)countEl.textContent=`${allPractices.length} pratiche totali`;
-    renderPracticesMetrics();renderPracticesList();
-  },error=>{const el=document.getElementById("practices-list");if(el)el.innerHTML=`<div class="error-box">Errore: ${esc(error.message)}</div>`});
-  _activeUnsubs.push(unsub);
+}
+
+async function handlePrenotativaRegistryUpload(input){
+  const file=input.files?.[0];
+  if(!file)return;
+  showClientRegistryAiLoader();
+  try{
+    const client=await analyzeClientRegistryFileWithAI(file);
+    const description=_prenotativaDraft.checklist?.rows?.length
+      ? buildPrenotativaProjectDescription(_prenotativaDraft.checklist.rows,client,_prenotativaDraft.checklist?.metadata?.operatingLocation)
+      : _prenotativaDraft.description;
+    invalidatePrenotativaPdfPreview();
+    _prenotativaDraft={..._prenotativaDraft,registryFile:{name:file.name,size:file.size,type:file.type},client,description,pdfDraft:null};
+    refreshPrenotativaWorkspace();
+    toast("Visura letta per comunicazione integrativa ✓");
+  }catch(error){
+    toast(`Visura non letta: ${prettifySupabaseError(error,"la lettura della visura")}`,"error");
+  }finally{
+    closeClientRegistryAiLoader();
+    input.value="";
+  }
+}
+
+async function handlePrenotativaChecklistUpload(input){
+  const file=input.files?.[0];
+  if(!file)return;
+  try{
+    const checklist=await parsePrenotativaChecklistExcel(file);
+    const description=buildPrenotativaProjectDescription(checklist.rows,_prenotativaDraft.client,checklist.metadata?.operatingLocation);
+    invalidatePrenotativaPdfPreview();
+    _prenotativaDraft={..._prenotativaDraft,checklistFile:{name:file.name,size:file.size,type:file.type},checklist,description,pdfDraft:null};
+    refreshPrenotativaWorkspace();
+    toast(`Check-list letta: ${checklist.rows.length} righe ✓`);
+  }catch(error){
+    toast(`Check-list non letta: ${error.message}`,"error");
+  }finally{
+    input.value="";
+  }
+}
+
+function prenotativaSharedStrings(xml){
+  return [...String(xml||"").matchAll(/<si\b[^>]*>([\s\S]*?)<\/si>/g)].map(match=>
+    [...match[1].matchAll(/<t\b[^>]*>([\s\S]*?)<\/t>/g)].map(t=>xmlUnescape(t[1])).join("")
+  );
+}
+
+function prenotativaCellValue(rowXml,col,sharedStrings){
+  const match=String(rowXml||"").match(new RegExp(`<c\\b[^>]*\\br="${col}\\d+"[^>]*>([\\s\\S]*?)<\\/c>`));
+  if(!match)return "";
+  const cell=match[0];
+  const body=match[1]||"";
+  const inline=body.match(/<t\b[^>]*>([\s\S]*?)<\/t>/);
+  if(inline)return xmlUnescape(inline[1]);
+  const value=body.match(/<v>([\s\S]*?)<\/v>/)?.[1]||"";
+  if(/\bt="s"/.test(cell))return sharedStrings[Number(value)]||"";
+  return xmlUnescape(value);
+}
+
+function prenotativaCellValueByRef(sheetXml,cellRef,sharedStrings){
+  const escaped=String(cellRef||"").replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  const match=String(sheetXml||"").match(new RegExp(`<c\\b[^>]*\\br="${escaped}"[^>]*>([\\s\\S]*?)<\\/c>`));
+  if(!match)return "";
+  return prenotativaCellValue(match[0],String(cellRef||"").replace(/\d+/g,""),sharedStrings);
+}
+
+function prenotativaColumnIndex(col=""){
+  return String(col||"").toUpperCase().split("").reduce((sum,char)=>sum*26+(char.charCodeAt(0)-64),0);
+}
+
+function prenotativaTextKey(value=""){
+  return String(value||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim();
+}
+
+function prenotativaUpper(value=""){
+  return String(value||"").trim().toLocaleUpperCase("it-IT");
+}
+
+function prenotativaRowCells(rowXml,sharedStrings){
+  return [...String(rowXml||"").matchAll(/<c\b[^>]*\br="([A-Z]+)(\d+)"[^>]*>([\s\S]*?)<\/c>/g)].map(match=>{
+    const ref=`${match[1]}${match[2]}`;
+    const value=prenotativaCellValue(match[0],match[1],sharedStrings);
+    const amount=Number(normalizeItalianAmount(value))||0;
+    return {
+      ref,
+      col:match[1],
+      colIndex:prenotativaColumnIndex(match[1]),
+      row:Number(match[2]),
+      value,
+      key:prenotativaTextKey(value),
+      amount
+    };
+  });
+}
+
+function prenotativaFindChecklistAmountByLabel(sheetXml,sharedStrings,labels=[]){
+  const labelKeys=labels.map(prenotativaTextKey).filter(Boolean);
+  const rows=[...String(sheetXml||"").matchAll(/<row\b[^>]*\br="(\d+)"[^>]*(?:>([\s\S]*?)<\/row>|\/>)/g)].map(match=>({
+    number:Number(match[1]),
+    cells:prenotativaRowCells(match[0],sharedStrings)
+  })).filter(row=>row.cells.length);
+  const numericCells=cells=>cells.filter(cell=>cell.amount>0&&!cell.key.includes("20 26"));
+  const pickClosest=(cells,labelCell)=>numericCells(cells)
+    .sort((a,b)=>Math.abs(a.colIndex-labelCell.colIndex)-Math.abs(b.colIndex-labelCell.colIndex))[0]?.amount||0;
+  const pickColumnTotal=(labelRow,labelCell)=>{
+    const belowRows=rows.filter(candidate=>candidate.number>labelRow.number&&candidate.number<=labelRow.number+30);
+    const columnAmounts=belowRows.map(candidate=>{
+      const amountCell=numericCells(candidate.cells).find(cell=>cell.colIndex===labelCell.colIndex);
+      if(!amountCell)return null;
+      const isTotal=candidate.cells.some(cell=>cell.key.includes("totale"));
+      return {row:candidate.number,amount:amountCell.amount,isTotal};
+    }).filter(Boolean);
+    const total=columnAmounts.filter(item=>item.isTotal).pop();
+    if(total)return total.amount;
+    return columnAmounts.pop()?.amount||0;
+  };
+  for(const row of rows){
+    for(const cell of row.cells){
+      if(!labelKeys.some(label=>cell.key.includes(label)))continue;
+      const columnTotal=pickColumnTotal(row,cell);
+      if(columnTotal)return columnTotal;
+      const right=numericCells(row.cells.filter(candidate=>candidate.colIndex>cell.colIndex)).sort((a,b)=>a.colIndex-b.colIndex)[0]?.amount||0;
+      if(right)return right;
+      const sameRow=pickClosest(row.cells.filter(candidate=>candidate.ref!==cell.ref),cell);
+      if(sameRow)return sameRow;
+      for(let offset=1;offset<=3;offset++){
+        const nextRow=rows.find(candidate=>candidate.number===row.number+offset);
+        if(!nextRow)continue;
+        const below=pickClosest(nextRow.cells.filter(candidate=>candidate.colIndex>=cell.colIndex),cell);
+        if(below)return below;
+      }
+    }
+  }
+  return 0;
+}
+
+function prenotativaFindChecklistTextByLabel(sheetXml,sharedStrings,labels=[]){
+  const labelKeys=labels.map(prenotativaTextKey).filter(Boolean);
+  const preferBelow=labelKeys.some(label=>label.includes("dimensione"));
+  const isOperatingLocation=labelKeys.some(label=>label.includes("sede operativa"));
+  const rows=[...String(sheetXml||"").matchAll(/<row\b[^>]*\br="(\d+)"[^>]*(?:>([\s\S]*?)<\/row>|\/>)/g)].map(match=>({
+    number:Number(match[1]),
+    cells:prenotativaRowCells(match[0],sharedStrings)
+  })).filter(row=>row.cells.length);
+  const validOperatingLocationText=value=>{
+    const raw=String(value||"").trim();
+    const key=prenotativaTextKey(raw);
+    if(!raw||key.includes("investimenti ammissibili")||key.includes("agevolabile")||key.includes("totale"))return false;
+    const parsed=prenotativaParseChecklistOperatingLocation(raw);
+    return Boolean(parsed&&parsed.city&&(parsed.street||parsed.cityCode));
+  };
+  const usefulText=cell=>{
+    const value=String(cell.value||"").trim();
+    if(!value||cell.amount||/^\d{4}$/.test(value))return false;
+    return isOperatingLocation?validOperatingLocationText(value):true;
+  };
+  for(const row of rows){
+    for(const cell of row.cells){
+      if(!labelKeys.some(label=>cell.key.includes(label)))continue;
+      if(!preferBelow){
+        const right=row.cells.filter(candidate=>candidate.colIndex>cell.colIndex&&usefulText(candidate)).sort((a,b)=>a.colIndex-b.colIndex)[0];
+        if(right)return right.value.trim();
+      }
+      for(let offset=1;offset<=3;offset++){
+        const nextRow=rows.find(candidate=>candidate.number===row.number+offset);
+        if(!nextRow)continue;
+        const below=nextRow.cells.filter(candidate=>candidate.colIndex>=cell.colIndex&&usefulText(candidate)).sort((a,b)=>Math.abs(a.colIndex-cell.colIndex)-Math.abs(b.colIndex-cell.colIndex))[0];
+        if(below)return below.value.trim();
+      }
+    }
+  }
+  return "";
+}
+
+function prenotativaFindChecklistOperatingLocationText(sheetXml,sharedStrings){
+  const byLabel=prenotativaFindChecklistTextByLabel(sheetXml,sharedStrings,["Sede operativa"]);
+  if(byLabel)return byLabel;
+  const candidates=[];
+  for(const rowMatch of String(sheetXml||"").matchAll(/<row\b[^>]*\br="(\d+)"[^>]*(?:>([\s\S]*?)<\/row>|\/>)/g)){
+    const rowNumber=Number(rowMatch[1]);
+    if(rowNumber<PREANALYSIS_EXCEL_START_ROW-20)continue;
+    for(const cell of prenotativaRowCells(rowMatch[0],sharedStrings)){
+      const value=String(cell.value||"").trim();
+      const parsed=prenotativaParseChecklistOperatingLocation(value);
+      if(!parsed?.city)continue;
+      const key=prenotativaTextKey(value);
+      const score=(parsed.cityCode?40:0)+(parsed.street?35:0)+(key.includes("strada")||key.includes("via")||key.includes("statale")?20:0)-Math.max(0,rowNumber-PREANALYSIS_EXCEL_START_ROW);
+      candidates.push({value,score});
+    }
+  }
+  candidates.sort((a,b)=>b.score-a.score);
+  return candidates[0]?.value||"";
+}
+
+function prenotativaChecklistCategoryTotals(sheetXml,sharedStrings,expectedTotal=0){
+  const readTotalsFromRow=rowXml=>({
+    "Impianti":Number(normalizeItalianAmount(prenotativaCellValue(rowXml,"J",sharedStrings)))||0,
+    "Macchinari":Number(normalizeItalianAmount(prenotativaCellValue(rowXml,"K",sharedStrings)))||0,
+    "Attrezzature":Number(normalizeItalianAmount(prenotativaCellValue(rowXml,"L",sharedStrings)))||0,
+    "Terreni/Immobili":Number(normalizeItalianAmount(prenotativaCellValue(rowXml,"M",sharedStrings)))||0
+  });
+  const sumTotals=totals=>Object.values(totals||{}).reduce((sum,value)=>sum+(Number(value)||0),0);
+  const rows=[...String(sheetXml||"").matchAll(/<row\b[^>]*\br="(\d+)"[^>]*(?:>([\s\S]*?)<\/row>|\/>)/g)].map(match=>({
+    number:Number(match[1]),
+    cells:prenotativaRowCells(match[0],sharedStrings),
+    xml:match[0]
+  })).filter(row=>row.cells.length);
+  const headerAliases={
+    "Impianti":["impianti"],
+    "Macchinari":["macchinari"],
+    "Attrezzature":["attrezzature"],
+    "Terreni/Immobili":["terreni immobili","terreni","immobili"]
+  };
+  const headerRow=rows.find(row=>
+    Object.values(headerAliases).filter(aliases=>row.cells.some(cell=>aliases.some(alias=>cell.key.includes(alias)))).length>=3
+  );
+  const totalRow=rows.find(row=>row.cells.some(cell=>cell.key.includes("investimenti ammissibili")));
+  if(headerRow&&totalRow){
+    const totals={};
+    Object.entries(headerAliases).forEach(([category,aliases])=>{
+      const headerCell=headerRow.cells.find(cell=>aliases.some(alias=>cell.key.includes(alias)));
+      const amountCell=headerCell?totalRow.cells.find(cell=>cell.colIndex===headerCell.colIndex&&cell.amount>0):null;
+      totals[category]=amountCell?.amount||0;
+    });
+    if(sumTotals(totals)>0)return totals;
+  }
+  const directTotals={
+    "Impianti":Number(normalizeItalianAmount(prenotativaCellValueByRef(sheetXml,"J76",sharedStrings)))||0,
+    "Macchinari":Number(normalizeItalianAmount(prenotativaCellValueByRef(sheetXml,"K76",sharedStrings)))||0,
+    "Attrezzature":Number(normalizeItalianAmount(prenotativaCellValueByRef(sheetXml,"L76",sharedStrings)))||0,
+    "Terreni/Immobili":Number(normalizeItalianAmount(prenotativaCellValueByRef(sheetXml,"M76",sharedStrings)))||0
+  };
+  if(sumTotals(directTotals)>0)return directTotals;
+  const expected=Number(expectedTotal)||0;
+  const candidates=[];
+  for(const match of String(sheetXml||"").matchAll(/<row\b[^>]*\br="(\d+)"[^>]*(?:>([\s\S]*?)<\/row>|\/>)/g)){
+    const rowNumber=Number(match[1]);
+    if(rowNumber<PREANALYSIS_EXCEL_START_ROW||rowNumber===88)continue;
+    const totals=readTotalsFromRow(match[0]);
+    const sum=sumTotals(totals);
+    if(sum<=0)continue;
+    const nonZero=Object.values(totals).filter(value=>Number(value)>0).length;
+    candidates.push({
+      rowNumber,
+      totals,
+      sum,
+      nonZero,
+      delta:expected?Math.abs(sum-expected):0
+    });
+  }
+  candidates.sort((a,b)=>{
+    if(expected&&a.delta!==b.delta)return a.delta-b.delta;
+    if(a.nonZero!==b.nonZero)return b.nonZero-a.nonZero;
+    return b.rowNumber-a.rowNumber;
+  });
+  return candidates[0]?.totals||directTotals;
+}
+
+function xmlUnescape(value){
+  return String(value||"")
+    .replace(/&lt;/g,"<")
+    .replace(/&gt;/g,">")
+    .replace(/&amp;/g,"&")
+    .replace(/&quot;/g,'"')
+    .replace(/&apos;/g,"'");
+}
+
+function prenotativaClientLocation(client={}){
+  const locations=prenotativaClientOperatingLocations(client);
+  const legal=prenotativaLegalAddress(client);
+  return locations[0]||legal;
+}
+
+function prenotativaClientOperatingLocations(client={}){
+  const locations=Array.isArray(client?.operatingLocations)?client.operatingLocations.filter(Boolean):[];
+  if(locations.length)return locations.map(location=>prenotativaNormalizeLocation(location));
+  return clientOperatingLocations(client).map(location=>prenotativaNormalizeLocation(location));
+}
+
+function prenotativaLegalAddress(client={}){
+  return prenotativaNormalizeLocation(client.legalAddress||{
+    street:client.legalStreet||"",
+    cap:client.legalCap||"",
+    city:client.legalCity||"",
+    province:client.legalProvince||"",
+    region:client.legalRegion||"",
+    state:client.legalState||client.legalCountry||""
+  });
+}
+
+function prenotativaNormalizeLocation(location={}){
+  return {
+    street:location.street||location.address||"",
+    cap:location.cap||location.zip||"",
+    city:location.city||"",
+    province:String(location.province||"").toUpperCase(),
+    region:location.region||"",
+    state:location.state||location.country||"",
+    cityCode:location.cityCode||location.cadastralCode||location.codiceComune||""
+  };
+}
+
+function prenotativaClientOwner(client={}){
+  const owner=client.owner||{};
+  return {
+    firstName:owner.firstName||client.ownerFirstName||"",
+    lastName:owner.lastName||client.ownerLastName||"",
+    fiscalCode:owner.fiscalCode||client.ownerFiscalCode||"",
+    email:owner.email||client.ownerEmail||"",
+    phone:owner.phone||client.ownerPhone||"",
+    role:owner.role||client.ownerRole||""
+  };
+}
+
+function prenotativaClientContacts(client={}){
+  const contacts=client.contacts||{};
+  return {
+    contactEmail:contacts.contactEmail||client.contactEmail||client.ownerEmail||"",
+    contactMobile:contacts.contactMobile||client.contactMobile||"",
+    contactPhone:contacts.contactPhone||client.contactPhone||client.ownerPhone||"",
+    contactPec:contacts.contactPec||client.contactPec||client.pec||""
+  };
+}
+
+function prenotativaProvinceRegion(province=""){
+  const key=String(province||"").trim().toUpperCase();
+  const map={
+    TO:"Piemonte",VC:"Piemonte",NO:"Piemonte",CN:"Piemonte",AT:"Piemonte",AL:"Piemonte",BI:"Piemonte",VB:"Piemonte",
+    AO:"Valle d'Aosta",
+    VA:"Lombardia",CO:"Lombardia",SO:"Lombardia",MI:"Lombardia",BG:"Lombardia",BS:"Lombardia",PV:"Lombardia",CR:"Lombardia",MN:"Lombardia",LC:"Lombardia",LO:"Lombardia",MB:"Lombardia",
+    BZ:"Bolzano",TN:"Trento",
+    VR:"Veneto",VI:"Veneto",BL:"Veneto",TV:"Veneto",VE:"Veneto",PD:"Veneto",RO:"Veneto",
+    UD:"Friuli Venezia Giulia",GO:"Friuli Venezia Giulia",TS:"Friuli Venezia Giulia",PN:"Friuli Venezia Giulia",
+    IM:"Liguria",SV:"Liguria",GE:"Liguria",SP:"Liguria",
+    PC:"Emilia Romagna",PR:"Emilia Romagna",RE:"Emilia Romagna",MO:"Emilia Romagna",BO:"Emilia Romagna",FE:"Emilia Romagna",RA:"Emilia Romagna",FC:"Emilia Romagna",RN:"Emilia Romagna",
+    MS:"Toscana",LU:"Toscana",PT:"Toscana",FI:"Toscana",LI:"Toscana",PI:"Toscana",AR:"Toscana",SI:"Toscana",GR:"Toscana",PO:"Toscana",
+    PG:"Umbria",TR:"Umbria",
+    PU:"Marche",AN:"Marche",MC:"Marche",AP:"Marche",FM:"Marche",
+    VT:"Lazio",RI:"Lazio",RM:"Lazio",LT:"Lazio",FR:"Lazio",
+    AQ:"Abruzzo",TE:"Abruzzo",PE:"Abruzzo",CH:"Abruzzo",
+    CB:"Molise",IS:"Molise",
+    CE:"Campania",BN:"Campania",NA:"Campania",AV:"Campania",SA:"Campania",
+    FG:"Puglia",BA:"Puglia",TA:"Puglia",BR:"Puglia",LE:"Puglia",BT:"Puglia",
+    PZ:"Basilicata",MT:"Basilicata",
+    CS:"Calabria",CZ:"Calabria",RC:"Calabria",KR:"Calabria",VV:"Calabria",
+    TP:"Sicilia",PA:"Sicilia",ME:"Sicilia",AG:"Sicilia",CL:"Sicilia",EN:"Sicilia",CT:"Sicilia",RG:"Sicilia",SR:"Sicilia",
+    SS:"Sardegna",NU:"Sardegna",CA:"Sardegna",OR:"Sardegna",SU:"Sardegna"
+  };
+  return map[key]||"";
+}
+
+function prenotativaLocationRegion(location={}){
+  const explicit=String(location.region||"").trim();
+  if(explicit)return explicit;
+  const state=String(location.state||"").trim();
+  if(state&&!/^italia$/i.test(state))return state;
+  return prenotativaProvinceRegion(location.province);
+}
+
+function prenotativaCityCode(city="",province="",location={}){
+  const direct=String(location.cityCode||location.cadastralCode||location.codiceComune||"").trim().toUpperCase();
+  if(direct)return direct;
+  return prenotativaMunicipalityEntry(city,province)?.code||"";
+}
+
+function prenotativaMunicipalityEntry(city="",province=""){
+  const table=window.PIT_CATASTAL_CODES||{};
+  const keyBase=prenotativaUpper(city).normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^A-Z0-9]+/g," ").trim();
+  const provinceKey=String(province||"").trim().toUpperCase();
+  return table[provinceKey?`${keyBase}|${provinceKey}`:keyBase]||table[keyBase]||null;
+}
+
+function prenotativaRegionCode(region=""){
+  const key=prenotativaUpper(region).normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^A-Z0-9]+/g," ").trim();
+  const map={
+    ABRUZZO:"1",BASILICATA:"2",BOLZANO:"3",CALABRIA:"4",CAMPANIA:"5","EMILIA ROMAGNA":"6","FRIULI VENEZIA GIULIA":"7",LAZIO:"8",LIGURIA:"9",LOMBARDIA:"10",MARCHE:"11",MOLISE:"12",PIEMONTE:"13",PUGLIA:"14",SARDEGNA:"15",SICILIA:"16",TOSCANA:"17",TRENTO:"18",UMBRIA:"19","VALLE D AOSTA":"20",VENETO:"21"
+  };
+  return map[key]||"";
+}
+
+function prenotativaAddressParts(street=""){
+  const raw=String(street||"").replace(/\s+/g," ").trim();
+  const match=raw.match(/^(via|viale|piazza|p\.zza|corso|c\.so|strada|contrada|localita|loc\.|zona|largo)\s+(.+?)(?:[,\s]+(\d+[a-zA-Z]?))?$/i);
+  if(!match)return {streetType:"via",address:raw,houseNumber:""};
+  return {
+    streetType:match[1].replace(/^p\.zza$/i,"piazza").replace(/^c\.so$/i,"corso").replace(/^loc\.$/i,"localita").toLowerCase(),
+    address:match[2]||"",
+    houseNumber:match[3]||""
+  };
+}
+
+function prenotativaNormalizeCompanySize(value=""){
+  const key=prenotativaTextKey(value);
+  if(key.includes("micro"))return"micro";
+  if(key.includes("piccola"))return"piccola";
+  if(key.includes("media"))return"media";
+  if(key.includes("grande"))return"grande";
+  return"";
+}
+
+function prenotativaParseChecklistOperatingLocation(value=""){
+  const raw=String(value||"").replace(/\s+/g," ").trim();
+  if(!raw)return null;
+  const key=prenotativaTextKey(raw);
+  if(key.includes("investimenti ammissibili")||key.includes("agevolabile")||key.includes("totale"))return null;
+  const parts=raw.split(/\s+-\s+/);
+  const city=parts[0]||"";
+  const street=parts.slice(1).join(" - ");
+  const entry=prenotativaMunicipalityEntry(city,"");
+  if(!entry&&!street)return null;
+  const province=entry?.province||"";
+  return prenotativaNormalizeLocation({
+    street,
+    city,
+    province,
+    region:prenotativaProvinceRegion(province),
+    cityCode:entry?.code||""
+  });
+}
+
+function prenotativaLocationDisplay(location={},index=0){
+  const address=[location.street,location.cap].filter(Boolean).join(" ");
+  const city=[location.city,location.province].filter(Boolean).join(" ");
+  return prenotativaUpper([`SEDE ${index+1}`,city,address].filter(Boolean).join(" - "));
+}
+
+function prenotativaSameLocation(a={},b={}){
+  const key=location=>prenotativaTextKey([location.city,location.province,location.street].filter(Boolean).join(" "));
+  return key(a)&&key(a)===key(b);
+}
+
+function prenotativaLocationMatchScore(source={},candidate={}){
+  if(!source||!candidate)return 0;
+  const sourceCity=prenotativaTextKey(source.city);
+  const candidateCity=prenotativaTextKey(candidate.city);
+  const sourceProvince=prenotativaTextKey(source.province);
+  const candidateProvince=prenotativaTextKey(candidate.province);
+  const sourceStreet=prenotativaTextKey(source.street);
+  const candidateStreet=prenotativaTextKey(candidate.street);
+  let score=0;
+  if(sourceCity&&candidateCity){
+    if(sourceCity===candidateCity)score+=60;
+    else if(candidateCity.includes(sourceCity)||sourceCity.includes(candidateCity))score+=35;
+  }
+  if(sourceProvince&&candidateProvince&&sourceProvince===candidateProvince)score+=20;
+  if(sourceStreet&&candidateStreet){
+    if(sourceStreet===candidateStreet)score+=40;
+    else if(candidateStreet.includes(sourceStreet)||sourceStreet.includes(candidateStreet))score+=25;
+    else{
+      const tokens=sourceStreet.split(" ").filter(token=>token.length>2);
+      const hits=tokens.filter(token=>candidateStreet.includes(token)).length;
+      score+=Math.min(hits*6,24);
+    }
+  }
+  return score;
+}
+
+function prenotativaBestOperatingLocation(client={},checklistLocation=null){
+  const locations=prenotativaClientOperatingLocations(client);
+  const legal=prenotativaLegalAddress(client);
+  if(!locations.length&&Object.values(legal).some(Boolean))locations.push(legal);
+  if(!checklistLocation||!Object.values(checklistLocation).some(Boolean)){
+    return {locations,selected:locations[0]||legal,selectedIndex:0,matchedFromChecklist:false};
+  }
+  const ranked=locations
+    .map((location,index)=>({location,index,score:prenotativaLocationMatchScore(checklistLocation,location)}))
+    .sort((a,b)=>b.score-a.score);
+  if(ranked[0]?.score>=35){
+    return {locations,selected:ranked[0].location,selectedIndex:ranked[0].index,matchedFromChecklist:true};
+  }
+  const extended=[checklistLocation,...locations];
+  return {locations:extended,selected:checklistLocation,selectedIndex:0,matchedFromChecklist:false};
+}
+
+function prenotativaOperatingLocationOptions(client={},checklistLocation=null){
+  const match=prenotativaBestOperatingLocation(client,checklistLocation);
+  const locations=match.locations;
+  return locations.map((location,index)=>({
+    index,
+    location,
+    label:prenotativaLocationDisplay(location,index)
+  }));
+}
+
+function prenotativaLocationFields(location={}){
+  const normalized=prenotativaNormalizeLocation(location);
+  const entry=prenotativaMunicipalityEntry(normalized.city,normalized.province);
+  const province=normalized.province||entry?.province||"";
+  const region=prenotativaLocationRegion({...normalized,province});
+  const addressParts=prenotativaAddressParts(normalized.street||"");
+  return {
+    region:prenotativaUpper(region),
+    regionCode:prenotativaRegionCode(region),
+    province:prenotativaUpper(province),
+    city:prenotativaUpper(normalized.city),
+    cityCode:normalized.cityCode||entry?.code||"",
+    cap:normalized.cap||"",
+    streetType:prenotativaUpper(addressParts.streetType||"via"),
+    address:prenotativaUpper(addressParts.address||normalized.street||""),
+    houseNumber:prenotativaUpper(addressParts.houseNumber||"")
+  };
+}
+
+function prenotativaCurrentPdfDraft(){
+  if(_prenotativaDraft.pdfDraft){
+    return {
+      ..._prenotativaDraft.pdfDraft,
+      commitmentDate:_prenotativaDraft.pdfDraft.commitmentDate||prenotativaTodayDateInput()
+    };
+  }
+  const client=_prenotativaDraft.client||{};
+  const checklist=_prenotativaDraft.checklist||{};
+  const totals=checklist.totals||{};
+  const checklistLocation=checklist.metadata?.operatingLocation||null;
+  const locationMatch=prenotativaBestOperatingLocation(client,checklistLocation);
+  const locationOptions=prenotativaOperatingLocationOptions(client,checklistLocation);
+  const selectedIndex=locationOptions.findIndex(option=>prenotativaSameLocation(option.location,locationMatch.selected));
+  const location=locationOptions[Math.max(selectedIndex,0)]?.location||locationMatch.selected||prenotativaClientLocation(client);
+  const locationFields=prenotativaLocationFields(location);
+  const owner=prenotativaClientOwner(client);
+  const contacts=prenotativaClientContacts(client);
+  const clientFiscalCode=client.businessFiscalCode||client.vatNumber||"";
+  return {
+    operatingLocationIndex:String(Math.max(selectedIndex,0)),
+    businessName:prenotativaUpper(client.businessName||""),
+    businessFiscalCode:prenotativaUpper(clientFiscalCode),
+    vatNumber:client.vatNumber||"",
+    atecoCode:prenotativaUpper(client.atecoCode||""),
+    legalRepresentative:prenotativaUpper([owner.firstName,owner.lastName].filter(Boolean).join(" ")),
+    representativeFiscalCode:prenotativaUpper(clientFiscalCode),
+    contactEmail:prenotativaUpper(contacts.contactEmail||contacts.contactPec||""),
+    contactMobile:prenotativaUpper(contacts.contactMobile||""),
+    contactPhone:prenotativaUpper(contacts.contactPhone||owner.phone||""),
+    referentFirstName:prenotativaUpper(owner.firstName||""),
+    referentLastName:prenotativaUpper(owner.lastName||""),
+    ...locationFields,
+    investmentTotal:Math.ceil(Number(totals.quadroAInvestment||totals.total||0)),
+    creditRate:"",
+    creditAmount:Math.ceil(Number(totals.quadroACredit||0)),
+    investmentStatus:"notRealized",
+    startDate:"2026-01-01",
+    endDate:"2026-12-31",
+    companySize:checklist.metadata?.companySize||"",
+    officeCode:"1",
+    projectType:"ampliamento",
+    activityScope:"altro",
+    structureCount:"1",
+    nonOperational:false,
+    specialCases:"",
+    stepRegulation:false,
+    statementLargeProcess:false,
+    statementDiversification:false,
+    statementNewEconomicActivity:false,
+    statementOtherStateAid:false,
+    statementOtherMeasures:false,
+    statementDoubleFunding:true,
+    statementMinimumCost:Number(totals.total||0)>=200000,
+    statementStepRegulation:false,
+    statementVatIncluded:false,
+    delegateFiscalCode:PIT_DELEGATE_FISCAL_CODE,
+    commitmentDate:prenotativaTodayDateInput(),
+    description:_prenotativaDraft.description||buildPrenotativaProjectDescription(checklist.rows||[],client,checklistLocation)
+  };
+}
+
+async function ensurePdfLibLoaded(){
+  if(window.PDFLib)return window.PDFLib;
+  await loadExternalScript(PDFLIB_URL,10000);
+  if(!window.PDFLib)throw new Error("Libreria PDF non disponibile.");
+  return window.PDFLib;
+}
+
+async function loadPrenotativaTemplateBytes(){
+  try{
+    if(location.protocol!=="file:"){
+      const response=await fetch(PRENOTATIVA_TEMPLATE_URL,{cache:"no-store"});
+      if(response.ok)return await response.arrayBuffer();
+    }
+  }catch(error){}
+  if(PRENOTATIVA_TEMPLATE_BASE64_URL&&!window.PRENOTATIVA_TEMPLATE_BASE64){
+    await loadExternalScript(PRENOTATIVA_TEMPLATE_BASE64_URL,10000);
+  }
+  if(!window.PRENOTATIVA_TEMPLATE_BASE64)throw new Error("Modello PDF non disponibile negli asset");
+  return base64ToArrayBuffer(window.PRENOTATIVA_TEMPLATE_BASE64);
+}
+
+function prenotativaPdfAmount(value){
+  const n=Number(normalizeItalianAmount(value));
+  if(!Number.isFinite(n)||!n)return "";
+  return n.toLocaleString("it-IT",{maximumFractionDigits:0});
+}
+
+function prenotativaPdfNumber(value){
+  const n=Number(normalizeItalianAmount(value));
+  return Number.isFinite(n)?n:0;
+}
+
+function prenotativaPdfYear(){
+  const draft=_prenotativaDraft.pdfDraft||{};
+  const date=draft.startDate||draft.endDate||"";
+  const year=String(date).match(/\b(20\d{2})\b/)?.[1]||new Date().getFullYear();
+  return String(year);
+}
+
+function prenotativaTodayDateInput(){
+  const date=new Date();
+  const year=String(date.getFullYear());
+  const month=String(date.getMonth()+1).padStart(2,"0");
+  const day=String(date.getDate()).padStart(2,"0");
+  return `${year}-${month}-${day}`;
+}
+
+function prenotativaNormalizeDate(value){
+  const raw=String(value||"").trim();
+  const iso=raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(iso)return `${iso[1]}-${iso[2]}-${iso[3]}`;
+  const italian=raw.match(/^([0-3]?\d)[./-]([01]?\d)[./-](\d{4})$/);
+  if(italian)return `${italian[3]}-${italian[2].padStart(2,"0")}-${italian[1].padStart(2,"0")}`;
+  return "";
+}
+
+function prenotativaSplitName(fullName=""){
+  const parts=String(fullName||"").trim().split(/\s+/).filter(Boolean);
+  if(parts.length<=1)return {firstName:parts[0]||"",lastName:""};
+  return {firstName:parts.slice(0,-1).join(" "),lastName:parts.at(-1)};
+}
+
+function prenotativaWrapText(text,maxChars=92,maxLines=17){
+  const words=String(text||"").replace(/\s+/g," ").trim().split(" ").filter(Boolean);
+  const lines=[];
+  let line="";
+  words.forEach(word=>{
+    const next=line?`${line} ${word}`:word;
+    if(next.length>maxChars&&line){
+      lines.push(line);
+      line=word;
+    }else{
+      line=next;
+    }
+  });
+  if(line)lines.push(line);
+  return lines.slice(0,maxLines);
+}
+
+function prenotativaDrawText(page,font,text,x,y,size=8,options={}){
+  const value=String(text||"").trim();
+  if(!value)return;
+  page.drawText(value,{x,y,size,font,color:options.color||window.PDFLib.rgb(0,0,0),maxWidth:options.maxWidth});
+}
+
+function prenotativaDrawBoxChars(page,font,value,x,y,step=15.1,size=8.5,max=16){
+  String(value||"").replace(/\s/g,"").slice(0,max).split("").forEach((char,index)=>{
+    page.drawText(char.toUpperCase(),{x:x+(index*step),y,size,font,color:window.PDFLib.rgb(0,0,0)});
+  });
+}
+
+function prenotativaDrawAmount(page,font,value,xRight,y,size=9){
+  const text=prenotativaPdfAmount(value);
+  if(!text)return;
+  const width=font.widthOfTextAtSize(text,size);
+  page.drawText(text,{x:xRight-width,y,size,font,color:window.PDFLib.rgb(0,0,0)});
+}
+
+function prenotativaDrawDate(page,font,value,x,y,size=12){
+  const normalized=prenotativaNormalizeDate(value);
+  if(!normalized)return;
+  const [year,month,day]=normalized.split("-");
+  if(!year||!month||!day)return;
+  prenotativaDrawText(page,font,day,x,y,size);
+  prenotativaDrawText(page,font,month,x+32,y,size);
+  prenotativaDrawText(page,font,year,x+64,y,size);
+}
+
+function prenotativaDrawDateCompact(page,font,value,x,y,size=9){
+  const normalized=prenotativaNormalizeDate(value);
+  if(!normalized)return;
+  const [year,month,day]=normalized.split("-");
+  if(!year||!month||!day)return;
+  prenotativaDrawText(page,font,day,x,y,size);
+  prenotativaDrawText(page,font,month,x+32,y,size);
+  prenotativaDrawText(page,font,year,x+57,y,size);
+}
+
+function prenotativaDrawCheck(page,font,x,y,size=9){
+  page.drawText("X",{x,y,size,font,color:window.PDFLib.rgb(0,0,0)});
+}
+
+function prenotativaCategoryTotals(){
+  const byCategory=_prenotativaDraft.checklist?.totals?.byCategory||{};
+  return {
+    impianti:Number(byCategory["Impianti"]||0),
+    macchinari:Number(byCategory["Macchinari"]||0),
+    attrezzature:Number(byCategory["Attrezzature"]||0),
+    immobili:Number(byCategory["Terreni/Immobili"]||0)
+  };
+}
+
+const PRENOTATIVA_COORDS = {
+  p2: {
+    businessCf: {x:102,y:688,step:13.1,max:16},
+    size: {grande:[317,688],media:[358,688],piccola:[399,688],micro:[439,688]},
+    signerCf: {x:104,y:652,step:13.1,max:16},
+    officeCode: [394,656],
+    lastName: [103,632],
+    firstName: [338,632],
+    phone: [103,607],
+    mobile: [194,607],
+    email: [290,607],
+    delegateCf: {x:349,y:508,step:13.1,max:16},
+    commitmentDate: [194,472]
+  },
+  p3: {
+    cf: {x:340,y:764,step:13.1,max:16}
+  },
+  p4: {
+    cf: {x:340,y:764,step:13.1,max:16},
+    model: [542,714],
+    a1: {investment:166,credit:258,realized:374,notBillable:454,notRealized:532,y:654},
+    projectChecks: {nuovo:[131,605],ampliamento:[210,605],prodotti:[289,605],processo:[375,605]},
+    structureCount:[540,605],
+    startDate:[111,567],
+    endDate:[203,567],
+    a2: {investment:374,credit:166,realized:281,notBillable:360,notRealized:439,yInvestment:569,yCredit:534},
+    activityChecks: {
+      industria:[198,510],aerospazio:[274,510],salute:[410,510],creativita:[550,510],
+      agenda:[282,486],manifattura:[379,486],agricoli:[550,486],
+      costruzioni:[144,462],ricettive:[256,462],commercio:[391,462],servizi:[489,462],altro:[550,462]
+    },
+    description: {x:105,y:437,lineHeight:24,maxChars:105,maxLines:16}
+  },
+  p5: {
+    cf: {x:340,y:764,step:13.1,max:16},
+    model:[542,714],
+    b1Module:[481,681],
+    region:[130,641],
+    regionCode:[223,641],
+    city:[248,641],
+    province:[468,641],
+    cityCode:[509,641],
+    nonOperational:[55,593],
+    streetType:[130,608],
+    address:[181,608],
+    houseNumber:[528,608],
+    ateco:[130,571],
+    specialCases:[238,571],
+    step:[300,571],
+    b10:{realized:264,notBillable:344,notRealized:423,y:535},
+    rows:{
+      impianti: {y:499},
+      macchinari:{y:475},
+      attrezzature:{y:451},
+      immobili:{y:427},
+      totale:{y:403}
+    },
+    intensity:[445,403],
+    credit:[523,403],
+    reduce:[555,401],
+    b10Split:{realized:466,notBillable:545,y:365},
+    b30:{y:342},
+    b31:{y:318},
+    b32:{y:294},
+    b33:{y:270},
+    b34:{y:246},
+    b35:{x:545,y:224}
+  }
+};
+
+function prenotativaDrawCheckIf(page,font,condition,coord){
+  if(condition&&coord)prenotativaDrawCheck(page,font,coord[0],coord[1]);
+}
+
+function prenotativaDrawCheckSizedIf(page,font,condition,coord,size=9){
+  if(condition&&coord)prenotativaDrawCheck(page,font,coord[0],coord[1],size);
+}
+
+function prenotativaDrawStatusAmount(page,font,value,coords,status,y){
+  const key=["realized","notBillable","notRealized"].includes(status)?status:"";
+  if(!key||!coords?.[key])return;
+  prenotativaDrawAmount(page,font,value,coords[key],y);
+}
+
+function prenotativaProjectTypeKey(value){
+  const v=String(value||"").toLowerCase();
+  if(v.includes("nuovo"))return"nuovo";
+  if(v.includes("prod"))return"prodotti";
+  if(v.includes("process"))return"processo";
+  return"ampliamento";
+}
+
+function prenotativaActivityKey(value){
+  const v=String(value||"").toLowerCase();
+  if(v.includes("industria"))return"industria";
+  if(v.includes("aerospazio"))return"aerospazio";
+  if(v.includes("salute"))return"salute";
+  if(v.includes("creativ"))return"creativita";
+  if(v.includes("agenda"))return"agenda";
+  if(v.includes("manifatt"))return"manifattura";
+  if(v.includes("agric"))return"agricoli";
+  if(v.includes("costruz"))return"costruzioni";
+  if(v.includes("ricett"))return"ricettive";
+  if(v.includes("commerc"))return"commercio";
+  if(v.includes("servizi"))return"servizi";
+  return"altro";
+}
+
+function prenotativaInvestmentStatusLabel(status){
+  return {
+    realized:"investimenti realizzati e fatturati",
+    notBillable:"investimenti realizzati e non fatturabili",
+    notRealized:"investimenti non realizzati o non fatturati"
+  }[status]||"stato investimento da confermare";
+}
+
+function prenotativaOptionLabel(value,options=[]){
+  return options.find(([key])=>key===value)?.[1]||value||"da confermare";
+}
+
+function prenotativaDisplayDate(value){
+  const normalized=prenotativaNormalizeDate(value);
+  if(!normalized)return"da confermare";
+  const [year,month,day]=normalized.split("-");
+  return `${day}/${month}/${year}`;
+}
+
+function prenotativaQuadroADescription(data={}){
+  const projectLabel=prenotativaOptionLabel(data.projectType,[
+    ["nuovo","nuovo stabilimento"],
+    ["ampliamento","ampliamento dello stabilimento"],
+    ["prodotti","nuovi prodotti o servizi"],
+    ["processo","cambiamento del processo produttivo"]
+  ]);
+  const activityLabel=prenotativaOptionLabel(data.activityScope,[
+    ["industria","industria intelligente e sostenibile"],
+    ["aerospazio","aerospazio e difesa"],
+    ["salute","salute, alimentazione e qualita della vita"],
+    ["creativita","industria della creativita turistico-culturale"],
+    ["agenda","agenda digitale"],
+    ["manifattura","altre attivita manifatturiere"],
+    ["agricoli","trasformazione prodotti agricoli"],
+    ["costruzioni","costruzioni"],
+    ["ricettive","attivita ricettive e ristorazione"],
+    ["commercio","commercio"],
+    ["servizi","attivita terziarie e servizi"],
+    ["altro","altro ambito di attivita"]
+  ]);
+  const investment=formatEuro(data.investmentTotal||0);
+  const credit=formatEuro(data.creditAmount||0);
+  const status=prenotativaInvestmentStatusLabel(data.investmentStatus);
+  const dates=`dal ${prenotativaDisplayDate(data.startDate)} al ${prenotativaDisplayDate(data.endDate)}`;
+  const structures=Number(data.structureCount||1);
+  const structureLabel=structures===1?"struttura produttiva":"strutture produttive";
+  const base=`Il progetto di investimento indicato nel Quadro A riguarda ${projectLabel}, riferito all'ambito ${activityLabel}, e interessa ${structures} ${structureLabel}. L'investimento complessivo indicato in A1 e A2 e pari a ${investment}; il credito d'imposta complessivo indicato in A1 e A2 e pari a ${credit} ed e riferito a ${status}. Il periodo di realizzazione dell'investimento e ${dates}.`;
+  const detail=String(data.description||"").trim();
+  return detail||base;
+}
+
+async function buildPrenotativaPdfFile(){
+  if(!_prenotativaDraft.pdfDraft)throw new Error("Conferma prima la bozza dati");
+    const PDFLib=await ensurePdfLibLoaded();
+    const {PDFDocument,StandardFonts}=PDFLib;
+    const templateBytes=await loadPrenotativaTemplateBytes();
+    const pdfDoc=await PDFDocument.load(templateBytes);
+    while(pdfDoc.getPageCount()>5)pdfDoc.removePage(pdfDoc.getPageCount()-1);
+    const font=await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const data=_prenotativaDraft.pdfDraft;
+    const categories=prenotativaCategoryTotals();
+    const amount=Number(data.investmentTotal)||0;
+    const creditAmount=Number(data.creditAmount)||0;
+    const investmentStatus=data.investmentStatus||"";
+    const rate=String(data.creditRate||"").replace("%","").trim();
+    const pages=pdfDoc.getPages();
+    const cf=data.businessFiscalCode||data.vatNumber||"";
+    const rep=prenotativaSplitName(data.legalRepresentative);
+    const c=PRENOTATIVA_COORDS;
+
+    const p2=pages[1];
+    prenotativaDrawBoxChars(p2,font,cf,c.p2.businessCf.x,c.p2.businessCf.y,c.p2.businessCf.step,12,c.p2.businessCf.max);
+    prenotativaDrawCheckSizedIf(p2,font,true,c.p2.size[String(data.companySize||"").toLowerCase()]||c.p2.size.micro,8);
+    prenotativaDrawBoxChars(p2,font,data.representativeFiscalCode,c.p2.signerCf.x,c.p2.signerCf.y,c.p2.signerCf.step,12,c.p2.signerCf.max);
+    prenotativaDrawText(p2,font,String(data.officeCode||"1").padStart(2,"0"),...c.p2.officeCode,9);
+    prenotativaDrawText(p2,font,data.referentLastName||rep.lastName||data.legalRepresentative,...c.p2.lastName,9,{maxWidth:180});
+    prenotativaDrawText(p2,font,data.referentFirstName||rep.firstName,...c.p2.firstName,9,{maxWidth:180});
+    prenotativaDrawText(p2,font,data.contactPhone,...c.p2.phone,9);
+    prenotativaDrawText(p2,font,data.contactMobile,...c.p2.mobile,9);
+    prenotativaDrawText(p2,font,data.contactEmail,...c.p2.email,9,{maxWidth:260});
+    prenotativaDrawBoxChars(p2,font,data.delegateFiscalCode,c.p2.delegateCf.x,c.p2.delegateCf.y,c.p2.delegateCf.step,12,c.p2.delegateCf.max);
+    prenotativaDrawDate(p2,font,data.commitmentDate,...c.p2.commitmentDate);
+
+    const p3=pages[2];
+    prenotativaDrawBoxChars(p3,font,cf,c.p3.cf.x,c.p3.cf.y,c.p3.cf.step,12,c.p3.cf.max);
+
+    const p4=pages[3];
+    prenotativaDrawBoxChars(p4,font,cf,c.p4.cf.x,c.p4.cf.y,c.p4.cf.step,12,c.p4.cf.max);
+    prenotativaDrawText(p4,font,"0 1",...c.p4.model,12);
+    prenotativaDrawAmount(p4,font,amount,c.p4.a1.investment,c.p4.a1.y);
+    prenotativaDrawAmount(p4,font,creditAmount,c.p4.a1.credit,c.p4.a1.y);
+    prenotativaDrawStatusAmount(p4,font,creditAmount,c.p4.a1,investmentStatus,c.p4.a1.y);
+    prenotativaDrawCheckIf(p4,font,true,c.p4.projectChecks[prenotativaProjectTypeKey(data.projectType)]);
+    prenotativaDrawText(p4,font,data.structureCount||"1",...c.p4.structureCount,9);
+    prenotativaDrawDateCompact(p4,font,data.startDate,...c.p4.startDate,9);
+    prenotativaDrawDateCompact(p4,font,data.endDate,...c.p4.endDate,9);
+    prenotativaDrawAmount(p4,font,amount,c.p4.a2.investment,c.p4.a2.yInvestment);
+    prenotativaDrawAmount(p4,font,creditAmount,c.p4.a2.credit,c.p4.a2.yCredit);
+    prenotativaDrawStatusAmount(p4,font,creditAmount,c.p4.a2,investmentStatus,c.p4.a2.yCredit);
+    prenotativaDrawCheckIf(p4,font,true,c.p4.activityChecks[prenotativaActivityKey(data.activityScope)]);
+    prenotativaWrapText(prenotativaQuadroADescription(data),c.p4.description.maxChars,c.p4.description.maxLines).forEach((line,index)=>{
+      prenotativaDrawText(p4,font,line.toUpperCase(),c.p4.description.x,c.p4.description.y-(index*c.p4.description.lineHeight),7,{maxWidth:470});
+    });
+
+    const p5=pages[4];
+    prenotativaDrawBoxChars(p5,font,cf,c.p5.cf.x,c.p5.cf.y,c.p5.cf.step,12,c.p5.cf.max);
+    prenotativaDrawText(p5,font,"0 1",...c.p5.model,12);
+    prenotativaDrawText(p5,font,"1",...c.p5.b1Module,9);
+    prenotativaDrawText(p5,font,data.region,...c.p5.region,8,{maxWidth:74});
+    prenotativaDrawText(p5,font,data.regionCode,...c.p5.regionCode,8);
+    prenotativaDrawText(p5,font,data.city,...c.p5.city,8,{maxWidth:190});
+    prenotativaDrawText(p5,font,data.province,...c.p5.province,8);
+    prenotativaDrawText(p5,font,data.cityCode,...c.p5.cityCode,8);
+    prenotativaDrawCheckIf(p5,font,Boolean(data.nonOperational),c.p5.nonOperational);
+    prenotativaDrawText(p5,font,data.streetType||"via",...c.p5.streetType,8);
+    prenotativaDrawText(p5,font,data.address,...c.p5.address,8,{maxWidth:340});
+    prenotativaDrawText(p5,font,data.houseNumber,...c.p5.houseNumber,8);
+    prenotativaDrawText(p5,font,data.atecoCode,...c.p5.ateco,8);
+    prenotativaDrawText(p5,font,data.specialCases,...c.p5.specialCases,8);
+    prenotativaDrawText(p5,font,data.stepRegulation?"1":"",...c.p5.step,8);
+    prenotativaDrawAmount(p5,font,amount,c.p5.b10.notRealized,c.p5.b10.y);
+    prenotativaDrawAmount(p5,font,categories.impianti,247,c.p5.rows.impianti.y);
+    prenotativaDrawAmount(p5,font,categories.macchinari,247,c.p5.rows.macchinari.y);
+    prenotativaDrawAmount(p5,font,categories.attrezzature,247,c.p5.rows.attrezzature.y);
+    prenotativaDrawAmount(p5,font,categories.immobili,247,c.p5.rows.immobili.y);
+    prenotativaDrawAmount(p5,font,amount,247,c.p5.rows.totale.y);
+    prenotativaDrawText(p5,font,rate,...c.p5.intensity,8);
+    prenotativaDrawAmount(p5,font,creditAmount,c.p5.credit[0],c.p5.credit[1]);
+    prenotativaDrawAmount(p5,font,amount,c.p5.b35.x,c.p5.b35.y);
+
+    const bytes=await pdfDoc.save();
+    const safeName=(data.businessName||"comunicazione-integrativa").replace(/[^\w\d-]+/g,"-").replace(/-+/g,"-").replace(/^-|-$/g,"").slice(0,60);
+    return {
+      bytes,
+      fileName:`Comunicazione-integrativa_${safeName||"bozza"}.pdf`,
+      businessName:data.businessName||"",
+      businessFiscalCode:data.businessFiscalCode||data.vatNumber||""
+    };
+}
+
+async function generatePrenotativaPdf(){
+  if(!_prenotativaDraft.pdfDraft){
+    toast("Conferma prima la bozza dati","error");
+    return;
+  }
+  try{
+    const file=await buildPrenotativaPdfFile();
+    await saveCompletedPrenotativaPdf(file);
+    downloadBlob(new Blob([file.bytes],{type:"application/pdf"}),file.fileName);
+    toast("PDF salvato e scaricato ✓");
+  }catch(error){
+    console.error(error);
+    toast(`PDF non generato: ${error.message}`,"error");
+  }
+}
+
+function openPrenotativaPreview(){
+  if(!_prenotativaDraft.client||!_prenotativaDraft.checklist){
+    toast("Carica prima visura e check-list","error");
+    return;
+  }
+  const data=prenotativaCurrentPdfDraft();
+  const representative=prenotativaSplitName(data.legalRepresentative);
+  _prenotativaPreviewLocations=prenotativaOperatingLocationOptions(_prenotativaDraft.client||{},_prenotativaDraft.checklist?.metadata?.operatingLocation||null);
+  const modal=document.createElement("div");
+  modal.className="modal-overlay";
+  modal.id="prenotativa-preview-modal";
+  modal.innerHTML=`<div class="modal" style="max-width:1040px">
+    <div class="modal-header">
+      <div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">Comunicazione integrativa</div></div>
+      <button class="modal-close" onclick="closeModal('prenotativa-preview-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="prenotativa-warning">Controlla e conferma i dati prima della compilazione. Le pagine successive al Quadro B non verranno incluse nel PDF finale.</div>
+      <div class="client-form-sections">
+        <div class="client-form-section">
+          <div class="client-form-section-title">Impresa beneficiaria</div>
+          <div class="prenotativa-preview-grid">
+            ${prenotativaInput("Codice fiscale impresa","pp-businessFiscalCode",data.businessFiscalCode,true)}
+            ${prenotativaSelect("Dimensione impresa","pp-companySize",data.companySize,[["micro","Micro"],["piccola","Piccola"],["media","Media"],["grande","Grande"]])}
+            ${prenotativaInput("Ragione sociale","pp-businessName",data.businessName,true)}
+            ${prenotativaInput("Partita IVA","pp-vatNumber",data.vatNumber)}
+            ${prenotativaInput("Codice ATECO","pp-atecoCode",data.atecoCode)}
+          </div>
+        </div>
+        <div class="client-form-section">
+          <div class="client-form-section-title">Rappresentante firmatario</div>
+          <div class="prenotativa-preview-grid">
+            ${prenotativaInput("Codice fiscale firmatario","pp-representativeFiscalCode",data.representativeFiscalCode)}
+            ${prenotativaInput("Codice carica","pp-officeCode",data.officeCode||"1")}
+          </div>
+        </div>
+        <div class="client-form-section">
+          <div class="client-form-section-title">Referente da contattare</div>
+          <div class="prenotativa-preview-grid">
+            ${prenotativaInput("Cognome","pp-referentLastName",data.referentLastName||representative.lastName)}
+            ${prenotativaInput("Nome","pp-referentFirstName",data.referentFirstName||representative.firstName)}
+            ${prenotativaInput("Telefono","pp-contactPhone",data.contactPhone)}
+            ${prenotativaInput("Cellulare","pp-contactMobile",data.contactMobile)}
+            ${prenotativaInput("Indirizzo di posta elettronica","pp-contactEmail",data.contactEmail)}
+          </div>
+        </div>
+        <div class="client-form-section">
+          <div class="client-form-section-title">Presentazione telematica</div>
+          <div class="prenotativa-preview-grid">
+            ${prenotativaInput("Codice fiscale soggetto incaricato","pp-delegateFiscalCode",data.delegateFiscalCode)}
+            ${prenotativaInput("Data impegno","pp-commitmentDate",data.commitmentDate,false,"date")}
+          </div>
+        </div>
+        <div class="client-form-section">
+          <div class="client-form-section-title">Struttura produttiva e investimento</div>
+          <div class="prenotativa-preview-grid">
+            ${prenotativaLocationSelect("Sede operativa","pp-operatingLocationIndex",data.operatingLocationIndex,_prenotativaPreviewLocations)}
+            ${prenotativaInput("Regione","pp-region",data.region)}
+            ${prenotativaInput("Codice regione","pp-regionCode",data.regionCode)}
+            ${prenotativaInput("Provincia","pp-province",data.province)}
+            ${prenotativaInput("Comune","pp-city",data.city)}
+            ${prenotativaInput("Codice comune","pp-cityCode",data.cityCode)}
+            ${prenotativaInput("CAP","pp-cap",data.cap)}
+            ${prenotativaInput("Tipologia indirizzo","pp-streetType",data.streetType||"via")}
+            ${prenotativaInput("Indirizzo","pp-address",data.address)}
+            ${prenotativaInput("Numero civico","pp-houseNumber",data.houseNumber)}
+            ${prenotativaInput("Investimento complessivo","pp-investmentTotal",formatMoney(data.investmentTotal),true)}
+            ${prenotativaInput("Credito d'imposta","pp-creditAmount",formatMoney(data.creditAmount))}
+            ${prenotativaSelect("Stato investimento per credito","pp-investmentStatus",data.investmentStatus,[["","Seleziona stato investimento"],["realized","Relativo a investimenti realizzati e fatturati"],["notBillable","Relativo a investimenti realizzati e non fatturabili"],["notRealized","Relativo a investimenti non realizzati o non fatturati"]])}
+            ${prenotativaInput("Intensità / aliquota %","pp-creditRate",data.creditRate)}
+            ${prenotativaInput("Data inizio investimento","pp-startDate",data.startDate,false,"date")}
+            ${prenotativaInput("Data fine investimento","pp-endDate",data.endDate,false,"date")}
+            ${prenotativaSelect("Tipologia progetto","pp-projectType",data.projectType,[["nuovo","Nuovo stabilimento"],["ampliamento","Ampliamento stabilimento"],["prodotti","Nuovi prodotti o servizi"],["processo","Cambiamento processo produttivo"]])}
+            ${prenotativaSelect("Ambito attività","pp-activityScope",data.activityScope,[["industria","Industria intelligente e sostenibile"],["aerospazio","Aerospazio e difesa"],["salute","Salute, alimentazione e qualità della vita"],["creativita","Industria creatività turistico-culturale"],["agenda","Agenda digitale"],["manifattura","Altre attività manifatturiere"],["agricoli","Trasformazione prodotti agricoli"],["costruzioni","Costruzioni"],["ricettive","Attività ricettive e ristorazione"],["commercio","Commercio"],["servizi","Attività terziarie e servizi"],["altro","Altro"]])}
+            ${prenotativaInput("Numero strutture produttive","pp-structureCount",data.structureCount||"1")}
+            ${prenotativaInput("Casi particolari","pp-specialCases",data.specialCases)}
+          </div>
+        </div>
+        <div class="client-form-section">
+          <div class="client-form-section-title">Descrizione progetto</div>
+          <textarea id="pp-description" class="form-control prenotativa-preview-description" oninput="updatePrenotativaDescriptionCount()">${esc(data.description)}</textarea>
+          <div id="pp-description-count" class="prenotativa-char-count ${data.description.length>=PRENOTATIVA_DESCRIPTION_MIN_LENGTH&&data.description.length<=PRENOTATIVA_DESCRIPTION_MAX_LENGTH?"ok":""}">${data.description.length}/${PRENOTATIVA_DESCRIPTION_MIN_LENGTH}-${PRENOTATIVA_DESCRIPTION_MAX_LENGTH} caratteri</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap">
+        <button class="btn btn-secondary" onclick="closeModal('prenotativa-preview-modal')">Annulla</button>
+        <button class="btn btn-primary" onclick="savePrenotativaPreviewDraft()">${appIcon("check")} Conferma dati</button>
+      </div>
+    </div>
+  </div>`;
+  document.body.appendChild(modal);
+}
+
+function prenotativaInput(label,id,value,required=false,type="text"){
+  return `<div class="form-group">
+    <label class="form-label">${esc(label)} ${required?'<span class="req">*</span>':""}</label>
+    <input id="${id}" type="${type}" class="form-control" value="${esc(value||"")}">
+  </div>`;
+}
+
+function prenotativaSelect(label,id,value,options=[]){
+  return `<div class="form-group">
+    <label class="form-label">${esc(label)}</label>
+    <select id="${id}" class="form-control">
+      ${options.map(([optionValue,optionLabel])=>`<option value="${esc(optionValue)}" ${String(value||"")===String(optionValue)?"selected":""}>${esc(optionLabel)}</option>`).join("")}
+    </select>
+  </div>`;
+}
+
+function prenotativaLocationSelect(label,id,value,options=[]){
+  return `<div class="form-group" style="grid-column:span 2">
+    <label class="form-label">${esc(label)}</label>
+    <select id="${id}" class="form-control" onchange="applyPrenotativaLocationSelection()">
+      ${options.map(option=>`<option value="${esc(String(option.index))}" ${String(value||"0")===String(option.index)?"selected":""}>${esc(option.label)}</option>`).join("")}
+    </select>
+  </div>`;
+}
+
+function applyPrenotativaLocationSelection(){
+  const selected=document.getElementById("pp-operatingLocationIndex")?.value||"0";
+  const option=_prenotativaPreviewLocations.find(item=>String(item.index)===String(selected));
+  if(!option)return;
+  const fields=prenotativaLocationFields(option.location);
+  Object.entries({
+    "pp-region":fields.region,
+    "pp-regionCode":fields.regionCode,
+    "pp-province":fields.province,
+    "pp-city":fields.city,
+    "pp-cityCode":fields.cityCode,
+    "pp-cap":fields.cap,
+    "pp-streetType":fields.streetType,
+    "pp-address":fields.address,
+    "pp-houseNumber":fields.houseNumber
+  }).forEach(([id,value])=>{
+    const input=document.getElementById(id);
+    if(input)input.value=value||"";
+  });
+  const description=document.getElementById("pp-description");
+  if(description&&_prenotativaDraft.checklist?.rows?.length){
+    description.value=buildPrenotativaProjectDescription(_prenotativaDraft.checklist.rows,_prenotativaDraft.client||{},option.location);
+    updatePrenotativaDescriptionCount();
+  }
+}
+
+function prenotativaCheckbox(label,id,checked=false){
+  return `<label class="form-group" style="display:flex;align-items:center;gap:10px;margin-bottom:12px;font-weight:850;color:var(--gray-dark)">
+    <input id="${id}" type="checkbox" ${checked?"checked":""} style="width:18px;height:18px;accent-color:var(--red)">
+    <span>${esc(label)}</span>
+  </label>`;
+}
+
+function updatePrenotativaDescriptionCount(){
+  const textarea=document.getElementById("pp-description");
+  const counter=document.getElementById("pp-description-count");
+  if(!textarea||!counter)return;
+  const length=textarea.value.trim().length;
+  counter.textContent=`${length}/${PRENOTATIVA_DESCRIPTION_MIN_LENGTH}-${PRENOTATIVA_DESCRIPTION_MAX_LENGTH} caratteri`;
+  counter.classList.toggle("ok",length>=PRENOTATIVA_DESCRIPTION_MIN_LENGTH&&length<=PRENOTATIVA_DESCRIPTION_MAX_LENGTH);
+}
+
+function savePrenotativaPreviewDraft(){
+  const get=id=>document.getElementById(id)?.value.trim()||"";
+  const checked=id=>Boolean(document.getElementById(id)?.checked);
+  const description=get("pp-description");
+  if(!get("pp-businessName")||!get("pp-businessFiscalCode")){
+    toast("Ragione sociale e codice fiscale impresa sono obbligatori","error");
+    return;
+  }
+  if(description.length<PRENOTATIVA_DESCRIPTION_MIN_LENGTH){
+    toast(`La descrizione del progetto deve essere di almeno ${PRENOTATIVA_DESCRIPTION_MIN_LENGTH} caratteri`,"error");
+    return;
+  }
+  if(description.length>PRENOTATIVA_DESCRIPTION_MAX_LENGTH){
+    toast(`La descrizione del progetto non deve superare ${PRENOTATIVA_DESCRIPTION_MAX_LENGTH} caratteri`,"error");
+    return;
+  }
+  if(!get("pp-investmentStatus")){
+    toast("Seleziona lo stato investimento da usare in A1 e A2","error");
+    return;
+  }
+  const investmentTotal=Math.ceil(Number(normalizeItalianAmount(get("pp-investmentTotal")))||0);
+  const creditRate=Number(normalizeItalianAmount(get("pp-creditRate")))||0;
+  const manualCredit=Number(normalizeItalianAmount(get("pp-creditAmount")))||0;
+  const creditAmount=Math.ceil(manualCredit||((investmentTotal&&creditRate)?investmentTotal*creditRate/100:0));
+  const businessFiscalCode=prenotativaUpper(get("pp-businessFiscalCode"));
+  const region=prenotativaUpper(get("pp-region"));
+  const province=prenotativaUpper(get("pp-province"));
+  const city=prenotativaUpper(get("pp-city"));
+  invalidatePrenotativaPdfPreview();
+  _prenotativaDraft={..._prenotativaDraft,pdfDraft:{
+    operatingLocationIndex:get("pp-operatingLocationIndex")||"0",
+    businessName:prenotativaUpper(get("pp-businessName")),
+    businessFiscalCode,
+    vatNumber:get("pp-vatNumber"),
+    companySize:get("pp-companySize"),
+    atecoCode:prenotativaUpper(get("pp-atecoCode")),
+    legalRepresentative:prenotativaUpper([get("pp-referentFirstName"),get("pp-referentLastName")].filter(Boolean).join(" ")),
+    representativeFiscalCode:businessFiscalCode,
+    officeCode:get("pp-officeCode")||"1",
+    referentFirstName:prenotativaUpper(get("pp-referentFirstName")),
+    referentLastName:prenotativaUpper(get("pp-referentLastName")),
+    contactEmail:prenotativaUpper(get("pp-contactEmail")),
+    contactMobile:prenotativaUpper(get("pp-contactMobile")),
+    contactPhone:prenotativaUpper(get("pp-contactPhone")),
+    region,
+    regionCode:get("pp-regionCode")||prenotativaRegionCode(region),
+    province,
+    city,
+    cityCode:prenotativaUpper(get("pp-cityCode")||prenotativaCityCode(city,province,{})),
+    cap:get("pp-cap"),
+    streetType:prenotativaUpper(get("pp-streetType")||"via"),
+    address:prenotativaUpper(get("pp-address")),
+    houseNumber:prenotativaUpper(get("pp-houseNumber")),
+    investmentTotal,
+    creditRate:get("pp-creditRate"),
+    creditAmount,
+    investmentStatus:get("pp-investmentStatus"),
+    startDate:get("pp-startDate"),
+    endDate:get("pp-endDate"),
+    projectType:get("pp-projectType"),
+    activityScope:get("pp-activityScope"),
+    structureCount:get("pp-structureCount")||"1",
+    specialCases:prenotativaUpper(get("pp-specialCases")),
+    nonOperational:false,
+    stepRegulation:false,
+    delegateFiscalCode:get("pp-delegateFiscalCode")||PIT_DELEGATE_FISCAL_CODE,
+    commitmentDate:get("pp-commitmentDate"),
+    description
+  },description};
+  closeModal("prenotativa-preview-modal");
+  refreshPrenotativaWorkspace();
+  toast("Dati confermati. Prossimo step: generazione PDF compilato.");
+}
+
+async function parsePrenotativaChecklistExcel(file){
+  const JSZip=await ensureJSZipLoaded();
+  const buffer=await file.arrayBuffer();
+  const zip=await JSZip.loadAsync(buffer);
+  const sheetFile=zip.file("xl/worksheets/sheet1.xml");
+  if(!sheetFile)throw new Error("Foglio Excel non trovato");
+  const sheet=await sheetFile.async("string");
+  const sharedFile=zip.file("xl/sharedStrings.xml");
+  const sharedStrings=sharedFile?prenotativaSharedStrings(await sharedFile.async("string")):[];
+  const quadroAInvestment=prenotativaFindChecklistAmountByLabel(sheet,sharedStrings,["Agevolabile"])
+    ||Number(normalizeItalianAmount(prenotativaCellValueByRef(sheet,"J88",sharedStrings)))||0;
+  const quadroACredit=prenotativaFindChecklistAmountByLabel(sheet,sharedStrings,["MAX. Credito d'imposta ottenibile","Max credito imposta ottenibile"])
+    ||Number(normalizeItalianAmount(prenotativaCellValueByRef(sheet,"N88",sharedStrings)))||0;
+  const companySize=prenotativaNormalizeCompanySize(prenotativaFindChecklistTextByLabel(sheet,sharedStrings,["Dimensione"]));
+  const operatingLocationText=prenotativaFindChecklistOperatingLocationText(sheet,sharedStrings);
+  const operatingLocation=prenotativaParseChecklistOperatingLocation(operatingLocationText);
+  const rows=[];
+  for(const match of sheet.matchAll(/<row\b[^>]*\br="(\d+)"[^>]*(?:>([\s\S]*?)<\/row>|\/>)/g)){
+    const rowNumber=Number(match[1]);
+    if(rowNumber<PREANALYSIS_EXCEL_START_ROW)continue;
+    const rowXml=match[0];
+    const supplier=prenotativaCellValue(rowXml,"D",sharedStrings);
+    const amount=Number(normalizeItalianAmount(prenotativaCellValue(rowXml,"I",sharedStrings)))||0;
+    const description=prenotativaCellValue(rowXml,"N",sharedStrings);
+    if(!supplier&&!amount&&!description)continue;
+    const categoryAmounts={
+      "Impianti":Number(normalizeItalianAmount(prenotativaCellValue(rowXml,"J",sharedStrings)))||0,
+      "Macchinari":Number(normalizeItalianAmount(prenotativaCellValue(rowXml,"K",sharedStrings)))||0,
+      "Attrezzature":Number(normalizeItalianAmount(prenotativaCellValue(rowXml,"L",sharedStrings)))||0,
+      "Terreni/Immobili":Number(normalizeItalianAmount(prenotativaCellValue(rowXml,"M",sharedStrings)))||0
+    };
+    const category=Object.entries(categoryAmounts).sort((a,b)=>b[1]-a[1])[0]?.[1]>0
+      ? Object.entries(categoryAmounts).sort((a,b)=>b[1]-a[1])[0][0]
+      : guessPreAnalysisCategory(description);
+    rows.push({supplier,description,category,taxableAmount:amount,categoryAmounts});
+  }
+  if(!rows.length)throw new Error("Nessuna riga investimento trovata nella check-list");
+  const fallbackTotals=preAnalysisTotals(rows.map(row=>({taxableAmount:row.taxableAmount,category:row.category})));
+  const checklistCategoryTotals=prenotativaChecklistCategoryTotals(sheet,sharedStrings,quadroAInvestment);
+  const checklistCategoryTotal=Object.values(checklistCategoryTotals).reduce((sum,value)=>sum+(Number(value)||0),0);
+  const totals={
+    ...fallbackTotals,
+    byCategory:checklistCategoryTotal>0?checklistCategoryTotals:fallbackTotals.byCategory,
+    quadroAInvestment,
+    quadroACredit
+  };
+  return {rows,totals,metadata:{companySize,operatingLocationText,operatingLocation}};
+}
+
+function prenotativaClampProjectDescription(text=""){
+  let value=String(text||"").replace(/\s+/g," ").trim();
+  if(value.length<=PRENOTATIVA_DESCRIPTION_MAX_LENGTH)return value;
+  const slice=value.slice(0,PRENOTATIVA_DESCRIPTION_MAX_LENGTH);
+  const sentenceEnd=Math.max(slice.lastIndexOf(". "),slice.lastIndexOf("; "),slice.lastIndexOf(": "));
+  if(sentenceEnd>=PRENOTATIVA_DESCRIPTION_MIN_LENGTH){
+    value=slice.slice(0,sentenceEnd+1).trim();
+  }else{
+    value=slice.slice(0,PRENOTATIVA_DESCRIPTION_MAX_LENGTH-1).trim().replace(/[,\s;:]+$/,"")+".";
+  }
+  return value;
+}
+
+function buildPrenotativaProjectDescription(rows=[],client={},sourceLocation=null){
+  const businessName=client?.businessName||"l'impresa beneficiaria";
+  const activity=client?.sector||client?.activitySector||(Array.isArray(client?.sectors)?client.sectors.join(", "):"l'attività economica esercitata");
+  const match=prenotativaBestOperatingLocation(client||{},sourceLocation);
+  const location=match.selected||sourceLocation||prenotativaClientLocation(client||{});
+  const locationLabel=[location.city,location.province].filter(Boolean).join(" (")+(location.city&&location.province?")":"");
+  let text=`${businessName} esercita ${activity} e realizza un programma di investimento presso la propria struttura produttiva${locationLabel?` sita in ${locationLabel}`:""}. L'intervento nasce dall'esigenza di rafforzare l'organizzazione operativa, adeguare le dotazioni aziendali alle necessità del ciclo produttivo e sostenere una crescita stabile dell'attività, con beni destinati a essere utilizzati direttamente nella struttura indicata.`;
+  text+=` Il progetto mira a migliorare la capacità produttiva, la qualità dei processi, la sicurezza operativa e l'efficienza gestionale, rendendo l'impresa più competitiva e più pronta a rispondere alle esigenze del mercato. La finalità economica è ridurre criticità operative, potenziare le risorse disponibili e creare le condizioni per una gestione più strutturata delle commesse, della produzione o dei servizi erogati.`;
+  text+=` Gli acquisti sono coerenti con il fabbisogno aziendale, con la localizzazione della struttura produttiva e con la continuità dell'attività esercitata. Il programma contribuisce alla modernizzazione dell'organizzazione, al consolidamento dell'attività e al miglioramento complessivo della capacità dell'impresa di operare in modo stabile, efficiente e organizzato.`;
+  while(text.length<PRENOTATIVA_DESCRIPTION_MIN_LENGTH){
+    text+=` Il programma contribuisce inoltre al consolidamento dell'attività aziendale, alla modernizzazione delle dotazioni disponibili e alla migliore organizzazione dei processi produttivi e gestionali.`;
+  }
+  return prenotativaClampProjectDescription(text);
 }
 function filterPractices(query){practiceSearch=query;renderPracticesList()}
 function setPracticeFilter(value){_practiceQuickFilter=value;renderPracticesMetrics();renderPracticesList()}
@@ -4834,27 +6946,60 @@ async function handlePreAnalysisFiles(input){
 }
 
 async function analyzePreAnalysisFilesWithAI(files){
+  const startedAt=performance.now();
+  const functionName=aiFunctionName("preanalysis_documents");
   const documents=[];
-  for(const file of files){
-    if(file.size>PREANALYSIS_AI_MAX_FILE_BYTES){
-      throw new Error(`${file.name} supera il limite di 18 MB per l'analisi AI`);
+  try{
+    ensureAiMonthlyQuota("preanalysis_documents",files.length);
+    for(const file of files){
+      if(file.size>PREANALYSIS_AI_MAX_FILE_BYTES){
+        const message=`${file.name} supera il limite di 18 MB per l'analisi AI`;
+        const blockedError=new Error(message);
+        blockedError.aiUsageStatus="BLOCKED_SIZE";
+        throw blockedError;
+      }
+      const base64=await fileToBase64(file);
+      if(!base64)throw new Error(`${file.name}: lettura file non riuscita`);
+      documents.push({
+        fileName:file.name,
+        mimeType:file.type||mimeTypeFromFileName(file.name),
+        base64
+      });
     }
-    const base64=await fileToBase64(file);
-    if(!base64)throw new Error(`${file.name}: lettura file non riuscita`);
-    documents.push({
-      fileName:file.name,
-      mimeType:file.type||mimeTypeFromFileName(file.name),
-      base64
+    const response=await fetch(supabaseFunctionUrl(functionName),{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({documents})
     });
+    const payload=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(payload.error||`AI non disponibile (${response.status})`);
+    const rows=normalizePreAnalysisAiRows(payload.rows||[]);
+    await logAiUsage({
+      functionName,
+      feature:"preanalysis_documents",
+      status:"SUCCESS",
+      durationMs:performance.now()-startedAt,
+      fileCount:files.length,
+      totalBytes:aiTotalBytes(files),
+      files:aiFileMetadata(files),
+      rowCount:rows.length,
+      relatedPreAnalysisId:_currentPreAnalysisId||""
+    });
+    return rows;
+  }catch(error){
+    await logAiUsage({
+      functionName,
+      feature:"preanalysis_documents",
+      status:error?.aiUsageStatus||"ERROR",
+      durationMs:performance.now()-startedAt,
+      fileCount:files.length,
+      totalBytes:aiTotalBytes(files),
+      files:aiFileMetadata(files),
+      relatedPreAnalysisId:_currentPreAnalysisId||"",
+      errorMessage:String(error?.message||error||"Errore AI")
+    });
+    throw error;
   }
-  const response=await fetch(supabaseFunctionUrl(PREANALYSIS_AI_FUNCTION),{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({documents})
-  });
-  const payload=await response.json().catch(()=>({}));
-  if(!response.ok)throw new Error(payload.error||`AI non disponibile (${response.status})`);
-  return normalizePreAnalysisAiRows(payload.rows||[]);
 }
 
 function normalizePreAnalysisAiRows(rows){
@@ -4869,6 +7014,305 @@ function normalizePreAnalysisAiRows(rows){
     normalized.needsReview=Boolean(normalized.needsReview)||!normalized.supplier||!normalized.taxableAmount;
     return normalized;
   });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FINANCE AI CHAT
+// ═══════════════════════════════════════════════════════════════
+function renderFinanceAi(){
+  loadFinanceChatMessages();
+  _financeChatFiles=[];
+  if(currentDeviceMode()==="mobile"){
+    renderFinanceAiMobile();
+    return;
+  }
+  const collapsed=financeSidebarCollapsed();
+  const main=document.getElementById("main");
+  main.innerHTML=`<div class="finance-shell">
+    ${renderPageHero({
+      kicker:"AI FINANCE",
+      title:"AI Finance",
+      subtitle:"Assistente operativo per finanza agevolata, ZES Unica, documenti e pratiche.",
+      buttonHtml:renderHeroPrimaryButton("+ Nuova chat","createFinanceChat()")
+    })}
+    <section class="finance-layout ${collapsed?"archive-collapsed":""}" id="finance-layout">
+      <button class="finance-chat-toggle" id="finance-chat-toggle" onclick="toggleFinanceChatsSidebar()" title="${collapsed?"Apri chat salvate":"Chiudi chat salvate"}">${appIcon(collapsed?"chevron-right":"chevron-left")}</button>
+      <aside class="finance-chat-list">
+        <div class="preanalysis-list-head finance-chat-list-head">
+          <div>
+            <div class="preanalysis-list-title">Chat salvate</div>
+            <div class="preanalysis-list-count">${readFinanceChats().length} chat</div>
+          </div>
+        </div>
+        ${renderFinanceSavedChats()}
+      </aside>
+      <div class="card finance-chat-editor" style="padding:0;overflow:hidden">
+        <div style="padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(193,39,45,.1);color:var(--red)">${appIcon("zap")}</span>
+            <div>
+              <div style="font-size:15px;font-weight:900">AI Finance</div>
+              <div style="font-size:12px;color:var(--gray)">Provider attivo: ${esc(aiProviderLabel())}</div>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="clearFinanceChat()">Pulisci chat</button>
+        </div>
+        <div id="finance-chat-list" class="finance-chat-scroll">${renderFinanceChatMessages()}</div>
+        <div style="padding:16px 18px;border-top:1px solid var(--border);background:#fff">
+          <div id="finance-chat-attachments"></div>
+          <div style="display:flex;gap:10px;align-items:flex-end">
+            <input id="finance-chat-file-input" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.webp,.txt,text/plain,application/pdf,image/*" style="display:none" onchange="handleFinanceAttachmentSelected(this)">
+            <button class="btn btn-secondary" style="width:44px;height:44px;padding:0;justify-content:center;font-size:22px" title="Allega file" onclick="document.getElementById('finance-chat-file-input').click()">+</button>
+            <textarea id="finance-chat-input" class="form-control finance-chat-input" rows="3" placeholder="Scrivi una domanda su ZES, credito d'imposta, documenti, requisiti o impostazione pratica..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendFinanceChatMessage()}"></textarea>
+            <button class="btn btn-primary" id="finance-chat-send" onclick="sendFinanceChatMessage()">Invia</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>`;
+  scrollFinanceChatToBottom();
+}
+
+function renderFinanceAiMobile(){
+  const collapsed=financeSidebarHasPreference()?financeSidebarCollapsed():true;
+  const main=document.getElementById("main");
+  main.innerHTML=`<div class="finance-mobile-shell">
+    <header class="finance-mobile-head">
+      <button class="finance-mobile-icon-btn" id="finance-chat-toggle" onclick="toggleFinanceChatsSidebar()" title="${collapsed?"Apri chat salvate":"Chiudi chat salvate"}">${appIcon(collapsed?"menu":"x")}</button>
+      <div class="finance-mobile-title-wrap">
+        <div class="finance-mobile-kicker">AI Finance</div>
+        <div class="finance-mobile-title">Chat finanziaria</div>
+      </div>
+      <button class="finance-mobile-new-btn" onclick="createFinanceChat()">${appIcon("plus")}</button>
+    </header>
+    <section class="finance-layout finance-mobile-layout ${collapsed?"archive-collapsed":""}" id="finance-layout">
+      <button class="finance-mobile-backdrop" onclick="toggleFinanceChatsSidebar()" aria-label="Chiudi chat salvate"></button>
+      <aside class="finance-chat-list finance-mobile-drawer">
+        <div class="preanalysis-list-head finance-chat-list-head">
+          <div>
+            <div class="preanalysis-list-title">Chat salvate</div>
+            <div class="preanalysis-list-count">${readFinanceChats().length} chat</div>
+          </div>
+        </div>
+        ${renderFinanceSavedChats()}
+      </aside>
+      <div class="finance-mobile-chat-card">
+        <div class="finance-mobile-chat-top">
+          <div style="display:flex;align-items:center;gap:10px;min-width:0">
+            <span class="finance-mobile-ai-dot">${appIcon("zap")}</span>
+            <div style="min-width:0">
+              <div class="finance-mobile-ai-name">AI Finance</div>
+              <div class="finance-mobile-provider">${esc(aiProviderLabel())}</div>
+            </div>
+          </div>
+          <button class="finance-mobile-clear" onclick="clearFinanceChat()">Pulisci</button>
+        </div>
+        <div id="finance-chat-list" class="finance-chat-scroll finance-mobile-messages">${renderFinanceChatMessages()}</div>
+        <div class="finance-mobile-composer">
+          <div id="finance-chat-attachments"></div>
+          <div class="finance-mobile-compose-row">
+            <input id="finance-chat-file-input" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.webp,.txt,text/plain,application/pdf,image/*" style="display:none" onchange="handleFinanceAttachmentSelected(this)">
+            <button class="finance-mobile-attach" title="Allega file" onclick="document.getElementById('finance-chat-file-input').click()">${appIcon("plus")}</button>
+            <textarea id="finance-chat-input" class="form-control finance-chat-input" rows="2" placeholder="Scrivi ad AI Finance..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendFinanceChatMessage()}"></textarea>
+            <button class="finance-mobile-send" id="finance-chat-send" onclick="sendFinanceChatMessage()">${appIcon("send")}</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>`;
+  scrollFinanceChatToBottom();
+}
+
+function renderFinanceSavedChats(){
+  const chats=readFinanceChats();
+  const currentId=currentFinanceChatId();
+  return `<div class="finance-saved-list">
+      ${chats.length?chats.map(chat=>`
+        <button class="preanalysis-card finance-saved-card ${chat.id===currentId?"active":""}" onclick="selectFinanceChat('${esc(chat.id)}')">
+          <div class="finance-saved-card-main">
+            <div class="finance-saved-card-copy">
+              <div class="preanalysis-card-title" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(chat.title||"Nuova chat")}</div>
+              <div class="preanalysis-card-meta">${formatDateTime(chat.updatedAt||chat.createdAt)}</div>
+            </div>
+            <span class="finance-chat-delete" onclick="deleteFinanceChat('${esc(chat.id)}',event)">×</span>
+          </div>
+        </button>
+      `).join(""):`<div style="font-size:13px;color:var(--gray);text-align:center;padding:18px 6px">Nessuna chat salvata</div>`}
+    </div>`;
+}
+
+function renderFinanceInlineMarkdown(text){
+  return esc(String(text||""))
+    .replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>")
+    .replace(/\*([^*\n]+)\*/g,"<em>$1</em>");
+}
+
+function renderFinanceMarkdown(text){
+  const lines=String(text||"").replace(/\r\n/g,"\n").split("\n");
+  let html="";
+  let listType="";
+  let paragraph=[];
+  const flushParagraph=()=>{
+    if(!paragraph.length)return;
+    html+=`<p>${renderFinanceInlineMarkdown(paragraph.join(" "))}</p>`;
+    paragraph=[];
+  };
+  const closeList=()=>{
+    if(!listType)return;
+    html+=`</${listType}>`;
+    listType="";
+  };
+  lines.forEach(rawLine=>{
+    const line=rawLine.trim();
+    if(!line){
+      flushParagraph();
+      closeList();
+      return;
+    }
+    const heading=line.match(/^\*\*([^*]+)\*\*:?\s*$/);
+    if(heading){
+      flushParagraph();
+      closeList();
+      html+=`<h4>${renderFinanceInlineMarkdown(heading[1])}</h4>`;
+      return;
+    }
+    const unordered=line.match(/^[*-]\s+(.+)$/);
+    const ordered=line.match(/^\d+\.\s+(.+)$/);
+    if(unordered||ordered){
+      flushParagraph();
+      const nextType=ordered?"ol":"ul";
+      if(listType&&listType!==nextType)closeList();
+      if(!listType){
+        listType=nextType;
+        html+=`<${listType}>`;
+      }
+      html+=`<li>${renderFinanceInlineMarkdown((unordered||ordered)[1])}</li>`;
+      return;
+    }
+    closeList();
+    paragraph.push(line);
+  });
+  flushParagraph();
+  closeList();
+  return html||"<p></p>";
+}
+
+function renderFinanceChatMessages(){
+  if(!_financeChatMessages.length){
+    return `<div class="empty" style="height:100%;display:flex;flex-direction:column;justify-content:center">
+      <div class="empty-icon">${appIcon("zap")}</div>
+      <div class="empty-title">Chiedi qualcosa ad AI Finance</div>
+      <div class="empty-sub">Puoi anche allegare un documento da far analizzare.</div>
+    </div>`;
+  }
+  return _financeChatMessages.map(message=>{
+    const isUser=message.role==="user";
+    return `<div class="finance-message ${isUser?"user":"ai"}">
+      <div class="finance-message-bubble">
+        <div class="finance-message-author">${isUser?"Tu":"AI Finance"}</div>
+        <div class="finance-markdown">${isUser?esc(message.content).replace(/\n/g,"<br>"):renderFinanceMarkdown(message.content)}</div>
+        ${message.attachments?.length?`<div class="finance-attachments-note">${message.attachments.map(file=>`${esc(file.name)} (${formatBytes(file.size)})`).join("<br>")}</div>`:""}
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function scrollFinanceChatToBottom(){
+  setTimeout(()=>{
+    const list=document.getElementById("finance-chat-list");
+    if(list)list.scrollTop=list.scrollHeight;
+  },40);
+}
+
+function clearFinanceChat(){
+  if(!confirm("Pulire la conversazione AI Finance su questo browser?"))return;
+  _financeChatMessages=[];
+  saveFinanceChatMessages();
+  renderFinanceAi();
+}
+
+function setFinanceSendButtonState(button,loading){
+  if(!button)return;
+  button.disabled=loading;
+  if(button.classList.contains("finance-mobile-send")){
+    button.innerHTML=loading?"...":appIcon("send");
+  }else{
+    button.textContent=loading?"...":"Invia";
+  }
+}
+
+async function sendFinanceChatMessage(){
+  const input=document.getElementById("finance-chat-input");
+  const button=document.getElementById("finance-chat-send");
+  const message=String(input?.value||"").trim();
+  const attachedFiles=[..._financeChatFiles];
+  if(!message&&!attachedFiles.length)return;
+  const startedAt=performance.now();
+  const functionName=aiFunctionName("finance_chat");
+  try{
+    ensureAiMonthlyQuota("finance_chat",1);
+    for(const file of attachedFiles){
+      if(file.size>PREANALYSIS_AI_MAX_FILE_BYTES){
+        const error=new Error(`${file.name} supera il limite di 18 MB per AI Finance`);
+        error.aiUsageStatus="BLOCKED_SIZE";
+        throw error;
+      }
+    }
+    const documents=[];
+    for(const file of attachedFiles){
+      documents.push({
+        fileName:file.name,
+        mimeType:file.type||mimeTypeFromFileName(file.name),
+        base64:await fileToBase64(file)
+      });
+    }
+    const userContent=message||"Analizza il documento allegato e sintetizza gli elementi rilevanti.";
+    _financeChatMessages.push({role:"user",content:userContent,attachments:aiFileMetadata(attachedFiles),createdAt:new Date().toISOString()});
+    input.value="";
+    _financeChatFiles=[];
+    renderFinanceAttachmentPreview();
+    saveFinanceChatMessages();
+    document.getElementById("finance-chat-list").innerHTML=renderFinanceChatMessages();
+    scrollFinanceChatToBottom();
+    setFinanceSendButtonState(button,true);
+    const response=await fetch(supabaseFunctionUrl(functionName),{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({message:userContent,history:_financeChatMessages.slice(-10),documents})
+    });
+    const payload=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(payload.error||`AI non disponibile (${response.status})`);
+    const answer=String(payload.answer||"").trim();
+    if(!answer)throw new Error("Risposta AI vuota");
+    _financeChatMessages.push({role:"assistant",content:answer,createdAt:new Date().toISOString(),model:payload.model||""});
+    saveFinanceChatMessages();
+    await logAiUsage({
+      functionName,
+      feature:"finance_chat",
+      status:"SUCCESS",
+      durationMs:performance.now()-startedAt,
+      fileCount:attachedFiles.length,
+      totalBytes:aiTotalBytes(attachedFiles),
+      files:aiFileMetadata(attachedFiles)
+    });
+  }catch(error){
+    await logAiUsage({
+      functionName,
+      feature:"finance_chat",
+      status:error?.aiUsageStatus||"ERROR",
+      durationMs:performance.now()-startedAt,
+      fileCount:attachedFiles.length,
+      totalBytes:aiTotalBytes(attachedFiles),
+      files:aiFileMetadata(attachedFiles),
+      errorMessage:String(error?.message||error||"Errore AI")
+    });
+    toast(`AI Finance non riuscita: ${prettifySupabaseError(error,"la chat finanziaria")}`,"error");
+  }finally{
+    setFinanceSendButtonState(button,false);
+    const list=document.getElementById("finance-chat-list");
+    if(list)list.innerHTML=renderFinanceChatMessages();
+    scrollFinanceChatToBottom();
+  }
 }
 
 function fileToBase64(file){
@@ -6771,6 +9215,49 @@ async function saveCollab(){
 // ═══════════════════════════════════════════════════════════════
 // SETTINGS
 // ═══════════════════════════════════════════════════════════════
+function renderAiUsageLogRows(logs){
+  if(!logs.length)return emptyState("zap","Nessun utilizzo AI","I log appariranno dopo la prossima analisi AI.");
+  const statusColor=status=>status==="SUCCESS"?"#2E7D32":["BLOCKED_SIZE","QUOTA_BLOCKED"].includes(status)?"#E65100":"#C1272D";
+  const featureLabel=feature=>feature==="client_registry_upload"?"Upload Cliente":feature==="finance_chat"?"AI Finance":"Pre-analisi";
+  return `<div class="table-wrap"><table>
+    <thead><tr><th>Quando</th><th>Funzione</th><th>Utente</th><th>Esito</th><th>File</th><th>Durata</th></tr></thead>
+    <tbody>${logs.map(log=>`<tr>
+      <td style="font-size:13px;color:var(--gray)">${formatDateTime(log.createdAt||log.createdAtLocal)}</td>
+      <td><div style="font-weight:800">${esc(featureLabel(log.feature))}</div><div style="font-size:12px;color:var(--gray)">${esc(log.functionName||"—")} · ${esc(log.provider||"AI")}</div></td>
+      <td style="font-size:13px">${esc(log.userName||"—")}</td>
+      <td>${badge(log.status||"—",statusColor(log.status))}${log.errorMessage?`<div style="font-size:11px;color:#C1272D;margin-top:4px;max-width:260px">${esc(log.errorMessage)}</div>`:""}</td>
+      <td style="font-size:13px;color:var(--gray)">${Number(log.fileCount||0)} · ${formatBytes(log.totalBytes)}${log.rowCount?`<br>${Number(log.rowCount)} righe`:""}</td>
+      <td style="font-size:13px;color:var(--gray)">${Number(log.durationMs||0)} ms</td>
+    </tr>`).join("")}</tbody>
+  </table></div>`;
+}
+
+function renderAiQuotaSummary(){
+  const features=[
+    ["client_registry_upload","Upload Cliente"],
+    ["preanalysis_documents","Documenti Pre-analisi"],
+    ["finance_chat","AI Finance"]
+  ];
+  return `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:14px">
+    ${features.map(([feature,label])=>{
+      const limit=aiMonthlyLimit(feature);
+      const used=aiMonthlyUsed(feature);
+      const remaining=Number.isFinite(limit)?Math.max(0,limit-used):"Illimitato";
+      const value=Number.isFinite(limit)?`${used}/${limit}`:`${used}/∞`;
+      return `<div style="border:1px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:12px;color:var(--gray);font-weight:800;margin-bottom:4px">${esc(label)}</div>
+        <div style="font-size:18px;font-weight:900;color:var(--black)">${esc(value)}</div>
+        <div style="font-size:12px;color:var(--gray);margin-top:3px">Residuo: ${esc(String(remaining))}</div>
+      </div>`;
+    }).join("")}
+  </div>`;
+}
+
+function renderLocalAiUsageFallback(message=""){
+  const logs=readLocalAiUsageLogs().slice(0,20);
+  return `${renderAiQuotaSummary()}${renderAiUsageLogRows(logs)}`;
+}
+
 function renderSettings(){
   clearUnsubs();
   const main=document.getElementById("main");
@@ -6829,6 +9316,7 @@ function renderSettings(){
         <div>Users: <strong style="color:var(--black)">${COLLECTIONS.users}</strong></div>
         <div>Clients: <strong style="color:var(--black)">${COLLECTIONS.clients}</strong></div>
         <div>Practices: <strong style="color:var(--black)">${COLLECTIONS.practices}</strong></div>
+        <div>AI Provider: <strong style="color:var(--black)">${esc(aiProviderLabel())}</strong></div>
         <div>Supabase: <strong style="color:var(--black)">${SUPABASE.projectRef}</strong> / <strong style="color:var(--black)">${SUPABASE.bucket}</strong></div>
       </div>
       <div style="margin-top:12px;padding:10px 14px;background:rgba(46,125,50,.08);border-radius:10px;font-size:13px;color:#2E7D32;font-weight:700">
@@ -6837,6 +9325,14 @@ function renderSettings(){
     </div>
 
     ${isAdmin()?`
+      <div class="card" style="padding:24px;margin-bottom:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <h3 style="font-size:15px;font-weight:800">${appIcon("zap")} Log Utilizzo AI</h3>
+          <span style="font-size:12px;color:var(--gray);font-weight:700">Ultime chiamate</span>
+        </div>
+        <div id="ai-usage-list">${spinner()}</div>
+      </div>
+
       <div class="card" style="padding:24px;margin-bottom:20px">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
           <h3 style="font-size:15px;font-weight:800">${appIcon("users")} Gestione Utenti</h3>
@@ -6854,6 +9350,15 @@ function renderSettings(){
   </div>`;
 
   if(!isAdmin())return;
+
+  const aiUnsub=db.collection(COLLECTIONS.aiUsageLogs).orderBy("createdAt","desc").limit(20).onSnapshot(snapshot=>{
+    const logs=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
+    const el=document.getElementById("ai-usage-list");if(el)el.innerHTML=`${renderAiQuotaSummary()}${renderAiUsageLogRows(logs)}`;
+  },error=>{
+    const el=document.getElementById("ai-usage-list");
+    if(el)el.innerHTML=renderLocalAiUsageFallback(error.message);
+  });
+  _activeUnsubs.push(aiUnsub);
 
   const unsub=db.collection(COLLECTIONS.users).onSnapshot(snapshot=>{
     const users=snapshot.docs.map(doc=>({id:doc.id,...doc.data()})).sort((a,b)=>displayUserName(a).localeCompare(displayUserName(b),"it"));

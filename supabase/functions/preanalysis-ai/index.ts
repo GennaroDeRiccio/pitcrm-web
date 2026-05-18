@@ -353,6 +353,7 @@ serve(async (req) => {
 
     return jsonResponse({ rows: normalizeRows(JSON.parse(outputText)) });
   } catch (error) {
-    return jsonResponse({ error: String(error?.message || error) }, 500);
+    const message = error instanceof Error ? error.message : String(error);
+    return jsonResponse({ error: message }, 500);
   }
 });

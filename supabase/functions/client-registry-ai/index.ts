@@ -106,7 +106,9 @@ function normalizeAddress(value: unknown) {
     cap: onlyDigits(address.cap, 5),
     city: cleanString(address.city, 120),
     province: normalizeProvince(address.province),
+    region: cleanString(address.region, 80),
     state: cleanString(address.state || "Italia", 80),
+    cityCode: cleanString(address.cityCode || address.cadastralCode || address.codiceComune, 8).toUpperCase(),
   };
 }
 
@@ -173,8 +175,8 @@ function extractionPrompt() {
     "- contacts.website: sito web solo se presente.",
     "- owner: rappresentante legale, titolare, amministratore unico o soggetto con carica principale.",
     "- owner.firstName, owner.lastName, owner.fiscalCode, owner.email, owner.phone, owner.role.",
-    "- legalAddress: sede legale con via, CAP, città, provincia, stato.",
-    "- operatingLocations: sedi operative/unità locali/sedi secondarie, se presenti, con stessi campi della sede legale.",
+    "- legalAddress: sede legale con via, CAP, città, provincia, regione, stato e cityCode/codice catastale del comune solo se presente o chiaramente indicato.",
+    "- operatingLocations: sedi operative/unità locali/sedi secondarie, se presenti, con stessi campi della sede legale. Per la comunicazione integrativa è fondamentale distinguere la sede operativa dalla sede legale.",
     "- notes: massimo 2 frasi utili, per esempio forma giuridica, REA, stato attività, capitale sociale, carica del rappresentante.",
     "- confidence: valore 0-1.",
     "- missingFields: elenco campi importanti non trovati.",
@@ -228,7 +230,9 @@ const responseSchema = {
         cap: { type: "string" },
         city: { type: "string" },
         province: { type: "string" },
+        region: { type: "string" },
         state: { type: "string" },
+        cityCode: { type: "string" },
       },
     },
     operatingLocations: {
@@ -240,7 +244,9 @@ const responseSchema = {
           cap: { type: "string" },
           city: { type: "string" },
           province: { type: "string" },
+          region: { type: "string" },
           state: { type: "string" },
+          cityCode: { type: "string" },
         },
       },
     },
@@ -362,6 +368,7 @@ serve(async (req) => {
 
     return jsonResponse({ client: normalizeRegistryData(JSON.parse(outputText)) });
   } catch (error) {
-    return jsonResponse({ error: String(error?.message || error) }, 500);
+    const message = error instanceof Error ? error.message : String(error);
+    return jsonResponse({ error: message }, 500);
   }
 });
