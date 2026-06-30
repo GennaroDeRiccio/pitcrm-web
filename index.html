@@ -69,6 +69,9 @@
   body[data-device="tablet"][data-tablet-orientation="portrait"] .calendar-sidebar{display:none!important}
   .sidebar-fixed-toggle{position:fixed;left:16px;top:24px;z-index:40;width:40px;height:40px;border:none;border-radius:12px;background:linear-gradient(180deg,var(--red-dark),var(--red));color:#fff;box-shadow:0 10px 22px rgba(139,28,31,.24);display:none;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .24s ease,box-shadow .24s ease}
   #app.sidebar-collapsed .sidebar-fixed-toggle{display:flex}
+  body[data-device="tablet"][data-tablet-orientation="portrait"] #app.sidebar-collapsed #main{padding-left:64px!important}
+  body[data-device="tablet"][data-tablet-orientation="portrait"] #app.sidebar-collapsed .sidebar-fixed-toggle{left:12px;top:18px;width:44px;height:44px;border-radius:14px;z-index:55}
+  body[data-device="tablet"][data-tablet-orientation="portrait"] #app:not(.sidebar-collapsed) .sidebar-fixed-toggle{display:none!important}
 
   /* Mobile topbar */
   .mobile-topbar{position:fixed;top:0;left:0;right:0;z-index:70;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 8px;background:linear-gradient(180deg,#F3F4F6 0%,rgba(243,244,246,.98) 74%,rgba(243,244,246,0) 100%)}
@@ -273,6 +276,14 @@
   .client-activity-row{display:flex;align-items:flex-start;gap:12px;padding:14px;border:1px solid rgba(0,0,0,.06);border-radius:16px}
   .client-activity-accent{width:4px;align-self:stretch;border-radius:999px;background:var(--red)}
   .client-activity-meta{font-size:12px;color:var(--gray);margin-top:4px}
+  .client-opportunity-list{display:flex;flex-direction:column;gap:10px}
+  .client-opportunity-card{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:left;background:#fff;border:1px solid rgba(193,39,45,.16);border-radius:16px;padding:14px 16px;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+  .client-opportunity-card:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(15,23,42,.08);border-color:rgba(193,39,45,.34)}
+  .client-opportunity-main{min-width:0}
+  .client-opportunity-type{font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.08em;color:var(--red);margin-bottom:4px}
+  .client-opportunity-title{font-size:15px;font-weight:950;color:var(--black);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .client-opportunity-meta{font-size:12px;font-weight:700;color:var(--gray);margin-top:3px}
+  .client-opportunity-amount{font-size:14px;font-weight:950;color:var(--black);white-space:nowrap}
   .client-history-form{display:grid;gap:12px;margin-bottom:16px}
   .client-history-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
   .client-history-file{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:#F3F4F6;color:var(--gray-dark);font-size:12px;font-weight:800}
@@ -801,6 +812,22 @@
   .iper-doc-discarded-row{font-size:11px;line-height:1.4;color:var(--gray-dark);padding:5px 0;border-top:1px solid rgba(193,39,45,.1)}
   .iper-doc-discarded-row:first-of-type{border-top:0}
   .iper-investment-derived{background:#f6f7f8!important;color:var(--gray-dark)!important;cursor:not-allowed}
+  body[data-device="tablet"] .iper-page{min-height:100%;padding:24px;gap:18px;overflow:visible}
+  body[data-device="tablet"] .iper-layout{width:100%;min-width:0;align-items:start}
+  body[data-device="tablet"][data-tablet-orientation="landscape"] .iper-layout{grid-template-columns:minmax(330px,410px) minmax(0,1fr);gap:18px}
+  body[data-device="tablet"][data-tablet-orientation="portrait"] .iper-layout{grid-template-columns:minmax(0,1fr);gap:16px}
+  body[data-device="tablet"] .iper-panel{position:static;min-width:0}
+  body[data-device="tablet"] .iper-results{min-width:0;overflow:hidden}
+  body[data-device="tablet"] .iper-archive{min-width:0}
+  body[data-device="tablet"] .iper-doc-upload{align-items:stretch;flex-direction:column}
+  body[data-device="tablet"] .iper-doc-upload .btn{width:100%;justify-content:center}
+  body[data-device="tablet"] .iper-doc-table-wrap,
+  body[data-device="tablet"] .iper-table-wrap{max-width:100%;overflow:auto;-webkit-overflow-scrolling:touch}
+  body[data-device="tablet"] .iper-archive-list{max-height:260px;overflow:auto;-webkit-overflow-scrolling:touch}
+  body[data-device="tablet"] .iper-archive-item{align-items:flex-start}
+  body[data-device="tablet"] .iper-archive-actions{flex-wrap:wrap;justify-content:flex-end}
+  body[data-device="tablet"] .iper-redemption-row{grid-template-columns:minmax(0,1fr) 84px}
+  body[data-device="tablet"] .iper-results .empty{min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center}
   .practice-workspace{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:20px;align-items:start}
   .practice-workspace.single{grid-template-columns:minmax(0,1fr)}
   .practice-list-card{border-radius:24px;background:#fff;border:1px solid var(--border);box-shadow:0 16px 36px rgba(15,23,42,.06);overflow:hidden}
@@ -1421,7 +1448,7 @@
         <div class="login-brand-kicker">Professioni in Team</div>
         <div class="login-brand-title">Professioni</div>
         <div class="login-brand-title login-brand-title-muted">in Team</div>
-        <div class="login-brand-text">Accedi al CRM professionale e ritrova clienti, lead, pratiche, eventi, task e notifiche con la stessa impostazione visiva dell’app nativa.</div>
+        <div class="login-brand-text">Accedi al CRM professionale e ritrova clienti, lead, opportunità, eventi, task e notifiche con la stessa impostazione visiva dell’app nativa.</div>
       </div>
     </div>
     <div class="login-form-panel">
@@ -2087,7 +2114,8 @@ let currentUser=null;
 let loginAttempts=0,cooldownTimer=null,cooldownSec=0;
 let activeSection="calendar";
 let allClients=[],clientSearch="";
-let clientViewStyle="grid",_clientBusinessFilter="Tutti";
+let clientViewStyle="grid",_clientOpportunityFilter="all";
+let _clientOpportunityPractices=[],_clientOpportunityIper=[];
 let allLeads=[],_leadFilter="all",leadSearch="",leadViewStyle="grid";
 let calDate=new Date(),allEvents=[],allTasks=[];
 let calViewMode="week",calShowEvents=true,calShowTasks=true;
@@ -2136,7 +2164,7 @@ function visibleNavItems(role=currentRole()){
     {id:"calendar",label:"Calendario",icon:"calendar",visible:perms.canViewCalendar},
     {id:"leads",label:"Lead",icon:"target",visible:perms.canViewLeads},
     {id:"clients",label:"Clienti",icon:"users",visible:perms.canViewClients},
-    {id:"practices",label:"Pratiche",icon:"briefcase",visible:perms.canViewClients},
+    {id:"practices",label:"Opportunità",icon:"briefcase",visible:perms.canViewClients},
     {id:"preanalysis",label:"Pre-analisi",icon:"chart",visible:perms.canViewClients&&currentDeviceMode()!=="mobile"},
     {id:"iperammortamento",label:"Iperammortamento",icon:"calculator",visible:true},
     {id:"finance-ai",label:"AI Finance",icon:"zap",visible:perms.canViewClients},
@@ -2440,7 +2468,7 @@ const NAV=[
   {id:"calendar",label:"Calendario",icon:"calendar"},
   {id:"leads",label:"Lead",icon:"target"},
   {id:"clients",label:"Clienti",icon:"users"},
-  {id:"practices",label:"Pratiche",icon:"briefcase"},
+  {id:"practices",label:"Opportunità",icon:"briefcase"},
   {id:"preanalysis",label:"Pre-analisi",icon:"chart"},
   {id:"collaborators",label:"Rete",icon:"user"},
   {id:"settings",label:"Impostazioni",icon:"settings"},
@@ -2712,7 +2740,7 @@ async function renderDashboard(){
             </button>
             <button class="quick-action-btn" onclick="openPracticeForm()">
               <div class="quick-action-icon" style="background:#E65100">${appIcon("briefcase")}</div>
-              <span class="quick-action-label">Nuova Pratica</span>
+              <span class="quick-action-label">Nuova Opportunità</span>
             </button>
           `:`
             <button class="quick-action-btn" onclick="navigate('clients')">
@@ -2725,7 +2753,7 @@ async function renderDashboard(){
             </button>
             <button class="quick-action-btn" onclick="navigate('practices')">
               <div class="quick-action-icon" style="background:#E65100">${appIcon("briefcase")}</div>
-              <span class="quick-action-label">Pratiche</span>
+              <span class="quick-action-label">Opportunità</span>
             </button>
             <button class="quick-action-btn" onclick="navigate('calendar')">
               <div class="quick-action-icon" style="background:var(--red)">${appIcon("calendar")}</div>
@@ -2741,7 +2769,7 @@ async function renderDashboard(){
           ${[
             {label:"Clienti",value:clients.length,icon:"users",color:"#1565C0"},
             {label:"Lead attivi",value:activeLeads,icon:"target",color:"#E65100"},
-            {label:"Pratiche",value:activePractices,icon:"briefcase",color:"#2E7D32"},
+            {label:"Opportunità",value:activePractices,icon:"briefcase",color:"#2E7D32"},
             {label:"Task pendenti",value:pendingTasks,icon:"check",color:"#C1272D"}
           ].map(item=>`
             <div class="card stat-card">
@@ -2819,6 +2847,7 @@ async function renderDashboard(){
 function renderClients(){
   clearUnsubs();
   clientSearch="";
+  if(!CLIENT_OPPORTUNITY_FILTERS.some(filter=>filter.value===_clientOpportunityFilter))_clientOpportunityFilter="all";
   const main=document.getElementById("main");
   main.innerHTML=currentDeviceMode()==="mobile"?renderClientsMobileShell():renderClientsDesktopShell();
 
@@ -2828,10 +2857,41 @@ function renderClients(){
       renderClientsContent();
     },error=>{const el=document.getElementById("clients-grid");if(el)el.innerHTML=`<div class="error-box">Errore: ${esc(error.message)}</div>`});
     _activeUnsubs.push(unsub);
+    const practicesUnsub=db.collection(COLLECTIONS.practices).onSnapshot(snapshot=>{
+      _clientOpportunityPractices=snapshot.docs.map(doc=>({id:doc.id,...doc.data()})).filter(item=>item.clientId);
+      renderClientsContent();
+    },error=>console.warn("Client opportunity practices unavailable",error));
+    _activeUnsubs.push(practicesUnsub);
+    subscribeClientIperOpportunityIndex();
   });
 }
 
-const CLIENT_BUSINESS_TYPES=["Tutti","Ditta individuale","Associazione professionale","Libero professionista","Società / Ente"];
+const CLIENT_OPPORTUNITY_FILTERS=[
+  {value:"all",label:"Tutti"},
+  {value:"zes",label:"ZES"},
+  {value:"iperammortamento",label:"Iperammortamento"}
+];
+
+function subscribeClientIperOpportunityIndex(){
+  const applySnapshot=snapshot=>{
+    _clientOpportunityIper=snapshot.docs.map(doc=>({id:doc.id,_archiveCollection:COLLECTIONS.iperammortamentoSimulations,...doc.data()})).filter(item=>item.clientId);
+    renderClientsContent();
+  };
+  const handleFallback=error=>{
+    if(!isFirestorePermissionError(error)){console.warn("Iperammortamento client index unavailable",error);return}
+    const fallbackUnsub=db.collection(COLLECTIONS.preAnalyses).where("documentType","==","iperammortamento_simulation").onSnapshot(snapshot=>{
+      _clientOpportunityIper=snapshot.docs.map(doc=>({id:doc.id,_archiveCollection:COLLECTIONS.preAnalyses,...doc.data()})).filter(item=>item.clientId);
+      renderClientsContent();
+    },fallbackError=>console.warn("Fallback iperammortamento client index unavailable",fallbackError));
+    _activeUnsubs.push(fallbackUnsub);
+  };
+  try{
+    const unsub=db.collection(COLLECTIONS.iperammortamentoSimulations).onSnapshot(applySnapshot,handleFallback);
+    _activeUnsubs.push(unsub);
+  }catch(error){
+    handleFallback(error);
+  }
+}
 
 function renderClientsDesktopShell(){
   return `<div class="clients-shell">
@@ -2855,7 +2915,7 @@ function renderClientsDesktopShell(){
         </div>
       </div>
       <div class="clients-filters" id="clients-filters">
-        ${CLIENT_BUSINESS_TYPES.map(type=>`<button class="client-filter-chip ${type===_clientBusinessFilter?"active":""}" data-value="${esc(type)}" onclick="setClientBusinessFilter('${esc(type)}')">${esc(type)}</button>`).join("")}
+        ${CLIENT_OPPORTUNITY_FILTERS.map(filter=>`<button class="client-filter-chip ${filter.value===_clientOpportunityFilter?"active":""}" data-value="${esc(filter.value)}" onclick="setClientOpportunityFilter('${esc(filter.value)}')">${esc(filter.label)}</button>`).join("")}
       </div>
     </div>
     <div id="clients-grid">${spinner()}</div>
@@ -2879,7 +2939,7 @@ function renderClientsMobileShell(){
           <button class="search-clear" onclick="clearClientSearch()" style="${clientSearch?"display:block":"display:none"}" id="clear-cs">×</button>
         </div>
         <div class="leads-mobile-filters" id="clients-filters">
-          ${CLIENT_BUSINESS_TYPES.map(type=>`<button class="leads-mobile-filter ${type===_clientBusinessFilter?"active":""}" data-value="${esc(type)}" onclick="setClientBusinessFilter('${esc(type)}')">${type==="Società / Ente"?"Società":esc(type)}</button>`).join("")}
+          ${CLIENT_OPPORTUNITY_FILTERS.map(filter=>`<button class="leads-mobile-filter ${filter.value===_clientOpportunityFilter?"active":""}" data-value="${esc(filter.value)}" onclick="setClientOpportunityFilter('${esc(filter.value)}')">${esc(filter.label)}</button>`).join("")}
         </div>
       </div>
     </div>
@@ -2915,12 +2975,30 @@ function clientMatchesSearch(client,query){
   ].some(v=>String(v||"").toLowerCase().includes(q));
 }
 
-function clientMatchesBusinessType(client){
-  return _clientBusinessFilter==="Tutti"||String(client.businessType||"").trim()===_clientBusinessFilter;
+function clientLinkedPractices(clientId){
+  return _clientOpportunityPractices.filter(item=>item.clientId===clientId);
+}
+
+function clientLinkedIper(clientId){
+  return _clientOpportunityIper.filter(item=>item.clientId===clientId);
+}
+
+function clientOpportunityCounts(clientId){
+  const practices=clientLinkedPractices(clientId);
+  const iper=clientLinkedIper(clientId);
+  const zes=practices.filter(item=>item.practiceType==="ZES_UNICA");
+  return {practices,iper,zes,total:practices.length+iper.length};
+}
+
+function clientMatchesOpportunityFilter(client){
+  const counts=clientOpportunityCounts(client.id);
+  if(_clientOpportunityFilter==="zes")return counts.zes.length>0;
+  if(_clientOpportunityFilter==="iperammortamento")return counts.iper.length>0;
+  return true;
 }
 
 function filteredClientsList(){
-  return allClients.filter(client=>clientMatchesBusinessType(client)&&clientMatchesSearch(client,clientSearch));
+  return allClients.filter(client=>clientMatchesOpportunityFilter(client)&&clientMatchesSearch(client,clientSearch));
 }
 
 function filterClients(query){
@@ -2943,8 +3021,8 @@ function setClientViewStyle(style){
   renderClientsContent();
 }
 
-function setClientBusinessFilter(type){
-  _clientBusinessFilter=type;
+function setClientOpportunityFilter(type){
+  _clientOpportunityFilter=type;
   refreshClientControls();
   renderClientsContent();
 }
@@ -2955,7 +3033,7 @@ function refreshClientControls(){
   if(gridBtn)gridBtn.classList.toggle("active",clientViewStyle==="grid");
   if(listBtn)listBtn.classList.toggle("active",clientViewStyle==="list");
   document.querySelectorAll("#clients-filters .client-filter-chip, #clients-filters .leads-mobile-filter").forEach(btn=>{
-    const isActive=btn.dataset.value===_clientBusinessFilter;
+    const isActive=btn.dataset.value===_clientOpportunityFilter;
     btn.classList.toggle("active",isActive);
     if(btn.classList.contains("leads-mobile-filter")){
       btn.style.cssText=isActive?"color:#202226;background:#fff":"";
@@ -2965,9 +3043,10 @@ function refreshClientControls(){
 
 function renderClientsContent(){
   const countEl=document.getElementById("clients-count");
-  if(countEl)countEl.textContent=`${allClients.length} clienti totali`;
+  const filtered=filteredClientsList();
+  if(countEl)countEl.textContent=_clientOpportunityFilter==="all"?`${allClients.length} clienti totali`:`${filtered.length} di ${allClients.length} clienti`;
   refreshClientControls();
-  renderClientsGrid(filteredClientsList());
+  renderClientsGrid(filtered);
 }
 
 function renderClientsGrid(clients){
@@ -2988,6 +3067,7 @@ function renderClientsGrid(clients){
 }
 
 function renderClientDesktopCard(client){
+  const opportunityCounts=clientOpportunityCounts(client.id);
   const lines=[
     clientEmail(client)?["mail",clientEmail(client)]:null,
     client.vatNumber?["landmark",`P.IVA ${client.vatNumber}`]:null,
@@ -3001,6 +3081,9 @@ function renderClientDesktopCard(client){
         <div class="client-native-badges">
           ${client.atecoCode?badge(client.atecoCode,"#C1272D"):""}
           ${client.vatNumber?badge(`P.IVA ${client.vatNumber}`,"#6B7280"):""}
+          ${opportunityCounts.total?badge(`${opportunityCounts.total} opportunità`,"#2E7D32"):""}
+          ${opportunityCounts.zes.length?badge("ZES","#C1272D"):""}
+          ${opportunityCounts.iper.length?badge("Iper","#1565C0"):""}
         </div>
       </div>
       ${canEditData()?`<div class="client-native-actions" onclick="event.stopPropagation()">
@@ -3016,6 +3099,7 @@ function renderClientDesktopCard(client){
 }
 
 function renderClientMobileCard(client){
+  const opportunityCounts=clientOpportunityCounts(client.id);
   const referent=[client.ownerFirstName,client.ownerLastName].filter(Boolean).join(" ")||"Nessun referente";
   return `<div class="clients-mobile-card" onclick="navigate('clients','${client.id}')">
     <div class="clients-mobile-card-top">
@@ -3024,6 +3108,7 @@ function renderClientMobileCard(client){
         <div class="clients-mobile-card-name">${esc(clientDisplayName(client))}</div>
         <div class="client-native-badges" style="margin-top:8px">
           ${badge(referent,"#C1272D")}
+          ${opportunityCounts.total?badge(`${opportunityCounts.total} opportunità`,"#2E7D32"):""}
         </div>
       </div>
     </div>
@@ -3464,6 +3549,10 @@ function renderClientSummaryShell(){
       </div>
     </div>
     <div class="client-panel">
+      <div class="client-panel-title">Opportunità collegate</div>
+      <div id="client-opportunities-list">${spinner()}</div>
+    </div>
+    <div class="client-panel">
       <div class="client-panel-title">Storico</div>
       ${renderClientHistoryComposer()}
       <div id="client-history-list">${spinner()}</div>
@@ -3474,6 +3563,10 @@ function renderClientSummaryShell(){
       <div class="client-panel">
         <div class="client-panel-title">Attività recenti</div>
         <div id="client-activity-list">${spinner()}</div>
+      </div>
+      <div class="client-panel">
+        <div class="client-panel-title">Opportunità collegate</div>
+        <div id="client-opportunities-list">${spinner()}</div>
       </div>
       <div class="client-panel">
         <div class="client-panel-title">Storico</div>
@@ -3518,24 +3611,28 @@ function renderClientHistoryComposer(){
 async function loadClientSummary(clientId){
   const cardsEl=document.getElementById("client-summary-cards");
   const activityEl=document.getElementById("client-activity-list");
+  const opportunitiesEl=document.getElementById("client-opportunities-list");
   const historyEl=document.getElementById("client-history-list");
   if(!cardsEl)return;
   try{
-    const [eventsSnap,tasksSnap,practicesSnap,attachmentsSnap]=await Promise.all([
+    const [eventsSnap,tasksSnap,practicesSnap,attachmentsSnap,iperSimulations]=await Promise.all([
       db.collection(COLLECTIONS.events).where("clientId","==",clientId).get(),
       db.collection(COLLECTIONS.tasks).where("clientId","==",clientId).get(),
       db.collection(COLLECTIONS.practices).where("clientId","==",clientId).get(),
-      db.collection(COLLECTIONS.attachments).where("clientId","==",clientId).get()
+      db.collection(COLLECTIONS.attachments).where("clientId","==",clientId).get(),
+      getClientIperSimulations(clientId)
     ]);
     const events=eventsSnap.docs.map(doc=>({id:doc.id,...doc.data()})).sort((a,b)=>(toDateValue(a.startAt)?.getTime()||0)-(toDateValue(b.startAt)?.getTime()||0));
     const tasks=tasksSnap.docs.map(doc=>({id:doc.id,...doc.data()})).sort((a,b)=>(toDateValue(a.dueAt)?.getTime()||0)-(toDateValue(b.dueAt)?.getTime()||0));
     const practices=practicesSnap.docs.map(doc=>({id:doc.id,...doc.data()}));
     const attachments=attachmentsSnap.docs.map(doc=>({id:doc.id,...doc.data()}));
+    const zesPractices=practices.filter(item=>item.practiceType==="ZES_UNICA");
+    const opportunityItems=buildClientOpportunityItems(practices,iperSimulations);
     _detailClientAttachments=attachments.sort((a,b)=>(toDateValue(b.createdAt)?.getTime()||0)-(toDateValue(a.createdAt)?.getTime()||0));
     const cards=[
       {label:"Appuntamenti",value:events.length,hint:events[0]?formatDate(events[0].startAt):"Nessun evento"},
       {label:"Task",value:tasks.length,hint:tasks.find(t=>!t.isCompleted)?"Task aperti presenti":"Nessun task aperto"},
-      {label:"Pratiche",value:practices.length,hint:practices[0]?.practiceCode||"Nessuna pratica"}
+      {label:"Opportunità",value:opportunityItems.length,hint:opportunityItems.length?`${zesPractices.length} ZES · ${iperSimulations.length} Iperammortamento`:"Nessuna opportunità"}
     ];
     cardsEl.innerHTML=currentDeviceMode()==="mobile"
       ?cards.map(card=>`<div class="clients-mobile-kpi">
@@ -3552,7 +3649,7 @@ async function loadClientSummary(clientId){
     const recentItems=[
       ...events.slice(0,2).map(item=>({type:"Evento",title:item.title,meta:formatDateTime(item.startAt),color:"#1565C0"})),
       ...tasks.slice(0,2).map(item=>({type:"Task",title:item.title,meta:`Scadenza ${formatDate(item.dueAt)}`,color:"#2E7D32"})),
-      ...practices.slice(0,2).map(item=>({type:"Pratica",title:item.practiceTitle||item.practiceCode||"Pratica",meta:item.practiceStatus||"In lavorazione",color:"#C1272D"}))
+      ...practices.slice(0,2).map(item=>({type:"Opportunità",title:item.title||item.practiceCode||"Opportunità",meta:item.practiceStatus||item.status||"In lavorazione",color:"#C1272D"}))
     ].slice(0,4);
     if(activityEl){
       activityEl.innerHTML=recentItems.length?`<div class="client-activity-list">${recentItems.map(item=>`<div class="client-activity-row">
@@ -3564,11 +3661,108 @@ async function loadClientSummary(clientId){
         </div>
       </div>`).join("")}</div>`:`<div style="color:var(--gray);font-size:14px">Nessuna attività collegata a questo cliente.</div>`;
     }
+    if(opportunitiesEl)opportunitiesEl.innerHTML=renderClientOpportunityItems(opportunityItems);
   }catch(error){
     if(activityEl)activityEl.innerHTML=`<div class="error-box">Errore: ${esc(error.message)}</div>`;
+    if(opportunitiesEl)opportunitiesEl.innerHTML=`<div class="error-box">Errore: ${esc(error.message)}</div>`;
   }
   if(historyEl){
     subscribeClientHistory(clientId,historyEl);
+  }
+}
+
+async function getClientIperSimulations(clientId){
+  try{
+    const snap=await db.collection(COLLECTIONS.iperammortamentoSimulations).where("clientId","==",clientId).get();
+    return snap.docs.map(doc=>({id:doc.id,_archiveCollection:COLLECTIONS.iperammortamentoSimulations,...doc.data()}));
+  }catch(error){
+    if(!isFirestorePermissionError(error))throw error;
+  }
+  try{
+    const snap=await db.collection(COLLECTIONS.preAnalyses).where("documentType","==","iperammortamento_simulation").where("clientId","==",clientId).get();
+    return snap.docs.map(doc=>({id:doc.id,_archiveCollection:COLLECTIONS.preAnalyses,...doc.data()}));
+  }catch(error){
+    try{
+      const snap=await db.collection(COLLECTIONS.preAnalyses).where("documentType","==","iperammortamento_simulation").get();
+      return snap.docs.map(doc=>({id:doc.id,_archiveCollection:COLLECTIONS.preAnalyses,...doc.data()})).filter(item=>item.clientId===clientId);
+    }catch(fallbackError){
+      console.warn("Client iperammortamento summary unavailable",fallbackError);
+      return [];
+    }
+  }
+}
+
+function buildClientOpportunityItems(practices,iperSimulations){
+  const practiceItems=practices.map(item=>{
+    const ptype=getPracticeType(item.practiceType);
+    const status=getPracticeStatus(item.status||item.practiceStatus);
+    const balance=calculatePracticeBalance(item);
+    const amount=balance.creditAmount?`Credito ${formatEuro(balance.creditAmount)}`:balance.investmentAmount?`Investimento ${formatEuro(balance.investmentAmount)}`:"Importo non indicato";
+    return {
+      kind:"practice",
+      id:item.id,
+      typeLabel:item.practiceType==="ZES_UNICA"?"ZES Unica":ptype.label||"Opportunità",
+      title:item.title||item.practiceTitle||item.practiceCode||"Opportunità senza nome",
+      meta:status.label||item.practiceStatus||"In lavorazione",
+      amount,
+      date:toDateValue(item.updatedAt)||toDateValue(item.createdAt)||toDateValue(item.openedAt)
+    };
+  });
+  const iperItems=iperSimulations.map(item=>{
+    const investment=Number(item.parameters?.investment||item.documentAnalysis?.investmentTotal||0);
+    const saving=Number(item.results?.totalSaving||0);
+    return {
+      kind:"iperammortamento",
+      id:item.id,
+      archiveCollection:item._archiveCollection||COLLECTIONS.iperammortamentoSimulations,
+      typeLabel:"Iperammortamento",
+      title:item.clientName||"Simulazione Iperammortamento",
+      meta:item.mode==="leasing"?"Leasing":"Acquisto",
+      amount:saving?`Risparmio ${iperMoney(saving)}`:investment?`Investimento ${iperMoney(investment)}`:"Importo non indicato",
+      date:toDateValue(item.updatedAt)||toDateValue(item.createdAt)
+    };
+  });
+  return [...practiceItems,...iperItems].sort((a,b)=>(b.date?.getTime()||0)-(a.date?.getTime()||0));
+}
+
+function renderClientOpportunityItems(items){
+  if(!items.length)return `<div style="color:var(--gray);font-size:14px">Nessuna opportunità collegata a questo cliente.</div>`;
+  return `<div class="client-opportunity-list">${items.map(item=>`<button class="client-opportunity-card" onclick="${item.kind==="practice"?`renderPracticeDetail('${item.id}')`:`openClientIperammortamentoSimulation('${item.id}','${esc(item.archiveCollection||"")}')`}">
+    <div class="client-opportunity-main">
+      <div class="client-opportunity-type">${esc(item.typeLabel)}</div>
+      <div class="client-opportunity-title">${esc(item.title)}</div>
+      <div class="client-opportunity-meta">${esc(item.meta)}${item.date?` · ${esc(formatDateTime(item.date))}`:""}</div>
+    </div>
+    <div class="client-opportunity-amount">${esc(item.amount)}</div>
+  </button>`).join("")}</div>`;
+}
+
+async function openClientIperammortamentoSimulation(id,archiveCollection=""){
+  try{
+    await waitAuth();
+    let collection=archiveCollection||COLLECTIONS.iperammortamentoSimulations;
+    let snap=null;
+    try{snap=await db.collection(collection).doc(id).get();}catch(error){if(!isFirestorePermissionError(error))throw error;}
+    if(!snap?.exists&&collection!==COLLECTIONS.preAnalyses){
+      collection=COLLECTIONS.preAnalyses;
+      snap=await db.collection(collection).doc(id).get();
+    }
+    if(!snap?.exists){toast("Simulazione Iperammortamento non trovata","error");return;}
+    const item={id:snap.id,_archiveCollection:collection,...snap.data()};
+    navigate("iperammortamento");
+    setTimeout(()=>{
+      const restored={...iperDefaultDraft(),...(item.parameters||{})};
+      restored.editingId=item.id;
+      restored.editingArchiveCollection=collection;
+      if(Array.isArray(item.documentAnalysis?.rows)&&!Array.isArray(restored.documentRows))restored.documentRows=item.documentAnalysis.rows;
+      if(Array.isArray(item.documentAnalysis?.discardedDocuments))restored.discardedDocuments=item.documentAnalysis.discardedDocuments;
+      _iperammortamentoDraft=restored;
+      iperSyncDocumentInvestment(_iperammortamentoDraft);
+      refreshIperammortamento();
+      toast("Simulazione Iperammortamento aperta ✓");
+    },0);
+  }catch(error){
+    toast(`Apertura simulazione non riuscita: ${error.message}`,"error");
   }
 }
 
@@ -4507,13 +4701,13 @@ function renderPractices(){
   const main=document.getElementById("main");
   main.innerHTML=`<div style="padding:32px">
     <div class="page-header">
-      <div><h1 class="page-title">Pratiche</h1><p class="page-sub" id="practices-count">Caricamento...</p></div>
-      ${canEditData()?`<button class="btn btn-primary" onclick="openPracticeForm()">+ Nuova Pratica</button>`:""}
+      <div><h1 class="page-title">Opportunità</h1><p class="page-sub" id="practices-count">Caricamento...</p></div>
+      ${canEditData()?`<button class="btn btn-primary" onclick="openPracticeForm()">+ Nuova Opportunità</button>`:""}
     </div>
     <div id="practices-metrics" class="metrics-bar"></div>
     <div class="search-wrap">
       <span class="search-icon">${appIcon("search")}</span>
-      <input class="search-input" id="practice-search" placeholder="Cerca pratica, cliente..." oninput="filterPractices(this.value)">
+      <input class="search-input" id="practice-search" placeholder="Cerca opportunità, cliente..." oninput="filterPractices(this.value)">
     </div>
     <div class="quick-filters" id="practice-quick-filters">
       ${[
@@ -4530,7 +4724,7 @@ function renderPractices(){
   const unsub=db.collection(COLLECTIONS.practices).onSnapshot(snapshot=>{
     allPractices=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
     const countEl=document.getElementById("practices-count");
-    if(countEl)countEl.textContent=`${allPractices.length} pratiche totali`;
+    if(countEl)countEl.textContent=`${allPractices.length} opportunità totali`;
     renderPracticesMetrics();renderPracticesList();
   },error=>{const el=document.getElementById("practices-list");if(el)el.innerHTML=`<div class="error-box">Errore: ${esc(error.message)}</div>`});
   _activeUnsubs.push(unsub);
@@ -4594,7 +4788,7 @@ function renderPracticesMetrics(){
 function renderPracticesList(){
   const el=document.getElementById("practices-list");if(!el)return;
   const practices=getFilteredPractices();
-  if(practices.length===0){el.innerHTML=emptyState("briefcase",practiceSearch?"Nessun risultato":"Nessuna pratica","Crea una nuova pratica o modifica i filtri");return}
+  if(practices.length===0){el.innerHTML=emptyState("briefcase",practiceSearch?"Nessun risultato":"Nessuna opportunità","Crea una nuova opportunità o modifica i filtri");return}
 
   // Group by status (kanban)
   const grouped={};
@@ -4635,7 +4829,7 @@ function renderPracticeCard(practice,status){
         </div>
         ${canEditData()?`<div style="display:flex;gap:4px" onclick="event.stopPropagation()">
           <button class="btn-icon blue" onclick="openPracticeForm('${practice.id}')">${appIcon("edit")}</button>
-          <button class="btn-icon red" onclick="deletePractice('${practice.id}','${esc(practice.practiceCode||"questa pratica")}')">${appIcon("trash")}</button>
+          <button class="btn-icon red" onclick="deletePractice('${practice.id}','${esc(practice.practiceCode||"questa opportunità")}')">${appIcon("trash")}</button>
         </div>`:""}
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
@@ -4657,7 +4851,7 @@ async function renderPracticeDetail(practiceId){
   try{
     await waitAuth();
     const snap=await db.collection(COLLECTIONS.practices).doc(practiceId).get();
-    if(!snap.exists){main.innerHTML=`<div style="padding:32px"><div class="error-box">Pratica non trovata</div></div>`;return}
+    if(!snap.exists){main.innerHTML=`<div style="padding:32px"><div class="error-box">Opportunità non trovata</div></div>`;return}
     _detailPractice={id:snap.id,...snap.data()};
     // Load collected amount
     const paymentsSnap=await db.collection(COLLECTIONS.practicePayments).where("practiceId","==",practiceId).get();
@@ -4673,7 +4867,7 @@ function drawPracticeDetail(){
   const commissionMode=COMMISSION_MODES.find(m=>m.value===practice.collaboratorCommissionMode)||{label:practice.collaboratorCommissionMode};
   const main=document.getElementById("main");
   main.innerHTML=`<div style="padding:32px">
-    <button class="back-btn" onclick="navigate('practices')">← Torna alle Pratiche</button>
+    <button class="back-btn" onclick="navigate('practices')">← Torna alle Opportunità</button>
     <div class="detail-hero" style="background:linear-gradient(135deg,${status.color}CC,${status.color}88)">
       <div style="font-size:48px;padding-bottom:24px;color:rgba(255,255,255,.9)">${appIcon(ptype.icon)}</div>
       <div class="detail-info">
@@ -4689,7 +4883,7 @@ function drawPracticeDetail(){
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
       <div class="card" style="padding:24px">
-        <h3 style="font-size:14px;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px">${appIcon("file-text")} Info Pratica</h3>
+        <h3 style="font-size:14px;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px">${appIcon("file-text")} Info Opportunità</h3>
         <div style="display:flex;flex-direction:column;gap:12px">
           ${[
             ["Codice",practice.practiceCode],["Titolo",practice.title||"—"],["Cliente",practice.clientNameSnapshot],
@@ -4767,8 +4961,8 @@ async function addPracticePayment(practiceId){
 
 async function deletePractice(id,code){
   if(!canEditData())return;
-  if(!confirm(`Eliminare la pratica "${code}"?`))return;
-  try{await db.collection(COLLECTIONS.practices).doc(id).delete();toast("Pratica eliminata")}
+  if(!confirm(`Eliminare l'opportunità "${code}"?`))return;
+  try{await db.collection(COLLECTIONS.practices).doc(id).delete();toast("Opportunità eliminata")}
   catch(error){toast(`Errore: ${error.message}`,"error")}
 }
 
@@ -4786,12 +4980,12 @@ async function openPracticeForm(id){
   const modal=document.createElement("div");modal.className="modal-overlay";modal.id="practice-modal";
   modal.innerHTML=`<div class="modal" style="max-width:720px">
     <div class="modal-header">
-      <div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">${id?"Modifica Pratica":"Nuova Pratica"}</div></div>
+      <div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">${id?"Modifica Opportunità":"Nuova Opportunità"}</div></div>
       <button class="modal-close" onclick="closeModal('practice-modal')">×</button>
     </div>
     <div class="modal-body">
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Titolo pratica</label><input id="pf-title" class="form-control" value="${esc(data.title||"")}"></div>
+        <div class="form-group"><label class="form-label">Titolo opportunità</label><input id="pf-title" class="form-control" value="${esc(data.title||"")}"></div>
         <div class="form-group"><label class="form-label">Cliente <span class="req">*</span></label>
           <select id="pf-client" class="form-control">
             <option value="">Seleziona cliente</option>
@@ -4829,7 +5023,7 @@ async function openPracticeForm(id){
       </div>
       <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
         <button class="btn btn-secondary" onclick="closeModal('practice-modal')">Annulla</button>
-        <button class="btn btn-primary" id="btn-save-practice" onclick="savePractice()">${id?"Salva Modifiche":"Crea Pratica"}</button>
+        <button class="btn btn-primary" id="btn-save-practice" onclick="savePractice()">${id?"Salva Modifiche":"Crea Opportunità"}</button>
       </div>
     </div>
   </div>`;
@@ -4882,7 +5076,7 @@ async function savePractice(){
     };
     if(!_editingPracticeId)payload.createdAt=firebase.firestore.FieldValue.serverTimestamp();
     await docRef.set(payload,{merge:true});
-    toast(_editingPracticeId?"Pratica aggiornata ✓":"Pratica creata ✓");closeModal("practice-modal");
+    toast(_editingPracticeId?"Opportunità aggiornata ✓":"Opportunità creata ✓");closeModal("practice-modal");
   }catch(error){toast(`Errore: ${error.message}`,"error");btn.disabled=false;btn.textContent="Salva"}
 }
 
@@ -4965,7 +5159,7 @@ function renderPracticeResultBlock(items,title="Risultato"){
 function renderPracticeBalanceRows(balance,practice){
   const partnerName=practice.partnerNameSnapshot||practice.commercialPartnerNameSnapshot||practice.professionalPartnerNameSnapshot||"Partner";
   const rows=[
-    {label:"Investimento",hint:"Importo base della pratica",value:formatEuro(balance.investmentAmount)},
+    {label:"Investimento",hint:"Importo base dell'opportunità",value:formatEuro(balance.investmentAmount)},
     {label:"Credito recuperato cliente",hint:`${formatPercent(balance.creditPercent)} sull'investimento`,value:formatEuro(balance.creditAmount)},
     {label:"Compenso lordo Professioni in Team",hint:`${formatPercent(balance.pitPercent)} sul credito recuperato`,value:formatEuro(balance.grossPitAmount)},
     {label:`Compenso ${partnerName}`,hint:`${formatPercent(balance.partnerPercent)} sul compenso Professioni in Team`,value:formatEuro(balance.partnerAmount)}
@@ -4977,7 +5171,7 @@ function renderPracticeBalanceRows(balance,practice){
 function renderPracticeHeroAction(){
   if(!canEditData())return"";
   const isPrenotativa=_practiceSubPage==="prenotativa";
-  const label=isPrenotativa?"+ Nuova Integrativa":"+ Nuova Pratica";
+  const label=isPrenotativa?"+ Nuova Integrativa":"+ Nuova Opportunità";
   const action=isPrenotativa?"startNewPrenotativaDraft()":"openPracticeForm()";
   return `<button id="practice-hero-action" class="btn" style="background:#fff;color:var(--red);font-weight:950;padding:13px 20px;border-radius:16px" onclick="${action}">${label}</button>`;
 }
@@ -4993,7 +5187,7 @@ function renderPractices(){
   main.innerHTML=`<div class="practice-page">
     <section class="practice-hero">
       <div class="practice-hero-row">
-        <div><div class="practice-hero-kicker">Gestione agevolazioni e bilanci</div><div class="practice-hero-title">Pratiche</div><div class="practice-hero-sub">Scenari liberi, dato ufficiale Agenzia Entrate, compensi, acconti e margine netto.</div></div>
+        <div><div class="practice-hero-kicker">Gestione agevolazioni e bilanci</div><div class="practice-hero-title">Opportunità</div><div class="practice-hero-sub">Scenari liberi, dato ufficiale Agenzia Entrate, compensi, acconti e margine netto.</div></div>
         ${renderPracticeHeroAction()}
       </div>
     </section>
@@ -5002,7 +5196,7 @@ function renderPractices(){
   </div>`;
   const unsub=db.collection(COLLECTIONS.practices).onSnapshot(snapshot=>{
     allPractices=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
-    const countEl=document.getElementById("practices-count");if(countEl)countEl.textContent=`${allPractices.length} pratiche totali`;
+    const countEl=document.getElementById("practices-count");if(countEl)countEl.textContent=`${allPractices.length} opportunità totali`;
     if(_practiceSubPage==="flow"){
       renderPracticesMetrics();
       renderPracticesList();
@@ -5013,7 +5207,7 @@ function renderPractices(){
 
 function renderPracticeSubnav(){
   return `<div class="practice-subnav">
-    <button class="practice-subtab ${_practiceSubPage==="flow"?"active":""}" onclick="switchPracticeSubpage('flow')">Flusso pratica</button>
+    <button class="practice-subtab ${_practiceSubPage==="flow"?"active":""}" onclick="switchPracticeSubpage('flow')">Flusso opportunità</button>
     <button class="practice-subtab ${_practiceSubPage==="prenotativa"?"active":""}" onclick="switchPracticeSubpage('prenotativa')">Comunicazione integrativa</button>
   </div>`;
 }
@@ -5042,8 +5236,8 @@ function renderPracticeFlowSubpage(){
     <div class="practice-workspace">
       <section class="practice-list-card">
         <div class="practice-list-head">
-          <div><h2 style="font-size:24px;font-weight:950;letter-spacing:-.04em">Portafoglio pratiche</h2><p class="page-sub" id="practices-count">${allPractices.length?`${allPractices.length} pratiche totali`:"Caricamento..."}</p></div>
-          <div style="min-width:min(430px,52%);position:relative"><span class="search-icon">${appIcon("search")}</span><input class="search-input" id="practice-search" value="${esc(practiceSearch)}" placeholder="Cerca pratica, cliente, partner..." oninput="filterPractices(this.value)"></div>
+          <div><h2 style="font-size:24px;font-weight:950;letter-spacing:-.04em">Portafoglio opportunità</h2><p class="page-sub" id="practices-count">${allPractices.length?`${allPractices.length} opportunità totali`:"Caricamento..."}</p></div>
+          <div style="min-width:min(430px,52%);position:relative"><span class="search-icon">${appIcon("search")}</span><input class="search-input" id="practice-search" value="${esc(practiceSearch)}" placeholder="Cerca opportunità, cliente, partner..." oninput="filterPractices(this.value)"></div>
         </div>
         <div class="quick-filters" style="padding:16px 20px 0;margin:0">${[
           ["all","Tutte"],["forecast","Previsionali"],["official","Ufficiali"],["inProgress","In corso"],["closingSoon","In scadenza"]
@@ -6601,20 +6795,20 @@ function renderPracticesMetrics(){
   ].map(([label,value,hint])=>`<div class="practice-money-card"><div class="practice-money-label">${label}</div><div class="practice-money-value">${value}</div><div class="practice-money-hint">${hint}</div></div>`).join("");
   const side=document.getElementById("practice-global-balance");
   if(side)side.innerHTML=[
-    ["Pratiche totali",String(allPractices.length)],["Dato ufficiale",String(allPractices.filter(practiceHasOfficialOutcome).length)],["Professioni in Team",formatEuro(Math.max(pit-advances,0))],["Acconti scalati",formatEuro(advances)],["Quote partner",formatEuro(partners)]
+    ["Opportunità totali",String(allPractices.length)],["Dato ufficiale",String(allPractices.filter(practiceHasOfficialOutcome).length)],["Professioni in Team",formatEuro(Math.max(pit-advances,0))],["Acconti scalati",formatEuro(advances)],["Quote partner",formatEuro(partners)]
   ].map(([l,v])=>`<div class="practice-balance-row"><span>${l}</span><strong>${v}</strong></div>`).join("");
 }
 function renderPracticesList(){
   const el=document.getElementById("practices-list");if(!el)return;
   const practices=getFilteredPractices().sort((a,b)=>(toDateValue(b.updatedAt)?.getTime()||0)-(toDateValue(a.updatedAt)?.getTime()||0));
-  if(!practices.length){el.innerHTML=emptyState("briefcase",practiceSearch?"Nessun risultato":"Nessuna pratica","Crea una pratica e aggiungi scenari per controllare il bilancio");return}
+  if(!practices.length){el.innerHTML=emptyState("briefcase",practiceSearch?"Nessun risultato":"Nessuna opportunità","Crea un'opportunità e aggiungi scenari per controllare il bilancio");return}
   el.innerHTML=`<div class="practice-grid-new">${practices.map(renderPracticeCard).join("")}</div>`;
 }
 function renderPracticeCard(practice){
   const status=getPracticeStatus(practice.status),ptype=getPracticeType(practice.practiceType),balance=practiceBalance(practice);
   return `<article class="practice-card-new" onclick="renderPracticeDetail('${practice.id}')">
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><span class="practice-status-pill" style="color:${status.color};background:${status.color}12"><span class="practice-status-dot" style="background:${status.color}"></span>${esc(status.label)}</span>${canEditData()?`<div style="display:flex;gap:6px" onclick="event.stopPropagation()"><button class="btn-icon blue" onclick="openPracticeForm('${practice.id}')">${appIcon("edit")}</button><button class="btn-icon red" onclick="deletePractice('${practice.id}','${esc(practice.title||practice.practiceCode||"questa pratica")}')">${appIcon("trash")}</button></div>`:""}</div>
-    <div class="practice-card-title-new">${esc(practice.title||practice.practiceCode||"Pratica senza nome")}</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><span class="practice-status-pill" style="color:${status.color};background:${status.color}12"><span class="practice-status-dot" style="background:${status.color}"></span>${esc(status.label)}</span>${canEditData()?`<div style="display:flex;gap:6px" onclick="event.stopPropagation()"><button class="btn-icon blue" onclick="openPracticeForm('${practice.id}')">${appIcon("edit")}</button><button class="btn-icon red" onclick="deletePractice('${practice.id}','${esc(practice.title||practice.practiceCode||"questa opportunità")}')">${appIcon("trash")}</button></div>`:""}</div>
+    <div class="practice-card-title-new">${esc(practice.title||practice.practiceCode||"Opportunità senza nome")}</div>
     <div style="font-size:13px;font-weight:800;color:var(--gray)">${esc(practice.clientNameSnapshot||"Cliente non selezionato")}</div>
     <div class="practice-card-meta"><span class="practice-mini-chip">${appIcon(ptype.icon)} ${esc(ptype.label)}</span><span class="practice-mini-chip">${appIcon(practiceHasOfficialOutcome(practice)?"check":"target")} ${practiceHasOfficialOutcome(practice)?"Ufficiale":"Scenario"}</span>${(practice.partnerNameSnapshot||practice.commercialPartnerNameSnapshot||practice.professionalPartnerNameSnapshot)?`<span class="practice-mini-chip">${appIcon("user")} ${esc(practice.partnerNameSnapshot||practice.commercialPartnerNameSnapshot||practice.professionalPartnerNameSnapshot)}</span>`:""}</div>
     <div class="practice-card-economy"><div><span>Credito</span><strong>${formatEuro(balance.creditAmount)}</strong></div><div><span>Lordo</span><strong>${formatEuro(balance.grossPitAmount)}</strong></div><div><span>Professioni in Team</span><strong>${formatEuro(balance.pitResidualAmount)}</strong></div><div><span>Partner</span><strong>${formatEuro(balance.partnerAmount)}</strong></div></div>
@@ -6626,7 +6820,7 @@ async function renderPracticeDetail(practiceId){
   try{
     await waitAuth();
     const snap=await db.collection(COLLECTIONS.practices).doc(practiceId).get();
-    if(!snap.exists){main.innerHTML=`<div style="padding:32px"><div class="error-box">Pratica non trovata</div></div>`;return}
+    if(!snap.exists){main.innerHTML=`<div style="padding:32px"><div class="error-box">Opportunità non trovata</div></div>`;return}
     _detailPractice={id:snap.id,...snap.data()};
     _practicePayments=[];
     _practiceCollectedAmount=0;
@@ -6650,13 +6844,13 @@ function renderPracticeOfficialResult(practice,balance){
 function drawPracticeDetail(){
   const practice=_detailPractice,status=getPracticeStatus(practice.status),ptype=getPracticeType(practice.practiceType),balance=practiceBalance(practice),scenarios=normalizePracticeScenarios(practice.scenarios,practice),official=normalizePracticeOfficial(practice.officialOutcome||practice.official||{},practice),isOfficial=practiceHasOfficialOutcome(practice);
   const main=document.getElementById("main");
-  main.innerHTML=`<div class="practice-page"><button class="back-btn" onclick="navigate('practices')">← Torna alle Pratiche</button>
-    <section class="practice-hero" style="background:linear-gradient(135deg,${status.color},#102A43)"><div class="practice-hero-row"><div><div class="practice-hero-kicker">${esc(ptype.label)} · ${esc(status.label)}</div><div class="practice-hero-title">${esc(practice.title||practice.practiceCode||"Pratica")}</div><div class="practice-hero-sub">${esc(practice.clientNameSnapshot||"Cliente non selezionato")} · ${isOfficial?"Dato ufficiale inserito":"Bilancio su scenario di riferimento"}</div></div>${canEditData()?`<button class="btn" style="background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.22);font-weight:900" onclick="openPracticeForm('${practice.id}')">${appIcon("edit")} Modifica</button>`:""}</div></section>
+  main.innerHTML=`<div class="practice-page"><button class="back-btn" onclick="navigate('practices')">← Torna alle Opportunità</button>
+    <section class="practice-hero" style="background:linear-gradient(135deg,${status.color},#102A43)"><div class="practice-hero-row"><div><div class="practice-hero-kicker">${esc(ptype.label)} · ${esc(status.label)}</div><div class="practice-hero-title">${esc(practice.title||practice.practiceCode||"Opportunità")}</div><div class="practice-hero-sub">${esc(practice.clientNameSnapshot||"Cliente non selezionato")} · ${isOfficial?"Dato ufficiale inserito":"Bilancio su scenario di riferimento"}</div></div>${canEditData()?`<button class="btn" style="background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.22);font-weight:900" onclick="openPracticeForm('${practice.id}')">${appIcon("edit")} Modifica</button>`:""}</div></section>
     <div class="practice-workspace"><div style="display:flex;flex-direction:column;gap:18px">
-      <section class="practice-section-card"><div class="practice-section-title">${appIcon("file-text")} Dati pratica</div><div class="practice-info-grid">${[["Codice",practice.practiceCode||"—"],["Cliente",practice.clientNameSnapshot||"—"],["Agevolazione",ptype.label],["Stato",status.label],["Investimento",formatEuro(balance.investmentAmount)],["% compenso Professioni in Team",formatPercent(balance.pitPercent)],["% partner su compenso Professioni in Team",formatPercent(balance.partnerPercent)],["Partner",practice.partnerNameSnapshot||practice.commercialPartnerNameSnapshot||practice.professionalPartnerNameSnapshot||"—"],["Tipo partner",balance.partnerKind==="commercial"?"Commerciale":balance.partnerKind==="professional"?"Professionista":"—"],["Inizio",formatDate(practice.openedAt)],["Fine prevista",formatDate(practice.expectedCloseAt)]].map(([l,v])=>`<div class="practice-info-tile"><label>${l}</label><span>${esc(String(v||"—"))}</span></div>`).join("")}</div>${practice.notes?`<div class="practice-info-tile" style="margin-top:12px"><label>Note</label><span style="white-space:pre-wrap;font-weight:700;color:var(--gray-dark)">${esc(practice.notes)}</span></div>`:""}</section>
+      <section class="practice-section-card"><div class="practice-section-title">${appIcon("file-text")} Dati opportunità</div><div class="practice-info-grid">${[["Codice",practice.practiceCode||"—"],["Cliente",practice.clientNameSnapshot||"—"],["Agevolazione",ptype.label],["Stato",status.label],["Investimento",formatEuro(balance.investmentAmount)],["% compenso Professioni in Team",formatPercent(balance.pitPercent)],["% partner su compenso Professioni in Team",formatPercent(balance.partnerPercent)],["Partner",practice.partnerNameSnapshot||practice.commercialPartnerNameSnapshot||practice.professionalPartnerNameSnapshot||"—"],["Tipo partner",balance.partnerKind==="commercial"?"Commerciale":balance.partnerKind==="professional"?"Professionista":"—"],["Inizio",formatDate(practice.openedAt)],["Fine prevista",formatDate(practice.expectedCloseAt)]].map(([l,v])=>`<div class="practice-info-tile"><label>${l}</label><span>${esc(String(v||"—"))}</span></div>`).join("")}</div>${practice.notes?`<div class="practice-info-tile" style="margin-top:12px"><label>Note</label><span style="white-space:pre-wrap;font-weight:700;color:var(--gray-dark)">${esc(practice.notes)}</span></div>`:""}</section>
       <section class="practice-section-card"><div class="practice-section-title">${appIcon("target")} Scenari previsionali</div>${scenarios.length?`<div class="practice-scenarios-grid">${scenarios.map(s=>renderPracticeScenarioCard(s,practice)).join("")}</div>`:`<div style="font-size:14px;color:var(--gray);font-weight:700">Nessuno scenario.</div>`}</section>
       <section class="practice-section-card"><div class="practice-section-title">${appIcon("check")} Esito ufficiale Agenzia Entrate</div>${isOfficial?`<div class="practice-info-grid" style="margin-bottom:14px">${[["Data esito",formatDate(official.date)],["Credito ufficiale",formatPercent(official.creditPercent)]].map(([l,v])=>`<div class="practice-info-tile"><label>${esc(l)}</label><span>${v}</span></div>`).join("")}</div>${renderPracticeOfficialResult(practice,balance)}`:`<div style="font-size:14px;color:var(--gray);font-weight:700">Non hai ancora inserito la data e la percentuale ufficiale.</div>`}</section>
-    </div><aside class="practice-side-panel"><section class="practice-section-card"><div class="practice-section-title">${appIcon("euro")} Bilancio pratica</div>${renderPracticeBalanceRows(balance,practice)}</section></aside></div></div>`;
+    </div><aside class="practice-side-panel"><section class="practice-section-card"><div class="practice-section-title">${appIcon("euro")} Bilancio opportunità</div>${renderPracticeBalanceRows(balance,practice)}</section></aside></div></div>`;
 }
 function practiceFormPartnerOptions(items,selectedId){return items.map(c=>{const nm=collaboratorFullName(c);return`<option value="${c.id}|${esc(nm)}" ${selectedId===c.id?"selected":""}>${esc(nm)}</option>`}).join("")}
 function updatePracticePartnerOptions(){
@@ -6708,11 +6902,11 @@ async function openPracticeForm(id){
   const official=normalizePracticeOfficial(data.officialOutcome||data.official||{},data);
   const fallbackAdvance=numberOr(data.advanceAmount,numberOr(_practiceFormScenarios.find(s=>s.isReference)?.advanceAmount,numberOr(_practiceFormScenarios[0]?.advanceAmount,0)));
   const modal=document.createElement("div");modal.className="modal-overlay";modal.id="practice-modal";
-  modal.innerHTML=`<div class="modal" style="max-width:1120px"><div class="modal-header"><div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">${id?"Modifica Pratica":"Nuova Pratica"}</div></div><button class="modal-close" onclick="closeModal('practice-modal')">×</button></div><div class="modal-body"><div class="client-form-sections">
-    <section class="client-form-section"><div class="client-form-section-head"><div><div class="client-form-section-title">Dati pratica</div><div class="client-form-section-sub">Dati principali, investimento e partner collegato</div></div></div>
-      <div class="practice-form-subsection"><div class="practice-form-subtitle">Informazioni pratica</div><div class="form-row">
+  modal.innerHTML=`<div class="modal" style="max-width:1120px"><div class="modal-header"><div class="modal-title-bar"><div class="modal-accent"></div><div class="modal-title">${id?"Modifica Opportunità":"Nuova Opportunità"}</div></div><button class="modal-close" onclick="closeModal('practice-modal')">×</button></div><div class="modal-body"><div class="client-form-sections">
+    <section class="client-form-section"><div class="client-form-section-head"><div><div class="client-form-section-title">Dati opportunità</div><div class="client-form-section-sub">Dati principali, investimento e partner collegato</div></div></div>
+      <div class="practice-form-subsection"><div class="practice-form-subtitle">Informazioni opportunità</div><div class="form-row">
         <div class="form-group"><label class="form-label">Codice</label><input class="form-control practice-code-preview" value="${esc(data.practiceCode||"Automatico alla creazione")}" readonly></div>
-        <div class="form-group"><label class="form-label">Nome pratica <span class="req">*</span></label><input id="pf-title" class="form-control" value="${esc(data.title||"")}"></div>
+        <div class="form-group"><label class="form-label">Nome opportunità <span class="req">*</span></label><input id="pf-title" class="form-control" value="${esc(data.title||"")}"></div>
         <div class="form-group"><label class="form-label">Cliente <span class="req">*</span></label><select id="pf-client" class="form-control" onchange="updatePracticeScenarioPreviews();updatePracticeOfficialPreview()"><option value="">Seleziona cliente</option>${allClients.map(c=>`<option value="${c.id}|${esc(clientDisplayName(c))}" ${data.clientId===c.id?"selected":""}>${esc(clientDisplayName(c))}</option>`).join("")}</select></div>
         <div class="form-group"><label class="form-label">Tipo agevolazione</label><select id="pf-type" class="form-control">${PRACTICE_TYPES.map(t=>`<option value="${t.value}" ${(data.practiceType||"")===t.value?"selected":""}>${t.label}</option>`).join("")}</select></div>
         <div class="form-group"><label class="form-label">Stato</label><select id="pf-status" class="form-control">${PRACTICE_STATUSES.map(s=>`<option value="${s.value}" ${getPracticeStatus(data.status).value===s.value?"selected":""}>${s.label}</option>`).join("")}</select></div>
@@ -6734,18 +6928,18 @@ async function openPracticeForm(id){
       <div class="form-group" style="grid-column:span 2"><label class="form-label">Nota acconto</label><input id="pf-advanceNote" class="form-control" value="${esc(data.advanceNote||"")}" placeholder="Es. Acconto alla firma, bonifico ricevuto..."></div>
     </div></section>
     <section class="client-form-section practice-collapsible-section" id="practice-scenarios-section"><button type="button" class="practice-collapsible-head" onclick="togglePracticeScenariosSection()"><div class="client-form-section-head"><div><div class="client-form-section-title">Scenari previsionali</div><div class="client-form-section-sub">Apri la tendina per creare o modificare le simulazioni</div></div></div><span class="practice-collapsible-toggle">${appIcon("chevron-down")}</span></button><div class="practice-collapsible-body"><div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();addPracticeScenarioRow()">+ Scenario</button></div><div id="practice-scenarios-editor">${renderPracticeScenarioEditor()}</div></div></section>
-    <section class="client-form-section"><div class="client-form-section-head"><div><div class="client-form-section-title">Esito ufficiale Agenzia Entrate</div><div class="client-form-section-sub">Inserisci solo data e percentuale ufficiale: il resto viene calcolato dai dati pratica</div></div></div><div class="form-row">
+    <section class="client-form-section"><div class="client-form-section-head"><div><div class="client-form-section-title">Esito ufficiale Agenzia Entrate</div><div class="client-form-section-sub">Inserisci solo data e percentuale ufficiale: il resto viene calcolato dai dati opportunità</div></div></div><div class="form-row">
       <div class="form-group"><label class="form-label">Data esito</label><input id="pf-official-date" class="form-control" type="date" value="${dateInputValue(official.date)}"></div>
       <div class="form-group"><label class="form-label">% credito ufficiale</label><input id="pf-official-creditPercent" class="form-control" type="number" step="0.01" value="${esc(practiceInputValue(official.creditPercent))}" oninput="updatePracticeOfficialPreview()"></div>
       <div class="form-group" style="grid-column:span 2"><label class="form-label">Note esito</label><textarea id="pf-official-notes" class="form-control">${esc(official.notes||"")}</textarea></div>
     </div><div id="practice-official-preview" class="practice-form-preview"></div></section>
-    <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn btn-secondary" onclick="closeModal('practice-modal')">Annulla</button><button class="btn btn-primary" id="btn-save-practice" onclick="savePractice()">${id?"Salva Modifiche":"Crea Pratica"}</button></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn btn-secondary" onclick="closeModal('practice-modal')">Annulla</button><button class="btn btn-primary" id="btn-save-practice" onclick="savePractice()">${id?"Salva Modifiche":"Crea Opportunità"}</button></div>
   </div></div></div>`;
   document.body.appendChild(modal);updatePracticePartnerOptions();document.getElementById("pf-title").focus();updatePracticeScenarioPreviews();updatePracticeOfficialPreview();
 }
 async function savePractice(){
   const title=document.getElementById("pf-title").value.trim(),clientRaw=document.getElementById("pf-client").value,practiceType=document.getElementById("pf-type").value,status=document.getElementById("pf-status").value;
-  if(!title||!clientRaw){toast("Nome pratica e cliente sono obbligatori","error");return}
+  if(!title||!clientRaw){toast("Nome opportunità e cliente sono obbligatori","error");return}
   const btn=document.getElementById("btn-save-practice");btn.disabled=true;btn.textContent="Salvataggio...";
   try{
     await waitAuth();
@@ -6767,7 +6961,7 @@ async function savePractice(){
     const payload={id:docRef.id,practiceCode,title,clientId,clientNameSnapshot:clientName,practiceType,status,year,investmentAmount:draft.investmentAmount,finalInvestmentAmount:draft.finalInvestmentAmount,feePercent:draft.feePercent,pitPercent:draft.feePercent,partnerPercent:draft.partnerPercent,advanceAmount:draft.advanceAmount,advanceDate:fieldValue("pf-advanceDate")?new Date(fieldValue("pf-advanceDate")):null,advanceNote:fieldValue("pf-advanceNote"),partnerKind,partnerId:partnerId||"",partnerNameSnapshot:partnerName||"",openedAt:fieldValue("pf-openedAt")?new Date(fieldValue("pf-openedAt")):new Date(),expectedCloseAt:fieldValue("pf-closeAt")?new Date(fieldValue("pf-closeAt")):null,notes:fieldValue("pf-notes"),commercialPartnerId:commercialPartnerId||"",commercialPartnerNameSnapshot:commercialPartnerName||"",professionalPartnerId:professionalPartnerId||"",professionalPartnerNameSnapshot:professionalPartnerName||"",collaboratorOriginId:commercialPartnerId||"",collaboratorOriginNameSnapshot:commercialPartnerName||"",collaboratorOriginType:partnerKind?"PARTNER":"",ownerInternalUserId:currentUser.id,ownerInternalUserNameSnapshot:displayUserName(),scenarios,officialOutcome,expectedIncentiveAmount:balance.creditAmount,expectedCompanyRevenue:balance.grossPitAmount,collaboratorCommissionMode:"PERCENT_OF_REVENUE",collaboratorCommissionValue:balance.partnerPercent,collaboratorCompensationExpected:balance.partnerAmount,collaboratorCompensationMatured:practiceHasOfficialOutcome(draft)?balance.partnerAmount:0,commercialPartnerDue:balance.commercialAmount,professionalPartnerDue:balance.professionalAmount,pitRevenue:balance.pitResidualAmount,pitGrossRevenue:balance.grossPitAmount,pitNetRevenue:balance.pitAmount,updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
     if(!_editingPracticeId)payload.createdAt=firebase.firestore.FieldValue.serverTimestamp();
     await docRef.set(payload,{merge:true});
-    toast(_editingPracticeId?"Pratica aggiornata ✓":"Pratica creata ✓");closeModal("practice-modal");if(activeSection==="practices"&&_detailPractice?.id===docRef.id)renderPracticeDetail(docRef.id);
+    toast(_editingPracticeId?"Opportunità aggiornata ✓":"Opportunità creata ✓");closeModal("practice-modal");if(activeSection==="practices"&&_detailPractice?.id===docRef.id)renderPracticeDetail(docRef.id);
   }catch(error){toast(`Errore: ${error.message}`,"error");btn.disabled=false;btn.textContent="Salva"}
 }
 
@@ -7165,7 +7359,7 @@ function renderFinanceAi(){
     ${renderPageHero({
       kicker:"AI FINANCE",
       title:"AI Finance",
-      subtitle:"Assistente operativo per finanza agevolata, ZES Unica, documenti e pratiche.",
+      subtitle:"Assistente operativo per finanza agevolata, ZES Unica, documenti e opportunità.",
       buttonHtml:renderHeroPrimaryButton("+ Nuova chat","createFinanceChat()")
     })}
     <section class="finance-layout ${collapsed?"archive-collapsed":""}" id="finance-layout">
@@ -7196,7 +7390,7 @@ function renderFinanceAi(){
           <div style="display:flex;gap:10px;align-items:flex-end">
             <input id="finance-chat-file-input" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.webp,.txt,text/plain,application/pdf,image/*" style="display:none" onchange="handleFinanceAttachmentSelected(this)">
             <button class="btn btn-secondary" style="width:44px;height:44px;padding:0;justify-content:center;font-size:22px" title="Allega file" onclick="document.getElementById('finance-chat-file-input').click()">+</button>
-            <textarea id="finance-chat-input" class="form-control finance-chat-input" rows="3" placeholder="Scrivi una domanda su ZES, credito d'imposta, documenti, requisiti o impostazione pratica..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendFinanceChatMessage()}"></textarea>
+            <textarea id="finance-chat-input" class="form-control finance-chat-input" rows="3" placeholder="Scrivi una domanda su ZES, credito d'imposta, documenti, requisiti o impostazione opportunità..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendFinanceChatMessage()}"></textarea>
             <button class="btn btn-primary" id="finance-chat-send" onclick="sendFinanceChatMessage()">Invia</button>
           </div>
         </div>
@@ -9200,9 +9394,9 @@ async function loadCollabDetailInsights(collab){
       if(partnerPerformanceEl){
         partnerPerformanceEl.innerHTML=`<div class="client-summary-cards">
           ${[
-            ["Pratiche generate",String(practices.length),"Totale pratiche associate al partner"],
+            ["Opportunità generate",String(practices.length),"Totale opportunità associate al partner"],
             ["Clienti portati",String(clients.length),"Anagrafiche clienti collegate"],
-            ["Valore generato",formatEuro(generatedValue),"Somma fee prevista sulle pratiche"],
+            ["Valore generato",formatEuro(generatedValue),"Somma fee prevista sulle opportunità"],
             ["Commissioni maturate",formatEuro(maturedCommissions),"Valore maturato disponibile"]
           ].map(([label,value,hint])=>`<div class="client-summary-card"><div class="client-summary-label">${esc(label)}</div><div class="client-summary-value" style="font-size:22px;line-height:1.15">${esc(value)}</div><div class="client-summary-hint">${esc(hint)}</div></div>`).join("")}
         </div>`;
@@ -9211,7 +9405,7 @@ async function loadCollabDetailInsights(collab){
         partnerCommissionEl.innerHTML=`<div class="client-data-grid">
           ${[
             ["Percentuale commissione",collab.commissionPercentage?`${collab.commissionPercentage}%`:"—"],
-            ["Pratiche segnalate",String(practices.length)],
+            ["Opportunità segnalate",String(practices.length)],
             ["Compensi attesi",formatEuro(expectedComp)],
             ["Compensi pagati",formatEuro(paidComp)]
           ].map(([label,value])=>`<div class="client-data-item"><div class="client-data-item-label">${esc(label)}</div><div class="client-data-item-value">${esc(value||"—")}</div></div>`).join("")}
@@ -9443,7 +9637,7 @@ function drawCollabDetail(){
           </div>
           <div class="client-panel">
             <div class="client-panel-title">Performance partner</div>
-            <div id="network-partner-performance"><div class="network-empty-note">Sto calcolando pratiche, clienti e valore generato...</div></div>
+            <div id="network-partner-performance"><div class="network-empty-note">Sto calcolando opportunità, clienti e valore generato...</div></div>
           </div>
           <div class="client-panel">
             <div class="client-panel-title">Compensi e commissioni</div>
@@ -9700,7 +9894,7 @@ function renderSettings(){
         <div>Firebase Project: <strong style="color:var(--black)">pitcrm-7e69c</strong></div>
         <div>Users: <strong style="color:var(--black)">${COLLECTIONS.users}</strong></div>
         <div>Clients: <strong style="color:var(--black)">${COLLECTIONS.clients}</strong></div>
-        <div>Practices: <strong style="color:var(--black)">${COLLECTIONS.practices}</strong></div>
+        <div>Opportunità: <strong style="color:var(--black)">${COLLECTIONS.practices}</strong></div>
         <div>AI Provider: <strong style="color:var(--black)">${esc(aiProviderLabel())}</strong></div>
         <div>Supabase: <strong style="color:var(--black)">${SUPABASE.projectRef}</strong> / <strong style="color:var(--black)">${SUPABASE.bucket}</strong></div>
       </div>
