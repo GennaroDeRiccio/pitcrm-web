@@ -98,6 +98,40 @@
   .mobile-tab .icon svg{width:19px;height:19px;display:block;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
   .mobile-tab .label{font-size:10px;font-weight:800;letter-spacing:.01em}
 
+  /* Mobile home */
+  body[data-device="mobile"][data-active-section="home"]{background:#F3F4F6;overflow:auto}
+  body[data-device="mobile"][data-active-section="home"] #main{padding-top:0!important;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 86px)!important;background:#F3F4F6;overflow-y:auto!important}
+  body[data-device="mobile"][data-active-section="home"] #mobile-topbar{display:none!important}
+  .mobile-home-shell{min-height:100dvh;background:#F3F4F6;padding:calc(env(safe-area-inset-top,0px) + 22px) 16px 22px}
+  .mobile-home-title{font-size:30px;font-weight:950;line-height:1;letter-spacing:-.045em;color:var(--black);margin:0 0 16px;padding:0 2px}
+  .mobile-home-title::after{content:"";display:block;width:44px;height:5px;border-radius:999px;background:var(--red);margin-top:10px;box-shadow:0 8px 16px rgba(193,39,45,.18)}
+  .mobile-home-agenda-widget{position:relative;display:block;width:100%;overflow:hidden;border:1px solid rgba(193,39,45,.12);border-radius:26px;background:linear-gradient(135deg,#90151B 0%,#B51E25 48%,#C1272D 100%);color:#fff;padding:18px;min-height:172px;box-shadow:0 18px 36px rgba(193,39,45,.18);cursor:pointer;text-align:left}
+  .mobile-home-agenda-widget::before{content:"";position:absolute;right:-54px;top:-42px;width:190px;height:190px;border-radius:50%;background:rgba(255,255,255,.08)}
+  .mobile-home-agenda-art{position:absolute;right:-8px;bottom:8px;z-index:1;width:128px;height:128px;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(91,12,18,.22));pointer-events:none}
+  .mobile-home-agenda-date{position:relative;z-index:1;font-size:25px;font-weight:950;letter-spacing:-.03em;line-height:1;margin-bottom:13px}
+  .mobile-home-agenda-list{position:relative;z-index:2;display:grid;gap:8px;max-width:70%}
+  .mobile-home-agenda-row{display:grid;grid-template-columns:5px minmax(0,1fr);gap:9px;align-items:start;color:#fff;text-align:left;border:none;background:transparent;padding:0;cursor:pointer;font-family:inherit}
+  .mobile-home-agenda-marker{display:block;width:4px;height:36px;border-radius:999px;margin-top:1px;background:#FFFFFF}
+  .mobile-home-agenda-row:nth-child(2) .mobile-home-agenda-marker{background:#FFD1D4}
+  .mobile-home-agenda-row:nth-child(3) .mobile-home-agenda-marker{background:#FFC36A}
+  .mobile-home-agenda-text{min-width:0}
+  .mobile-home-agenda-name{display:block;font-size:13px;font-weight:900;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mobile-home-agenda-time{display:block;font-size:12px;font-weight:800;line-height:1.18;margin-top:3px;color:rgba(255,255,255,.9)}
+  .mobile-home-agenda-empty{position:relative;z-index:1;max-width:70%;font-size:13px;font-weight:850;line-height:1.35;color:rgba(255,255,255,.92)}
+  .mobile-home-shortcut-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+  .mobile-home-shortcut{position:relative;display:block;min-height:104px;padding:16px 14px 15px 16px;border:1px solid rgba(15,23,42,.06);border-radius:22px;background:#fff;text-align:left;font-family:inherit;color:#17191D;cursor:pointer;box-shadow:0 10px 24px rgba(15,23,42,.05)}
+  .mobile-home-shortcut:nth-child(odd){border-right:1px solid rgba(15,23,42,.06)}
+  .mobile-home-shortcut-title{display:block;font-size:14px;font-weight:950;line-height:1.12;color:#14161A;letter-spacing:-.01em;white-space:normal}
+  .mobile-home-shortcut-sub{display:block;font-size:12px;font-weight:700;line-height:1.25;color:#8C929B;margin-top:7px;padding-right:50px}
+  .mobile-home-shortcut-icon{position:absolute;right:14px;bottom:14px;width:40px;height:40px;border-radius:15px;display:flex;align-items:center;justify-content:center;color:var(--shortcut-color,var(--red));background:color-mix(in srgb,var(--shortcut-color,var(--red)) 12%,#fff);border:1px solid color-mix(in srgb,var(--shortcut-color,var(--red)) 18%,#fff)}
+  .mobile-home-shortcut-icon svg{width:23px;height:23px;stroke:currentColor;stroke-width:1.9;fill:none}
+  .mobile-home-bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:76;display:flex;align-items:center;justify-content:center;padding:10px 20px calc(env(safe-area-inset-bottom,0px) + 14px);background:linear-gradient(180deg,rgba(243,244,246,0),rgba(243,244,246,.82) 28%,#F3F4F6 100%)}
+  .mobile-home-bottom-pill{display:flex;align-items:center;justify-content:center;gap:18px;padding:8px 10px;background:rgba(255,255,255,.94);border:1px solid rgba(226,232,240,.86);border-radius:999px;box-shadow:0 14px 30px rgba(15,23,42,.12),inset 0 1px 0 rgba(255,255,255,.88);backdrop-filter:blur(14px) saturate(1.08);-webkit-backdrop-filter:blur(14px) saturate(1.08)}
+  .mobile-home-bottom-btn{width:44px;height:44px;border:none;border-radius:50%;background:transparent;color:#A6AAB1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:none}
+  .mobile-home-bottom-btn.active{color:var(--red);background:linear-gradient(180deg,#FFF4F4,#FFEAEA);box-shadow:0 8px 18px rgba(193,39,45,.12);border:1px solid rgba(193,39,45,.16)}
+  .mobile-home-bottom-btn svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+  .mobile-home-bottom-btn .avatar{box-shadow:none!important;border:none!important}
+
   /* Sidebar */
   .sb-logo{padding:14px 12px;display:flex;align-items:center;gap:9px;border-bottom:1px solid rgba(255,255,255,.12)}
   .sb-logo-icon{width:42px;height:42px;background:rgba(255,255,255,.96);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(255,255,255,.3);padding:5px}
@@ -194,6 +228,10 @@
   .client-form-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
   .client-form-section-title{font-size:16px;font-weight:900;color:var(--black)}
   .client-form-section-sub{font-size:12px;font-weight:700;color:var(--gray);margin-top:2px}
+  .client-repeat-list{display:flex;flex-direction:column;gap:12px}
+  .client-repeat-card{border:1px solid rgba(15,23,42,.08);border-radius:16px;background:#fff;padding:14px}
+  .client-repeat-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .client-repeat-title{font-size:13px;font-weight:950;color:var(--black)}
   .client-form-operating{border:1px dashed rgba(193,39,45,.28);border-radius:16px;background:#fff;padding:14px;margin-top:12px}
   .client-form-operating-title{font-size:13px;font-weight:900;color:var(--red);margin-bottom:12px;text-transform:uppercase;letter-spacing:.06em}
   .calendar-detail-stack{display:flex;flex-direction:column;gap:14px}
@@ -1423,6 +1461,13 @@
   .calendar-mobile-agenda-card.event .calendar-mobile-agenda-action{background:#EFF7F1;color:#0F7A3C}
   .calendar-mobile-agenda-card.task .calendar-mobile-agenda-action{background:#FEF1F1;color:var(--red)}
   .calendar-mobile-agenda-card.task.done .calendar-mobile-agenda-action{background:#F2F4F7;color:#8C939D}
+  body[data-device="mobile"][data-active-section="home"] #main>.mobile-home-shell{padding:calc(env(safe-area-inset-top,0px) + 30px) 24px 22px!important}
+  @media(max-width:420px){
+    body[data-device="mobile"][data-active-section="home"] #main>.mobile-home-shell{padding:calc(env(safe-area-inset-top,0px) + 26px) 22px 20px!important}
+    .mobile-home-title{font-size:31px}
+    .mobile-home-agenda-widget{border-radius:18px;min-height:164px}
+    .mobile-home-shortcut{min-height:98px;padding-left:16px}
+  }
 </style>
 </head>
 <body>
@@ -2157,7 +2202,7 @@ function rolePermissions(role=currentRole()){
   };
 }
 function accountSectionId(){return currentRole()==="admin"?"settings":"profile"}
-function defaultSectionForUser(role=currentRole()){return rolePermissions(role).canViewCalendar?"calendar":"clients"}
+function defaultSectionForUser(role=currentRole()){return currentDeviceMode()==="mobile"?"home":(rolePermissions(role).canViewCalendar?"calendar":"clients")}
 function visibleNavItems(role=currentRole()){
   const perms=rolePermissions(role);
   return [
@@ -2173,6 +2218,7 @@ function visibleNavItems(role=currentRole()){
 }
 
 const ICON_PATHS={
+  home:`<path d="M4.5 11.5 12 5l7.5 6.5"></path><path d="M6.5 10.5v9h11v-9"></path><path d="M10 19.5v-5h4v5"></path>`,
   calendar:`<rect x="3.5" y="5.5" width="17" height="15" rx="3"></rect><path d="M7 3.5v4"></path><path d="M17 3.5v4"></path><path d="M3.5 9.5h17"></path>`,
   target:`<circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3"></path><path d="M22 12h-3"></path>`,
   users:`<path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path><path d="M16.5 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"></path><path d="M3.5 18c.8-2.6 3-4 5.5-4s4.7 1.4 5.5 4"></path><path d="M13.5 18c.5-1.8 2-2.9 4-3.2 1.4-.2 2.6.2 3.5.8"></path>`,
@@ -2334,8 +2380,16 @@ async function ensureAssignableUsersLoaded(){
 }
 
 function clientDisplayName(client){return client?.businessName||"Cliente senza nome"}
-function clientEmail(client){return client?.contactEmail||client?.ownerEmail||client?.contactPec||""}
-function clientPhone(client){return client?.contactMobile||client?.contactPhone||client?.ownerPhone||""}
+function clientEmail(client){
+  const referent=primaryClientReferent(client);
+  const owner=primaryClientOwner(client);
+  return client?.contactEmail||referent.email||owner.email||client?.ownerEmail||client?.contactPec||"";
+}
+function clientPhone(client){
+  const referent=primaryClientReferent(client);
+  const owner=primaryClientOwner(client);
+  return client?.contactMobile||client?.contactPhone||referent.phone||owner.phone||client?.ownerPhone||"";
+}
 function clientFiscalCode(client){return client?.businessFiscalCode||client?.ownerFiscalCode||""}
 function clientSector(client){return client?.sector||client?.activitySector||(Array.isArray(client?.sectors)?client.sectors.join(", "):client?.sectors)||""}
 function clientLegalProvince(client){return client?.legalProvince||client?.province||""}
@@ -2574,9 +2628,6 @@ function buildMobileChrome(){
   const mobileTabbar=document.getElementById("mobile-tabbar");
   if(!mobileTopbar||!mobileTabbar)return;
   const accountSection=accountSectionId();
-  const mobileNav=visibleNavItems()
-    .filter((item,index,array)=>array.findIndex(other=>other.id===item.id)===index)
-    .filter(item=>item.id!=="finance-ai");
   const unread=unreadNotificationsCount();
   const userName=displayUserName();
   const userRole=(currentUser?.role||"utente").replace(/^./,c=>c.toUpperCase());
@@ -2599,14 +2650,10 @@ function buildMobileChrome(){
     </div>`;
 
   mobileTabbar.innerHTML=`
-    <div class="mobile-tabbar">
-      <div class="mobile-tabbar-inner" style="grid-template-columns:repeat(${Math.max(mobileNav.length,1)},1fr)">
-        ${mobileNav.map(item=>`
-          <button class="mobile-tab ${item.id===activeSection?"active":""}" onclick="navigate('${item.id}')">
-            <span class="icon">${mobileNavIcon(item.id)}</span>
-            <span class="label">${item.label}</span>
-          </button>
-        `).join("")}
+    <div class="mobile-home-bottom-nav">
+      <div class="mobile-home-bottom-pill">
+        <button class="mobile-home-bottom-btn ${activeSection==="home"?"active":""}" aria-label="Home" onclick="navigate('home')">${appIcon("home")}</button>
+        <button class="mobile-home-bottom-btn ${activeSection==="profile"?"active":""}" aria-label="Profilo" onclick="navigate('profile')">${avatar(userName,32)}</button>
       </div>
     </div>`;
 }
@@ -2618,7 +2665,8 @@ function buildDesktopUtility(){
 
 function navigate(section,extra){
   clearUnsubs();
-  const allowedIds=new Set([...visibleNavItems().map(item=>item.id),accountSectionId()]);
+  const allowedIds=new Set([...visibleNavItems().map(item=>item.id),accountSectionId(),"profile"]);
+  if(currentDeviceMode()==="mobile")allowedIds.add("home");
   if(!allowedIds.has(section))section=defaultSectionForUser();
   activeSection=section;
   document.body.dataset.activeSection=section;
@@ -2640,6 +2688,7 @@ function navigate(section,extra){
   else if(section==="collaborators")extra?renderCollabDetail(extra):renderCollaborators();
   else if(section==="settings")renderSettings();
   else if(section==="profile")renderProfile();
+  else if(section==="home")renderMobileHome();
 }
 
 function syncSidebarToggle(){
@@ -2671,6 +2720,101 @@ function showApp(){
   document.getElementById("login-screen").style.display="none";
   activeSection=defaultSectionForUser();
   syncResponsiveAppShell();buildSidebar();applyTabletSidebarPreference();buildMobileChrome();buildDesktopUtility();startNotificationsListener();syncSidebarToggle();navigate(activeSection);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MOBILE HOME
+// ═══════════════════════════════════════════════════════════════
+function mobileHomeDateLabel(date=new Date()){
+  const label=date.toLocaleDateString("it-IT",{weekday:"short",day:"numeric",month:"short"}).replace(/\./g,"");
+  return label.replace(/^\w/,c=>c.toUpperCase());
+}
+
+function mobileHomeAgendaItems(){
+  const now=new Date();
+  const eventItems=allEvents.map(item=>{
+    const start=toDateValue(item.startAt);
+    const end=toDateValue(item.endAt)||start;
+    return start&&end>=now?{kind:"event",start,end,data:item}:null;
+  }).filter(Boolean);
+  const taskItems=allTasks.map(item=>{
+    const start=toDateValue(item.startAt)||toDateValue(item.dueAt);
+    const end=toDateValue(item.endAt)||start;
+    return start&&end>=now&&!item.isCompleted?{kind:"task",start,end,data:item}:null;
+  }).filter(Boolean);
+  return [...eventItems,...taskItems].sort((a,b)=>a.start-b.start||a.end-b.end).slice(0,3);
+}
+
+function mobileHomeAgendaTime(item){
+  if(item.kind==="event")return `${formatTime(item.start)} - ${formatTime(item.end)}`;
+  return item.end&&item.end.getTime()!==item.start.getTime()?`${formatTime(item.start)} - ${formatTime(item.end)}`:formatTime(item.start);
+}
+
+function mobileHomeShortcutItems(){
+  const visible=new Set(visibleNavItems().map(item=>item.id));
+  return [
+    {id:"calendar",title:"Calendario",sub:"Appuntamenti e task",icon:"calendar",color:"#9B64D9",visible:visible.has("calendar")},
+    {id:"clients",title:"Clienti",sub:"Anagrafiche e pratiche",icon:"users",color:"#2E4A9B",visible:visible.has("clients")},
+    {id:"leads",title:"Lead",sub:"Nuove opportunita",icon:"target",color:"#E7C84B",visible:visible.has("leads")},
+    {id:"practices",title:"Opportunità",sub:"Pipeline commerciale",icon:"briefcase",color:"#2FA776",visible:visible.has("practices")},
+    {id:"iperammortamento",title:"Iperammortamento",sub:"Simulazioni 2026",icon:"calculator",color:"#E6558B",visible:visible.has("iperammortamento")},
+    {id:"finance-ai",title:"AI Finance",sub:"Chat e analisi",icon:"zap",color:"#4A8DDF",visible:visible.has("finance-ai")},
+    {id:"collaborators",title:"Rete",sub:"Team e partner",icon:"user",color:"#63BBD8",visible:visible.has("collaborators")},
+    {id:"settings",title:"Impostazioni",sub:"Utenti e permessi",icon:"settings",color:"#111827",visible:isAdmin()}
+  ].filter(item=>item.visible);
+}
+
+function renderMobileHomeAgenda(){
+  const items=mobileHomeAgendaItems();
+  if(!items.length)return `<div class="mobile-home-agenda-empty">Nessun appuntamento o task pianificato nei prossimi giorni.</div>`;
+  return `<div class="mobile-home-agenda-list">
+    ${items.map(item=>{
+      const title=item.data.title||(item.kind==="event"?"Evento":"Task");
+      return `<button class="mobile-home-agenda-row" onclick="event.stopPropagation();openCalendarItemDetails('${item.kind}','${item.data.id}')">
+        <span class="mobile-home-agenda-marker"></span>
+        <span class="mobile-home-agenda-text">
+          <span class="mobile-home-agenda-name">${esc(title)}</span>
+          <span class="mobile-home-agenda-time">${esc(mobileHomeAgendaTime(item))}</span>
+        </span>
+      </button>`;
+    }).join("")}
+  </div>`;
+}
+
+function drawMobileHome(){
+  const main=document.getElementById("main");if(!main)return;
+  const shortcuts=mobileHomeShortcutItems();
+  main.innerHTML=`<div class="mobile-home-shell">
+    <h1 class="mobile-home-title">Professioni in Team</h1>
+    <div class="mobile-home-agenda-widget" role="button" tabindex="0" onclick="navigate('calendar')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('calendar')}" aria-label="Apri calendario">
+      <div class="mobile-home-agenda-date">${esc(mobileHomeDateLabel())}</div>
+      ${renderMobileHomeAgenda()}
+      <img class="mobile-home-agenda-art" src="assets/mobile-home-calendar.png" alt="" aria-hidden="true">
+    </div>
+    <div class="mobile-home-shortcut-grid">
+      ${shortcuts.map(item=>`<button class="mobile-home-shortcut" onclick="navigate('${item.id}')">
+        <span>
+          <span class="mobile-home-shortcut-title">${esc(item.title)}</span>
+          <span class="mobile-home-shortcut-sub">${esc(item.sub)}</span>
+        </span>
+        <span class="mobile-home-shortcut-icon" style="--shortcut-color:${item.color}">${appIcon(item.icon)}</span>
+      </button>`).join("")}
+    </div>
+  </div>`;
+}
+
+function renderMobileHome(){
+  if(currentDeviceMode()!=="mobile"){navigate(defaultSectionForUser());return}
+  drawMobileHome();
+  waitAuth().then(()=>{
+    const redraw=()=>{if(activeSection==="home")drawMobileHome()};
+    const unsubEvents=db.collection(COLLECTIONS.events).onSnapshot(snapshot=>{allEvents=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));redraw()},error=>{console.warn(error)});
+    const unsubTasks=db.collection(COLLECTIONS.tasks).onSnapshot(snapshot=>{allTasks=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));redraw()},error=>{console.warn(error)});
+    _activeUnsubs.push(unsubEvents,unsubTasks);
+  }).catch(error=>{
+    const main=document.getElementById("main");
+    if(main)main.innerHTML=`<div class="mobile-home-shell"><h1 class="mobile-home-title">Professioni in Team</h1><div class="error-box">Errore: ${esc(error.message)}</div></div>`;
+  });
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -2950,6 +3094,8 @@ function renderClientsMobileShell(){
 function clientMatchesSearch(client,query){
   if(!query)return true;
   const q=query.toLowerCase();
+  const owners=normalizeClientOwners(client);
+  const referents=normalizeClientReferents(client);
   return[
     clientDisplayName(client),
     client.atecoCode,
@@ -2967,6 +3113,8 @@ function clientMatchesSearch(client,query){
     client.ownerFiscalCode,
     client.ownerEmail,
     client.ownerPhone,
+    ...owners.flatMap(owner=>[owner.firstName,owner.lastName,owner.fiscalCode,owner.email,owner.phone]),
+    ...referents.flatMap(referent=>[referent.firstName,referent.lastName,referent.email,referent.phone]),
     client.legalStreet,
     client.legalCap,
     client.legalCity,
@@ -2977,6 +3125,52 @@ function clientMatchesSearch(client,query){
 
 function clientLinkedPractices(clientId){
   return _clientOpportunityPractices.filter(item=>item.clientId===clientId);
+}
+
+function normalizeClientOwners(client={}){
+  const owners=Array.isArray(client.owners)?client.owners:[];
+  const normalized=owners.map(item=>({
+    firstName:String(item.firstName||"").trim(),
+    lastName:String(item.lastName||"").trim(),
+    fiscalCode:String(item.fiscalCode||"").trim(),
+    email:String(item.email||"").trim(),
+    phone:String(item.phone||"").trim()
+  })).filter(item=>Object.values(item).some(Boolean));
+  const legacy={
+    firstName:String(client.ownerFirstName||"").trim(),
+    lastName:String(client.ownerLastName||"").trim(),
+    fiscalCode:String(client.ownerFiscalCode||"").trim(),
+    email:String(client.ownerEmail||"").trim(),
+    phone:String(client.ownerPhone||"").trim()
+  };
+  if(!normalized.length&&Object.values(legacy).some(Boolean))normalized.push(legacy);
+  return normalized;
+}
+
+function normalizeClientReferents(client={}){
+  const referents=Array.isArray(client.referents)?client.referents:[];
+  const normalized=referents.map(item=>({
+    firstName:String(item.firstName||"").trim(),
+    lastName:String(item.lastName||"").trim(),
+    email:String(item.email||"").trim(),
+    phone:String(item.phone||"").trim()
+  })).filter(item=>Object.values(item).some(Boolean));
+  const contactFallback={
+    firstName:String(client.referentFirstName||"").trim(),
+    lastName:String(client.referentLastName||"").trim(),
+    email:String(client.referentEmail||client.contactEmail||"").trim(),
+    phone:String(client.referentPhone||client.contactMobile||client.contactPhone||"").trim()
+  };
+  if(!normalized.length&&(contactFallback.firstName||contactFallback.lastName||client.referentEmail||client.referentPhone))normalized.push(contactFallback);
+  return normalized;
+}
+
+function primaryClientOwner(client={}){
+  return normalizeClientOwners(client)[0]||{};
+}
+
+function primaryClientReferent(client={}){
+  return normalizeClientReferents(client)[0]||{};
 }
 
 function clientLinkedIper(clientId){
@@ -3100,7 +3294,8 @@ function renderClientDesktopCard(client){
 
 function renderClientMobileCard(client){
   const opportunityCounts=clientOpportunityCounts(client.id);
-  const referent=[client.ownerFirstName,client.ownerLastName].filter(Boolean).join(" ")||"Nessun referente";
+  const owner=primaryClientOwner(client);
+  const referent=[owner.firstName,owner.lastName].filter(Boolean).join(" ")||"Nessun titolare";
   return `<div class="clients-mobile-card" onclick="navigate('clients','${client.id}')">
     <div class="clients-mobile-card-top">
       ${avatar(clientDisplayName(client),44)}
@@ -3133,6 +3328,8 @@ async function openClientForm(id){
   let data={};
   if(id){await waitAuth();const snap=await db.collection(COLLECTIONS.clients).doc(id).get();data=snap.data()||{}}
   const operatingLocations=clientOperatingLocations(data);
+  const owners=clientOwnerFormValuesFromData(data);
+  const referents=clientReferentFormValuesFromData(data);
   const modal=document.createElement("div");modal.className="modal-overlay";modal.id="client-modal";
   modal.innerHTML=`<div class="modal" style="max-width:980px">
     <div class="modal-header">
@@ -3171,13 +3368,28 @@ async function openClientForm(id){
         </div>
 
         <div class="client-form-section">
-          <div class="client-form-section-head"><div><div class="client-form-section-title">Informazioni del titolare</div></div></div>
-          <div class="form-row">
-            <div class="form-group"><label class="form-label">Nome</label><input id="cf-ownerFirstName" class="form-control" value="${esc(data.ownerFirstName||"")}"></div>
-            <div class="form-group"><label class="form-label">Cognome</label><input id="cf-ownerLastName" class="form-control" value="${esc(data.ownerLastName||"")}"></div>
-            <div class="form-group"><label class="form-label">Codice Fiscale</label><input id="cf-ownerFiscalCode" class="form-control" value="${esc(data.ownerFiscalCode||"")}"></div>
-            <div class="form-group"><label class="form-label">Email titolare</label><input id="cf-ownerEmail" class="form-control" type="email" value="${esc(data.ownerEmail||"")}"></div>
-            <div class="form-group" style="grid-column:span 2"><label class="form-label">Telefono Titolare</label><input id="cf-ownerPhone" class="form-control" value="${esc(data.ownerPhone||"")}"></div>
+          <div class="client-form-section-head">
+            <div>
+              <div class="client-form-section-title">Referente</div>
+              <div class="client-form-section-sub">Aggiungi uno o più referenti operativi del cliente.</div>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="addClientReferent()">+ Referente</button>
+          </div>
+          <div id="client-referents-list" class="client-repeat-list">
+            ${referents.map((referent,index)=>renderClientReferentForm(referent,index)).join("")}
+          </div>
+        </div>
+
+        <div class="client-form-section">
+          <div class="client-form-section-head">
+            <div>
+              <div class="client-form-section-title">Titolare</div>
+              <div class="client-form-section-sub">Aggiungi uno o più titolari collegati al cliente.</div>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="addClientOwner()">+ Titolare</button>
+          </div>
+          <div id="client-owners-list" class="client-repeat-list">
+            ${owners.map((owner,index)=>renderClientOwnerForm(owner,index)).join("")}
           </div>
         </div>
 
@@ -3227,6 +3439,108 @@ function renderClientOperatingLocationForm(location={},index=0){
       <div class="form-group"><label class="form-label">Stato</label><input data-op-field="state" class="form-control" value="${esc(location.state||location.country||"")}"></div>
     </div>
   </div>`;
+}
+
+function clientOwnerFormValuesFromData(data={}){
+  const owners=normalizeClientOwners(data);
+  return owners.length?owners:[{firstName:"",lastName:"",fiscalCode:"",email:"",phone:""}];
+}
+
+function clientReferentFormValuesFromData(data={}){
+  const referents=normalizeClientReferents(data);
+  return referents.length?referents:[{firstName:"",lastName:"",email:"",phone:""}];
+}
+
+function renderClientOwnerForm(owner={},index=0){
+  return `<div class="client-repeat-card" data-owner-index="${index}">
+    <div class="client-repeat-card-head">
+      <div class="client-repeat-title">Titolare ${index+1}</div>
+      <button class="btn btn-danger btn-sm" onclick="removeClientOwner(${index})">Rimuovi</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Nome</label><input data-owner-field="firstName" class="form-control" value="${esc(owner.firstName||"")}"></div>
+      <div class="form-group"><label class="form-label">Cognome</label><input data-owner-field="lastName" class="form-control" value="${esc(owner.lastName||"")}"></div>
+      <div class="form-group"><label class="form-label">Codice Fiscale</label><input data-owner-field="fiscalCode" class="form-control" value="${esc(owner.fiscalCode||"")}"></div>
+      <div class="form-group"><label class="form-label">Email titolare</label><input data-owner-field="email" class="form-control" type="email" value="${esc(owner.email||"")}"></div>
+      <div class="form-group" style="grid-column:span 2"><label class="form-label">Telefono Titolare</label><input data-owner-field="phone" class="form-control" value="${esc(owner.phone||"")}"></div>
+    </div>
+  </div>`;
+}
+
+function renderClientReferentForm(referent={},index=0){
+  return `<div class="client-repeat-card" data-referent-index="${index}">
+    <div class="client-repeat-card-head">
+      <div class="client-repeat-title">Referente ${index+1}</div>
+      <button class="btn btn-danger btn-sm" onclick="removeClientReferent(${index})">Rimuovi</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Nome</label><input data-referent-field="firstName" class="form-control" value="${esc(referent.firstName||"")}"></div>
+      <div class="form-group"><label class="form-label">Cognome</label><input data-referent-field="lastName" class="form-control" value="${esc(referent.lastName||"")}"></div>
+      <div class="form-group"><label class="form-label">Email</label><input data-referent-field="email" class="form-control" type="email" value="${esc(referent.email||"")}"></div>
+      <div class="form-group"><label class="form-label">Telefono</label><input data-referent-field="phone" class="form-control" value="${esc(referent.phone||"")}"></div>
+    </div>
+  </div>`;
+}
+
+function currentClientOwnersFormValues({includeEmpty=false}={}){
+  return [...document.querySelectorAll("#client-owners-list .client-repeat-card")].map(section=>{
+    const valueFor=field=>section.querySelector(`[data-owner-field="${field}"]`)?.value.trim()||"";
+    return {
+      firstName:valueFor("firstName"),
+      lastName:valueFor("lastName"),
+      fiscalCode:valueFor("fiscalCode"),
+      email:valueFor("email"),
+      phone:valueFor("phone")
+    };
+  }).filter(owner=>includeEmpty||Object.values(owner).some(Boolean));
+}
+
+function currentClientReferentsFormValues({includeEmpty=false}={}){
+  return [...document.querySelectorAll("#client-referents-list .client-repeat-card")].map(section=>{
+    const valueFor=field=>section.querySelector(`[data-referent-field="${field}"]`)?.value.trim()||"";
+    return {
+      firstName:valueFor("firstName"),
+      lastName:valueFor("lastName"),
+      email:valueFor("email"),
+      phone:valueFor("phone")
+    };
+  }).filter(referent=>includeEmpty||Object.values(referent).some(Boolean));
+}
+
+function rerenderClientOwners(owners){
+  const wrap=document.getElementById("client-owners-list");
+  const next=owners.length?owners:[{firstName:"",lastName:"",fiscalCode:"",email:"",phone:""}];
+  if(wrap)wrap.innerHTML=next.map((owner,index)=>renderClientOwnerForm(owner,index)).join("");
+}
+
+function rerenderClientReferents(referents){
+  const wrap=document.getElementById("client-referents-list");
+  const next=referents.length?referents:[{firstName:"",lastName:"",email:"",phone:""}];
+  if(wrap)wrap.innerHTML=next.map((referent,index)=>renderClientReferentForm(referent,index)).join("");
+}
+
+function addClientOwner(){
+  const owners=currentClientOwnersFormValues({includeEmpty:true});
+  owners.push({firstName:"",lastName:"",fiscalCode:"",email:"",phone:""});
+  rerenderClientOwners(owners);
+}
+
+function removeClientOwner(index){
+  const owners=currentClientOwnersFormValues({includeEmpty:true});
+  owners.splice(index,1);
+  rerenderClientOwners(owners);
+}
+
+function addClientReferent(){
+  const referents=currentClientReferentsFormValues({includeEmpty:true});
+  referents.push({firstName:"",lastName:"",email:"",phone:""});
+  rerenderClientReferents(referents);
+}
+
+function removeClientReferent(index){
+  const referents=currentClientReferentsFormValues({includeEmpty:true});
+  referents.splice(index,1);
+  rerenderClientReferents(referents);
 }
 
 function currentClientOperatingFormValues(){
@@ -3289,11 +3603,27 @@ function applyClientRegistryData(client){
   set("cf-contactPec",contacts.contactPec);
   set("cf-contactPhone",contacts.contactPhone);
   set("cf-website",contacts.website);
-  set("cf-ownerFirstName",owner.firstName);
-  set("cf-ownerLastName",owner.lastName);
-  set("cf-ownerFiscalCode",owner.fiscalCode);
-  set("cf-ownerEmail",owner.email);
-  set("cf-ownerPhone",owner.phone);
+  const ownerFields={
+    firstName:String(owner.firstName||"").trim(),
+    lastName:String(owner.lastName||"").trim(),
+    fiscalCode:String(owner.fiscalCode||"").trim(),
+    email:String(owner.email||"").trim(),
+    phone:String(owner.phone||"").trim()
+  };
+  if(Object.values(ownerFields).some(Boolean)&&!currentClientOwnersFormValues({includeEmpty:true}).some(item=>Object.values(item).some(Boolean))){
+    rerenderClientOwners([ownerFields]);
+    filled+=Object.values(ownerFields).filter(Boolean).length;
+  }
+  const referentFields={
+    firstName:String(data.referent?.firstName||"").trim(),
+    lastName:String(data.referent?.lastName||"").trim(),
+    email:String(data.referent?.email||contacts.contactEmail||"").trim(),
+    phone:String(data.referent?.phone||contacts.contactMobile||contacts.contactPhone||"").trim()
+  };
+  if(Object.values(referentFields).some(Boolean)&&!currentClientReferentsFormValues({includeEmpty:true}).some(item=>Object.values(item).some(Boolean))){
+    rerenderClientReferents([referentFields]);
+    filled+=Object.values(referentFields).filter(Boolean).length;
+  }
   set("cf-legalStreet",legal.street);
   set("cf-legalCap",legal.cap);
   set("cf-legalCity",legal.city);
@@ -3402,6 +3732,10 @@ async function saveClient(){
     const docRef=_editingClientId?db.collection(COLLECTIONS.clients).doc(_editingClientId):db.collection(COLLECTIONS.clients).doc();
     const sector=document.getElementById("cf-sector").value.trim();
     const operatingLocations=currentClientOperatingFormValues();
+    const owners=currentClientOwnersFormValues();
+    const referents=currentClientReferentsFormValues();
+    const primaryOwner=owners[0]||{};
+    const primaryReferent=referents[0]||{};
     const payload={
       id:docRef.id,businessName,
       businessType:allClients.find(item=>item.id===docRef.id)?.businessType||_detailClient?.businessType||"",
@@ -3410,13 +3744,19 @@ async function saveClient(){
       uniqueCode:document.getElementById("cf-uniqueCode").value.trim(),
       businessFiscalCode:document.getElementById("cf-businessFiscalCode").value.trim(),
       originCollaboratorName:"",sourceCollaboratorId:"",originClientName:"",originClientPartnerId:"",
-      ownerFirstName:document.getElementById("cf-ownerFirstName").value.trim(),
-      ownerLastName:document.getElementById("cf-ownerLastName").value.trim(),
+      ownerFirstName:primaryOwner.firstName||"",
+      ownerLastName:primaryOwner.lastName||"",
       ownerBirthPlace:"",
-      ownerFiscalCode:document.getElementById("cf-ownerFiscalCode").value.trim(),
-      ownerEmail:document.getElementById("cf-ownerEmail").value.trim(),
-      ownerPhone:document.getElementById("cf-ownerPhone").value.trim(),
+      ownerFiscalCode:primaryOwner.fiscalCode||"",
+      ownerEmail:primaryOwner.email||"",
+      ownerPhone:primaryOwner.phone||"",
       ownerStreet:"",ownerCap:"",
+      owners,
+      referents,
+      referentFirstName:primaryReferent.firstName||"",
+      referentLastName:primaryReferent.lastName||"",
+      referentEmail:primaryReferent.email||"",
+      referentPhone:primaryReferent.phone||"",
       legalStreet:document.getElementById("cf-legalStreet").value.trim(),
       legalCap:document.getElementById("cf-legalCap").value.trim(),
       legalCity:document.getElementById("cf-legalCity").value.trim(),
@@ -3478,6 +3818,8 @@ async function renderClientDetail(clientId){
 
 function drawClientDetail(){
   const client=_detailClient;
+  const owner=primaryClientOwner(client);
+  const ownerName=[owner.firstName,owner.lastName].filter(Boolean).join(" ");
   const hue=[...clientDisplayName(client)].reduce((acc,ch)=>acc+ch.charCodeAt(0),0)%360;
   const isMobile=currentDeviceMode()==="mobile";
   const tabLabels={summary:"Riepilogo",data:"Dati"};
@@ -3490,8 +3832,8 @@ function drawClientDetail(){
         <div class="clients-mobile-hero-copy">
           <div class="clients-mobile-hero-kicker">Dettaglio Cliente</div>
           <div class="clients-mobile-hero-name">${esc(clientDisplayName(client))}</div>
-          ${[client.ownerFirstName,client.ownerLastName].filter(Boolean).join(" ")?
-            `<div class="clients-mobile-hero-badge">${appIcon("user")} ${esc([client.ownerFirstName,client.ownerLastName].filter(Boolean).join(" "))}</div>`:
+          ${ownerName?
+            `<div class="clients-mobile-hero-badge">${appIcon("user")} ${esc(ownerName)}</div>`:
             client.atecoCode?`<div class="clients-mobile-hero-badge">${appIcon("building")} ${esc(client.atecoCode)}</div>`:""
           }
         </div>
@@ -3508,8 +3850,8 @@ function drawClientDetail(){
       <div class="client-detail-hero-copy">
         <div class="client-detail-kicker">Dettaglio Cliente</div>
         <div class="client-detail-name">${esc(clientDisplayName(client))}</div>
-        ${[client.ownerFirstName,client.ownerLastName].filter(Boolean).join(" ")?
-          `<div class="client-native-badges">${badge([client.ownerFirstName,client.ownerLastName].filter(Boolean).join(" "),"rgba(255,255,255,.9)")}</div>`:
+        ${ownerName?
+          `<div class="client-native-badges">${badge(ownerName,"rgba(255,255,255,.9)")}</div>`:
           client.atecoCode?`<div class="client-native-badges">${badge(client.atecoCode,"rgba(255,255,255,.9)")}</div>`:""
         }
       </div>
@@ -3768,6 +4110,8 @@ async function openClientIperammortamentoSimulation(id,archiveCollection=""){
 
 function renderClientDataTab(client){
   const operatingLocations=clientOperatingLocations(client);
+  const owners=normalizeClientOwners(client);
+  const referents=normalizeClientReferents(client);
   const sections=[
     {
       title:"Informazioni aziende",
@@ -3790,16 +4134,25 @@ function renderClientDataTab(client){
         ["Sito Web",client.website]
       ].filter(([,value])=>value)
     },
-    {
-      title:"Informazioni del titolare",
+    ...referents.map((referent,index)=>({
+      title:referents.length>1?`Referente ${index+1}`:"Referente",
       items:[
-        ["Nome",client.ownerFirstName],
-        ["Cognome",client.ownerLastName],
-        ["Codice Fiscale",client.ownerFiscalCode],
-        ["Email titolare",client.ownerEmail],
-        ["Telefono Titolare",client.ownerPhone]
+        ["Nome",referent.firstName],
+        ["Cognome",referent.lastName],
+        ["Email",referent.email],
+        ["Telefono",referent.phone]
       ].filter(([,value])=>value)
-    },
+    })),
+    ...owners.map((owner,index)=>({
+      title:owners.length>1?`Titolare ${index+1}`:"Titolare",
+      items:[
+        ["Nome",owner.firstName],
+        ["Cognome",owner.lastName],
+        ["Codice Fiscale",owner.fiscalCode],
+        ["Email titolare",owner.email],
+        ["Telefono Titolare",owner.phone]
+      ].filter(([,value])=>value)
+    })),
     {
       title:"Sede Legale",
       items:[
